@@ -36,8 +36,6 @@ class Api:
         except requests.exceptions.HTTPError:
             raise OAApiAuthenticationFail()
 
-
-
     def __str__(self):
         return f"API - url: {self.url}, username: {self.username}, " \
             f"password: {self.password}, Authenticated: {self.authorised}"
