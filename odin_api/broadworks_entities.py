@@ -4,40 +4,40 @@ from typing import List
 
 class Enterprise:
     def __init__(self, id, name):
-        self.id = id
-        self.name = name
-        self.groups: List[Group] = []
+        self._id = id
+        self._name = name
+        self._groups: List[Group] = []
 
         Store.get_instance().enterprises.append(self)
 
     def __str__(self):
-        return f"Enterprise - id: {self.id}, name: {self.name}, groups: {self.groups}"
+        return f"Enterprise - id: {self._id}, name: {self.name}, groups: {self.groups}"
 
     @property
     def id(self):
-        return self.id
+        return self._id
 
     @id.setter
     def id(self, new_id):
         if len(new_id) >= 1 and len(new_id) <= 30:
-            self.id = new_id
+            self._id = new_id
 
     @id.deleter
     def id(self):
-        del self.id
+        del self._id
 
     @property
     def name(self):
-        return self.name
+        return self._name
 
     @name.setter
     def name(self, new_name):
         if len(new_name) >= 1 and len(new_name) <= 80:
-            self.name = new_name
+            self._name = new_name
 
     @name.deleter
     def nameid(self):
-        del self.name
+        del self._name
 
 
 class ServiceProvider(Enterprise):
