@@ -6,12 +6,12 @@ class Enterprise:
     def __init__(self, id, name):
         self._id = id
         self._name = name
-        self._groups: List[Group] = []
+        self.groups: List[Group] = []
 
         Store.get_instance().enterprises.append(self)
 
     def __str__(self):
-        return f"Enterprise - id: {self._id}, name: {self.name}, groups: {self.groups}"
+        return f"Enterprise - id: {self._id}, name: {self._name}, groups: {self.groups}"
 
     @property
     def id(self):
