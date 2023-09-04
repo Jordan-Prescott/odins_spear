@@ -141,13 +141,13 @@ class TrunkGroup(Group):
 
 
 class HuntGroup(Group):
-    def __init__(self, group, name, extension, number=None, users=None):
+    def __init__(self, group, name, extension, id, number=None, users=None):
         self.group = group
         self.name = name
         self.extension = extension
+        self.id = id
         self.number = number
         self.users: List[User] = users if users else []
-        self.id = f"{self.group.id}{self.extension}@{self.group.domain}"
 
         Store.get_instance().hunt_groups.append(self)
 
@@ -157,16 +157,29 @@ class HuntGroup(Group):
 
 
 class User:
-    def __init__(self, group, first_name, last_name, extension):
+    def __init__(self, group, id, first_name, last_name, extension):
         self.group = group
+        self._id = id
         self._first_name = first_name
         self._last_name = last_name
         self._extension = extension
-        self.id = f"{self.group.id}{self.extension}@{self.group.domain}"
 
         self.group.users.append(self)
 
         Store.get_instance().users.append(self)
+
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, new_id):
+        if len(new_id) >= 1 and len(new_id) <= 30:
+            self._id = new_id
+
+    @id.deleter
+    def id(self):
+        del self._id
 
     @property
     def first_name(self):
