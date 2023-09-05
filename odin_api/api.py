@@ -1,4 +1,5 @@
 import requests
+import os
 
 from odin_api.exceptions import *
 from odin_api.store import Store
@@ -7,10 +8,10 @@ from odin_api.store import Store
 class Api:
     """ Connection to Odin API, all interactions with the api are here.
     """
-    def __init__(self, url, username, password) -> None:
+    def __init__(self, url, username, password_env_variable) -> None:
         self.url = url
         self.username = username
-        self.password = password
+        self.password = os.getenv(password_env_variable, default=None)
         self.authorised = False
         self.token = ""
 
