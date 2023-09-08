@@ -29,3 +29,15 @@ class Store:
             self.users = []
 
             Store.__instance = self
+    
+    def __str__(self):
+        """ returns complete list of entities in store.
+        """
+
+        entities = self.apis + self.enterprises + self.service_providers + self.groups + self.trunk_groups + \
+            self.hunt_groups + self.users
+
+        # loops entities and joins into string
+        string = lambda e: "\n".join(map(str, e))
+
+        return string(entities)
