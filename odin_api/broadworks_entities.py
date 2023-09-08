@@ -2,16 +2,16 @@ from odin_api.store import Store
 from typing import List
 
 
-class Enterprise:
+class ServiceProvider:
     def __init__(self, id, name):
         self._id = id
         self._name = name
         self.groups: List[Group] = []
 
-        Store.get_instance().enterprises.append(self)
+        Store.get_instance().service_providers.append(self)
 
     def __str__(self):
-        return f"Enterprise - id: {self._id}, name: {self._name}, groups: {self.groups}"
+        return f"Service Provider - id: {self._id}, name: {self._name}, groups: {self.groups}"
 
     @property
     def id(self):
@@ -40,16 +40,16 @@ class Enterprise:
         del self._name
 
 
-class ServiceProvider(Enterprise):
+class Enterprise(ServiceProvider):
     def __init__(self, id, name):
 
         # JP: Assuemed that ent has all functionality and SP has a subset
         super().__init__(id, name)
 
-        Store.get_instance().service_providers.append(self)
+        Store.get_instance().enterprises.append(self)
 
     def __str__(self):
-        return f"Service Provider - id: {self.id}, name: {self.name}, groups: {self.groups}"
+        return f"Enterprise - id: {self.id}, name: {self.name}, groups: {self.groups}"
 
 
 class Group:
@@ -157,9 +157,9 @@ class HuntGroup(Group):
 
 
 class User:
-    def __init__(self, group, id, first_name, last_name, extension):
+    def __init__(self, group: Group, id: str, first_name, last_name, extension):
         self.group = group
-        self._id = id
+        self._id = id 
         self._first_name = first_name
         self._last_name = last_name
         self._extension = extension
