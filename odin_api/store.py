@@ -30,6 +30,16 @@ class Store:
 
             Store.__instance = self
     
+    def get_group_state(group_id):
+        """ takes in group id and loads group state into broadworks entities
+        """
+        pass
+
+    def export_store():
+        """ exports entire store to json file
+        """
+        pass
+    
     def __str__(self):
         """ returns complete list of entities in store.
         """
