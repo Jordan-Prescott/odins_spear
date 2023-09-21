@@ -27,9 +27,29 @@ class Store:
             self.trunk_groups = []
             self.hunt_groups = []
             self.users = []
+            self.other_entities = [] #Non-common or custom objects
 
             Store.__instance = self
     
+    def add_object_to_store(self, entity, entity_type):
+        if entity_type == "api" and entity not in self.apis:
+            self.apis.append(entity)
+        elif entity_type == "enterprise" and entity not in self.enterprises:
+            self.enterprises.append(entity)
+        elif entity_type == "service_provider" and entity not in self.service_providers:
+            self.service_providers.append(entity)
+        elif entity_type == "group" and entity not in self.groups:
+            self.groups.append(entity)
+        elif entity_type == "trunk_group" and entity not in self.trunk_groups:
+            self.trunk_groups.append(entity)
+        elif entity_type == "hunt_group" and entity not in self.hunt_groups:
+            self.hunt_groups.append(entity)
+        elif entity_type == "user" and entity not in self.users:
+                self.users.append(entity)
+        else:
+            self.other_entities.append(entity)
+        
+
     def get_group_state(group_id):
         """ takes in group id and loads group state into broadworks entities
         """
