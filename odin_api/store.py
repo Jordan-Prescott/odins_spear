@@ -31,7 +31,7 @@ class Store:
 
             Store.__instance = self
     
-    def add_object_to_store(self, entity, entity_type):
+    def _add_object_to_store(self, entity, entity_type):
         if entity_type == "api" and entity not in self.apis:
             self.apis.append(entity)
         elif entity_type == "enterprise" and entity not in self.enterprises:
