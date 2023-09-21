@@ -11,9 +11,9 @@ class OAError(Exception):
 
 
 class OAApiAuthenticationFail(OAError):
-    """
-    Raised when api fails to authenticate
+    """ Raised when api fails to authenticate
     """
 
     def __str__(self) -> str:
         return f"Failed to authenticate. Check username, password, and url."
+    
