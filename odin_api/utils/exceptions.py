@@ -1,4 +1,4 @@
-""" put some stuff here.
+""" Odin API package custom exceptions.
 """
 
 
