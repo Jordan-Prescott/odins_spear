@@ -1,7 +1,7 @@
 import requests
 import os
 
-from odin_api.exceptions import *
+from odin_api.utils.exceptions import *
 from odin_api.store import Store
 
 
