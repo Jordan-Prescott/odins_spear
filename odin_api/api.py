@@ -7,11 +7,17 @@ from odin_api.store.data_store import Store
 
 class Api:
     """ Connection to Odin API, all interactions with the api are here.
+
+    :param base_url: Base url of your odin instance api.
+    :param username: Username used when logging into odin account.
+    :param password: Password used when logging into odin account.
+    :var authorised: Boolean value to indicate if api is authorised.
+    :var token: Token string returned from odin api.
     """
-    def __init__(self, url, username, password_env_variable) -> None:
-        self.url = url
+    def __init__(self, base_url, username, password) -> None:
+        self.base_url = base_url
         self.username = username
-        self.password = os.getenv(password_env_variable, default=None)
+        self.password = os.getenv(password, default=None)
         self.authorised = False
         self.token = ""
 
@@ -25,7 +31,7 @@ class Api:
         endpoint = "api/v2/auth/token"
         try:
             response = requests.post(
-                self.url + endpoint,
+                self.base_url + endpoint,
                 data={
                     "username": self.username,
                     "password": self.password
