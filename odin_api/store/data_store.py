@@ -11,12 +11,12 @@ class DataStore:
 
     @staticmethod
     def get_instance():
-        if Store.__instance is None:
-            Store()
-        return Store.__instance
+        if DataStore.__instance is None:
+            DataStore()
+        return DataStore.__instance
 
     def __init__(self):
-        if Store.__instance is not None:
+        if DataStore.__instance is not None:
             raise Exception("Singleton cannot be instantiated more than once!")
         else:
             self.apis = []
@@ -28,9 +28,15 @@ class DataStore:
             self.users = []
             self.other_entities = [] #Non-common or custom objects
 
-            Store.__instance = self
+            DataStore.__instance = self
     
     def _add_object_to_store(self, entity, entity_type):
+        """ Takes in object and type of object and files in list depening on object type.
+
+        :param entity: broadwork_entitie object.
+        :param entity_type: entity type e.g. User 
+        """
+
         if entity_type == "api" and entity not in self.apis:
             self.apis.append(entity)
         elif entity_type == "enterprise" and entity not in self.enterprises:
