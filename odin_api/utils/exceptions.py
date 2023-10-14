@@ -1,7 +1,3 @@
-""" Odin API package custom exceptions.
-"""
-
-
 class OAError(Exception):
     """ Odin Api Exceptions
     """

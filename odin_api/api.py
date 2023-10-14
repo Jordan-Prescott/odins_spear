@@ -2,7 +2,7 @@ import requests
 import os
 
 from odin_api.utils.exceptions import *
-from odin_api.store import Store
+from odin_api.store.data_store import Store
 
 
 class Api:
@@ -17,11 +17,12 @@ class Api:
 
         Store.get_instance().apis.append(self)
 
+    # SESSION
     def authenticate(self) -> None:
         """ makes a POST request with the U and P to URL and attempts to authenticate.
         if successful api object is update else it throws an exception.
         """
-        endpoint = "/auth/token"
+        endpoint = "api/v2/auth/token"
         try:
             response = requests.post(
                 self.url + endpoint,
@@ -37,8 +38,21 @@ class Api:
         except requests.exceptions.HTTPError:
             raise OAApiAuthenticationFail()
 
+    # GROUP
+
+    # TRUNK GROUP
+
+    # HUNT GROUP
+
+    # AUTO ATTENDANT 
+
+    # CALL CENTER 
+
+    # USER 
+
+    # DEVICE
+
     def __str__(self):
         return f"API - url: {self.url}, username: {self.username}, " \
             f"password: {self.password}, Authenticated: {self.authorised}"
     
-    # 

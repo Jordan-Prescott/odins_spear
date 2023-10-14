@@ -1,7 +1,6 @@
 from typing import List
 
-
-class Store:
+class DataStore:
     """ Local store of objects, when each object is instantiated it is added to
     the appropriate list.
 

@@ -1,4 +1,4 @@
-from odin_api.store import Store
+from odin_api.store.data_store import Store
 from typing import List
 
 
