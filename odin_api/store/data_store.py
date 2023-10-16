@@ -55,8 +55,10 @@ class DataStore:
             self.other_entities.append(entity)
         
 
-    def get_group_state(group_id):
-        """ takes in group id and loads group state into broadworks entities
+    def get_group_state(group):
+        """ takes in group id and loads group state into broadworks entities.
+
+        :param group: Group object of Broadworks group user would like to load state.
         """
         pass
 
