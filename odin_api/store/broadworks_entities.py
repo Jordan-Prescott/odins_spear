@@ -1,4 +1,4 @@
-from odin_api.store.data_store import Store
+from odin_api.store.data_store import DataStore
 from typing import List
 
 
@@ -8,7 +8,7 @@ class ServiceProvider:
         self._name = name
         self.groups: List[Group] = []
 
-        Store.get_instance()._add_object_to_store(self, "service_provider")
+        DataStore.get_instance()._add_object_to_store(self, "service_provider")
 
     def __str__(self):
         return f"Service Provider - id: {self._id}, name: {self._name}, groups: {self.groups}"
@@ -46,7 +46,7 @@ class Enterprise(ServiceProvider):
         # JP: Assuemed that ent has all functionality and SP has a subset
         super().__init__(id, name)
 
-        Store.get_instance()._add_object_to_store(self, "enterprise")
+        DataStore.get_instance()._add_object_to_store(self, "enterprise")
 
     def __str__(self):
         return f"Enterprise - id: {self.id}, name: {self.name}, groups: {self.groups}"
@@ -66,7 +66,7 @@ class Group:
 
         self.enterprise.groups.append(self)
 
-        Store.get_instance()._add_object_to_store(self, "group")
+        DataStore.get_instance()._add_object_to_store(self, "group")
 
     def __str__(self):
         return f"Group - enterprise: {self.enterprise.name}, id: {self.id}, name: {self.name}, domain: {self.domain}, " \
@@ -133,7 +133,7 @@ class TrunkGroup(Group):
         self.number = number
         self.users: List[User] = users if users else []
 
-        Store.get_instance()._add_object_to_store(self, "trunk_group")
+        DataStore.get_instance()._add_object_to_store(self, "trunk_group")
 
     def __str__(self):
         return f"Trunk Group - group: {self.group.name}, name: {self.name}, device: {self.device} " \
@@ -149,7 +149,7 @@ class HuntGroup(Group):
         self.number = number
         self.users: List[User] = users if users else []
 
-        Store.get_instance()._add_object_to_store(self, "hunt_group")
+        DataStore.get_instance()._add_object_to_store(self, "hunt_group")
 
     def __str__(self):
         return f"Hunt Group - group: {self.group.name}, name: {self.name}, extension: {self.extension} " \
@@ -166,7 +166,7 @@ class User:
 
         self.group.users.append(self)
 
-        Store.get_instance()._add_object_to_store(self, "user")
+        DataStore.get_instance()._add_object_to_store(self, "user")
 
     @property
     def id(self):
