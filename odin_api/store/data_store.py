@@ -39,10 +39,15 @@ class DataStore:
 
         if entity_type == "api" and entity not in self.apis:
             self.apis.append(entity)
-        elif entity_type == "enterprise" and entity not in self.enterprises:
-            self.enterprises.append(entity)
-        elif entity_type == "service_provider" and entity not in self.service_providers:
-            self.service_providers.append(entity)
+        
+        # due to object relationship check needs to confirm this hasnt already been added to store
+        elif entity_type == "enterprise":
+            if entity not in self.service_providers and entity not in self.enterprises:
+                self.enterprises.append(entity)
+        elif entity_type == "service_provider":
+            if entity not in self.service_providers and entity not in self.enterprises:
+                self.service_providers.append(entity)
+
         elif entity_type == "group" and entity not in self.groups:
             self.groups.append(entity)
         elif entity_type == "trunk_group" and entity not in self.trunk_groups:
@@ -70,7 +75,7 @@ class DataStore:
     def __str__(self):
         """ returns complete list of entities in store.
         """
-
+ 
         entities = self.apis + self.enterprises + self.service_providers + self.groups + self.trunk_groups + \
             self.hunt_groups + self.users
 

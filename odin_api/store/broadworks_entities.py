@@ -42,19 +42,19 @@ class ServiceProvider:
 
 class Enterprise(ServiceProvider):
     def __init__(self, id, name):
+       
+       DataStore.get_instance()._add_object_to_store(self, "enterprise")
+       
+       super().__init__(id, name)
 
-        # JP: Assuemed that ent has all functionality and SP has a subset
-        super().__init__(id, name)
-
-        DataStore.get_instance()._add_object_to_store(self, "enterprise")
 
     def __str__(self):
         return f"Enterprise - id: {self.id}, name: {self.name}, groups: {self.groups}"
 
 
 class Group:
-    def __init__(self, enterprise, id, name, domain, main_number):
-        self.enterprise = enterprise
+    def __init__(self, service_provider, id, name, domain, main_number):
+        self.service_provider = service_provider
         self._id = id
         self._name = name
         self._domain = domain
@@ -64,12 +64,12 @@ class Group:
         self.hunt_groups: List[HuntGroup] = []
         self.trunk_groups: List[TrunkGroup] = []
 
-        self.enterprise.groups.append(self)
+        self.service_provider.groups.append(self)
 
         DataStore.get_instance()._add_object_to_store(self, "group")
 
     def __str__(self):
-        return f"Group - enterprise: {self.enterprise.name}, id: {self.id}, name: {self.name}, domain: {self.domain}, " \
+        return f"Group - service_provider: {self.service_provider.name}, id: {self.id}, name: {self.name}, domain: {self.domain}, " \
                f"users: {self.users}"
 
     @property

@@ -61,6 +61,6 @@ class Api:
     # DEVICE
 
     def __str__(self):
-        return f"API - url: {self.url}, username: {self.username}, " \
+        return f"API - url: {self.base_url}, username: {self.username}, " \
             f"password: {self.password}, Authenticated: {self.authorised}"
     
