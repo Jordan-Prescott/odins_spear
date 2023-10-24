@@ -21,7 +21,7 @@ class Api:
         self.password = os.getenv(password, default=None)
         self.authorised = False
         self.token = ""
-        self.scripter = Scripter()
+        self.scripter = Scripter(self)
 
         DataStore.get_instance().apis.append(self)
 
