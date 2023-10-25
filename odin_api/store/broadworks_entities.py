@@ -1,4 +1,3 @@
-from odin_api.store.data_store import DataStore
 from typing import List
 
 
@@ -7,8 +6,6 @@ class ServiceProvider:
         self._id = id
         self._name = name
         self.groups: List[Group] = []
-
-        DataStore.get_instance()._add_object_to_store(self, "service_provider")
 
     def __str__(self):
         return f"Service Provider - id: {self._id}, name: {self._name}, groups: {self.groups}"
@@ -43,10 +40,7 @@ class ServiceProvider:
 class Enterprise(ServiceProvider):
     def __init__(self, id, name):
        
-       DataStore.get_instance()._add_object_to_store(self, "enterprise")
-       
        super().__init__(id, name)
-
 
     def __str__(self):
         return f"Enterprise - id: {self.id}, name: {self.name}, groups: {self.groups}"
@@ -65,8 +59,6 @@ class Group:
         self.trunk_groups: List[TrunkGroup] = []
 
         self.service_provider.groups.append(self)
-
-        DataStore.get_instance()._add_object_to_store(self, "group")
 
     def __str__(self):
         return f"Group - service_provider: {self.service_provider.name}, id: {self.id}, name: {self.name}, domain: {self.domain}, " \
@@ -133,8 +125,6 @@ class TrunkGroup(Group):
         self.number = number
         self.users: List[User] = users if users else []
 
-        DataStore.get_instance()._add_object_to_store(self, "trunk_group")
-
     def __str__(self):
         return f"Trunk Group - group: {self.group.name}, name: {self.name}, device: {self.device} " \
                f"users: {self.users}"
@@ -148,8 +138,6 @@ class HuntGroup(Group):
         self.id = id
         self.number = number
         self.users: List[User] = users if users else []
-
-        DataStore.get_instance()._add_object_to_store(self, "hunt_group")
 
     def __str__(self):
         return f"Hunt Group - group: {self.group.name}, name: {self.name}, extension: {self.extension} " \
@@ -165,8 +153,6 @@ class User:
         self._extension = extension
 
         self.group.users.append(self)
-
-        DataStore.get_instance()._add_object_to_store(self, "user")
 
     @property
     def id(self):

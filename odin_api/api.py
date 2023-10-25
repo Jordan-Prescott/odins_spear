@@ -2,7 +2,6 @@ import requests
 import os
 
 from odin_api.utils.exceptions import *
-from odin_api.store.data_store import DataStore
 from odin_api.scripter import Scripter
 
 
@@ -22,8 +21,6 @@ class Api:
         self.authorised = False
         self.token = ""
         self.scripter = Scripter(self)
-
-        DataStore.get_instance().apis.append(self)
 
     # SESSION
     def authenticate(self) -> None:

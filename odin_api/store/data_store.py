@@ -1,5 +1,8 @@
 from typing import List
 
+from odin_api import Api
+from . import broadworks_entities as bre
+
 class DataStore:
     """ Local store of objects, when each object is instantiated it is added to
     the appropriate list.
@@ -19,46 +22,16 @@ class DataStore:
         if DataStore.__instance is not None:
             raise Exception("Singleton cannot be instantiated more than once!")
         else:
-            self.apis = []
-            self.enterprises = []
-            self.service_providers = []
-            self.groups = []
-            self.trunk_groups = []
-            self.hunt_groups = []
-            self.users = []
+            self.apis: List[Api] = []
+            self.service_providers: List[bre.ServiceProvider] = []
+            self.enterprises: List[bre.Enterprise] = []
+            self.groups: List[bre.Group] = []
+            self.trunk_groups: List[bre.TrunkGroup] = []
+            self.hunt_groups: List[bre.HuntGroup] = []
+            self.users: List[bre.User] = []
             self.other_entities = [] #Non-common or custom objects
 
             DataStore.__instance = self
-    
-    def _add_object_to_store(self, entity, entity_type):
-        """ Takes in object and type of object and files in list depening on object type.
-
-        :param entity: broadwork_entitie object.
-        :param entity_type: entity type e.g. User 
-        """
-
-        if entity_type == "api" and entity not in self.apis:
-            self.apis.append(entity)
-        
-        # due to object relationship check needs to confirm this hasnt already been added to store
-        elif entity_type == "enterprise":
-            if entity not in self.service_providers and entity not in self.enterprises:
-                self.enterprises.append(entity)
-        elif entity_type == "service_provider":
-            if entity not in self.service_providers and entity not in self.enterprises:
-                self.service_providers.append(entity)
-
-        elif entity_type == "group" and entity not in self.groups:
-            self.groups.append(entity)
-        elif entity_type == "trunk_group" and entity not in self.trunk_groups:
-            self.trunk_groups.append(entity)
-        elif entity_type == "hunt_group" and entity not in self.hunt_groups:
-            self.hunt_groups.append(entity)
-        elif entity_type == "user" and entity not in self.users:
-                self.users.append(entity)
-        else:
-            self.other_entities.append(entity)
-        
 
     def get_group_state(group):
         """ takes in group id and loads group state into broadworks entities.
@@ -67,11 +40,37 @@ class DataStore:
         """
         pass
 
+    def store_object(self, *entities):
+        """ Takes in objects within the odin_api and custom and stores in lists
+        depending on type.
+
+        :param entity: 
+        """
+
+        from . import broadworks_entities
+        from odin_api.api import Api
+
+        for e in entities:
+            if isinstance(e, Api):
+                self.apis.append(e)
+            elif isinstance(e, broadworks_entities.ServiceProvider):
+                self.service_providers.append(e)
+            elif isinstance(e, broadworks_entities.Enterprise):
+                self.enterprises.append(e)
+            elif isinstance(e, broadworks_entities.Group):
+                self.groups.append(e)
+            elif isinstance(e, broadworks_entities.TrunkGroup):
+                self.trunk_groups.append(e)
+            elif isinstance(e, broadworks_entities.HuntGroup):
+                self.hunt_groups.append(e)
+            elif isinstance(e, broadworks_entities.User):
+                self.users.append(e)
+    
     def export_store():
         """ exports entire store to json file
         """
         pass
-    
+
     def __str__(self):
         """ returns complete list of entities in store.
         """
