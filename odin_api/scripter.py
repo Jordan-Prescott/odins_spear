@@ -1,11 +1,15 @@
-# user will use this module as an entry to oa_scripts for example:
-# odin_aip.scripts.find_alias('foo') will call the relevant script in oa_scipts = oa_scripts.find_alias('foo')
 from . import scripts
 
 class Scripter:
     """ This object acts as the gateway to all pre-written scripts in /scripts/.
 
-    :param api: 
+    Each api object created creates its own associated Scripter object on api creation. 
+    Additionally, this object can be created solely and passed an api, however, this 
+    will result in two exact Scripter objects.
+
+    Intended use: odin_api.scripter.{script function}
+
+    :param api: api object in package odin_api, this is used in the scripts to achieve objective.
     """
     def __init__(self, api) -> None:
         self.api = api
