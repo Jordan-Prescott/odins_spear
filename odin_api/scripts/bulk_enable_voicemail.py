@@ -1,7 +1,11 @@
 def main():
-        """ Takes in list of users and resets each SIP password. This 
-    will return the list of users and their new changed password. 
+    """ Takes in list of users and performs below:
 
+    Enables VM, 
+    Adds VM to email if required along with email address, 
+    Transfer on zero (if required) and destination, 
+    VM common password, 
+    Auto-login
 
     :param x:
     :param y:
@@ -9,4 +13,4 @@ def main():
 
     :return r: 
     """
-    return 
+    return  
