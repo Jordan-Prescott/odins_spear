@@ -44,7 +44,7 @@ class DataStore:
         """ Takes in objects within the odin_api and custom and stores in lists
         depending on type.
 
-        :param entity: 
+        :param entity: broadwork entities used in odin_api
         """
 
         from . import broadworks_entities
