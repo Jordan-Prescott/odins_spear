@@ -54,8 +54,20 @@ class Api:
     # CALL CENTER 
 
     # USER 
+    
+    
 
     # DEVICE
+    
+    # internal to api
+    
+    def _requester():
+        """ sends request to api, this is used in all functions.
+        """
+
+        
+                
+        return
 
     def __str__(self):
         return f"API - url: {self.base_url}, username: {self.username}, " \
