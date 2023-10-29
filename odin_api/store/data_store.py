@@ -65,6 +65,8 @@ class DataStore:
                 self.hunt_groups.append(e)
             elif isinstance(e, broadworks_entities.User):
                 self.users.append(e)
+            else:
+                self.other_entities.append(e)
     
     def export_store():
         """ exports entire store to json file
