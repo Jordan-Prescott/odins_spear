@@ -1,6 +1,8 @@
 # odin_api
 Python package for Odins API to build and manage Broadwork installations.
 
+[Odin API Docs](https://doc.odinapi.net/)
+
 ## Solution Design
 ![Solution Design](./data/media/solution_design.png "Solution Design")
 
