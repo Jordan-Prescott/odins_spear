@@ -117,7 +117,7 @@ class Group:
         del self._main_number
 
 
-class TrunkGroup(Group):
+class TrunkGroup():
     def __init__(self, group, name, device, number, users=None):
         self.group = group
         self.name = name
@@ -130,7 +130,17 @@ class TrunkGroup(Group):
                f"users: {self.users}"
 
 
-class HuntGroup(Group):
+class AutoAttendant():
+    def __init__():
+        pass
+
+
+class CallCenter():
+    def __init__():
+        pass
+
+
+class HuntGroup():
     def __init__(self, group, name, extension, id, number=None, users=None):
         self.group = group
         self.name = name
@@ -209,3 +219,8 @@ class User:
     def __str__(self):
         return f"User - group: {self.group.name}, first Name: {self.first_name}, last Name: {self.last_name}, " \
                f"extension: {self.extension}, id: {self.id}"
+
+    
+    class Device:
+        def __init__():
+            pass
