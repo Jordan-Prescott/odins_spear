@@ -1,0 +1,27 @@
+{
+    "defaultDomain": "lab.tekvoice.net",
+    "userLimit": 50,
+    "userCount": 13,
+    "groupName": "grp.odin",
+    "callingLineIdName": "grp.odin",
+    "callingLineIdPhoneNumber": "+15132337655",
+    "callingLineIdDisplayPhoneNumber": 5132337655,
+    "timeZone": "America/Denver",
+    "timeZoneDisplayName": "(GMT-06:00) (US) Mountain Time",
+    "locationDialingCode": "5131",
+    "contact": {
+        "contactName": "Mark Reverman",
+        "contactNumber": "100-454-4545",
+        "contactEmail": "zmayfield@parkbenchsolutions.com"
+    },
+    "address": {
+        "addressLine1": "4545 Main Street",
+        "addressLine2": "Bldg 2",
+        "city": "Cincinnati",
+        "stateOrProvince": "Ohio",
+        "zipOrPostalCode": "45212",
+        "country": "United States"
+    },
+    "serviceProviderId": "ent.odin",
+    "groupId": "grp.odin"
+}

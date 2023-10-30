@@ -1,0 +1,37 @@
+{
+    "deviceType": "Polycom Soundpoint IP 4000",
+    "deviceName": "my-new-device-name",
+    "deviceLevel": "Group",
+    "useCustomUserNamePassword": true,
+    "accessDeviceCredentials": {
+        "userName": "9871515000",
+        "password": "ym7#zIuA"
+    },
+    "netAddress": "111.111.111.111",
+    "port": "2222",
+    "outboundProxyServerNetAddress": "222.222.222.222",
+    "stunServerNetAddress": "333.333.333.333",
+    "macAddress": "CBFB0EBBF325",
+    "serialNumber": "123456789",
+    "description": "description",
+    "physicalLocation": "usa",
+    "transportProtocol": "UDP",
+    "groupId": "grp.odin",
+    "serviceProviderId": "ent.odin",
+    "profile": "Intelligent Proxy Addressing",
+    "staticRegistrationCapable": "false",
+    "configType": "3 File Configuration",
+    "protocolChoice": [
+        "SIP 2.0"
+    ],
+    "isIpAddressOptional": "true",
+    "useDomain": "true",
+    "isMobilityManagerDevice": "false",
+    "deviceConfigurationOption": "Device Management",
+    "staticLineOrdering": "false",
+    "deviceTypeLevel": "System",
+    "tags": [],
+    "relatedServices": [],
+    "protocol": "SIP 2.0",
+    "userName": "9871515000"
+}

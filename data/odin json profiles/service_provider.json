@@ -1,0 +1,20 @@
+{
+    "serviceProviderId": "ent.odin.mock",
+    "isEnterprise": true,
+    "defaultDomain": "microv-works.com",
+    "serviceProviderName": "Odin Mock Enterprise 2",
+    "supportEmail": "support@parkbenchsolutions.com",
+    "contact": {
+        "contactName": "Support Team",
+        "contactNumber": "111-111-1111",
+        "contactEmail": "support@parkbenchsolutions.com"
+    },
+    "address": {
+        "addressLine1": "111 This St",
+        "city": "Somecity",
+        "stateOrProvince": "Arizona",
+        "zipOrPostalCode": "33333",
+        "country": "US"
+    },
+    "useServiceProviderLanguages": false
+}

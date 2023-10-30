@@ -1,0 +1,76 @@
+{
+    "serviceInstanceProfile": {
+        "name": "mock-aa-test-1",
+        "callingLineIdLastName": "mock-aa-test-1",
+        "callingLineIdFirstName": "mock-aa-test-1",
+        "hiraganaLastName": "mock-aa-test-1",
+        "hiraganaFirstName": "Auto Attendant",
+        "language": "English",
+        "timeZone": "America/Denver",
+        "timeZoneDisplayName": "(GMT-06:00) (US) Mountain Time",
+        "aliases": []
+    },
+    "type": "Basic",
+    "enableVideo": false,
+    "extensionDialingScope": "Group",
+    "nameDialingScope": "Group",
+    "nameDialingEntries": "LastName + FirstName",
+    "businessHoursMenu": {
+        "announcementSelection": "Default",
+        "enableFirstMenuLevelExtensionDialing": false,
+        "keys": [
+            {
+                "key": "0",
+                "action": "Transfer To Operator",
+                "description": null,
+                "phoneNumber": null,
+                "submenuId": null
+            },
+            {
+                "key": "1",
+                "action": "Extension Dialing",
+                "description": null,
+                "phoneNumber": null,
+                "submenuId": null
+            },
+            {
+                "key": "2",
+                "action": "Name Dialing",
+                "description": null,
+                "phoneNumber": null,
+                "submenuId": null
+            }
+        ]
+    },
+    "afterHoursMenu": {
+        "announcementSelection": "Default",
+        "enableFirstMenuLevelExtensionDialing": false,
+        "keys": [
+            {
+                "key": "0",
+                "action": "Transfer To Operator",
+                "description": null,
+                "phoneNumber": null,
+                "submenuId": null
+            },
+            {
+                "key": "1",
+                "action": "Extension Dialing",
+                "description": null,
+                "phoneNumber": null,
+                "submenuId": null
+            },
+            {
+                "key": "2",
+                "action": "Name Dialing",
+                "description": null,
+                "phoneNumber": null,
+                "submenuId": null
+            }
+        ]
+    },
+    "serviceUserId": "mock-aa-test-1",
+    "serviceProviderId": "odin.mock.ent1",
+    "groupId": "odin.mock.grp1",
+    "isEnterprise": true
+}
