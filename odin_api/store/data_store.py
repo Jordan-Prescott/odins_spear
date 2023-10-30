@@ -68,7 +68,7 @@ class DataStore:
             else:
                 self.other_entities.append(e)
     
-    def export_store():
+    def export_store(self, path):
         """ exports entire store to json file
         """
         pass
