@@ -1,17 +1,5 @@
 from typing import List
 
-
-# class ServiceProvider:
-#     def __init__(self, id, name):
-#         self.id = id
-#         self.name = name
-#         self.groups: List[Group] = []
-        
-
-
-
-#         self.is_enterprise = False
-
 class ServiceProvider:
     def __init__(self, id, name):
         self._id = id
