@@ -127,7 +127,7 @@ class TrunkGroup:
                  allow_termination_to_dtg_identity: bool=False,
                  allow_termination_to_trunk_group_identity: bool=False,
                  allow_unscreened_calls: bool=False,
-                 allow_unscreened_emergency_call: bool=False,
+                 allow_unscreened_emergency_calls: bool=False,
                  capacity_exceeded_trap_initial_calls=None,
                  capacity_exceeded_trap_offset_calls=None,
                  clid_source_for_screened_calls_policy=None,
