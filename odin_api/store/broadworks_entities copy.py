@@ -52,9 +52,16 @@ class Enteprise(ServiceProvider):
                  use_service_provider_language=False
                  ):
         
-        super().__init__(default_domain, support_email, contact_name, contact_number, 
-                         contact_email, address_line_1, city, state_or_province, 
-                         zip_or_postcode, country, use_service_provider_language)
+        super().__init__(default_domain, 
+                         support_email, 
+                         contact_name, 
+                         contact_number, 
+                         contact_email, 
+                         address_line_1, 
+                         city, state_or_province, 
+                         zip_or_postcode, 
+                         country, 
+                         use_service_provider_language)
 
         self.id = id 
         self.name = name
