@@ -1,14 +1,22 @@
 from typing import List
 
 
+# class ServiceProvider:
+#     def __init__(self, id, name):
+#         self.id = id
+#         self.name = name
+#         self.groups: List[Group] = []
+        
+
+
+
+#         self.is_enterprise = False
+
 class ServiceProvider:
     def __init__(self, id, name):
         self._id = id
         self._name = name
         self.groups: List[Group] = []
-
-    def __str__(self):
-        return f"Service Provider - id: {self._id}, name: {self._name}, groups: {self.groups}"
 
     @property
     def id(self):
@@ -35,6 +43,9 @@ class ServiceProvider:
     @name.deleter
     def nameid(self):
         del self._name
+
+    def __str__(self):
+        return f"Service Provider - id: {self._id}, name: {self._name}, groups: {self.groups}"
 
 
 class Enterprise(ServiceProvider):
