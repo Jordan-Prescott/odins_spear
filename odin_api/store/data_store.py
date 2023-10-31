@@ -27,8 +27,11 @@ class DataStore:
             self.enterprises: List[bre.Enterprise] = []
             self.groups: List[bre.Group] = []
             self.trunk_groups: List[bre.TrunkGroup] = []
+            self.auto_attendants: List[bre.AutoAttendant] = []
+            self.call_centers: List[bre.CallCenter] = []
             self.hunt_groups: List[bre.HuntGroup] = []
             self.users: List[bre.User] = []
+            self.devices: List[bre.Device] = []
             self.other_entities = [] #Non-common or custom objects
 
             DataStore.__instance = self
@@ -47,24 +50,27 @@ class DataStore:
         :param entity: broadwork entities used in odin_api
         """
 
-        from . import broadworks_entities
-        from odin_api.api import Api
-
         for e in entities:
             if isinstance(e, Api):
                 self.apis.append(e)
-            elif isinstance(e, broadworks_entities.ServiceProvider):
+            elif isinstance(e, bre.ServiceProvider):
                 self.service_providers.append(e)
-            elif isinstance(e, broadworks_entities.Enterprise):
+            elif isinstance(e, bre.Enterprise):
                 self.enterprises.append(e)
-            elif isinstance(e, broadworks_entities.Group):
+            elif isinstance(e, bre.Group):
                 self.groups.append(e)
-            elif isinstance(e, broadworks_entities.TrunkGroup):
+            elif isinstance(e, bre.TrunkGroup):
                 self.trunk_groups.append(e)
-            elif isinstance(e, broadworks_entities.HuntGroup):
+            elif isinstance(e, bre.AutoAttendant):
+                self.auto_attendants.append(e)
+            elif isinstance(e, bre.CallCenter):
+                self.call_centers.append(e)
+            elif isinstance(e, bre.HuntGroup):
                 self.hunt_groups.append(e)
-            elif isinstance(e, broadworks_entities.User):
+            elif isinstance(e, bre.User):
                 self.users.append(e)
+            elif isinstance(e, bre.Device):
+                self.devices.append(e)
             else:
                 self.other_entities.append(e)
     

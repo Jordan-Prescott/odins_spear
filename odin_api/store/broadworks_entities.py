@@ -221,6 +221,6 @@ class User:
                f"extension: {self.extension}, id: {self.id}"
 
     
-    class Device:
-        def __init__():
-            pass
+class Device:
+    def __init__():
+        pass
