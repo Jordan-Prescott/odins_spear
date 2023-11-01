@@ -52,16 +52,9 @@ class Enteprise(ServiceProvider):
                  use_service_provider_language=False
                  ):
         
-        super().__init__(default_domain, 
-                         support_email, 
-                         contact_name, 
-                         contact_number, 
-                         contact_email, 
-                         address_line_1, 
-                         city, state_or_province, 
-                         zip_or_postcode, 
-                         country, 
-                         use_service_provider_language)
+        super().__init__(default_domain, support_email, contact_name, contact_number, 
+                         contact_email, address_line_1, city, state_or_province, 
+                         zip_or_postcode, country, use_service_provider_language)
 
         self.id = id 
         self.name = name
@@ -216,5 +209,77 @@ class TrunkGroup:
         self.service_provider_id = group.sp_or_ent
 
 
-
+class AAKey():
+    def __init__(self,
+                 key_number=None, 
+                 action=None, 
+                 description=None, 
+                 phone_number=None, 
+                 submenu_id=None
+                 ) -> None:
         
+        self.key = key_number
+        self.action = action
+        self.description = description
+        self.phone_number = phone_number
+        self.submenu_id = submenu_id
+
+class AAMenu():
+    def __init__(self, 
+                 announcement_selection=None, 
+                 enable_first_menu_level_extension_dialing: bool=False,
+                 keys: List[AAKey]=None
+                 ) -> None:
+        
+        self.announcement_selection = announcement_selection
+        self.enable_first_menu_level_extension_dialing = enable_first_menu_level_extension_dialing
+        self.keys = keys
+        
+
+class AutoAttendant:
+    def __int__(self, 
+                name=None, 
+                calling_line_id_last_name=None, 
+                calling_line_id_first_name=None, 
+                hiragana_last_name=None, 
+                hiragana_first_name=None, 
+                language=None, 
+                time_zone=None, 
+                time_zone_display_name=None, 
+                aliases: List[Alias]=None,
+                type=None, 
+                enable_video: bool=False, 
+                extension_dialing_scope=None, 
+                name_dialing_scope=None, 
+                name_dialing_entries=None,
+                business_hours_menu: AAMenu=None,
+                after_hours_menu: AAMenu=None,
+                service_user_id=None, 
+                group=None, 
+                ):
+        
+        self.name = name
+        self.group = group
+
+        self.calling_line_id_last_name = calling_line_id_last_name
+        self.calling_line_id_first_name = calling_line_id_first_name
+        self.hiragana_last_name = hiragana_last_name
+        self.hiragana_first_name = hiragana_first_name
+        self.language = language
+        self.time_zone = time_zone
+        self.time_zone_display_name = time_zone_display_name
+        self.aliases = aliases
+        self.type = type
+        self.enable_video = enable_video
+        self.extension_dialing_scope = extension_dialing_scope
+        self.name_dialing_scope = name_dialing_scope
+        self.name_dialing_entries = name_dialing_entries
+        self.business_hours_menu = business_hours_menu
+        self.after_hours_menu = after_hours_menu
+        self.service_user_id = service_user_id
+
+        self.service_provider_id = group.sp_or_ent.id
+        self.is_enterprise = group.sp_or_ent.is_enterprise
+        
+
+
