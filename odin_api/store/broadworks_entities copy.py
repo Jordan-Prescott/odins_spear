@@ -3,10 +3,20 @@ from typing import List
 class ServiceProvider:
     """_summary_
     """
-    def __init__(self, id, name, default_domain=None, support_email=None, 
-                 contact_name=None, contact_number=None, contact_email=None,
-                 address_line_1=None, city=None, state_or_province=None, 
-                 zip_or_postcode=None, country=None, use_service_provider_language=False
+    def __init__(self, 
+                 id, 
+                 name, 
+                 default_domain=None, 
+                 support_email=None, 
+                 contact_name=None, 
+                 contact_number=None, 
+                 contact_email=None,
+                 address_line_1=None, 
+                 city=None, 
+                 state_or_province=None, 
+                 zip_or_postcode=None, 
+                 country=None, 
+                 use_service_provider_language=False
                  ):
         
         self.id = id
