@@ -3,6 +3,10 @@ from typing import List
 class ServiceProvider:
     """_summary_
     """
+    
+    def __init__():
+        pass
+    
     def __init__(self, 
                  id, 
                  name, 
@@ -292,4 +296,64 @@ class AutoAttendant:
         self.is_enterprise = group.sp_or_ent.is_enterprise
         
 
-
+class CallCenter:
+    def __init__(self,
+        name,         
+        group,
+        agents: List[User]=None,
+                
+        enable_video=False, 
+        allow_caller_to_dial_escape_digit=False, 
+        reset_call_statistics_upon_entry_in_queue=True, 
+        allow_agent_logoff=True, 
+        allow_call_waiting_for_agents=True, 
+        play_ringing_when_offering_call=True, 
+        external_preferred_audio_codec=None, 
+        internal_preferred_audio_codec=None,
+        enable_reporting=False, 
+        allow_calls_to_agents_in_wrap_up=True,
+        override_agent_wrap_up_time=False, 
+        enable_automatic_state_change_for_agents=False,
+        force_delivery_of_calls=False, 
+        type=None,
+        service_user_id_prefix=None, 
+        calling_line_id_last_name=None, 
+        calling_line_id_first_name=None, 
+        password=None, 
+        policy=None, 
+        routing_type=None,
+        queue_length=None, 
+        escape_digit=None, 
+        service_user_id=None
+        ):
+        
+        self.name = name
+        self.group = group
+        self.agents: List[User] = []
+        
+        self.enable_video = False
+        self.allow_caller_to_dial_escape_digit = False
+        self.reset_call_statistics_upon_entry_in_queue = True
+        self.allow_agent_logoff = True
+        self.allow_call_waiting_for_agents = True
+        self.play_ringing_when_offering_call = True
+        self.external_preferred_audio_codec = None
+        self.internal_preferred_audio_codec = None
+        self.enable_reporting = False
+        self.allow_calls_to_agents_in_wrap_up = True
+        self.override_agent_wrap_up_time = False
+        self.enable_automatic_state_change_for_agents = False
+        self.force_delivery_of_calls = False
+        self.type = None
+        self.service_user_id_prefix = None
+        self.calling_line_id_last_name = None
+        self.calling_line_id_first_name = None
+        self.password = None
+        self.policy = None
+        self.routing_type = None
+        self.queue_length = None
+        self.escape_digit = None
+        self.service_user_id = None
+        
+        self.service_provider_id = group.sp_or_ent.id 
+        
