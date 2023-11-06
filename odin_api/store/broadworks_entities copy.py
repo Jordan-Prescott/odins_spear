@@ -298,34 +298,34 @@ class AutoAttendant:
 
 class CallCenter:
     def __init__(self,
-        name,         
-        group,
-        agents: List[User]=None,
-                
-        enable_video=False, 
-        allow_caller_to_dial_escape_digit=False, 
-        reset_call_statistics_upon_entry_in_queue=True, 
-        allow_agent_logoff=True, 
-        allow_call_waiting_for_agents=True, 
-        play_ringing_when_offering_call=True, 
-        external_preferred_audio_codec=None, 
-        internal_preferred_audio_codec=None,
-        enable_reporting=False, 
-        allow_calls_to_agents_in_wrap_up=True,
-        override_agent_wrap_up_time=False, 
-        enable_automatic_state_change_for_agents=False,
-        force_delivery_of_calls=False, 
-        type=None,
-        service_user_id_prefix=None, 
-        calling_line_id_last_name=None, 
-        calling_line_id_first_name=None, 
-        password=None, 
-        policy=None, 
-        routing_type=None,
-        queue_length=None, 
-        escape_digit=None, 
-        service_user_id=None
-        ):
+                name,         
+                group,
+                agents: List[User]=None,
+                        
+                enable_video=False, 
+                allow_caller_to_dial_escape_digit=False, 
+                reset_call_statistics_upon_entry_in_queue=True, 
+                allow_agent_logoff=True, 
+                allow_call_waiting_for_agents=True, 
+                play_ringing_when_offering_call=True, 
+                external_preferred_audio_codec=None, 
+                internal_preferred_audio_codec=None,
+                enable_reporting=False, 
+                allow_calls_to_agents_in_wrap_up=True,
+                override_agent_wrap_up_time=False, 
+                enable_automatic_state_change_for_agents=False,
+                force_delivery_of_calls=False, 
+                type=None,
+                service_user_id_prefix=None, 
+                calling_line_id_last_name=None, 
+                calling_line_id_first_name=None, 
+                password=None, 
+                policy=None, 
+                routing_type=None,
+                queue_length=None, 
+                escape_digit=None, 
+                service_user_id=None
+                ):
         
         self.name = name
         self.group = group
@@ -357,3 +357,62 @@ class CallCenter:
         
         self.service_provider_id = group.sp_or_ent.id 
         
+        
+class HuntGroup:
+    def __init__(self,
+                name,
+                group,
+                agents: List[User]=None,
+                calling_line_id_last_name=None,
+                calling_line_id_first_name=None,
+                hiragana_last_name=None,
+                hiragana_first_name=None,
+                language=None,
+                time_zone=None,
+                aliases=None,
+                policy=None,
+                hunt_after_no_answer=None,
+                no_answer_number_of_rings=None,
+                forward_after_timeout=None,
+                forward_timeout_seconds=None,
+                allow_call_waiting_for_agents=None,
+                use_system_hunt_group_clid_setting=None,
+                include_hunt_group_name_in_clid=None,
+                enable_not_reachable_forwarding=None,
+                make_busy_when_not_reachable=None,
+                service_user_id=None,
+                ):
+        
+        self.name = name
+        self.group = group
+        self.agents: List[User] = []
+        
+        self.service_provider_id = group.so_or_ent.id
+        
+        self.calling_line_id_last_name = calling_line_id_last_name
+        self.calling_line_id_first_name = calling_line_id_first_name
+        self.hiragana_last_name = hiragana_last_name
+        self.hiragana_first_name = hiragana_first_name
+        self.language = language
+        self.time_zone = time_zone
+        self.aliases = aliases
+        self.policy = policy
+        self.hunt_after_no_answer = hunt_after_no_answer
+        self.no_answer_number_of_rings = no_answer_number_of_rings
+        self.forward_after_timeout = forward_after_timeout
+        self.forward_timeout_seconds = forward_timeout_seconds
+        self.allow_call_waiting_for_agents = allow_call_waiting_for_agents
+        self.use_system_hunt_group_clid_setting = use_system_hunt_group_clid_setting
+        self.include_hunt_group_name_in_clid = include_hunt_group_name_in_clid
+        self.enable_not_reachable_forwarding = enable_not_reachable_forwarding
+        self.make_busy_when_not_reachable = make_busy_when_not_reachable
+        self.service_user_id = service_user_id
+     
+     
+class User:
+    def __init__(self):
+        return
+
+class Device:
+    def __init__(self):
+        return
