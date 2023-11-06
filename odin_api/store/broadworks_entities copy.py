@@ -416,3 +416,8 @@ class User:
 class Device:
     def __init__(self):
         return
+    
+    
+class Alias:
+    def __init__(self):
+        return
