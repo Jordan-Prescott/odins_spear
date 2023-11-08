@@ -70,7 +70,7 @@ class Api:
                 
         return
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"API - url: {self.base_url}, username: {self.username}, " \
             f"password: {self.password}, Authenticated: {self.authorised}"
     
