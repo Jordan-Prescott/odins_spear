@@ -79,7 +79,7 @@ class DataStore:
         """
         pass
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ returns complete list of entities in store.
         """
         entities = self.apis + self.enterprises + self.service_providers + self.groups + self.trunk_groups + \
