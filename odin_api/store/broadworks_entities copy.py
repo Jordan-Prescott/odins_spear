@@ -559,5 +559,11 @@ class Device:
         self.service_provider_id = group.sp_or_ent.id
 
 class Alias:
-    def __init__(self):
-        return
+    def __init__(self, 
+                 number, 
+                 broadworks_entity: object):
+        
+        self.number = number
+        self.broadworks_entity = broadworks_entity
+        
+        self.user_id = number + broadworks_entity.group.default_domain
