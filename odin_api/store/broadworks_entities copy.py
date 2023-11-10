@@ -1,5 +1,7 @@
 from typing import List
 
+from odin_api.utils import generator as gen
+
 class ServiceProvider:
     """_summary_
     """
@@ -348,7 +350,7 @@ class CallCenter:
         self.service_user_id_prefix = service_user_id_prefix
         self.calling_line_id_last_name = calling_line_id_last_name
         self.calling_line_id_first_name = calling_line_id_first_name
-        self.password = password
+        self.password = if password is None gen.generate_password() else password
         self.policy = policy
         self.routing_type = routing_type
         self.queue_length = queue_length
@@ -410,8 +412,84 @@ class HuntGroup:
      
      
 class User:
-    def __init__(self):
-        return
+    def __init__(self, 
+                 service_provider_id=None, 
+                 group=None, 
+                 user_id=None, 
+                 last_name=None, 
+                 first_name=None, 
+                 calling_line_id_last_name=None, 
+                 calling_line_id_first_name=None, 
+                 hiragana_last_name=None, 
+                 hiragana_first_name=None, 
+                 phone_number=None, 
+                 extension=None, 
+                 calling_line_id_phone_number=None, 
+                 password=None, 
+                 department=None, 
+                 department_full_path=None, 
+                 language=None, 
+                 time_zone=None, 
+                 time_zone_display_name=None, 
+                 default_alias=None, 
+                 access_device_endpoint=None, 
+                 title=None, 
+                 pager_phone_number=None, 
+                 mobile_phone_number=None, 
+                 email_address=None, 
+                 yahoo_id=None, 
+                 address_location=None, 
+                 address=None, 
+                 country_code=None, 
+                 network_class_of_service=None, 
+                 allow_video: bool=True, 
+                 domain=None, 
+                 endpoint_type=None, 
+                 aliases=None, 
+                 trunk_addressing=None,
+                 alternate_user_id=None):
+        
+        self.group = group
+        self.user_id = user_id + group.default_domain
+        self.last_name = last_name
+        self.first_name = first_name
+        
+        self.calling_line_id_last_name = self.last_name
+        self.calling_line_id_first_name = self.first_name
+        self.hiragana_last_name = self.last_name
+        self.hiragana_first_name = self.first_name
+        self.phone_number = phone_number
+        self.extension = extension
+        self.calling_line_id_phone_number = calling_line_id_phone_number
+        self.password = if password is None gen.generate_password() else password
+        self.department = department
+        self.department_full_path = department_full_path
+        self.language = language
+        self.time_zone = time_zone
+        self.time_zone_display_name = time_zone_display_name
+        self.default_alias = default_alias
+        self.access_device_endpoint = access_device_endpoint #Device object
+        self.title = title
+        self.pager_phone_number = pager_phone_number
+        self.mobile_phone_number = mobile_phone_number
+        self.email_address = email_address
+        self.yahoo_id = yahoo_id
+        self.address_location = address_location
+        self.address = address #address object
+        self.country_code = country_code
+        self.network_class_of_service = network_class_of_service
+        self.allow_video = allow_video
+        self.domain = domain
+        self.endpoint_type = endpoint_type
+        self.aliases = aliases
+        self.trunk_addressing = trunk_addressing
+        self.alternate_user_id = alternate_user_id
+        
+        self.is_enterprise = group.sp_or_ent.is_enterprise
+        self.password_expires_days = 2147483647
+        self.service_provider_id = group.sp_or_ent.id
+
+
 
 class Device:
     def __init__(self):
