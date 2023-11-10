@@ -386,7 +386,7 @@ class HuntGroup:
                 ):
         
         self.name = name
-        self.group = group
+        self.group = group.hunt_groups.append(self) #this may fail
         self.agents: List[User] = []
         
         self.service_provider_id = group.so_or_ent.id
@@ -449,7 +449,7 @@ class User:
                  trunk_addressing=None,
                  alternate_user_id=None):
         
-        self.group = group
+        self.group = group.user.append(self) #this may fail
         self.user_id = user_id + group.default_domain
         self.last_name = last_name
         self.first_name = first_name
@@ -490,12 +490,74 @@ class User:
         self.service_provider_id = group.sp_or_ent.id
 
 
-
 class Device:
-    def __init__(self):
-        return
-    
-    
+    def __init__(self, 
+                 type,
+                 name,
+                 group: Group,
+                 
+                 use_custom_user_name_password: bool=True, 
+                 access_device_credential_name=None,
+                 access_device_credential_password=None,
+                 net_address=None, 
+                 port=None, 
+                 outbound_proxy_server_net_address=None,
+                 stun_server_net_address=None,
+                 mac_address=None, 
+                 serial_number=None,
+                 description=None, 
+                 physical_location=None, 
+                 transport_protocol=None,
+                 profile=None,
+                 static_registration_capable=None, 
+                 config_type=None, 
+                 protocol_choice:List[]=None,
+                 is_ip_address_optional: bool=True, 
+                 use_domain: bool=True,
+                 is_mobility_manager_device: bool=False, 
+                 device_configuration_option=None,
+                 static_line_ordering: bool=False,
+                 device_type_level=None, 
+                 tags:List[]=None,
+                 related_services:List[]=None, 
+                 protocol=None,
+                 user_name=None):
+        
+        self.device_type = device_type
+        self.device_name = device_name
+        self.group = group
+        
+        self.use_custom_user_name_password = use_custom_user_name_password
+        self.access_device_credential_name = access_device_credential_name
+        self.access_device_credential_password = if password is None gen.generate_password() else password
+        self.net_address = net_address
+        self.port = port
+        self.outbound_proxy_server_net_address = outbound_proxy_server_net_address
+        self.stun_server_net_address = stun_server_net_address
+        self.mac_address = mac_address
+        self.serial_number = serial_number
+        self.description = description
+        self.physical_location = physical_location
+        self.transport_protocol = transport_protocol
+        self.profile = profile
+        self.static_registration_capable = static_registration_capable
+        self.config_type = config_type
+        self.protocol_choice = protocol_choice
+        self.is_ip_address_optional = is_ip_address_optional
+        self.use_domain = use_domain
+        self.is_mobility_manager_device = is_mobility_manager_device
+        self.device_configuration_option = device_configuration_option
+        self.static_line_ordering = static_line_ordering
+        self.device_type_level = device_type_level
+        self.tags = tags
+        self.related_services = related_services
+        self.protocol = protocol
+        self.user_name = user_name
+        
+        self.device_level = "Group"
+        self.group_id = group.id
+        self.service_provider_id = group.sp_or_ent.id
+
 class Alias:
     def __init__(self):
         return
