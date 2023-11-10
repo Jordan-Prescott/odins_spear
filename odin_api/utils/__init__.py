@@ -1,6 +1,7 @@
-__all__ = ["exceptions", "parsing", "oa_logger", "tests"]
+__all__ = ["exceptions", "generators", "parsing", "oa_logger", "tests"]
 
 from .exceptions import *
+from .generators import *
 from .parsing import *
 from .oa_logger import *
 from .tests import *
