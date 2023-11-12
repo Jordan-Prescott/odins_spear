@@ -1,4 +1,5 @@
 from typing import List
+import json
 
 from odin_api import Api
 from . import broadworks_entities as bre
@@ -74,10 +75,55 @@ class DataStore:
             else:
                 self.other_entities.append(e)
     
-    def export_store(self, path):
-        """ exports entire store to json file
-        """
-        pass
+    def export_store(self) -> str:
+        """Export all objects in the store and their relationships in JSON format."""
+        export_data = {}
+        object_lists = {
+            'apis': self.apis,
+            'service_providers': self.service_providers,
+            'enterprises': self.enterprises,
+            'groups': self.groups,
+            'trunk_groups': self.trunk_groups,
+            'auto_attendants': self.auto_attendants,
+            'call_centers': self.call_centers,
+            'hunt_groups': self.hunt_groups,
+            'users': self.users,
+            'devices': self.devices,
+            'other_entities': self.other_entities
+        }
+
+        for key, object_list in object_lists.items():
+            export_data[key] = self.export_objects(object_list)
+
+        return json.dumps(export_data, indent=2)
+
+    def export_objects(self, object_list: List) -> List[dict]:
+        """Export a list of objects and their relationships to a dictionary."""
+        exported_objects = []
+
+        for obj in object_list:
+            exported_object = {
+                'type': obj.__class__.__name__,
+                'data': self.export_object_data(obj)
+            }
+            exported_objects.append(exported_object)
+
+        return exported_objects
+
+    def export_object_data(self, obj) -> dict:
+        """Export an object's attributes and relationships to a dictionary."""
+        object_data = {}
+
+        # Add attributes
+        for attr, value in vars(obj).items():
+            object_data[attr] = value
+
+        # Add relationships (if applicable)
+        if hasattr(obj, 'groups'):
+            object_data['groups'] = self.export_objects(obj.groups)
+        # Add other relationships as needed
+
+        return object_data
 
     def __str__(self) -> str:
         """ returns complete list of entities in store.
