@@ -2,6 +2,7 @@ from typing import List
 import json
 
 from odin_api import Api
+from odin_api.utils import parsing
 from . import broadworks_entities as bre
 
 class DataStore:
@@ -93,37 +94,9 @@ class DataStore:
         }
 
         for key, object_list in object_lists.items():
-            export_data[key] = self.export_objects(object_list)
+            export_data[key] = parsing.export_objects(object_list)
 
         return json.dumps(export_data, indent=2)
-
-    def export_objects(self, object_list: List) -> List[dict]:
-        """Export a list of objects and their relationships to a dictionary."""
-        exported_objects = []
-
-        for obj in object_list:
-            exported_object = {
-                'type': obj.__class__.__name__,
-                'data': self.export_object_data(obj)
-            }
-            exported_objects.append(exported_object)
-
-        return exported_objects
-
-    def export_object_data(self, obj) -> dict:
-        """Export an object's attributes and relationships to a dictionary."""
-        object_data = {}
-
-        # Add attributes
-        for attr, value in vars(obj).items():
-            object_data[attr] = value
-
-        # Add relationships (if applicable)
-        if hasattr(obj, 'groups'):
-            object_data['groups'] = self.export_objects(obj.groups)
-        # Add other relationships as needed
-
-        return object_data
 
     def __str__(self) -> str:
         """ returns complete list of entities in store.
