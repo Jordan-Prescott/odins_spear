@@ -81,6 +81,7 @@ class Enteprise(ServiceProvider):
 class Group:
     """_summary_
     """
+    
     def __init__(self, 
                  sp_or_ent, 
                  id, 
@@ -135,6 +136,7 @@ class Group:
 class TrunkGroup:
     """_summary_
     """
+    
     def __init__(self,
                  name,
                  group,
@@ -226,6 +228,9 @@ class TrunkGroup:
 
 
 class AAKey():
+    """_summary_
+    """
+    
     def __init__(self,
                  key_number=None, 
                  action=None, 
@@ -241,6 +246,9 @@ class AAKey():
         self.submenu_id = submenu_id
 
 class AAMenu():
+    """_summary_
+    """
+    
     def __init__(self, 
                  announcement_selection=None, 
                  enable_first_menu_level_extension_dialing: bool=False,
@@ -253,6 +261,9 @@ class AAMenu():
         
 
 class AutoAttendant:
+    """_summary_
+    """
+    
     def __int__(self, 
                 name=None, 
                 calling_line_id_last_name=None, 
@@ -299,6 +310,9 @@ class AutoAttendant:
         
 
 class CallCenter:
+    """_summary_
+    """
+    
     def __init__(self,
                 name,         
                 group,
@@ -361,6 +375,9 @@ class CallCenter:
         
         
 class HuntGroup:
+    """_summary_
+    """
+    
     def __init__(self,
                 name,
                 group,
@@ -412,6 +429,9 @@ class HuntGroup:
      
      
 class User:
+    """_summary_
+    """
+    
     def __init__(self, 
                  service_provider_id=None, 
                  group=None, 
@@ -491,6 +511,9 @@ class User:
 
 
 class Device:
+    """_summary_
+    """
+    
     def __init__(self, 
                  type,
                  name,
@@ -559,6 +582,9 @@ class Device:
         self.service_provider_id = group.sp_or_ent.id
 
 class Alias:
+    """_summary_
+    """
+    
     def __init__(self, 
                  number, 
                  broadworks_entity: object):
