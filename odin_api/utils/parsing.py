@@ -9,7 +9,14 @@ def json_to_ao_object():
     return
 
 def export_objects(self, object_list: List) -> List[dict]:
-    """Export a list of objects and their relationships to a dictionary."""
+    """_summary_
+
+    Args:
+        object_list (List): _description_
+
+    Returns:
+        List[dict]: _description_
+    """
     exported_objects = []
 
     for obj in object_list:
@@ -22,7 +29,14 @@ def export_objects(self, object_list: List) -> List[dict]:
     return exported_objects
 
 def export_object_data(self, obj) -> dict:
-    """Export an object's attributes and relationships to a dictionary."""
+    """_summary_
+
+    Args:
+        obj (_type_): _description_
+
+    Returns:
+        dict: _description_
+    """
     object_data = {}
 
     # Add attributes
