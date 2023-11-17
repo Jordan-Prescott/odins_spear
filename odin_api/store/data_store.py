@@ -38,7 +38,7 @@ class DataStore:
 
             DataStore.__instance = self
             
-    def get_group_state(api: Api, group: bre.Group):
+    def get_group_state(api: Api, group: bre.Group) -> None:
         """ takes in group id and loads group state into broadworks entities.
 
         :param api: API object used to send requests to create group state in store.
@@ -46,7 +46,7 @@ class DataStore:
         """
     pass
 
-    def store_object(self, *entities):
+    def store_object(self, *entities) -> None:
         """ Takes in objects within the odin_api and custom and stores in lists
         depending on type.
 
