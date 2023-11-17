@@ -37,13 +37,14 @@ class DataStore:
             self.other_entities = [] #Non-common or custom objects
 
             DataStore.__instance = self
-
-    def get_group_state(group):
+            
+    def get_group_state(api: Api, group: bre.Group):
         """ takes in group id and loads group state into broadworks entities.
 
+        :param api: API object used to send requests to create group state in store.
         :param group: Group object of Broadworks group user would like to load state.
         """
-        pass
+    pass
 
     def store_object(self, *entities):
         """ Takes in objects within the odin_api and custom and stores in lists
