@@ -20,3 +20,4 @@ def generate_timestamp():
         _type_: _description_
     """
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
