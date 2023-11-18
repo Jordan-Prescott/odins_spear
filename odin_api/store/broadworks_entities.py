@@ -364,7 +364,7 @@ class CallCenter:
         self.service_user_id_prefix = service_user_id_prefix
         self.calling_line_id_last_name = calling_line_id_last_name
         self.calling_line_id_first_name = calling_line_id_first_name
-        self.password = if password is None gen.generate_password() else password
+        self.password = password if password is not None else gen.generate_password() 
         self.policy = policy
         self.routing_type = routing_type
         self.queue_length = queue_length
@@ -481,7 +481,7 @@ class User:
         self.phone_number = phone_number
         self.extension = extension
         self.calling_line_id_phone_number = calling_line_id_phone_number
-        self.password = if password is None gen.generate_password() else password
+        self.password = password if password is not None else gen.generate_password()
         self.department = department
         self.department_full_path = department_full_path
         self.language = language
@@ -534,25 +534,25 @@ class Device:
                  profile=None,
                  static_registration_capable=None, 
                  config_type=None, 
-                 protocol_choice:List[]=None,
+                 protocol_choice: List[str]=None,
                  is_ip_address_optional: bool=True, 
                  use_domain: bool=True,
                  is_mobility_manager_device: bool=False, 
                  device_configuration_option=None,
                  static_line_ordering: bool=False,
                  device_type_level=None, 
-                 tags:List[]=None,
-                 related_services:List[]=None, 
+                 tags: List[str]=None,
+                 related_services: List[str]=None, 
                  protocol=None,
                  user_name=None):
         
-        self.device_type = device_type
-        self.device_name = device_name
+        self.device_type = type
+        self.device_name = name
         self.group = group
         
         self.use_custom_user_name_password = use_custom_user_name_password
         self.access_device_credential_name = access_device_credential_name
-        self.access_device_credential_password = if password is None gen.generate_password() else password
+        self.access_device_credential_password = access_device_credential_password if access_device_credential_password is not None else gen.generate_password()
         self.net_address = net_address
         self.port = port
         self.outbound_proxy_server_net_address = outbound_proxy_server_net_address
