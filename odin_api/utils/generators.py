@@ -1,3 +1,6 @@
+import string 
+import secrets
+
 from datetime import datetime
 
 def generate_password(length=8):
