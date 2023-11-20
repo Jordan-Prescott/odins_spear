@@ -24,6 +24,23 @@ class ServiceProvider:
                  country=None, 
                  use_service_provider_language=False
                  ):
+        """_summary_
+
+        Args:
+            id (_type_): _description_
+            name (_type_): _description_
+            default_domain (_type_, optional): _description_. Defaults to None.
+            support_email (_type_, optional): _description_. Defaults to None.
+            contact_name (_type_, optional): _description_. Defaults to None.
+            contact_number (_type_, optional): _description_. Defaults to None.
+            contact_email (_type_, optional): _description_. Defaults to None.
+            address_line_1 (_type_, optional): _description_. Defaults to None.
+            city (_type_, optional): _description_. Defaults to None.
+            state_or_province (_type_, optional): _description_. Defaults to None.
+            zip_or_postcode (_type_, optional): _description_. Defaults to None.
+            country (_type_, optional): _description_. Defaults to None.
+            use_service_provider_language (bool, optional): _description_. Defaults to False.
+        """
         
         self.id = id
         self.name = name
@@ -67,6 +84,23 @@ class Enteprise(ServiceProvider):
                  country=None, 
                  use_service_provider_language=False
                  ):
+        """_summary_
+
+        Args:
+            id (_type_): _description_
+            name (_type_): _description_
+            default_domain (_type_, optional): _description_. Defaults to None.
+            support_email (_type_, optional): _description_. Defaults to None.
+            contact_name (_type_, optional): _description_. Defaults to None.
+            contact_number (_type_, optional): _description_. Defaults to None.
+            contact_email (_type_, optional): _description_. Defaults to None.
+            address_line_1 (_type_, optional): _description_. Defaults to None.
+            city (_type_, optional): _description_. Defaults to None.
+            state_or_province (_type_, optional): _description_. Defaults to None.
+            zip_or_postcode (_type_, optional): _description_. Defaults to None.
+            country (_type_, optional): _description_. Defaults to None.
+            use_service_provider_language (bool, optional): _description_. Defaults to False.
+        """
         
         super().__init__(default_domain, support_email, contact_name, contact_number, 
                          contact_email, address_line_1, city, state_or_province, 
@@ -104,6 +138,30 @@ class Group:
                  state_or_province=None, 
                  country=None,
                  ):
+        """_summary_
+
+        Args:
+            sp_or_ent (_type_): _description_
+            id (_type_): _description_
+            name (_type_): _description_
+            default_domain (_type_, optional): _description_. Defaults to None.
+            user_limit (_type_, optional): _description_. Defaults to None.
+            user_count (_type_, optional): _description_. Defaults to None.
+            calling_line_id_name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_phone_number (_type_, optional): _description_. Defaults to None.
+            calling_line_id_display_phone_number (_type_, optional): _description_. Defaults to None.
+            time_zone (_type_, optional): _description_. Defaults to None.
+            time_zone_display_name (_type_, optional): _description_. Defaults to None.
+            location_dialing_code (_type_, optional): _description_. Defaults to None.
+            contact_name (_type_, optional): _description_. Defaults to None.
+            contact_number (_type_, optional): _description_. Defaults to None.
+            contact_email (_type_, optional): _description_. Defaults to None.
+            address_line_1 (_type_, optional): _description_. Defaults to None.
+            address_line_2 (_type_, optional): _description_. Defaults to None.
+            city (_type_, optional): _description_. Defaults to None.
+            state_or_province (_type_, optional): _description_. Defaults to None.
+            country (_type_, optional): _description_. Defaults to None.
+        """
         
         self.sp_or_ent = sp_or_ent.groups.append(self) #TODO: This may fail
         self.id = id
@@ -180,6 +238,51 @@ class TrunkGroup:
                  max_incoming_calls=None,
                  max_outgoing_calls=None,
                  ):
+        """_summary_
+
+        Args:
+            name (_type_): _description_
+            group (_type_): _description_
+            access_device (_type_): _description_
+            users (list[object]): _description_
+            allow_termination_to_dtg_identity (bool, optional): _description_. Defaults to False.
+            allow_termination_to_trunk_group_identity (bool, optional): _description_. Defaults to False.
+            allow_unscreened_calls (bool, optional): _description_. Defaults to False.
+            allow_unscreened_emergency_calls (bool, optional): _description_. Defaults to False.
+            capacity_exceeded_trap_initial_calls (_type_, optional): _description_. Defaults to None.
+            capacity_exceeded_trap_offset_calls (_type_, optional): _description_. Defaults to None.
+            clid_source_for_screened_calls_policy (_type_, optional): _description_. Defaults to None.
+            continuous_options_sending_interval_seconds (_type_, optional): _description_. Defaults to None.
+            enable_bursting (bool, optional): _description_. Defaults to False.
+            enable_network_address_identity (bool, optional): _description_. Defaults to False.
+            failure_options_sending_interval_seconds (_type_, optional): _description_. Defaults to None.
+            failure_threshold_counter (_type_, optional): _description_. Defaults to None.
+            include_dtg_identity (bool, optional): _description_. Defaults to False.
+            include_otg_identity_for_network_calls (bool, optional): _description_. Defaults to False.
+            include_trunk_group_identity (bool, optional): _description_. Defaults to False.
+            include_trunk_group_identity_for_network_calls (bool, optional): _description_. Defaults to False.
+            invitation_timeout (_type_, optional): _description_. Defaults to None.
+            invite_failure_threshold_counter (_type_, optional): _description_. Defaults to None.
+            invite_failure_threshold_window_seconds (_type_, optional): _description_. Defaults to None.
+            pilot_user_call_optimization_policy (_type_, optional): _description_. Defaults to None.
+            pilot_user_calling_line_asserted_identity_policy (_type_, optional): _description_. Defaults to None.
+            pilot_user_calling_line_identity_for_emergency_calls_policy (_type_, optional): _description_. Defaults to None.
+            pilot_user_calling_line_identity_for_external_calls_policy (_type_, optional): _description_. Defaults to None.
+            pilot_user_charge_number_policy (_type_, optional): _description_. Defaults to None.
+            prefix_enabled (bool, optional): _description_. Defaults to False.
+            require_authentication (bool, optional): _description_. Defaults to False.
+            route_to_peering_domain (bool, optional): _description_. Defaults to False.
+            send_continuous_options_message (bool, optional): _description_. Defaults to False.
+            stateful_rerouting_enabled (bool, optional): _description_. Defaults to False.
+            success_threshold_counter (_type_, optional): _description_. Defaults to None.
+            use_system_clid_source_for_screened_calls_policy (bool, optional): _description_. Defaults to False.
+            use_system_calling_line_asserted_identity_policy (bool, optional): _description_. Defaults to False.
+            use_system_user_lookup_policy (bool, optional): _description_. Defaults to False.
+            user_lookup_policy (_type_, optional): _description_. Defaults to None.
+            max_active_calls (_type_, optional): _description_. Defaults to None.
+            max_incoming_calls (_type_, optional): _description_. Defaults to None.
+            max_outgoing_calls (_type_, optional): _description_. Defaults to None.
+        """
          
         self.name = name
         self.group = group
@@ -238,6 +341,15 @@ class AAKey():
                  phone_number=None, 
                  submenu_id=None
                  ) -> None:
+        """_summary_
+
+        Args:
+            key_number (_type_, optional): _description_. Defaults to None.
+            action (_type_, optional): _description_. Defaults to None.
+            description (_type_, optional): _description_. Defaults to None.
+            phone_number (_type_, optional): _description_. Defaults to None.
+            submenu_id (_type_, optional): _description_. Defaults to None.
+        """
         
         self.key = key_number
         self.action = action
@@ -254,10 +366,18 @@ class AAMenu():
                  enable_first_menu_level_extension_dialing: bool=False,
                  keys: List[AAKey]=None
                  ) -> None:
+        """_summary_
+
+        Args:
+            announcement_selection (_type_, optional): _description_. Defaults to None.
+            enable_first_menu_level_extension_dialing (bool, optional): _description_. Defaults to False.
+            keys (List[AAKey], optional): _description_. Defaults to None.
+        """
         
         self.announcement_selection = announcement_selection
         self.enable_first_menu_level_extension_dialing = enable_first_menu_level_extension_dialing
         self.keys = keys
+
         
 
 class AutoAttendant:
@@ -284,6 +404,28 @@ class AutoAttendant:
                 service_user_id=None, 
                 group=None, 
                 ):
+        """_summary_
+
+        Args:
+            name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_last_name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_first_name (_type_, optional): _description_. Defaults to None.
+            hiragana_last_name (_type_, optional): _description_. Defaults to None.
+            hiragana_first_name (_type_, optional): _description_. Defaults to None.
+            language (_type_, optional): _description_. Defaults to None.
+            time_zone (_type_, optional): _description_. Defaults to None.
+            time_zone_display_name (_type_, optional): _description_. Defaults to None.
+            aliases (List[object], optional): _description_. Defaults to None.
+            type (_type_, optional): _description_. Defaults to None.
+            enable_video (bool, optional): _description_. Defaults to False.
+            extension_dialing_scope (_type_, optional): _description_. Defaults to None.
+            name_dialing_scope (_type_, optional): _description_. Defaults to None.
+            name_dialing_entries (_type_, optional): _description_. Defaults to None.
+            business_hours_menu (AAMenu, optional): _description_. Defaults to None.
+            after_hours_menu (AAMenu, optional): _description_. Defaults to None.
+            service_user_id (_type_, optional): _description_. Defaults to None.
+            group (_type_, optional): _description_. Defaults to None.
+        """
         
         self.name = name
         self.group = group
@@ -342,6 +484,36 @@ class CallCenter:
                 escape_digit=None, 
                 service_user_id=None
                 ):
+        """_summary_
+
+        Args:
+            name (_type_): _description_
+            group (_type_): _description_
+            agents (List[object], optional): _description_. Defaults to None.
+            enable_video (bool, optional): _description_. Defaults to False.
+            allow_caller_to_dial_escape_digit (bool, optional): _description_. Defaults to False.
+            reset_call_statistics_upon_entry_in_queue (bool, optional): _description_. Defaults to True.
+            allow_agent_logoff (bool, optional): _description_. Defaults to True.
+            allow_call_waiting_for_agents (bool, optional): _description_. Defaults to True.
+            play_ringing_when_offering_call (bool, optional): _description_. Defaults to True.
+            external_preferred_audio_codec (_type_, optional): _description_. Defaults to None.
+            internal_preferred_audio_codec (_type_, optional): _description_. Defaults to None.
+            enable_reporting (bool, optional): _description_. Defaults to False.
+            allow_calls_to_agents_in_wrap_up (bool, optional): _description_. Defaults to True.
+            override_agent_wrap_up_time (bool, optional): _description_. Defaults to False.
+            enable_automatic_state_change_for_agents (bool, optional): _description_. Defaults to False.
+            force_delivery_of_calls (bool, optional): _description_. Defaults to False.
+            type (_type_, optional): _description_. Defaults to None.
+            service_user_id_prefix (_type_, optional): _description_. Defaults to None.
+            calling_line_id_last_name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_first_name (_type_, optional): _description_. Defaults to None.
+            password (_type_, optional): _description_. Defaults to None.
+            policy (_type_, optional): _description_. Defaults to None.
+            routing_type (_type_, optional): _description_. Defaults to None.
+            queue_length (_type_, optional): _description_. Defaults to None.
+            escape_digit (_type_, optional): _description_. Defaults to None.
+            service_user_id (_type_, optional): _description_. Defaults to None.
+        """
         
         self.name = name
         self.group = group
@@ -401,6 +573,31 @@ class HuntGroup:
                 make_busy_when_not_reachable=None,
                 service_user_id=None,
                 ):
+        """_summary_
+
+        Args:
+            name (_type_): _description_
+            group (_type_): _description_
+            agents (List[object], optional): _description_. Defaults to None.
+            calling_line_id_last_name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_first_name (_type_, optional): _description_. Defaults to None.
+            hiragana_last_name (_type_, optional): _description_. Defaults to None.
+            hiragana_first_name (_type_, optional): _description_. Defaults to None.
+            language (_type_, optional): _description_. Defaults to None.
+            time_zone (_type_, optional): _description_. Defaults to None.
+            aliases (_type_, optional): _description_. Defaults to None.
+            policy (_type_, optional): _description_. Defaults to None.
+            hunt_after_no_answer (_type_, optional): _description_. Defaults to None.
+            no_answer_number_of_rings (_type_, optional): _description_. Defaults to None.
+            forward_after_timeout (_type_, optional): _description_. Defaults to None.
+            forward_timeout_seconds (_type_, optional): _description_. Defaults to None.
+            allow_call_waiting_for_agents (_type_, optional): _description_. Defaults to None.
+            use_system_hunt_group_clid_setting (_type_, optional): _description_. Defaults to None.
+            include_hunt_group_name_in_clid (_type_, optional): _description_. Defaults to None.
+            enable_not_reachable_forwarding (_type_, optional): _description_. Defaults to None.
+            make_busy_when_not_reachable (_type_, optional): _description_. Defaults to None.
+            service_user_id (_type_, optional): _description_. Defaults to None.
+        """
         
         self.name = name
         self.group = group.hunt_groups.append(self) #this may fail
@@ -468,6 +665,45 @@ class User:
                  aliases=None, 
                  trunk_addressing=None,
                  alternate_user_id=None):
+        """_summary_
+
+        Args:
+            service_provider_id (_type_, optional): _description_. Defaults to None.
+            group (_type_, optional): _description_. Defaults to None.
+            user_id (_type_, optional): _description_. Defaults to None.
+            last_name (_type_, optional): _description_. Defaults to None.
+            first_name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_last_name (_type_, optional): _description_. Defaults to None.
+            calling_line_id_first_name (_type_, optional): _description_. Defaults to None.
+            hiragana_last_name (_type_, optional): _description_. Defaults to None.
+            hiragana_first_name (_type_, optional): _description_. Defaults to None.
+            phone_number (_type_, optional): _description_. Defaults to None.
+            extension (_type_, optional): _description_. Defaults to None.
+            calling_line_id_phone_number (_type_, optional): _description_. Defaults to None.
+            password (_type_, optional): _description_. Defaults to None.
+            department (_type_, optional): _description_. Defaults to None.
+            department_full_path (_type_, optional): _description_. Defaults to None.
+            language (_type_, optional): _description_. Defaults to None.
+            time_zone (_type_, optional): _description_. Defaults to None.
+            time_zone_display_name (_type_, optional): _description_. Defaults to None.
+            default_alias (_type_, optional): _description_. Defaults to None.
+            access_device_endpoint (_type_, optional): _description_. Defaults to None.
+            title (_type_, optional): _description_. Defaults to None.
+            pager_phone_number (_type_, optional): _description_. Defaults to None.
+            mobile_phone_number (_type_, optional): _description_. Defaults to None.
+            email_address (_type_, optional): _description_. Defaults to None.
+            yahoo_id (_type_, optional): _description_. Defaults to None.
+            address_location (_type_, optional): _description_. Defaults to None.
+            address (_type_, optional): _description_. Defaults to None.
+            country_code (_type_, optional): _description_. Defaults to None.
+            network_class_of_service (_type_, optional): _description_. Defaults to None.
+            allow_video (bool, optional): _description_. Defaults to True.
+            domain (_type_, optional): _description_. Defaults to None.
+            endpoint_type (_type_, optional): _description_. Defaults to None.
+            aliases (_type_, optional): _description_. Defaults to None.
+            trunk_addressing (_type_, optional): _description_. Defaults to None.
+            alternate_user_id (_type_, optional): _description_. Defaults to None.
+        """
         
         self.group = group.user.append(self) #this may fail
         self.user_id = user_id + group.default_domain
@@ -545,6 +781,39 @@ class Device:
                  related_services: List[str]=None, 
                  protocol=None,
                  user_name=None):
+        """_summary_
+
+        Args:
+            type (_type_): _description_
+            name (_type_): _description_
+            group (Group): _description_
+            use_custom_user_name_password (bool, optional): _description_. Defaults to True.
+            access_device_credential_name (_type_, optional): _description_. Defaults to None.
+            access_device_credential_password (_type_, optional): _description_. Defaults to None.
+            net_address (_type_, optional): _description_. Defaults to None.
+            port (_type_, optional): _description_. Defaults to None.
+            outbound_proxy_server_net_address (_type_, optional): _description_. Defaults to None.
+            stun_server_net_address (_type_, optional): _description_. Defaults to None.
+            mac_address (_type_, optional): _description_. Defaults to None.
+            serial_number (_type_, optional): _description_. Defaults to None.
+            description (_type_, optional): _description_. Defaults to None.
+            physical_location (_type_, optional): _description_. Defaults to None.
+            transport_protocol (_type_, optional): _description_. Defaults to None.
+            profile (_type_, optional): _description_. Defaults to None.
+            static_registration_capable (_type_, optional): _description_. Defaults to None.
+            config_type (_type_, optional): _description_. Defaults to None.
+            protocol_choice (List[str], optional): _description_. Defaults to None.
+            is_ip_address_optional (bool, optional): _description_. Defaults to True.
+            use_domain (bool, optional): _description_. Defaults to True.
+            is_mobility_manager_device (bool, optional): _description_. Defaults to False.
+            device_configuration_option (_type_, optional): _description_. Defaults to None.
+            static_line_ordering (bool, optional): _description_. Defaults to False.
+            device_type_level (_type_, optional): _description_. Defaults to None.
+            tags (List[str], optional): _description_. Defaults to None.
+            related_services (List[str], optional): _description_. Defaults to None.
+            protocol (_type_, optional): _description_. Defaults to None.
+            user_name (_type_, optional): _description_. Defaults to None.
+        """
         
         self.device_type = type
         self.device_name = name
@@ -588,6 +857,12 @@ class Alias:
     def __init__(self, 
                  number, 
                  broadworks_entity: object):
+        """_summary_
+
+        Args:
+            number (_type_): _description_
+            broadworks_entity (object): _description_
+        """
         
         self.number = number
         self.broadworks_entity = broadworks_entity
