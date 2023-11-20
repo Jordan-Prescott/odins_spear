@@ -55,8 +55,6 @@ class Api:
     # CALL CENTER 
 
     # USER 
-    
-    
 
     # DEVICE
     
@@ -65,8 +63,6 @@ class Api:
     def _requester():
         """ sends request to api, this is used in all functions.
         """
-
-        
                 
         return
 
