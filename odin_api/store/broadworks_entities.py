@@ -8,8 +8,7 @@ class ServiceProvider:
     
     def __init__(self, 
                  id, 
-                 name,
-                 is_enterprise: bool=False,
+                 name, 
                  default_domain=None, 
                  support_email=None, 
                  contact_name=None, 
@@ -43,10 +42,8 @@ class ServiceProvider:
         self.id = id
         self.name = name
         self.groups: List[Group] = []
-        
-        # A
-        self.is_enterprise = is_enterprise
-        
+
+        self.is_enterprise = False
         self.default_domain = default_domain
 
         self.support_email = support_email
@@ -61,55 +58,68 @@ class ServiceProvider:
         self.country = country
 
         self.use_service_provider_language = use_service_provider_language
-
-
-# class Enterprise(ServiceProvider):
-#     """_summary_
-
-#     Args:
-#         ServiceProvider (_type_): _description_
-#     """
-#     def __init__(self, 
-#                  id, 
-#                  name, 
-#                  default_domain=None, 
-#                  support_email=None, 
-#                  contact_name=None, 
-#                  contact_number=None, 
-#                  contact_email=None,
-#                  address_line_1=None, 
-#                  city=None, 
-#                  state_or_province=None, 
-#                  zip_or_postcode=None, 
-#                  country=None, 
-#                  use_service_provider_language=False
-#                  ):
-#         """_summary_
-
-#         Args:
-#             id (_type_): _description_
-#             name (_type_): _description_
-#             default_domain (_type_, optional): _description_. Defaults to None.
-#             support_email (_type_, optional): _description_. Defaults to None.
-#             contact_name (_type_, optional): _description_. Defaults to None.
-#             contact_number (_type_, optional): _description_. Defaults to None.
-#             contact_email (_type_, optional): _description_. Defaults to None.
-#             address_line_1 (_type_, optional): _description_. Defaults to None.
-#             city (_type_, optional): _description_. Defaults to None.
-#             state_or_province (_type_, optional): _description_. Defaults to None.
-#             zip_or_postcode (_type_, optional): _description_. Defaults to None.
-#             country (_type_, optional): _description_. Defaults to None.
-#             use_service_provider_language (bool, optional): _description_. Defaults to False.
-#         """
         
-#         super().__init__(default_domain, support_email, contact_name, contact_number, 
-#                          contact_email, address_line_1, city, state_or_province, 
-#                          zip_or_postcode, country, use_service_provider_language)
+        def __str__(self) -> str:
+            return (
+            "Type: ServiceProvider, "
+            f"id: {self.id}, "
+            f"name: {self.name}, "
+        )
 
-#         self.id = id 
-#         self.name = name
+class Enterprise(ServiceProvider):
+    """_summary_
 
-#         self.is_enterprise = True
+    Args:
+        ServiceProvider (_type_): _description_
+    """
+    def __init__(self, 
+                 id, 
+                 name, 
+                 default_domain=None, 
+                 support_email=None, 
+                 contact_name=None, 
+                 contact_number=None, 
+                 contact_email=None,
+                 address_line_1=None, 
+                 city=None, 
+                 state_or_province=None, 
+                 zip_or_postcode=None, 
+                 country=None, 
+                 use_service_provider_language=False
+                 ):
+        """_summary_
+
+        Args:
+            id (_type_): _description_
+            name (_type_): _description_
+            default_domain (_type_, optional): _description_. Defaults to None.
+            support_email (_type_, optional): _description_. Defaults to None.
+            contact_name (_type_, optional): _description_. Defaults to None.
+            contact_number (_type_, optional): _description_. Defaults to None.
+            contact_email (_type_, optional): _description_. Defaults to None.
+            address_line_1 (_type_, optional): _description_. Defaults to None.
+            city (_type_, optional): _description_. Defaults to None.
+            state_or_province (_type_, optional): _description_. Defaults to None.
+            zip_or_postcode (_type_, optional): _description_. Defaults to None.
+            country (_type_, optional): _description_. Defaults to None.
+            use_service_provider_language (bool, optional): _description_. Defaults to False.
+        """
+        
+        super().__init__(default_domain, support_email, contact_name, contact_number, 
+                         contact_email, address_line_1, city, state_or_province, 
+                         zip_or_postcode, country, use_service_provider_language)
+
+        self.id = id 
+        self.name = name
+
+        self.is_enterprise = True
+        
+        def __str__(self) -> str:
+            return (
+            "Type: Enterprise, "
+            f"id: {self.id}, "
+            f"name: {self.name}, "
+        )
 
 
 class Group:
@@ -165,8 +175,8 @@ class Group:
         
         self.sp_or_ent = sp_or_ent
         self.id = id
-        self.default_domain = default_domain
         self.name = name
+        self.default_domain = default_domain
         self.users: List[User] = []
         self.hunt_groups: List[HuntGroup] = []
         self.trunk_groups: List[TrunkGroup] = []
@@ -191,6 +201,16 @@ class Group:
         self.country = country
         
         self.sp_or_ent.groups.append(self)
+        
+    def __str__(self) -> str:
+        return (
+        "Type: Group, "
+        f"sp_or_ent: {self.sp_or_ent}, "
+        f"id: {self.id}, "
+        f"name: {self.name}, "
+        f"default_domain: {self.default_domain}, "
+        f"main_number: {self.calling_line_id_phone_number}"
+    )
 
 
 class TrunkGroup:
