@@ -1,6 +1,6 @@
 from typing import List
 
-from odin_api.utils import generator as gen
+from odin_api.utils import generators as gen
 
 class ServiceProvider:
     """_summary_
@@ -63,7 +63,7 @@ class ServiceProvider:
         self.use_service_provider_language = use_service_provider_language
 
 
-class Enteprise(ServiceProvider):
+class Enterprise(ServiceProvider):
     """_summary_
 
     Args:
@@ -120,7 +120,7 @@ class Group:
                  sp_or_ent, 
                  id, 
                  name, 
-                 default_domain=None, 
+                 default_domain, 
                  user_limit=None, 
                  user_count=None, 
                  calling_line_id_name=None, 
@@ -163,7 +163,7 @@ class Group:
             country (_type_, optional): _description_. Defaults to None.
         """
         
-        self.sp_or_ent = sp_or_ent.groups.append(self) #TODO: This may fail
+        self.sp_or_ent = sp_or_ent
         self.id = id
         self.default_domain = default_domain
         self.name = name
@@ -189,6 +189,8 @@ class Group:
         self.city = city
         self.state_or_province = state_or_province
         self.country = country
+        
+        self.sp_or_ent.groups.append(self)
 
 
 class TrunkGroup:
@@ -629,18 +631,17 @@ class User:
     """_summary_
     """
     
-    def __init__(self, 
-                 service_provider_id=None, 
-                 group=None, 
-                 user_id=None, 
-                 last_name=None, 
-                 first_name=None, 
+    def __init__(self,  
+                 group, 
+                 user_id, 
+                 last_name, 
+                 first_name, 
+                 extension, 
                  calling_line_id_last_name=None, 
                  calling_line_id_first_name=None, 
                  hiragana_last_name=None, 
                  hiragana_first_name=None, 
                  phone_number=None, 
-                 extension=None, 
                  calling_line_id_phone_number=None, 
                  password=None, 
                  department=None, 
@@ -705,7 +706,7 @@ class User:
             alternate_user_id (_type_, optional): _description_. Defaults to None.
         """
         
-        self.group = group.user.append(self) #this may fail
+        self.group = group
         self.user_id = user_id + group.default_domain
         self.last_name = last_name
         self.first_name = first_name
@@ -744,6 +745,8 @@ class User:
         self.is_enterprise = group.sp_or_ent.is_enterprise
         self.password_expires_days = 2147483647
         self.service_provider_id = group.sp_or_ent.id
+        
+        self.group.users.append(self)
 
 
 class Device:
