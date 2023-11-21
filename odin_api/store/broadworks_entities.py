@@ -6,12 +6,10 @@ class ServiceProvider:
     """_summary_
     """
     
-    def __init__():
-        pass
-    
     def __init__(self, 
                  id, 
-                 name, 
+                 name,
+                 is_enterprise: bool=False,
                  default_domain=None, 
                  support_email=None, 
                  contact_name=None, 
@@ -45,8 +43,10 @@ class ServiceProvider:
         self.id = id
         self.name = name
         self.groups: List[Group] = []
-
-        self.is_enterprise = False
+        
+        # A
+        self.is_enterprise = is_enterprise
+        
         self.default_domain = default_domain
 
         self.support_email = support_email
@@ -63,53 +63,53 @@ class ServiceProvider:
         self.use_service_provider_language = use_service_provider_language
 
 
-class Enterprise(ServiceProvider):
-    """_summary_
+# class Enterprise(ServiceProvider):
+#     """_summary_
 
-    Args:
-        ServiceProvider (_type_): _description_
-    """
-    def __init__(self, 
-                 id, 
-                 name, 
-                 default_domain=None, 
-                 support_email=None, 
-                 contact_name=None, 
-                 contact_number=None, 
-                 contact_email=None,
-                 address_line_1=None, 
-                 city=None, 
-                 state_or_province=None, 
-                 zip_or_postcode=None, 
-                 country=None, 
-                 use_service_provider_language=False
-                 ):
-        """_summary_
+#     Args:
+#         ServiceProvider (_type_): _description_
+#     """
+#     def __init__(self, 
+#                  id, 
+#                  name, 
+#                  default_domain=None, 
+#                  support_email=None, 
+#                  contact_name=None, 
+#                  contact_number=None, 
+#                  contact_email=None,
+#                  address_line_1=None, 
+#                  city=None, 
+#                  state_or_province=None, 
+#                  zip_or_postcode=None, 
+#                  country=None, 
+#                  use_service_provider_language=False
+#                  ):
+#         """_summary_
 
-        Args:
-            id (_type_): _description_
-            name (_type_): _description_
-            default_domain (_type_, optional): _description_. Defaults to None.
-            support_email (_type_, optional): _description_. Defaults to None.
-            contact_name (_type_, optional): _description_. Defaults to None.
-            contact_number (_type_, optional): _description_. Defaults to None.
-            contact_email (_type_, optional): _description_. Defaults to None.
-            address_line_1 (_type_, optional): _description_. Defaults to None.
-            city (_type_, optional): _description_. Defaults to None.
-            state_or_province (_type_, optional): _description_. Defaults to None.
-            zip_or_postcode (_type_, optional): _description_. Defaults to None.
-            country (_type_, optional): _description_. Defaults to None.
-            use_service_provider_language (bool, optional): _description_. Defaults to False.
-        """
+#         Args:
+#             id (_type_): _description_
+#             name (_type_): _description_
+#             default_domain (_type_, optional): _description_. Defaults to None.
+#             support_email (_type_, optional): _description_. Defaults to None.
+#             contact_name (_type_, optional): _description_. Defaults to None.
+#             contact_number (_type_, optional): _description_. Defaults to None.
+#             contact_email (_type_, optional): _description_. Defaults to None.
+#             address_line_1 (_type_, optional): _description_. Defaults to None.
+#             city (_type_, optional): _description_. Defaults to None.
+#             state_or_province (_type_, optional): _description_. Defaults to None.
+#             zip_or_postcode (_type_, optional): _description_. Defaults to None.
+#             country (_type_, optional): _description_. Defaults to None.
+#             use_service_provider_language (bool, optional): _description_. Defaults to False.
+#         """
         
-        super().__init__(default_domain, support_email, contact_name, contact_number, 
-                         contact_email, address_line_1, city, state_or_province, 
-                         zip_or_postcode, country, use_service_provider_language)
+#         super().__init__(default_domain, support_email, contact_name, contact_number, 
+#                          contact_email, address_line_1, city, state_or_province, 
+#                          zip_or_postcode, country, use_service_provider_language)
 
-        self.id = id 
-        self.name = name
+#         self.id = id 
+#         self.name = name
 
-        self.is_enterprise = True
+#         self.is_enterprise = True
 
 
 class Group:
