@@ -25,8 +25,7 @@ class DataStore:
             raise Exception("Singleton cannot be instantiated more than once!")
         else:
             self.apis: List[Api] = []
-            self.service_providers: List[bre.ServiceProvider] = []
-            self.enterprises: List[bre.Enterprise] = []
+            self.service_providers_enterprises: List[bre.ServiceProvider] = []
             self.groups: List[bre.Group] = []
             self.trunk_groups: List[bre.TrunkGroup] = []
             self.auto_attendants: List[bre.AutoAttendant] = []
@@ -57,9 +56,7 @@ class DataStore:
             if isinstance(e, Api):
                 self.apis.append(e)
             elif isinstance(e, bre.ServiceProvider):
-                self.service_providers.append(e)
-            elif isinstance(e, bre.Enterprise):
-                self.enterprises.append(e)
+                self.service_providers_enterprises.append(e)
             elif isinstance(e, bre.Group):
                 self.groups.append(e)
             elif isinstance(e, bre.TrunkGroup):

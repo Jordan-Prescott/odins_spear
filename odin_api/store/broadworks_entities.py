@@ -1,13 +1,10 @@
 from typing import List
 
-from odin_api.utils import generator as gen
+from odin_api.utils import generators as gen
 
 class ServiceProvider:
     """_summary_
     """
-    
-    def __init__():
-        pass
     
     def __init__(self, 
                  id, 
@@ -61,9 +58,15 @@ class ServiceProvider:
         self.country = country
 
         self.use_service_provider_language = use_service_provider_language
+        
+        def __str__(self) -> str:
+            return (
+            "Type: ServiceProvider, "
+            f"id: {self.id}, "
+            f"name: {self.name}, "
+        )
 
-
-class Enteprise(ServiceProvider):
+class Enterprise(ServiceProvider):
     """_summary_
 
     Args:
@@ -110,6 +113,13 @@ class Enteprise(ServiceProvider):
         self.name = name
 
         self.is_enterprise = True
+        
+        def __str__(self) -> str:
+            return (
+            "Type: Enterprise, "
+            f"id: {self.id}, "
+            f"name: {self.name}, "
+        )
 
 
 class Group:
@@ -120,7 +130,7 @@ class Group:
                  sp_or_ent, 
                  id, 
                  name, 
-                 default_domain=None, 
+                 default_domain, 
                  user_limit=None, 
                  user_count=None, 
                  calling_line_id_name=None, 
@@ -163,10 +173,10 @@ class Group:
             country (_type_, optional): _description_. Defaults to None.
         """
         
-        self.sp_or_ent = sp_or_ent.groups.append(self) #TODO: This may fail
+        self.sp_or_ent = sp_or_ent
         self.id = id
-        self.default_domain = default_domain
         self.name = name
+        self.default_domain = default_domain
         self.users: List[User] = []
         self.hunt_groups: List[HuntGroup] = []
         self.trunk_groups: List[TrunkGroup] = []
@@ -189,6 +199,18 @@ class Group:
         self.city = city
         self.state_or_province = state_or_province
         self.country = country
+        
+        self.sp_or_ent.groups.append(self)
+        
+    def __str__(self) -> str:
+        return (
+        "Type: Group, "
+        f"sp_or_ent: {self.sp_or_ent}, "
+        f"id: {self.id}, "
+        f"name: {self.name}, "
+        f"default_domain: {self.default_domain}, "
+        f"main_number: {self.calling_line_id_phone_number}"
+    )
 
 
 class TrunkGroup:
@@ -629,18 +651,17 @@ class User:
     """_summary_
     """
     
-    def __init__(self, 
-                 service_provider_id=None, 
-                 group=None, 
-                 user_id=None, 
-                 last_name=None, 
-                 first_name=None, 
+    def __init__(self,  
+                 group, 
+                 user_id, 
+                 last_name, 
+                 first_name, 
+                 extension, 
                  calling_line_id_last_name=None, 
                  calling_line_id_first_name=None, 
                  hiragana_last_name=None, 
                  hiragana_first_name=None, 
                  phone_number=None, 
-                 extension=None, 
                  calling_line_id_phone_number=None, 
                  password=None, 
                  department=None, 
@@ -705,7 +726,7 @@ class User:
             alternate_user_id (_type_, optional): _description_. Defaults to None.
         """
         
-        self.group = group.user.append(self) #this may fail
+        self.group = group
         self.user_id = user_id + group.default_domain
         self.last_name = last_name
         self.first_name = first_name
@@ -744,6 +765,8 @@ class User:
         self.is_enterprise = group.sp_or_ent.is_enterprise
         self.password_expires_days = 2147483647
         self.service_provider_id = group.sp_or_ent.id
+        
+        self.group.users.append(self)
 
 
 class Device:
