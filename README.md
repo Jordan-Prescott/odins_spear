@@ -3,6 +3,10 @@ Python package for Odins API to build and manage Broadwork installations.
 
 [Odin API Docs](https://doc.odinapi.net/)
 
+## Project Scope
+NOTE: Some functionality is Fourteen IP Specific and not relevant outside of the company (25/11/23).
+![Project Scope](./data/media/package_development_scope.jpg "Project Scope")
+
 ## Solution Design
 ![Solution Design](./data/media/solution_design.jpg "Solution Design")
 
