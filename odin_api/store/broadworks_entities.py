@@ -872,22 +872,3 @@ class Device:
         self.device_level = "Group"
         self.group_id = group.id
         self.service_provider_id = group.sp_or_ent.id
-
-class Alias:
-    """_summary_
-    """
-    
-    def __init__(self, 
-                 number, 
-                 broadworks_entity: object):
-        """_summary_
-
-        Args:
-            number (_type_): _description_
-            broadworks_entity (object): _description_
-        """
-        
-        self.number = number
-        self.broadworks_entity = broadworks_entity
-        
-        self.user_id = number + broadworks_entity.group.default_domain
