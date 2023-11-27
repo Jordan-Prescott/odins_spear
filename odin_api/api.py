@@ -3,6 +3,7 @@ import os
 
 from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
+from odin_api.utils.oa_logger import logger
 
 
 class Api:
@@ -15,6 +16,9 @@ class Api:
     :var authorised: Boolean value to indicate if api is authorised.
     :var token: Token string returned from odin api.
     """
+    
+    logger = logger
+    
     def __init__(self, base_url, username, password) -> None:
         self.base_url = base_url
         self.username = username
