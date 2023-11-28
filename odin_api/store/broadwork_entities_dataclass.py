@@ -48,11 +48,12 @@ class Group:
     country: str = None
 
     def __post_init__(self):
-        self.trunkGroups: List['TrunkGroup'] = field(default_factory=list)
-        self.huntGroups: List['HuntGroup'] = field(default_factory=list)
+        self.trunk_groups: List['TrunkGroup'] = field(default_factory=list)
+        self.call_centers: List['CallCenter'] = field(default_factory=list)
+        self.hunt_groups: List['HuntGroup'] = field(default_factory=list)
         self.users: List['User'] = field(default_factory=list)
 
-        self.spOrEnt.groups.append(self)
+        self.ServiceProvider.groups.append(self)
      
         
 @dataclass
@@ -101,10 +102,8 @@ class TrunkGroup:
     maxOutgoingCalls: int = None
 
     def __post_init__(self):
-        self.serviceProviderId = self.group.ServiceProvider.id
+        self.service_provider_id = self.group.service_provider_id.id
 
-from dataclasses import dataclass, field
-from typing import List
 
 
 @dataclass
@@ -179,9 +178,12 @@ class CallCenter:
     serviceUserId: str = None
 
     def __post_init__(self):
-        self.serviceProviderId = self.group.ServiceProvider.id
+        self.service_provider_id = self.group.service_provider_id.id
         self.password = self.password if self.password is not None else gen.generate_password()
+        
+        self.group.call_centers.append(self)
 
+#TODO: Change to camelcase
 @dataclass
 class HuntGroup:
     name: str
@@ -211,13 +213,14 @@ class HuntGroup:
     agents: List['User'] = field(default_factory=list)
     
     def __post_init__(self):
-        self.serviceProviderId = self.group.ServiceProvider.id
+        self.service_provider_id = self.group.service_provider_id.id
+        self.group.hunt_groups.append(self)
         
         
 @dataclass
 class HuntGroup:
     id: str
     group = 'Group'
-    firstName = str
-    lastName = str
+    first_name = str
+    last_name = str
     
