@@ -1,14 +1,13 @@
 from dataclasses import dataclass, field, InitVar
-from typing import List
+from typing import List, Type
 
 from odin_api.utils import generators as gen
    
 @dataclass
 class ServiceProvider:
-    id: int
+    id: str
     name: str
     groups: List['Group'] = field(default_factory=list)
-
     is_enterprise: bool = False
     default_domain: str = None
     support_email: str = None
@@ -25,7 +24,7 @@ class ServiceProvider:
     
 @dataclass
 class Group:
-    service_provider: 'ServiceProvider'
+    service_provider: Type['ServiceProvider']
     group_id: int
     group_name: str
     default_domain: str
@@ -45,23 +44,22 @@ class Group:
     city: str = None
     state_or_province: str = None
     country: str = None
+    trunk_groups: List['TrunkGroup'] = field(default_factory=list)
+    call_centers: List['CallCenter'] = field(default_factory=list)
+    hunt_groups: List['HuntGroup'] = field(default_factory=list)
+    users: List['User'] = field(default_factory=list)
 
     def __post_init__(self):
-        self.trunk_groups: List['TrunkGroup'] = field(default_factory=list)
-        self.call_centers: List['CallCenter'] = field(default_factory=list)
-        self.hunt_groups: List['HuntGroup'] = field(default_factory=list)
-        self.users: List['User'] = field(default_factory=list)
 
-        self.ServiceProvider.groups.append(self)
+        self.service_provider.groups.append(self)
      
         
 @dataclass
 class TrunkGroup:
     name: str
-    group: 'Group'
-    access_device: 'Device'
+    group: Type['Group']
+    access_device: Type['Device']
     users: List['User'] = field(default_factory=list)
-
     allow_termination_to_dtg_identity: bool = False
     allow_termination_to_trunk_group_identity: bool = False
     allow_unscreened_calls: bool = False
@@ -123,7 +121,7 @@ class AAMenu:
 @dataclass
 class AutoAttendant:
     name: str
-    group: 'Group'
+    group: Type['Group']
     calling_line_id_last_name: str = None
     calling_line_id_first_name: str = None
     hiragana_last_name: str = None
@@ -131,14 +129,14 @@ class AutoAttendant:
     language: str = None
     time_zone: str = None
     time_zone_display_name: str = None
-    aliases: List[object] = None
+    aliases: List[str] = field(default_factory= [list])
     type: str = None
     enable_video: bool = False
     extension_dialing_scope: str = None
     name_dialing_scope: str = None
     name_dialing_entries: str = None
-    business_hours_menu: 'AAMenu' = None
-    after_hours_menu: 'AAMenu' = None
+    business_hours_menu: Type['AAMenu'] = None
+    after_hours_menu: Type['AAMenu'] = None
     service_user_id: str = None
 
     def __post_init__(self):
@@ -148,7 +146,7 @@ class AutoAttendant:
 @dataclass
 class CallCenter:
     name: str
-    group: 'Group'
+    group: Type['Group']
     agents: List['User'] = field(default_factory=list)
     enable_video: bool = False
     allow_caller_to_dial_escape_digit: bool = False
@@ -167,7 +165,7 @@ class CallCenter:
     service_user_id_prefix: str = None
     calling_line_id_last_name: str = None
     calling_line_id_first_name: str = None
-    password: str = None
+    password: str = field(default_factory=gen.generate_password)
     policy: str = None
     routing_type: str = None
     queue_length: int = None
@@ -176,15 +174,13 @@ class CallCenter:
 
     def __post_init__(self):
         self.service_provider_id = self.group.service_provider_id.id
-        self.password = self.password if self.password is not None else gen.generate_password()
-        
         self.group.call_centers.append(self)
 
 
 @dataclass
 class HuntGroup:
     name: str
-    group: 'Group'
+    group: Type['Group']
     agents: List['User'] = field(default_factory=list)
     calling_line_id_last_name: str = None
     calling_line_id_first_name: str = None
@@ -214,7 +210,8 @@ class HuntGroup:
         
 @dataclass
 class User:
-    group: 'Group'
+    group: Type['Group']
+    access_device_endpoint: Type['Device'] = None
     user_id: str = None
     last_name: str = None
     first_name: str = None
@@ -232,22 +229,21 @@ class User:
     time_zone: str = None
     time_zone_display_name: str = None
     default_alias: str = None
-    access_device_endpoint: 'Device'
     title: str = None
     pager_phone_number: str = None
     mobile_phone_number: str = None
     email_address: str = None
     yahoo_id: str = None
     address_location: str = None
-    address: 'Address'
+    address: Type['Address'] = None
     country_code: str = None
     network_class_of_service: str = None
     allow_video: bool = True
     domain: str = None
     endpoint_type: str = None
     aliases: List[str] = field(default_factory=list)
-    trunk_addressing: str
-    alternate_user_id: str
+    trunk_addressing: str = None
+    alternate_user_id: str = None
     is_enterprise: bool = False
     password_expires_days: int = 2147483647
     service_provider_id: str = None
@@ -262,7 +258,8 @@ class User:
 class Device:
     device_type: str
     device_name: str
-    group: 'Group'
+    group: Type['Group']
+    device_level: Type['Group']
     use_custom_user_name_password: bool = True
     access_device_credential_name: str = None
     access_device_credential_password: str = None
@@ -289,7 +286,6 @@ class Device:
     related_services: List[str] = field(default_factory=list)
     protocol: str = None
     user_name: str = None
-    device_level: 'Group'
     group_id: int = field(init=False)
     service_provider_id: int = field(init=False)
 
@@ -317,7 +313,7 @@ class Address:
 
 @dataclass
 class Department:
-    group: 'Group'
+    group: Type['Group']
     name: str
     
     def __post_init__(self):
