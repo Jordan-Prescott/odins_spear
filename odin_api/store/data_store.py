@@ -3,7 +3,7 @@ import json
 
 from odin_api import Api
 from odin_api.utils import parsing
-from . import broadworks_entities as bre
+from . import broadwork_entities as bre
 
 class DataStore:
     """ Local store of objects, when each object is instantiated it is added to

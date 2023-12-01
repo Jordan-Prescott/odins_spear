@@ -3,7 +3,7 @@ from typing import List, Type
 
 from odin_api.utils import generators as gen
    
-@dataclass
+@dataclass(kw_only=True)
 class ServiceProvider:
     id: str
     name: str
@@ -22,11 +22,11 @@ class ServiceProvider:
     use_service_provider_language: bool = False
    
     
-@dataclass
+@dataclass(kw_only=True)
 class Group:
     service_provider: Type['ServiceProvider']
-    group_id: int
-    group_name: str
+    id: int
+    name: str
     default_domain: str
     user_limit: int = None
     user_count: int = None
@@ -54,7 +54,7 @@ class Group:
         self.service_provider.groups.append(self)
      
         
-@dataclass
+@dataclass(kw_only=True)
 class TrunkGroup:
     name: str
     group: Type['Group']
@@ -102,7 +102,7 @@ class TrunkGroup:
         self.service_provider_id = self.group.service_provider_id.id
 
 
-@dataclass
+@dataclass(kw_only=True)
 class AAKey:
     key_number: int
     action: str
@@ -111,14 +111,14 @@ class AAKey:
     submenu_id: int = None
 
 
-@dataclass
+@dataclass(kw_only=True)
 class AAMenu:
     announcement_selection: str = None
     enable_first_menu_level_extension_dialing: bool = False
     keys: List[AAKey] = field(default_factory=list)
 
 
-@dataclass
+@dataclass(kw_only=True)
 class AutoAttendant:
     name: str
     group: Type['Group']
@@ -143,7 +143,7 @@ class AutoAttendant:
         self.serviceProviderId = self.group.ServiceProvider.id
         
 
-@dataclass
+@dataclass(kw_only=True)
 class CallCenter:
     name: str
     group: Type['Group']
@@ -177,7 +177,7 @@ class CallCenter:
         self.group.call_centers.append(self)
 
 
-@dataclass
+@dataclass(kw_only=True)
 class HuntGroup:
     name: str
     group: Type['Group']
@@ -208,19 +208,19 @@ class HuntGroup:
         self.group.hunt_groups.append(self)
     
         
-@dataclass
+@dataclass(kw_only=True)
 class User:
     group: Type['Group']
-    access_device_endpoint: Type['Device'] = None
     user_id: str = None
-    last_name: str = None
     first_name: str = None
+    last_name: str = None
+    extension: str = None
+    access_device_endpoint: Type['Device'] = None
     calling_line_id_last_name: str = None
     calling_line_id_first_name: str = None
     hiragana_last_name: str = None
     hiragana_first_name: str = None
     phone_number: str = None
-    extension: str = None
     calling_line_id_phone_number: str = None
     password: str = None
     department: str = None
@@ -254,10 +254,10 @@ class User:
         self.group.users.append(self)
  
     
-@dataclass
+@dataclass(kw_only=True)
 class Device:
     device_type: str
-    device_name: str
+    name: str
     group: Type['Group']
     device_level: Type['Group']
     use_custom_user_name_password: bool = True
@@ -294,14 +294,14 @@ class Device:
         self.service_provider_id = self.group.service_provider.id
         
         
-@dataclass
+@dataclass(kw_only=True)
 class Contact:
-    contact_name: str = None
-    contact_number: str = None
-    contact_email: str = None
+    name: str = None
+    number: str = None
+    email: str = None
     
     
-@dataclass
+@dataclass(kw_only=True)
 class Address:
     address_line1: str
     address_line2: str
@@ -311,7 +311,7 @@ class Address:
     country: str
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Department:
     group: Type['Group']
     name: str
