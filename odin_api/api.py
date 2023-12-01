@@ -1,9 +1,10 @@
 import requests
 import os
 
-from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
+from odin_api.utils.exceptions import *
 from odin_api.utils.oa_logger import logger
+from odin_api.store import broadwork_entities as bre
 
 
 class Api:
@@ -24,15 +25,18 @@ class Api:
         self.username = username
         self.password = os.getenv(password, default=None)
         self.authorised = False
-        self.token = ""
         self.scripter = Scripter(self)
+        self.headers = {'Authorization': ''}
+        self.payload = {}
 
+        self._token = ""
+        
     # SESSION
     def authenticate(self) -> None:
         """ makes a POST request with the U and P to URL and attempts to authenticate.
         if successful api object is update else it throws an exception.
         """
-        endpoint = "api/v2/auth/token"
+        endpoint = "/auth/token"
         try:
             response = requests.post(
                 self.base_url + endpoint,
@@ -42,8 +46,8 @@ class Api:
                 }
             )
             response.raise_for_status()
-
             self.token = response.json()["token"]
+            self.headers['Authorization'] = f'Bearer {self.token}'
             self.authorised = True
         except requests.exceptions.HTTPError:
             raise OAApiAuthenticationFail()
@@ -59,6 +63,20 @@ class Api:
     # CALL CENTER 
 
     # USER 
+    
+    def get_user_by_id(self, user: bre.User):
+
+        endpoint = f"/users?userId={user.id}"
+        
+        response = requests.get(
+            self.base_url + endpoint,
+            headers=self.headers,
+            data=self.payload
+        )
+        
+        response.raise_for_status()
+        return response.json()
+
 
     # DEVICE
     
