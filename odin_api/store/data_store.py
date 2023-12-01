@@ -1,7 +1,7 @@
 from typing import List
 import json
 
-from odin_api import Api
+from odin_api import api
 from odin_api.utils import parsing
 from . import broadwork_entities as bre
 
@@ -24,7 +24,7 @@ class DataStore:
         if DataStore.__instance is not None:
             raise Exception("Singleton cannot be instantiated more than once!")
         else:
-            self.apis: List[Api] = []
+            self.apis: List[api.Api] = []
             self.service_providers_enterprises: List[bre.ServiceProvider] = []
             self.groups: List[bre.Group] = []
             self.trunk_groups: List[bre.TrunkGroup] = []
@@ -37,13 +37,13 @@ class DataStore:
 
             DataStore.__instance = self
             
-    def get_group_state(api: Api, group: bre.Group) -> None:
+    def get_group_state(api, group: bre.Group) -> None:
         """ takes in group id and loads group state into broadworks entities.
 
         :param api: API object used to send requests to create group state in store.
         :param group: Group object of Broadworks group user would like to load state.
         """
-    pass
+        pass
 
     def store_object(self, *entities) -> None:
         """ Takes in objects within the odin_api and custom and stores in lists
@@ -53,7 +53,7 @@ class DataStore:
         """
 
         for e in entities:
-            if isinstance(e, Api):
+            if isinstance(e, api.Api):
                 self.apis.append(e)
             elif isinstance(e, bre.ServiceProvider):
                 self.service_providers_enterprises.append(e)

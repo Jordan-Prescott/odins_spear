@@ -52,6 +52,7 @@ class Group:
     def __post_init__(self):
 
         self.service_provider.groups.append(self)
+        self.default_domain = '@' + self.default_domain
      
         
 @dataclass(kw_only=True)
@@ -211,7 +212,7 @@ class HuntGroup:
 @dataclass(kw_only=True)
 class User:
     group: Type['Group']
-    user_id: str = None
+    id: str
     first_name: str = None
     last_name: str = None
     extension: str = None
@@ -252,6 +253,7 @@ class User:
         self.is_enterprise = self.group.service_provider.is_enterprise
         self.service_provider_id = self.group.service_provider.id
         self.group.users.append(self)
+        self.id = self.id + self.group.default_domain
  
     
 @dataclass(kw_only=True)
