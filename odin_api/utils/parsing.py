@@ -2,13 +2,15 @@ import json
 
 from typing import List
 # TODO: Look at parsing objects to and from JSON in python there must be a package that achieves this
-def ao_object_to_json():
+def oa_object_to_json(obj) -> str:
+    data = ''
+    
+    return json.dumps(data)
+
+def json_to_oa_object():
     return
 
-def json_to_ao_object():
-    return
-
-def export_objects(self, object_list: List) -> List[dict]:
+def export_objects(object_list: List) -> List[dict]:
     """_summary_
 
     Args:
@@ -28,7 +30,7 @@ def export_objects(self, object_list: List) -> List[dict]:
 
     return exported_objects
 
-def export_object_data(self, obj) -> dict:
+def export_object_data(obj) -> dict:
     """_summary_
 
     Args:

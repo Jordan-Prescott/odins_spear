@@ -26,8 +26,10 @@ class Api:
         self.password = os.getenv(password, default=None)
         self.authorised = False
         self.scripter = Scripter(self)
-        self.headers = {'Authorization': ''}
-        self.payload = {}
+        self.headers = {
+            'Authorization': '',
+            'Content-Type': 'application/json'
+        }
 
         self._token = ""
         
@@ -71,12 +73,26 @@ class Api:
         response = requests.get(
             self.base_url + endpoint,
             headers=self.headers,
-            data=self.payload
+            data={}
         )
         
         response.raise_for_status()
         return response.json()
-
+    
+    def post_user(self, user: bre.user):
+        
+        endpoint = "users"
+        
+        
+        
+        response = requests.get(
+            self.base_url + endpoint,
+            headers=self.headers,
+            data={}
+        )
+        
+        response.raise_for_status()
+        return response.json()
 
     # DEVICE
     
