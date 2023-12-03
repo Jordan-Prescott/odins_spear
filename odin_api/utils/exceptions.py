@@ -13,3 +13,11 @@ class OAApiAuthenticationFail(OAError):
     def __str__(self) -> str:
         return f"Failed to authenticate. Check username, password, and url."
     
+
+class OARequestTypeError(OAError):
+    """ Raised when unsupport request type is given. 
+    """
+
+    def __str__(self) -> str:
+        return f"Non-supported request type, supported: GET, POST, PUT, DELETE."
+    

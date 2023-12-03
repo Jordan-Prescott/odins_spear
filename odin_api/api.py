@@ -67,26 +67,17 @@ class Api:
     # USER 
     
     def get_user_by_id(self, user: bre.User):
-
+        
         endpoint = f"/users?userId={user.id}"
         
-        response = requests.get(
-            self.base_url + endpoint,
-            headers=self.headers,
-            data={}
-        )
-        
-        response.raise_for_status()
-        return response.json()
+        return self._requester("get", endpoint)
     
     def post_user(self, user: bre.user):
         
         endpoint = "users"
         
-        
-        
         response = requests.get(
-            self.base_url + endpoint,
+            url=self.base_url + endpoint,
             headers=self.headers,
             data={}
         )
@@ -98,11 +89,48 @@ class Api:
     
     # internal to api
     
-    def _requester():
+    def _requester(self, request_type, endpoint, data={}):
         """ sends request to api, this is used in all functions.
         """
+        
+        if request_type.lower() == 'get':
+            response = requests.get(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data=data
+        )
+            response.raise_for_status()
+            return response.json()
+        
+        elif request_type.lower() == 'post':
+            response = requests.post(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data=data
+        )
+            response.raise_for_status()
+            return response.json()
                 
-        return
+        elif request_type.lower() == 'put':
+            response = requests.put(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data=data
+        )
+            response.raise_for_status()
+            return response.json() 
+        
+        elif request_type.lower() == 'delete':
+            response = requests.delete(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data=data
+        )
+            response.raise_for_status()
+            return response.json()  
+        
+        else:
+            raise OARequestTypeError     
 
     def __str__(self) -> str:
         return f"API - url: {self.base_url}, username: {self.username}, " \
