@@ -2,13 +2,15 @@ import json
 
 from typing import List
 
-from bre_json_profile_matrix import matrix 
+from .bre_profile_matrix import MATRIX
 
 
 # TODO: Look at parsing objects to and from JSON in python there must be a package that achieves this
 def oa_object_to_json(obj) -> str:
     
-    data = matrix["USER"]
+    data = MATRIX["USER"]
+    
+    
     print(data)
     
     return json.dumps(data)

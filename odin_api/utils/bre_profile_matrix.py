@@ -1,12 +1,5 @@
-matrix = {
-    "USER": "user",
-    "user": {
-        "test": "test"
-    }
-    
-}
 
-user = {
+_user = {
     "serviceProviderId": "",
     "groupId": "",
     "userId": "",
@@ -100,4 +93,8 @@ user = {
             "alternateUserId": ""
         }
     ]
+}
+
+MATRIX = {
+    "USER": _user
 }
