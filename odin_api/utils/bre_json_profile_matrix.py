@@ -1,4 +1,12 @@
-{
+matrix = {
+    "USER": "user",
+    "user": {
+        "test": "test"
+    }
+    
+}
+
+user = {
     "serviceProviderId": "",
     "groupId": "",
     "userId": "",
@@ -93,4 +101,3 @@
         }
     ]
 }
-

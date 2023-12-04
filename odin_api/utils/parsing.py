@@ -1,12 +1,15 @@
 import json
 
 from typing import List
+
+from bre_json_profile_matrix import matrix 
+
+
 # TODO: Look at parsing objects to and from JSON in python there must be a package that achieves this
 def oa_object_to_json(obj) -> str:
     
-    from odin_api.store.bre_dict_profiles import User
-    
-    data = User 
+    data = matrix["USER"]
+    print(data)
     
     return json.dumps(data)
 

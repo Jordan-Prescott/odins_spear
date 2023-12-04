@@ -1,9 +1,10 @@
 import requests
 import os
 
-from odin_api.scripter import Scripter
 from odin_api.utils.exceptions import *
+from odin_api.scripter import Scripter
 from odin_api.utils.oa_logger import logger
+from odin_api.utils import parsing
 from odin_api.store import broadwork_entities as bre
 
 
@@ -76,14 +77,16 @@ class Api:
         
         endpoint = "users"
         
-        response = requests.get(
-            url=self.base_url + endpoint,
-            headers=self.headers,
-            data={}
-        )
+        parsing.oa_object_to_json(user)
         
-        response.raise_for_status()
-        return response.json()
+        # response = requests.get(
+        #     url=self.base_url + endpoint,
+        #     headers=self.headers,
+        #     data={}
+        # )
+        
+        # response.raise_for_status()
+        # return response.json()
 
     # DEVICE
     
