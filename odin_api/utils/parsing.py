@@ -3,12 +3,37 @@ import json
 from typing import List
 # TODO: Look at parsing objects to and from JSON in python there must be a package that achieves this
 def oa_object_to_json(obj) -> str:
-    data = ''
+    
+    from odin_api.store.bre_dict_profiles import User
+    
+    data = User 
     
     return json.dumps(data)
 
 def json_to_oa_object():
     return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def export_objects(object_list: List) -> List[dict]:
     """_summary_
