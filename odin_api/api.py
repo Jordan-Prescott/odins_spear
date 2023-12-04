@@ -72,7 +72,7 @@ class Api:
         
         return self._requester("get", endpoint)
     
-    def post_user(self, user: bre.user):
+    def post_user(self, user: bre.User):
         
         endpoint = "users"
         
