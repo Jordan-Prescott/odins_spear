@@ -26,34 +26,34 @@ class Api:
         self.username = username
         self.password = os.getenv(password, default=None)
         self.authorised = False
-        self.scripter = Scripter(self)
+        self.scripter = Scripter(api=self)
         self.headers = {
             'Authorization': '',
             'Content-Type': 'application/json'
         }
+        self.token = ""
 
-        self._token = ""
         
     # SESSION
     def authenticate(self) -> None:
         """ makes a POST request with the U and P to URL and attempts to authenticate.
         if successful api object is update else it throws an exception.
         """
+        
         endpoint = "/auth/token"
+        data={
+            "username": self.username,
+            "password": self.password
+        }
+        
         try:
-            response = requests.post(
-                self.base_url + endpoint,
-                data={
-                    "username": self.username,
-                    "password": self.password
-                }
-            )
-            response.raise_for_status()
-            self.token = response.json()["token"]
-            self.headers['Authorization'] = f'Bearer {self.token}'
-            self.authorised = True
+            response = self._requester("post", endpoint, data=data)
         except requests.exceptions.HTTPError:
             raise OAApiAuthenticationFail()
+        
+        self.token = response["token"]
+        self.headers['Authorization'] = f'Bearer {self.token}'
+        self.authorised = True
 
     # GROUP
 
