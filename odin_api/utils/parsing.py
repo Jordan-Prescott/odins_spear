@@ -5,14 +5,29 @@ from typing import List, Any, Dict, Type
 
 from .bre_profile_matrix import MATRIX
 
-def user_to_json(user) -> str:
-    data = MATRIX["USER"]
-    
-    data['user']
-
 def camel_case(s):
     parts = iter(s.split('_'))
     return next(parts) + ''.join(i.capitalize() for i in parts)
+
+
+def serialise_user(user) -> str:
+    data = MATRIX["USER"]
+    
+    for field in fields(user):
+        value = getattr(user, field.name)
+        
+        if is_dataclass(value):
+            continue
+            serialized_value = serialize_dataclass(value)
+            if serialized_value is not None:
+                data[camel_case(field.name)] = serialized_value
+        elif isinstance(value, list) and value and is_dataclass(value[0]):
+            continue
+            serialized_list = [serialize_dataclass(item) for item in value]
+            data[camel_case(field.name)] = serialized_list
+        else:
+            data[camel_case(field.name)] = value
+        
 
 
 def serialize_dataclass(instance: Any, visited: set = None) -> Dict:
