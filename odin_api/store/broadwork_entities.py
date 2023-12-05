@@ -25,7 +25,7 @@ class ServiceProvider:
 @dataclass(kw_only=True)
 class Group:
     service_provider: Type['ServiceProvider']
-    id: int
+    id: str
     name: str
     default_domain: str
     user_limit: int = None
@@ -261,7 +261,7 @@ class Device:
     device_type: str
     name: str
     group: Type['Group']
-    device_level: Type['Group']
+    device_level: str = None
     use_custom_user_name_password: bool = True
     access_device_credential_name: str = None
     access_device_credential_password: str = None
