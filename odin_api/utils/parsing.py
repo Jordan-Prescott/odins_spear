@@ -1,19 +1,47 @@
 import json
 
-from typing import List
+from dataclasses import is_dataclass, fields
+from typing import List, Any, Dict, Type
 
 from .bre_profile_matrix import MATRIX
 
-
-# TODO: Look at parsing objects to and from JSON in python there must be a package that achieves this
-def oa_object_to_json(obj) -> str:
-    
+def user_to_json(user) -> str:
     data = MATRIX["USER"]
     
-    
-    print(data)
-    
-    return json.dumps(data)
+    data['user']
+
+def camel_case(s):
+    parts = iter(s.split('_'))
+    return next(parts) + ''.join(i.capitalize() for i in parts)
+
+
+def serialize_dataclass(instance: Any, visited: set = None) -> Dict:
+    if visited is None:
+        visited = set()
+
+    if id(instance) in visited:
+        return None  # Skip already visited objects
+
+    visited.add(id(instance))
+
+    result = {}
+
+    for field in fields(instance):
+        value = getattr(instance, field.name)
+
+        if is_dataclass(value):
+            # serialized_value = serialize_dataclass(value, visited)
+            # if serialized_value is not None:
+            #     result[camel_case(field.name)] = serialized_value
+            continue
+        elif isinstance(value, list) and value and is_dataclass(value[0]):
+            serialized_list = [serialize_dataclass(item, visited) for item in value]
+            result[camel_case(field.name)] = serialized_list
+        else:
+            result[camel_case(field.name)] = value
+
+    return result
+
 
 def json_to_oa_object():
     return
