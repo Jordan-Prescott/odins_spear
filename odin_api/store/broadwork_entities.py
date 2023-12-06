@@ -244,7 +244,7 @@ class User:
     endpoint_type: str = None
     aliases: List[str] = field(default_factory=list)
     trunk_addressing: str = None
-    alternate_user_id: str = None
+    alternate_user_id: List[str] = field(default_factory=list)
     is_enterprise: bool = False
     password_expires_days: int = 2147483647
     service_provider_id: str = None
@@ -261,7 +261,7 @@ class Device:
     device_type: str
     name: str
     group: Type['Group']
-    device_level: str = None
+    device_level: Type['Group']
     use_custom_user_name_password: bool = True
     access_device_credential_name: str = None
     access_device_credential_password: str = None
@@ -315,8 +315,6 @@ class Address:
 
 @dataclass(kw_only=True)
 class Department:
-    group: Type['Group']
+    service_provider_id: str
+    group_id: str
     name: str
-    
-    def __post_init__(self):
-        self.service_provider_id = self.group.service_provider.id
