@@ -13,7 +13,7 @@ class Api:
 
     :param base_url: Base url of your odin instance api.
     :param username: Username used when logging into odin account.
-    :param password: Password used when logging into odin account.
+    :param password: Password used when logging into odin account stored as virtual environment.
     
     :var authorised: Boolean value to indicate if api is authorised.
     :var token: Token string returned from odin api.
@@ -89,6 +89,8 @@ class Api:
         # return response.json()
 
     # DEVICE
+    
+    # CUSTOM
     
     # internal to api
     
