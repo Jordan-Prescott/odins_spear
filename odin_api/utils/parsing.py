@@ -5,6 +5,7 @@ from typing import List, Any, Dict
 
 from odin_api.store.broadwork_entities import *
 
+#TODO: for small objects that dont need custom parsing could be grouped into edge objects function
 
 def camel_case(s):
     parts = iter(s.split('_'))
@@ -31,7 +32,8 @@ def serialize_auto_attendant() -> str:
 def serialize_hunt_group() -> str:
     pass
 
-def serialise_user(user) -> str:
+def serialise_user(user, return_json:bool = False) -> str:
+   
     data = {}
     
     for field in fields(user):
@@ -39,25 +41,65 @@ def serialise_user(user) -> str:
         
         if isinstance(value, list) and value and is_dataclass(value[0]):
             continue
+            #TODO: Add in logic for alternateUserId, aliases
             serialized_list = [serialize_dataclass(item) for item in value]
             data[camel_case(field.name)] = serialized_list
         elif is_dataclass(value):
             if isinstance(value, Department):
-                pass
+                data["department"] = serialize_department(value)
+            elif isinstance(value, Device):
+                data["accessDeviceEndpoint"] = serialize_address(value)  
+            elif isinstance(value, Address):
+                data["address"] = serialize_address(value)
+            elif isinstance(value, Address):
+                data["trunkAddressing"] = serialize_address(value)
         else:
             data[camel_case(field.name)] = value
+            
+            
+    if return_json:
+        return json.dumps(data)
+    return data
 
 def serialize_device() -> str:
     pass
 
-def serialize_contact() -> str:
-    pass
+def serialize_contact(contact, return_json:bool = False) -> str:
+    
+    data = {}
+    
+    for field in fields(contact):
+        value = getattr(contact, field.name)
+        data[camel_case(field.name)] = value
+        
+    if return_json:
+        return json.dumps(data)
+    return data
 
-def serialize_address() -> str:
-    pass
+def serialize_address(address, return_json:bool = False) -> str:
+    
+    data = {}
+    
+    for field in fields(address):
+        value = getattr(address, field.name)
+        data[camel_case(field.name)] = value
+        
+    if return_json:
+        return json.dumps(data)
+    return data
 
-def serialize_department() -> str:
-    pass
+def serialize_department(department, return_json:bool = False) -> str:
+    
+    data = {}
+    
+    for field in fields(department):
+        value = getattr(department, field.name)
+        data[camel_case(field.name)] = value
+        
+    if return_json:
+        return json.dumps(data)
+    return data
+    
 
 
 
