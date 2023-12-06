@@ -40,19 +40,22 @@ def serialise_user(user, return_json:bool = False) -> str:
         value = getattr(user, field.name)
         
         if isinstance(value, list) and value and is_dataclass(value[0]):
-            continue
+            
             #TODO: Add in logic for alternateUserId, aliases
-            serialized_list = [serialize_dataclass(item) for item in value]
-            data[camel_case(field.name)] = serialized_list
+            
+            if value == "aliases":
+                # serialized_list = [serialize_dataclass(item) for item in value]
+                # data[camel_case(field.name)] = serialized_list
+                pass
         elif is_dataclass(value):
             if isinstance(value, Department):
                 data["department"] = serialize_department(value)
             elif isinstance(value, Device):
-                data["accessDeviceEndpoint"] = serialize_address(value)  
+                data["accessDeviceEndpoint"] = serialize_device(value)  
             elif isinstance(value, Address):
                 data["address"] = serialize_address(value)
-            elif isinstance(value, Address):
-                data["trunkAddressing"] = serialize_address(value)
+            elif isinstance(value, TrunkGroup):
+                data["trunkAddressing"] = serialize_trunk_group(value)
         else:
             data[camel_case(field.name)] = value
             
