@@ -77,7 +77,7 @@ class Api:
         
         endpoint = "users"
         
-        parsing.oa_object_to_json(user)
+        parsing.serialise_user(user)
         
         # response = requests.get(
         #     url=self.base_url + endpoint,
