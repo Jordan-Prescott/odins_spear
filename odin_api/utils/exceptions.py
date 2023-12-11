@@ -21,3 +21,11 @@ class OARequestTypeError(OAError):
     def __str__(self) -> str:
         return f"Non-supported request type, supported: GET, POST, PUT, DELETE."
     
+
+class OAObjectParseError(OAError):
+    """ Raised when unsupport request type is given. 
+    """
+
+    def __str__(self) -> str:
+        return f"Non-supported request type, supported: GET, POST, PUT, DELETE."
+    
