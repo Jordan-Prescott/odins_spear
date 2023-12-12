@@ -11,63 +11,63 @@ def camel_case(s):
     parts = iter(s.split('_'))
     return next(parts) + ''.join(i.capitalize() for i in parts)
 
-def serialize_service_provider() -> str:
+def serialise_service_provider() -> str:
     pass
 
-def serialize_group() -> str:
+def serialise_group() -> str:
     pass
 
-def serialize_trunk_group() -> str:
+def serialise_trunk_group() -> str:
     pass
 
-def serialize_aa_key() -> str:
+def serialise_aa_key() -> str:
     pass
 
-def serialize_aa_menu() -> str:
+def serialise_aa_menu() -> str:
     pass
 
-def serialize_auto_attendant() -> str:
+def serialise_auto_attendant() -> str:
     pass
 
-def serialize_hunt_group() -> str:
+def serialise_hunt_group() -> str:
     pass
 
 def serialise_user(user, return_json:bool = False) -> str:
    #TODO: TrunkAddressing needs addressing. Not sure what data that is aimed at object doesnt store data needed.
    
-    user = {}
+    serialised_user = {}
     
     for field in fields(user):
         value = getattr(user, field.name)
         
         if isinstance(value, list):
-            if value == "aliases":
-                user[value] = value
-            elif value == "alternate_user_id":
-                user[value] = [
+            if field.name == "aliases":
+                serialised_user[field.name] = value
+            elif field.name == "alternate_user_id":
+                serialised_user[camel_case(field.name)] = [
                     {"description": a, "alternateUserId": a}
                     for a in value
                 ]         
         elif is_dataclass(value):
             if isinstance(value, Department):
-                user["department"] = serialize_department(value)
+                serialised_user["department"] = serialise_department(value)
             elif isinstance(value, Device):
-                user["accessDeviceEndpoint"] = serialize_device(value)  
+                serialised_user["accessDeviceEndpoint"] = serialise_device(value)  
             elif isinstance(value, Address):
-                user["address"] = serialize_address(value)
+                serialised_user["address"] = serialise_address(value)
             elif isinstance(value, TrunkGroup):
-                user["trunkAddressing"] = serialize_trunk_group(value)
+                serialised_user["trunkAddressing"] = serialise_trunk_group(value)
         else:
-            user[camel_case(field.name)] = value
+            serialised_user[camel_case(field.name)] = value
               
     if return_json:
-        return json.dumps(user)
-    return user
+        return json.dumps(serialised_user)
+    return serialised_user
 
-def serialize_device() -> str:
+def serialise_device() -> str:
     pass
 
-def serialize_contact(contact, return_json:bool = False) -> str:
+def serialise_contact(contact, return_json:bool = False) -> str:
     
     data = {}
     
@@ -79,7 +79,7 @@ def serialize_contact(contact, return_json:bool = False) -> str:
         return json.dumps(data)
     return data
 
-def serialize_address(address, return_json:bool = False) -> str:
+def serialise_address(address, return_json:bool = False) -> str:
     
     data = {}
     
@@ -91,7 +91,7 @@ def serialize_address(address, return_json:bool = False) -> str:
         return json.dumps(data)
     return data
 
-def serialize_department(department, return_json:bool = False) -> str:
+def serialise_department(department, return_json:bool = False) -> str:
     
     data = {}
     
