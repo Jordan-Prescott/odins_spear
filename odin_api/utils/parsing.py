@@ -33,36 +33,36 @@ def serialize_hunt_group() -> str:
     pass
 
 def serialise_user(user, return_json:bool = False) -> str:
+   #TODO: TrunkAddressing needs addressing. Not sure what data that is aimed at object doesnt store data needed.
    
-    data = {}
+    user = {}
     
     for field in fields(user):
         value = getattr(user, field.name)
         
-        if isinstance(value, list) and value and is_dataclass(value[0]):
-            
-            #TODO: Add in logic for alternateUserId, aliases
-            
+        if isinstance(value, list):
             if value == "aliases":
-                # serialized_list = [serialize_dataclass(item) for item in value]
-                # data[camel_case(field.name)] = serialized_list
-                pass
+                user[value] = value
+            elif value == "alternate_user_id":
+                user[value] = [
+                    {"description": a, "alternateUserId": a}
+                    for a in value
+                ]         
         elif is_dataclass(value):
             if isinstance(value, Department):
-                data["department"] = serialize_department(value)
+                user["department"] = serialize_department(value)
             elif isinstance(value, Device):
-                data["accessDeviceEndpoint"] = serialize_device(value)  
+                user["accessDeviceEndpoint"] = serialize_device(value)  
             elif isinstance(value, Address):
-                data["address"] = serialize_address(value)
+                user["address"] = serialize_address(value)
             elif isinstance(value, TrunkGroup):
-                data["trunkAddressing"] = serialize_trunk_group(value)
+                user["trunkAddressing"] = serialize_trunk_group(value)
         else:
-            data[camel_case(field.name)] = value
-            
-            
+            user[camel_case(field.name)] = value
+              
     if return_json:
-        return json.dumps(data)
-    return data
+        return json.dumps(user)
+    return user
 
 def serialize_device() -> str:
     pass
