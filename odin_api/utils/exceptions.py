@@ -23,9 +23,9 @@ class OARequestTypeError(OAError):
     
 
 class OAObjectParseError(OAError):
-    """ Raised when unsupport request type is given. 
+    """ Raised when parsing Broadworks Entity fails. 
     """
 
     def __str__(self) -> str:
-        return f"Non-supported request type, supported: GET, POST, PUT, DELETE."
+        return f"Parsing Broadwork Entity failed."
     
