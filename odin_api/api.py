@@ -76,17 +76,10 @@ class Api:
     def post_user(self, user: bre.User):
         
         endpoint = "users"
+                
+        data = parsing.serialise_user(user)
         
-        parsing.serialise_user(user)
-        
-        # response = requests.get(
-        #     url=self.base_url + endpoint,
-        #     headers=self.headers,
-        #     data={}
-        # )
-        
-        # response.raise_for_status()
-        # return response.json()
+        return self._requester("post", endpoint, data=data)
 
     # DEVICE
     
