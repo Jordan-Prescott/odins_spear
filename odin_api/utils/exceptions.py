@@ -3,7 +3,7 @@ class OAError(Exception):
     """
 
     def __str__(self) -> str:
-        return f"I dont think you can be trusted in a combat situation"
+        return f"Odin API Exception"
 
 
 class OAApiAuthenticationFail(OAError):
