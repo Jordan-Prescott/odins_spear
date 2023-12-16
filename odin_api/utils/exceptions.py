@@ -1,14 +1,4 @@
-class OAError(Exception):
-    """ Odin Api Exceptions
-    """
-
-    def __str__(self) -> str:
-        return f"Odin API Exception"
-
-
-class OAApiAuthenticationFail(OAError):
-    """ Raised when api fails to authenticate
-    """
+class    """
 
     def __str__(self) -> str:
         return f"Failed to authenticate. Check username, password, and url."
