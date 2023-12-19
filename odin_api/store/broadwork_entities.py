@@ -224,7 +224,7 @@ class User:
     phone_number: str = None
     calling_line_id_phone_number: str = None
     password: str = None
-    department: str = None
+    department: Type['Department'] = None
     department_full_path: str = None
     language: str = None
     time_zone: str = None
@@ -254,6 +254,7 @@ class User:
         self.service_provider_id = self.group.service_provider.id
         self.group.users.append(self)
         self.id = self.id + self.group.default_domain
+        self.group_id = self.group.id
  
     
 @dataclass(kw_only=True)

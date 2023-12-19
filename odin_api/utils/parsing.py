@@ -57,11 +57,6 @@ def serialise_user(user, return_json:bool = False) -> str:
                 serialised_user["address"] = serialise_address(value)
             elif isinstance(value, TrunkGroup):
                 serialised_user["trunkAddressing"] = serialise_trunk_group(value)
-        else:
-            serialised_user[camel_case(field.name)] = value
-              
-    if return_json:
-        return json.dumps(serialised_user)
     return serialised_user
 
 def serialise_device() -> str:
@@ -103,9 +98,11 @@ def serialise_department(department, return_json:bool = False) -> str:
         return json.dumps(data)
     return data
     
-
-
-
+def clean_data(obj):
+    
+    # loops through serialised data and only returns feilds with data in excluding None, empty list, etc
+    
+    pass
         
 
 
