@@ -248,6 +248,7 @@ class User:
     is_enterprise: bool = False
     password_expires_days: int = 2147483647
     service_provider_id: str = None
+    line_port: str = None
 
     def __post_init__(self):
         self.is_enterprise = self.group.service_provider.is_enterprise
