@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
@@ -75,6 +76,8 @@ class Api:
     
     def post_user(self, user: bre.User):
         
+        #TODO: Only include what is needed/ been added in the data
+        
         endpoint = "users"
                 
         data = parsing.serialise_user(user)
@@ -87,7 +90,7 @@ class Api:
     
     # internal to api
     
-    def _requester(self, request_type, endpoint, data={}):
+    def _requester(self, request_type, endpoint, data=None):
         """ sends request to api, this is used in all functions.
         """
         
@@ -95,7 +98,7 @@ class Api:
             response = requests.get(
             url=self.base_url + endpoint,
             headers=self.headers,
-            data=data
+            data = json.dumps(data if data is not None else {})
         )
             response.raise_for_status()
             return response.json()
@@ -104,7 +107,7 @@ class Api:
             response = requests.post(
             url=self.base_url + endpoint,
             headers=self.headers,
-            data=data
+            data = json.dumps(data if data is not None else {})
         )
             response.raise_for_status()
             return response.json()
@@ -113,7 +116,7 @@ class Api:
             response = requests.put(
             url=self.base_url + endpoint,
             headers=self.headers,
-            data=data
+            data = json.dumps(data if data is not None else {})
         )
             response.raise_for_status()
             return response.json() 
@@ -122,7 +125,7 @@ class Api:
             response = requests.delete(
             url=self.base_url + endpoint,
             headers=self.headers,
-            data=data
+            data = json.dumps(data if data is not None else {})
         )
             response.raise_for_status()
             return response.json()  
