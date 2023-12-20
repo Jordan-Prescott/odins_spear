@@ -6,23 +6,25 @@ from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
 from odin_api.utils.oa_logger import logger
 from odin_api.utils import parsing
-from odin_api.store import broadwork_entities as bre
 
 
 class Api:
-    """ Connection to Odin API, all interactions with the api are here.
 
-    :param base_url: Base url of your odin instance api.
-    :param username: Username used when logging into odin account.
-    :param password: Password used when logging into odin account stored as virtual environment.
-    
-    :var authorised: Boolean value to indicate if api is authorised.
-    :var token: Token string returned from odin api.
-    """
-    
     logger = logger
     
     def __init__(self, base_url, username, password) -> None:
+        """ Connection to Odin API, all interactions with the api are here.
+
+        Args:
+            base_url (str): Base url of your odin instance api.
+            username (str): Username used when logging into odin account.
+            password (str): Password used when logging into odin account stored as virtual environment.
+            
+        Vars: 
+            authorised (bool): Boolean value to indicate if api is authorised.\
+            token (str): Token string returned from odin api.
+        """
+        
         self.base_url = base_url
         self.username = username
         self.password = os.getenv(password, default=None)
@@ -68,21 +70,33 @@ class Api:
 
     # USER 
     
-    def get_user_by_id(self, user: bre.User):
+    def get_user_by_id(self, user_id):
+        """_summary_
+
+        Args:
+            user_id (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         
-        endpoint = f"/users?userId={user.id}"
+        endpoint = f"/users?userId={user_id}"
         
         return self._requester("get", endpoint)
     
-    def post_user(self, user: bre.User):
-        
-        #TODO: Only include what is needed/ been added in the data
+    def post_user(self, user):
+        """_summary_
+
+        Args:
+            user (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         
         endpoint = "users"
-                
-        data = parsing.serialise_user(user)
         
-        return self._requester("post", endpoint, data=data)
+        return self._requester("post", endpoint, data=user)
 
     # DEVICE
     
