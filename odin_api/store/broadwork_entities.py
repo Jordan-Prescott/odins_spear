@@ -292,6 +292,14 @@ class Device:
     user_name: str = None
     group_id: int = field(init=False)
     service_provider_id: int = field(init=False)
+    
+    # USER HAS THIS OVER DEVICE
+    # contacts 
+    # support_visual_device_management
+    # number_of_ports
+    # number_of_assigned_ports 
+    # status
+    # line_port
 
     def __post_init__(self):
         self.group_id = self.group.id
