@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import typing
 
 from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
@@ -69,6 +70,51 @@ class Api:
     # CALL CENTER 
 
     # USER 
+    
+# Get all users in Enterprise ent1
+# GET /api/v2/users?serviceProviderId=ent1
+
+# # Get all users in Group grp1
+# GET /api/v2/users?serviceProviderId=ent1&groupId=grp1
+
+# # Get up to 10 users in the system with a last name that contains smith
+# GET /api/v2/users?lastName=*smith*&limit=10
+
+# # Get the users in grp1 that have a phone number that starts with 513333
+# GET /api/v2/users?serviceProviderId=ent1&groupId=grp1&dn=513333*
+    
+    def get_users(self, servive_provider_id: str =None, group_id: str =None, 
+                  filter: str =None, filter_type: str =None, limit: int =None):
+        """_summary_
+
+        Args:
+            servive_provider_id (str): _description_
+            group_id (str): _description_
+            filter (str, optional): 
+            filter_type (str, optional): _description_. Defaults to None.
+            limit (int, optional): _description_. Defaults to None.
+
+        macAddress: search by device
+        lastName: filter by lastName
+        firstName: filter by firstName
+        dn: filter by dn
+        emailAddress: filter by emailAddress
+        userId: filter by userId
+        extension: filter by extension
+
+        Returns:
+            _type_: _description_
+        """
+        
+        endpoint = f"/users?"
+
+        
+        
+        if filter:
+
+        
+        
+        return self._requester("get", endpoint)
     
     def get_user_by_id(self, user_id):
         """_summary_
