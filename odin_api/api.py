@@ -6,12 +6,16 @@ import typing
 from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
 from odin_api.utils.oa_logger import logger
-from odin_api.utils import parsing
 
 
 class Api:
 
     logger = logger
+    
+    filters = [
+        "macAddress", "lastName", "firstName", "dn",
+        "emailAddress", "userId", "extension"
+    ]
     
     def __init__(self, base_url, username, password) -> None:
         """ Connection to Odin API, all interactions with the api are here.
@@ -84,16 +88,21 @@ class Api:
 # GET /api/v2/users?serviceProviderId=ent1&groupId=grp1&dn=513333*
     
     def get_users(self, servive_provider_id: str =None, group_id: str =None, 
-                  filter: str =None, filter_type: str =None, limit: int =None):
-        """_summary_
-
+                  filter: str =None, filter_type: str =None, filter_value: str =None,
+                  limit: int =None):
+        """
         Args:
-            servive_provider_id (str): _description_
-            group_id (str): _description_
-            filter (str, optional): 
+            servive_provider_id (str, optional): _description_. Defaults to None.
+            group_id (str, optional): _description_. Defaults to None.
+            filter (str, optional): _description_. Defaults to None.
             filter_type (str, optional): _description_. Defaults to None.
+            filter_value (str, optional): _description_. Defaults to None.
             limit (int, optional): _description_. Defaults to None.
 
+        Returns:
+            _type_: _description_
+            
+        #### Supported Filters
         macAddress: search by device
         lastName: filter by lastName
         firstName: filter by firstName
@@ -101,19 +110,38 @@ class Api:
         emailAddress: filter by emailAddress
         userId: filter by userId
         extension: filter by extension
+        
+        #### Examples
+        Get all users in Enterprise ent1
+        GET /api/v2/users?serviceProviderId=ent1
 
-        Returns:
-            _type_: _description_
+        Get all users in Group grp1
+        GET /api/v2/users?serviceProviderId=ent1&groupId=grp1
+
+        Get up to 10 users in the system with a last name that contains smith
+        GET /api/v2/users?lastName=*smith*&limit=10
+
+        Get the users in grp1 that have a phone number that starts with 513333
+        GET /api/v2/users?serviceProviderId=ent1&groupId=grp1&dn=513333*
         """
         
         endpoint = f"/users?"
 
-        
-        
+        if servive_provider_id:
+            endpoint += f"serviceProviderId={servive_provider_id}"
+            if group_id:
+                endpoint += f"&groupId={group_id}"
         if filter:
+            if filter not in self.filters:
+                return OAUnsupportedFilter
+            
+            if servive_provider_id:
+                endpoint += "&"   
+            endpoint += f"{self._format_filter(filter, filter_type, filter_value)}"   
+        if limit:
+            # TODO: Limit is failing when needed, odin to resolve
+            endpoint += f"&limit={limit}"
 
-        
-        
         return self._requester("get", endpoint)
     
     def get_user_by_id(self, user_id):
@@ -149,6 +177,14 @@ class Api:
     # CUSTOM
     
     # internal to api
+
+    def _format_filter(self, filter, type, value):
+        if type.lower() == "equal to":
+            return f"{filter}={value}" 
+        elif type.lower() == "starts with":
+            return f"{filter}={value}*" 
+        else: #contains
+            return f"{filter}=*{value}*"
     
     def _requester(self, request_type, endpoint, data=None):
         """ sends request to api, this is used in all functions.
@@ -191,8 +227,8 @@ class Api:
             return response.json()  
         
         else:
-            raise OARequestTypeError     
-
+            raise OARequestTypeError 
+        
     def __str__(self) -> str:
         return f"API - url: {self.base_url}, username: {self.username}, " \
             f"password: {self.password}, Authenticated: {self.authorised}"
