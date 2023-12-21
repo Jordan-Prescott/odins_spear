@@ -75,32 +75,23 @@ class Api:
 
     # USER 
     
-# Get all users in Enterprise ent1
-# GET /api/v2/users?serviceProviderId=ent1
-
-# # Get all users in Group grp1
-# GET /api/v2/users?serviceProviderId=ent1&groupId=grp1
-
-# # Get up to 10 users in the system with a last name that contains smith
-# GET /api/v2/users?lastName=*smith*&limit=10
-
-# # Get the users in grp1 that have a phone number that starts with 513333
-# GET /api/v2/users?serviceProviderId=ent1&groupId=grp1&dn=513333*
-    
     def get_users(self, servive_provider_id: str =None, group_id: str =None, 
                   filter: str =None, filter_type: str =None, filter_value: str =None,
                   limit: int =None):
         """
+        Returns list of users depending on filter criteria.
+        
         Args:
-            servive_provider_id (str, optional): _description_. Defaults to None.
-            group_id (str, optional): _description_. Defaults to None.
-            filter (str, optional): _description_. Defaults to None.
-            filter_type (str, optional): _description_. Defaults to None.
-            filter_value (str, optional): _description_. Defaults to None.
-            limit (int, optional): _description_. Defaults to None.
+            servive_provider_id (str, optional): Service or Enterprise ID,
+            top level object. Defaults to None.
+            group_id (str, optional): Group ID where user is hosted. Defaults to None.
+            filter (str, optional): Filter criteria, supported filters below. Defaults to None.
+            filter_type (str, optional): Options: equal to, starts with, or contains. Defaults to None.
+            filter_value (str, optional): Value filtering on e.g. firstName. Defaults to None.
+            limit (int, optional): Limits the amount of values API returns. Defaults to None.
 
         Returns:
-            _type_: _description_
+            json: List of users.
             
         #### Supported Filters
         macAddress: search by device
