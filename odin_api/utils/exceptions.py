@@ -41,3 +41,4 @@ class OAUnsupportedFilter(OAError):
     def __str__(self) -> str:
         return f"""Unsupported filter. Supported: macAddress, lastName, 
     firstName, dn, emailAddress, userId, extension"""
+    
