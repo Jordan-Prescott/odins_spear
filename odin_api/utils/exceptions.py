@@ -33,3 +33,11 @@ class OAObjectParseError(OAError):
 
     def __str__(self) -> str:
         return f"Parsing Broadwork Entity failed."
+    
+class OAUnsupportedFilter(OAError):
+    """ Raised when user requests to filter on unsupported filter
+    """
+
+    def __str__(self) -> str:
+        return f"""Unsupported filter. Supported: macAddress, lastName, 
+    firstName, dn, emailAddress, userId, extension"""
