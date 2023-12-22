@@ -63,15 +63,38 @@ class Api:
         self.headers['Authorization'] = f'Bearer {self.token}'
         self.authorised = True
 
-    # GROUP
+    # AUTO ATTENDANTS
+    
+    def get_auto_attendants(self, service_provider_id, group_id):
+        """_summary_
 
-    # TRUNK GROUP
+        Args:
+            service_provider_id (_type_): _description_
+            group_id (_type_): _description_
 
-    # HUNT GROUP
+        Returns:
+            _type_: _description_
+        """
 
-    # AUTO ATTENDANT 
+        endpoint = f"/auto-attendants?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self._requester("get", endpoint)
+        
+    # REPORTS  
+    
+    def get_user_report(self, user_id):
+        """ Detailed report of user including services and service packs assigned.
 
-    # CALL CENTER 
+        Args:
+            user_id (str): Target user id of user.
+
+        Returns:
+            dict: Detailed report of user including services and service packs.
+        """
+        
+        endpoint = f"/users/reports/users?userId={user_id}"
+        
+        return self._requester("get", endpoint)
 
     # USER 
     
@@ -91,7 +114,7 @@ class Api:
             limit (int, optional): Limits the amount of values API returns. Defaults to None.
 
         Returns:
-            json: List of users.
+            dict: List of users.
             
         #### Supported Filters
         macAddress: search by device
@@ -169,7 +192,7 @@ class Api:
     def _format_filter(self, filter, type, value):
         
         if filter not in self.filters:
-                return OAUnsupportedFilter
+                raise OAUnsupportedFilter
             
         if type.lower() == "equal to":
             return f"{filter}={value}" 
