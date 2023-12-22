@@ -122,10 +122,7 @@ class Api:
             endpoint += f"serviceProviderId={servive_provider_id}"
             if group_id:
                 endpoint += f"&groupId={group_id}"
-        if filter:
-            if filter not in self.filters:
-                return OAUnsupportedFilter
-            
+        if filter:       
             if servive_provider_id:
                 endpoint += "&"   
             endpoint += f"{self._format_filter(filter, filter_type, filter_value)}"   
@@ -170,6 +167,10 @@ class Api:
     # internal to api
 
     def _format_filter(self, filter, type, value):
+        
+        if filter not in self.filters:
+                return OAUnsupportedFilter
+            
         if type.lower() == "equal to":
             return f"{filter}={value}" 
         elif type.lower() == "starts with":
