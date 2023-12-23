@@ -1,4 +1,5 @@
-
+import requests
+import json
 class requester():
     
     __instance = None
@@ -24,4 +25,42 @@ class requester():
         
         requester.__instance = self
     
+    def get(self, endpoint, data=None):
+        response = requests.get(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data = json.dumps(data if data is not None else {})
+        )
+        
+        response.raise_for_status()
+        return response.json()
     
+    def post(self, endpoint, data=None):
+        response = requests.post(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data = json.dumps(data if data is not None else {})
+        )
+        
+        response.raise_for_status()
+        return response.json()
+
+    def put(self, endpoint, data=None):
+        response = requests.put(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data = json.dumps(data if data is not None else {})
+        )
+        
+        response.raise_for_status()
+        return response.json()
+    
+    def delete(self, endpoint, data=None):
+        response = requests.delete(
+            url=self.base_url + endpoint,
+            headers=self.headers,
+            data = json.dumps(data if data is not None else {})
+        )
+        
+        response.raise_for_status()
+        return response.json()

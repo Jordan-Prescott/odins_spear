@@ -1,112 +1,17 @@
 import json
 
-from dataclasses import is_dataclass, fields
-from typing import List, Any, Dict
+from odin_api.utils.exceptions import *
 
-from odin_api.store.broadwork_entities import *
+def format_filter(self, filter, type, value):
 
-#TODO: for small objects that dont need custom parsing could be grouped into edge objects function
-
-def camel_case(s):
-    parts = iter(s.split('_'))
-    return next(parts) + ''.join(i.capitalize() for i in parts)
-
-def serialise_service_provider() -> str:
-    pass
-
-def serialise_group() -> str:
-    pass
-
-def serialise_trunk_group() -> str:
-    pass
-
-def serialise_aa_key() -> str:
-    pass
-
-def serialise_aa_menu() -> str:
-    pass
-
-def serialise_auto_attendant() -> str:
-    pass
-
-def serialise_hunt_group() -> str:
-    pass
-
-def serialise_user(user, return_json:bool = False) -> str:
-   #TODO: TrunkAddressing needs addressing. Not sure what data that is aimed at object doesnt store data needed.
-   
-    serialised_user = {}
-    
-    for field in fields(user):
-        value = getattr(user, field.name)
-        
-        if isinstance(value, list):
-            if field.name == "aliases":
-                serialised_user[field.name] = value
-            elif field.name == "alternate_user_id":
-                serialised_user[camel_case(field.name)] = [
-                    {"description": a, "alternateUserId": a}
-                    for a in value
-                ]         
-        elif is_dataclass(value):
-            if isinstance(value, Department):
-                serialised_user["department"] = serialise_department(value)
-            elif isinstance(value, Device):
-                serialised_user["accessDeviceEndpoint"] = serialise_device(value)  
-            elif isinstance(value, Address):
-                serialised_user["address"] = serialise_address(value)
-            elif isinstance(value, TrunkGroup):
-                serialised_user["trunkAddressing"] = serialise_trunk_group(value)
-    return serialised_user
-
-def serialise_device() -> str:
-    pass
-
-def serialise_contact(contact, return_json:bool = False) -> str:
-    
-    data = {}
-    
-    for field in fields(contact):
-        value = getattr(contact, field.name)
-        data[camel_case(field.name)] = value
-        
-    if return_json:
-        return json.dumps(data)
-    return data
-
-def serialise_address(address, return_json:bool = False) -> str:
-    
-    data = {}
-    
-    for field in fields(address):
-        value = getattr(address, field.name)
-        data[camel_case(field.name)] = value
-        
-    if return_json:
-        return json.dumps(data)
-    return data
-
-def serialise_department(department, return_json:bool = False) -> str:
-    
-    data = {}
-    
-    for field in fields(department):
-        value = getattr(department, field.name)
-        data[camel_case(field.name)] = value
-        
-    if return_json:
-        return json.dumps(data)
-    return data
-    
-def clean_data(obj):
-    
-    # loops through serialised data and only returns feilds with data in excluding None, empty list, etc
-    
-    pass
-        
-
-
-
+    if type.lower() == "equal to":
+        return f"{filter}={value}" 
+    elif type.lower() == "starts with":
+        return f"{filter}={value}*" 
+    elif type.lower() == "contains":
+        return f"{filter}=*{value}*"
+    else:
+        raise OAUnsupportedFilter
 
 
 

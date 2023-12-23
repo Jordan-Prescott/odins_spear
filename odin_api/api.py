@@ -6,6 +6,7 @@ import typing
 from odin_api.utils.exceptions import *
 from odin_api.scripter import Scripter
 from odin_api.utils.oa_logger import logger
+from odin_api.api_methods import *
 
 
 class Api:
@@ -40,6 +41,11 @@ class Api:
             'Content-Type': 'application/json'
         }
         self.token = ""
+        
+        self.get = get.Get()
+        self.post = post.Post()
+        self.put = put.Put()
+        self.delete = delete.Delete()
 
         
     # SESSION
