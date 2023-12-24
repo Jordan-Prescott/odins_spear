@@ -194,18 +194,6 @@ class Api:
     # CUSTOM
     
     # internal to api
-
-    def _format_filter(self, filter, type, value):
-        
-        if filter not in self.filters:
-                raise OAUnsupportedFilter
-            
-        if type.lower() == "equal to":
-            return f"{filter}={value}" 
-        elif type.lower() == "starts with":
-            return f"{filter}={value}*" 
-        else: #contains
-            return f"{filter}=*{value}*"
     
     def _requester(self, request_type, endpoint, data=None):
         """ sends request to api, this is used in all functions.
