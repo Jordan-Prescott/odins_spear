@@ -19,7 +19,7 @@ class Scripter:
         return scripts.bulk_enable_voicemail(self.api, users)
     
     #TODO: How will users be passed in
-    def bulk_password_reset(self, users):
+    def bulk_password_reset(self, *users):
         return scripts.find_alias(self.api, users)
     
     def find_alias(self, group, alias):
