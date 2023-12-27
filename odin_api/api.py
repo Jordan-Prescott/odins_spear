@@ -1,23 +1,13 @@
 import requests
 import os
-import json
-import typing
 
-from odin_api.utils.exceptions import *
+from odin_api.exceptions import *
 from odin_api.scripter import Scripter
-from odin_api.utils.oa_logger import logger
-from odin_api.api_methods import *
+from odin_api.methods import *
 from odin_api.requester import Requester
 
 
 class Api:
-
-    logger = logger
-    
-    filters = [
-        "macAddress", "lastName", "firstName", "dn",
-        "emailAddress", "userId", "extension"
-    ]
     
     def __init__(self, base_url, username, password) -> None:
         """ Connection to Odin API, all interactions with the api are here.
@@ -47,7 +37,6 @@ class Api:
         self.scripter = Scripter(api=self)
 
         
-    # SESSION
     def authenticate(self) -> None:
         """ makes a POST request with the U and P to URL and attempts to authenticate.
         if successful api object is update else it throws an exception.
