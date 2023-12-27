@@ -1,6 +1,6 @@
 import requests
 
-from odin_api.utils.exceptions import *
+from odin_api.exceptions import *
 
 class Post():
     
