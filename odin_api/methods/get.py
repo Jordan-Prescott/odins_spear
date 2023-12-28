@@ -261,7 +261,7 @@ class Get():
         
         endpoint = f"/users?userId={user_id}"
         
-        return self.requester(endpoint)
+        return self.requester.get(endpoint)
 
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON

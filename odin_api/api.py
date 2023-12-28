@@ -47,7 +47,7 @@ class Api:
             raise OAApiAuthenticationFail()
         
         self.requester.token = response["token"]
-        self.requester.headers['Authorization'] = f'Bearer {self.token}'
+        self.requester.headers['Authorization'] = f'Bearer {self.requester.token}'
         
         self.authenticated = True
 
