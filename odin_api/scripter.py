@@ -22,8 +22,9 @@ class Scripter:
     def bulk_password_reset(self, users):
         return scripts.bulk_password_reset.main(self.api, users)
     
-    def find_alias(self, group, alias):
-        return scripts.find_alias.main(self.api, group, alias)
+    def find_alias(self, service_provider_id, group_id, alias):
+        return scripts.find_alias.main(self.api, service_provider_id, group_id, 
+                                       alias)
     
     def group_audit(self, group):
         return scripts.group_audit.main(self.api, group)
