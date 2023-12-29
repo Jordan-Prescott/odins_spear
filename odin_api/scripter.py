@@ -16,20 +16,20 @@ class Scripter:
 
     #TODO: How will users be passed in
     def bulk_enable_voicemail(self, users):
-        return scripts.bulk_enable_voicemail(self.api, users)
+        return scripts.bulk_enable_voicemail.main(self.api, users)
     
     #TODO: How will users be passed in
-    def bulk_password_reset(self, *users):
-        return scripts.find_alias(self.api, users)
+    def bulk_password_reset(self, users):
+        return scripts.bulk_password_reset.main(self.api, users)
     
     def find_alias(self, group, alias):
         return scripts.find_alias.main(self.api, group, alias)
     
     def group_audit(self, group):
-        return scripts.group_audit(self.api, group)
+        return scripts.group_audit.main(self.api, group)
     
     def user_activity(self, user):
-        return scripts.user_activity(self.api, user)
+        return scripts.user_activity.main(self.api, user)
     
     def user_huntgroup_membership(self, user):
-        return scripts.user_huntgroup_membership(self.api, user)
+        return scripts.user_huntgroup_membership.main(self.api, user)
