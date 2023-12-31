@@ -42,3 +42,10 @@ class OAUnsupportedFilter(OAError):
         return f"""Unsupported filter. Supported: macAddress, lastName, 
     firstName, dn, emailAddress, userId, extension"""
     
+class AOAliasNotFound(OAError):
+    """ Raised when alias is not found in Broadowks Group. 
+    """
+
+    def __str__(self) -> str:
+        return f"Alias not found, it either does not exist or please check alias." \
+            f"NOTE: Unable to check Call Centers, alias could be located here."
