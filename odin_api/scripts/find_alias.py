@@ -123,4 +123,4 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         Alias ({alias}) found: User - {user['userId']}
         """
 
-    return AOAliasNotFound
+    raise AOAliasNotFound
