@@ -21,16 +21,13 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     - Hunt Groups
     - Users
 
-    :param x:
-    :param y:
-    :param z:
+    :param service_provider_id: Service Prodiver where group is hosted.
+    :param group_id: Group where alias is located.
+    :param alias: Alias number to identify e.g. 0
 
-    :return r:
-    """
-
-    # 1. Auto attendant 
-    # 2. Hunt Groups
-    # 3. Users    
+    :return str: Returns type and name/ userId of entity where alias located. 
+    :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
+    """   
     
     retry_queue = []
     max_retries = 2  
