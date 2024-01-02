@@ -24,17 +24,14 @@ class Get():
 #AUTO ATTENDANTS
 
     def auto_attendants(self, service_provider_id, group_id):
-        """_summary_
 
-        Args:
-            service_provider_id (_type_): _description_
-            group_id (_type_): _description_
+        endpoint = f"/groups/auto-attendants?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    def auto_attendant(self, service_user_id):
 
-        Returns:
-            _type_: _description_
-        """
-
-        endpoint = f"/auto-attendants?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/auto-attendants?serviceUserId={service_user_id}"
         
         return self.requester.get(endpoint)
     
@@ -51,6 +48,19 @@ class Get():
 #BUSY LAMP FIELD
 #CALL CAPACITY
 #CALL CENTER
+
+    def group_call_centers(self, service_provider_id, group_id):
+
+        endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+
+    def group_call_center(self, service_user_id):
+
+        endpoint = f"/groups/auto-attendants?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
+    
 #CALL CONTROL
 #CALL FORWARDING ALWAYS
 #CALL FORWARDING ALWAYS SECONDARY
@@ -114,18 +124,18 @@ class Get():
 #HOTELING HOST
 #HUNT GROUPS
 
-def group_hunt_groups(self, service_provider_id, group_id):
-  
-    endpoint = f"/groups/hunt-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
-        
-    return self.requester.get(endpoint)
+    def group_hunt_groups(self, service_provider_id, group_id):
+    
+        endpoint = f"/groups/hunt-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+            
+        return self.requester.get(endpoint)
 
 
-def group_hunt_group(self, service_user_id):
-  
-    endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
-        
-    return self.requester.get(endpoint)
+    def group_hunt_group(self, service_user_id):
+    
+        endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
+            
+        return self.requester.get(endpoint)
 
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
