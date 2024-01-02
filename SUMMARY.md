@@ -1,0 +1,15 @@
+# Table of contents
+
+* [👋 Welcome!!](README.md)
+* [🧐 Getting Started](getting-started/README.md)
+  * [⬇ Downloading Library](getting-started/downloading-library.md)
+  * [🧠 Installing Requirements](getting-started/installing-requirements.md)
+  * [⚠ Setting Environment Variable](getting-started/setting-environment-variable.md)
+* [⚙ Create API Object](create-api-object.md)
+* [📦 Methods](methods/README.md)
+  * [📥 Get](methods/get.md)
+  * [✉ Post](methods/post.md)
+  * [📤 Put](methods/put.md)
+  * [🚮 Delete](methods/delete.md)
+* [🙌 Custom Features](custom-features/README.md)
+  * [🔎 Find Alias](custom-features/find-alias.md)
