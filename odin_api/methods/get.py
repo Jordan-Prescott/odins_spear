@@ -113,6 +113,20 @@ class Get():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
+
+def group_hunt_groups(self, service_provider_id, group_id):
+  
+    endpoint = f"/groups/hunt-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+    return self.requester.get(endpoint)
+
+
+def group_hunt_group(self, service_user_id):
+  
+    endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
+        
+    return self.requester.get(endpoint)
+
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
 #INTEGRATED IMP
