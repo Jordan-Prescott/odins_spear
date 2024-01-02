@@ -54,7 +54,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     for cc in call_centers:
         broadwork_entities_user_ids.append(["CC", cc["serviceUserId"]])
         
-    for broadwork_entity in tqdm(broadwork_entities_user_ids, desc="Collecting AA, HG, and CC details"):
+    for broadwork_entity in tqdm(broadwork_entities_user_ids, desc="Fetching AA, HG, and CC details"):
         # add some buffer time for odins api 
         time.sleep(0.3)
         
@@ -119,7 +119,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         """
         
     users = api.get.users(service_provider_id, group_id, extended=True)
-    logger.log_info("Collected users.")
+    logger.log_info("Fetched users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
         time.sleep(0.1)
