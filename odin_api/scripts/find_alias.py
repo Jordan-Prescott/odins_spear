@@ -15,11 +15,17 @@ def locate_alias(alias, aliases: list):
 def main(api, service_provider_id: str, group_id: str, alias: str):
     """ Locates alias if assigned to broadworks entity. 
 
-    Checks:
-    - Auto Attendants
-    - Call Centers
-    - Hunt Groups
-    - Users
+    The script searches through various entity types including Auto Attendants (AA),
+    Hunt Groups (HG), and Call Centers (CC), as well as individual Users. It employs 
+    a retry mechanism for instances where initial attempts to fetch entity details fail.
+
+    The search is conducted in two phases:
+    1. Collecting details of AAs, HGs, and CCs and checking for the alias.
+    2. If not found, searching through the users for the alias.
+
+    If the alias is found, the method returns a string specifying the type of entity and
+    its name or userID. If the alias is not found after checking all entities, an 
+    AOAliasNotFound exception is raised.
 
     :param service_provider_id: Service Prodiver where group is hosted.
     :param group_id: Group where alias is located.
@@ -50,7 +56,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         
     for broadwork_entity in tqdm(broadwork_entities_user_ids, desc="Collecting AA, HG, and CC details"):
         # add some buffer time for odins api 
-        time.sleep(0.5)
+        time.sleep(0.3)
         
         formatted = {}
         formatted["type"] = broadwork_entity[0] 
@@ -106,6 +112,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
                 logger.log_error(f"Failed to process {entity_type} - {service_user_id} after {max_retries} retries. Skipping.")
 
     for broadwork_entity in tqdm(object_with_alias, desc=f"Searching AA, HG, and CC for alias {alias}"):
+        time.sleep(0.1)
         if locate_alias(alias, broadwork_entity['aliases']):
             return f"""
         Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}
@@ -115,7 +122,8 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     logger.log_info("Collected users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
-         if locate_alias(alias, user['aliases']):
+        time.sleep(0.1)
+        if locate_alias(alias, user['aliases']):
             return f"""
         Alias ({alias}) found: User - {user['userId']}
         """
