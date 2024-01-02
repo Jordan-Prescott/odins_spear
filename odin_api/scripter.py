@@ -23,6 +23,21 @@ class Scripter:
         return scripts.bulk_password_reset.main(self.api, users)
     
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
+        """ Locates alias if assigned to broadworks entity. 
+
+        Checks:
+        - Auto Attendants
+        - Call Centers
+        - Hunt Groups
+        - Users
+
+        :param service_provider_id: Service Prodiver where group is hosted.
+        :param group_id: Group where alias is located.
+        :param alias: Alias number to identify e.g. 0
+
+        :return str: Returns type and name/ userId of entity where alias located. 
+        :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
+        """   
         return scripts.find_alias.main(self.api, service_provider_id, group_id, 
                                        alias)
     
