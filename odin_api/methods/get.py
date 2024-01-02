@@ -57,7 +57,7 @@ class Get():
 
     def group_call_center(self, service_user_id):
 
-        endpoint = f"/groups/auto-attendants?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers?serviceUserId={service_user_id}"
         
         return self.requester.get(endpoint)
     
@@ -218,7 +218,7 @@ class Get():
     
     def users(self, servive_provider_id: str =None, group_id: str =None, 
                   filter: str =None, filter_type: str =None, filter_value: str =None,
-                  limit: int =None):
+                  limit: int =None, extended =False):
         """
         Returns list of users depending on filter criteria.
         
@@ -270,6 +270,8 @@ class Get():
         if limit:
             # TODO: Limit is failing when needed, odin to resolve
             endpoint += f"&limit={limit}"
+        if extended:
+            endpoint += f"&extended=True"
 
         return self.requester.get(endpoint)
     

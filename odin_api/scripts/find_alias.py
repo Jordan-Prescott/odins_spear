@@ -7,12 +7,12 @@ from odin_api.exceptions import AOAliasNotFound
 import odin_api.logger as logger
 
 def locate_alias(alias, aliases: list):
-    for alias in aliases:
-        if re.search(rf'\b{alias}\b', alias):
+    for a in aliases:
+        if re.search(rf'\b{alias}\b', a):
             return True
         
 
-def main(api, service_provider_id, group_id, alias):
+def main(api, service_provider_id: str, group_id: str, alias: str):
     """ Locates alias if assigned to broadworks entity. 
 
     Checks:
@@ -37,13 +37,8 @@ def main(api, service_provider_id, group_id, alias):
     object_with_alias = []
     
     auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    logger.log_info("List of groups Auto Attendants collected.")
-    
     hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    logger.log_info("List of groups Hunt Groups collected.")
-    
     call_centers = api.get.group_call_centers(service_provider_id, group_id)
-    logger.log_info("List of groups Call Centers collected.")
     
     broadwork_entities_user_ids = []
     
@@ -79,16 +74,21 @@ def main(api, service_provider_id, group_id, alias):
             object_with_alias.append(formatted)
             
         except Exception:
-            
             # add a retry count and add this entity to retry queue
             broadwork_entity.append(0)
             retry_queue.append(broadwork_entity)
              
 
     # objects failed in first instance
-    logger.log_info("Retrying failed instances.")
+    if retry_queue:
+        logger.log_info("Retrying failed instances.")
     while retry_queue:
         entity_type, service_user_id, retry_count = retry_queue.pop(0)  # Get the first item from the queue
+        
+        formatted = {}
+        formatted["type"] = entity_type
+        temp_object = ""
+        
         try:
             if entity_type == "AA":
                 temp_object = api.get.auto_attendant(service_user_id)
@@ -96,21 +96,31 @@ def main(api, service_provider_id, group_id, alias):
                 temp_object = api.get.group_hunt_group(service_user_id)
             else:
                 temp_object = api.get.group_call_center(service_user_id)
+                
+            formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
+            formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
+            
+            object_with_alias.append(formatted)
+            
         except Exception:
             if retry_count < max_retries:
                 retry_queue.append((entity_type, service_user_id, retry_count + 1))  # Increment retry count and re-add to the queue
             else:
                 logger.log_error(f"Failed to process {entity_type} - {service_user_id} after {max_retries} retries. Skipping.")
 
-    for broadwork_entity in tqdm(object_with_alias, desc=f"Searching AA, HG, and CC for alias: {alias}"):
+    for broadwork_entity in tqdm(object_with_alias, desc=f"Searching AA, HG, and CC for alias {alias}"):
         if locate_alias(alias, broadwork_entity['aliases']):
-            return f"Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"
+            return f"""
+        Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}
+        """
         
-    users = api.get.users(service_provider_id, group_id)
-    logger.log_info("List of groups Users collected.")
+    users = api.get.users(service_provider_id, group_id, extended=True)
+    logger.log_info("Collected users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
          if locate_alias(alias, user['aliases']):
-            return f"Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"
+            return f"""
+        Alias ({alias}) found: User - {user['userId']}
+        """
 
     return AOAliasNotFound
