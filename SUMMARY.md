@@ -13,3 +13,6 @@
     * [🚮 Delete](welcome/methods/delete.md)
   * [🙌 Custom Features](welcome/custom-features/README.md)
     * [🔎 Find Alias](welcome/custom-features/find-alias.md)
+  * [👨💻 Development](welcome/development.md)
+  * [🖌 Library Design](welcome/library-design.md)
+  * [🤙 Contact](welcome/contact.md)
