@@ -8,17 +8,14 @@ Before using the library set up an environment variable in your local machine an
 
 Setting environment variable (Windows):
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 Passing environment variable to API object:
 
-{% code overflow="wrap" %}
-```python
-from odin_api import api
-
+<pre class="language-python" data-overflow="wrap"><code class="lang-python"><strong>from odin_api import api
+</strong>
 magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
-```
-{% endcode %}
+</code></pre>
 
 ## Guide on setting environmental variables:&#x20;
 
