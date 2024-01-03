@@ -1,2 +1,0 @@
-# 🔎 Find Alias
-
