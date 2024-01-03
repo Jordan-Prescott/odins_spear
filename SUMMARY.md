@@ -2,8 +2,8 @@
 
 * [👋 Welcome!!](README.md)
   * [🧐 Getting Started](welcome/getting-started/README.md)
-    * [⬇ Downloading Library (BETA)](welcome/getting-started/downloading-library-beta.md)
     * [⚠ Setting Environment Variable](welcome/getting-started/setting-environment-variable.md)
+    * [⬇ Downloading Library (BETA)](welcome/getting-started/downloading-library-beta.md)
     * [⚙ Create API Object](welcome/getting-started/create-api-object.md)
   * [📦 Methods](welcome/methods/README.md)
     * [📥 Get](welcome/methods/get.md)
