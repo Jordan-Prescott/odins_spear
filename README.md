@@ -1,5 +1,9 @@
 # 👋 Welcome!!
 
+For those viewing this on GitHub and thinks this README.md file looks funky, the docs are on gitbook [here](https://docs.jordan-prescott.com/odin\_api/).
+
+
+
 Welcome to odin\_api a Python library to ease the use of Odins API(naming on point). Odin is a solution by [rev.io](https://rev.io/) for managing Broadworks instances. The library eases the use of this API and encapsulates the methods available.&#x20;
 
 
