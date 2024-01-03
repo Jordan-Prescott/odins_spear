@@ -25,10 +25,6 @@ class Scripter:
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
         """ Locates alias if assigned to broadworks entity. 
 
-
-
-
-
         :param service_provider_id: Service Prodiver where group is hosted.
         :param group_id: Group where alias is located.
         :param alias: Alias number to identify e.g. 0

@@ -7,9 +7,9 @@ __all__ = [
     "user_huntgroup_membership"
 ]
 
-from .bulk_enable_voicemail import *
-from .bulk_password_reset import *
-from .find_alias import *
-from .group_audit import *
-from .user_activity import *
-from .user_huntgroup_membership import *
+from .bulk_enable_voicemail import main
+from .bulk_password_reset import main
+from .find_alias import main
+from .group_audit import main
+from .user_activity import main
+from .user_huntgroup_membership import main
