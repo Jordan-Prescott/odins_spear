@@ -2,7 +2,7 @@
 
 * [👋 Welcome!!](README.md)
   * [🧐 Getting Started](welcome/getting-started/README.md)
-    * [⬇ Downloading Library](welcome/getting-started/downloading-library.md)
+    * [⬇ Downloading Library (BETA)](welcome/getting-started/downloading-library-beta.md)
     * [🧠 Installing Requirements](welcome/getting-started/installing-requirements.md)
     * [⚠ Setting Environment Variable](welcome/getting-started/setting-environment-variable.md)
     * [⚙ Create API Object](welcome/getting-started/create-api-object.md)

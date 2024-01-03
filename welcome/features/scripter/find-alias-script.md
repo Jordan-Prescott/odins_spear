@@ -13,15 +13,17 @@ If the alias is found, the method returns a string specifying the type of entity
 
 ### Parameters&#x20;
 
-{% code overflow="wrap" %}
-```python
-:param service_provider_id: Service Prodiver where group is hosted. 
-:param group_id: Group where alias is located. :param alias: Alias number to identify e.g. 0
+* service\_provider\_id: Service Prodiver where group is hosted.
+* group\_id: Group where alias is located.
+* alias: Alias number to identify e.g. 0
 
-:return str: Returns type and name/ userId of entity where alias located. 
-:raise AOALiasNotFound: If alias not found AOAliasNotFound error raised
-```
-{% endcode %}
+### Return
+
+* Returns type and name/ userId of entity where alias located.
+
+### Raise
+
+* AOALiasNotFound: If the alias is not found AOAliasNotFound error raised
 
 ### How To Use:
 
