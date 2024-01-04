@@ -2,6 +2,7 @@
 
 * [👋 Welcome!!](README.md)
   * [🧐 Getting Started](welcome/getting-started/README.md)
+    * [🐍 Getting the Essentials (Python + IDE)](welcome/getting-started/getting-the-essentials-python-+-ide.md)
     * [⚠ Setting Environment Variable](welcome/getting-started/setting-environment-variable.md)
     * [⬇ Downloading Library (BETA)](welcome/getting-started/downloading-library-beta.md)
     * [⚙ Create API Object](welcome/getting-started/create-api-object.md)
