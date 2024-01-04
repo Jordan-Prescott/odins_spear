@@ -23,4 +23,5 @@
     * [❓ Requester Object](welcome/library-design/requester-object.md)
     * [🤖 Scripter Object](welcome/library-design/scripter-object.md)
   * [👨💻 Development](welcome/development.md)
+  * [📢 Feedback](welcome/feedback.md)
   * [🤙 Contact](welcome/contact.md)
