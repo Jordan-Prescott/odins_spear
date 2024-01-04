@@ -1,6 +1,7 @@
 # Table of contents
 
-* [👋 Welcome!!](README.md)
+* [📄 README.md](README.md)
+* [👋 Welcome!!](<README (1).md>)
   * [🧐 Getting Started](welcome/getting-started/README.md)
     * [🐍 Getting the Essentials (Python + IDE)](welcome/getting-started/getting-the-essentials-python-+-ide.md)
     * [⚠ Setting Environment Variable](welcome/getting-started/setting-environment-variable.md)
@@ -26,4 +27,3 @@
   * [👨💻 Development](welcome/development.md)
   * [📢 Feedback](welcome/feedback.md)
   * [🤙 Contact](welcome/contact.md)
-* [📄 README.md](readme.md.md)
