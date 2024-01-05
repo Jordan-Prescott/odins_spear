@@ -1,10 +1,10 @@
 import requests
 import os
 
-from odin_api.exceptions import *
-from odin_api.scripter import Scripter
-from odin_api.methods import *
+from odin_api.exceptions import OAApiAuthenticationFail
 from odin_api.requester import Requester
+from odin_api.methods import *
+from odin_api.scripter import Scripter
 
 
 class Api:
@@ -54,5 +54,5 @@ class Api:
         
     def __str__(self) -> str:
         return f"API - url: {self.base_url}, username: {self.username}, " \
-            f"Authenticated: {self.authenticated}"
+            f"Password: {self.password} Authenticated: {self.authenticated}"
     
