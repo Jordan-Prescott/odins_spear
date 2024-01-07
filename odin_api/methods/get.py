@@ -11,6 +11,13 @@ class Get():
         self.requester = requester
         
 #SESSION
+
+    def session(self):
+        
+        endpoint = f"/auth/session"
+        
+        return self.requester.get(endpoint)
+        
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS
 #ADVICE OF CHARGE
@@ -28,6 +35,7 @@ class Get():
         endpoint = f"/groups/auto-attendants?serviceProviderId={service_provider_id}&groupId={group_id}"
         
         return self.requester.get(endpoint)
+    
     
     def auto_attendant(self, service_user_id):
 
@@ -54,6 +62,7 @@ class Get():
         endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
         
         return self.requester.get(endpoint)
+
 
     def group_call_center(self, service_user_id):
 
@@ -274,6 +283,7 @@ class Get():
             endpoint += f"&extended=True"
 
         return self.requester.get(endpoint)
+    
     
     def user_by_id(self, user_id: str):
         """_summary_

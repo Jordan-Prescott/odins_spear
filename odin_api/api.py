@@ -1,15 +1,18 @@
 import requests
 import os
+import threading
 
-from odin_api.exceptions import OAApiAuthenticationFail
 from odin_api.requester import Requester
 from odin_api.methods import *
 from odin_api.scripter import Scripter
+from odin_api.exceptions import (OAApiAuthenticationFail, 
+                                 AOSessionRefreshFail, 
+                                 AOFailedToLocateSession)
 
 
 class Api:
     
-    def __init__(self, base_url, username, password) -> None:
+    def __init__(self, base_url: str, username: str, password: str) -> None:
         """ Connection to Odin API, all interactions with the api are here.
 
         Args:
@@ -24,8 +27,10 @@ class Api:
         
         self.base_url = base_url
         self.username = username
-        self.password = os.getenv(password, default=None)
-        self.authenticated = False
+        self.password = os.getenv(password)
+        
+        self.authorised = False
+        self.token = ""
         
         self.requester = Requester(self.base_url)
         
@@ -35,24 +40,41 @@ class Api:
         self.delete = delete.Delete(self.requester)
         
         self.scripter = Scripter(api=self)
-
+ 
+ 
+    def authenticate(self):
         
-    def authenticate(self) -> None:
-        """ makes a POST request with the U and P to URL and attempts to authenticate.
-        if successful api object is update else it throws an exception.
-        """
         try:
             response = self.post.session(self.username, self.password)
+            self.token = response["token"]
+            self.requester.headers["Authorization"] = f"Bearer {self.token}"
+            self.authorised = True
+            return True
         except requests.exceptions.HTTPError:
             raise OAApiAuthenticationFail()
+    
+    
+    def refresh_authorisation(self):
         
-        self.requester.token = response["token"]
-        self.requester.headers['Authorization'] = f'Bearer {self.requester.token}'
+        try:
+            response = self.put.session()
+            self.token = response["token"]
+            self.requester.headers["Authorization"] = f"Bearer {self.token}"
+            self.authorised = True
+            return True
+        except requests.exceptions.HTTPError:
+            raise AOSessionRefreshFail()
+  
+    
+    def get_auth_details(self):
         
-        self.authenticated = True
+        try:
+            return self.get.session()
+        except requests.exceptions.HTTPError:
+            raise AOFailedToLocateSession()
 
-        
+
     def __str__(self) -> str:
-        return f"API - url: {self.base_url}, username: {self.username}, " \
-            f"Password: {self.password} Authenticated: {self.authenticated}"
+        return f"API - url: {self.base_url}, username: {self.username}, password: {self.password}." \
+            f"Authenticated: {self.authorised}"
     

@@ -6,10 +6,9 @@ class Requester():
 
         self.base_url = base_url
         self.headers = {
-            'Authorization': '',
+            'Authorization': "",
             'Content-Type': 'application/json'
         }
-        self.token = ""
     
     def get(self, endpoint, data=None):
         response = requests.get(
@@ -50,3 +49,4 @@ class Requester():
         
         response.raise_for_status()
         return response.json()
+    

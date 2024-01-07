@@ -1,4 +1,5 @@
-import requests
+import os
+import requests.exceptions
 
 from odin_api.exceptions import *
 
@@ -19,6 +20,17 @@ class Post():
         }
         
         return self.requester.post(endpoint, data=data)
+        
+    def session_switch(self, username: str):
+        
+        endpoint = "/auth/switch-user"
+        
+        data = {
+            "username": username
+        }
+        
+        return self.requester.post(endpoint, data=data)
+        
 
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS

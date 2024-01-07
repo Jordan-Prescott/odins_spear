@@ -1,8 +1,19 @@
+import requests.exceptions
+
+from odin_api.exceptions import *
+
 class Put():
     def __init__(self, requester):
         self.requester = requester
         
 #SESSION
+
+    def session(self):
+        
+        endpoint = "/auth/token"
+        
+        return self.requester.put(endpoint)
+        
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS
 #ADVICE OF CHARGE
