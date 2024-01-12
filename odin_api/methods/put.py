@@ -149,6 +149,21 @@ class Put():
 #SERVICE PACKS
 #SERVICE PROVIDERS
 #SERVICES
+
+def user_services(self, user_id: str, updates: dict):
+    
+    endpoint = "/users/services"
+    
+    data = {
+        "userId": user_id,
+        "userServices": [
+            {
+                "serviceName": "Basic Call Logs",
+                "assigned": true
+            }
+        ]
+    }
+
 #SHARED CALL APPEARANCE
 #SILENT ALERTING
 #SIMULTANEOUS RING PERSONAL
@@ -192,8 +207,8 @@ class Put():
     
     def user_portal_passcode(self, user_id: str, new_passcode: int):
         
-        #TODO: Passcode needs to be checked not lower than 4 and higher than 6
-        #TODO: give option to generate random one
+        if new_passcode < 4 or new_passcode > 6:
+            raise AOInvalidCode
         
         endpoint = "/users/portal-passcode"
         

@@ -1,5 +1,6 @@
 import string 
 import secrets
+import random
 
 from datetime import datetime
 
@@ -23,4 +24,7 @@ def generate_timestamp():
         _type_: _description_
     """
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+def generate_random_code(length=6):
+    return ''.join(str(random.randint(0, 9)) for _ in range(length))
 
