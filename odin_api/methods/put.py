@@ -150,7 +150,7 @@ class Put():
 #SERVICE PROVIDERS
 #SERVICES
 
-def user_services(self, user_id: str, updates: dict):
+def user_services(self, user_id: str, licenses: list, assign: bool =True):
     
     endpoint = "/users/services"
     
@@ -159,7 +159,7 @@ def user_services(self, user_id: str, updates: dict):
         "userServices": [
             {
                 "serviceName": "Basic Call Logs",
-                "assigned": true
+                "assigned": ""
             }
         ]
     }
