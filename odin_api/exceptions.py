@@ -70,3 +70,10 @@ class AOFailedToLocateSession(OAError):
 
     def __str__(self) -> str:
         return f"Session details not found. Check token is valid and not exppired."
+    
+class AOInvalidCode(OAError):
+    """ Raised when code is less than 4 and higher than 6.
+    """
+
+    def __str__(self) -> str:
+        return f"Code needs to be between 4 and 6 digits."
