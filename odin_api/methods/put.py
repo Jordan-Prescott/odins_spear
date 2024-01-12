@@ -1,6 +1,7 @@
 import requests.exceptions
 
 from odin_api.exceptions import *
+from odin_api.utils.formatting import check_and_update_dict
 
 class Put():
     def __init__(self, requester):
@@ -164,35 +165,46 @@ class Put():
 #TWO STAGE DIALING
 #USERS
 
-def users_bulk(self, users: list, updates: dict):
-    
-    endpoint = "/users/bulk"
-    
-    target_users = [{"userId": user} for user in users]
-    
-    data = {
-        "users": target_users,
-        "data": updates 
-    }
-    
-    return requests.put(endpoint, data=data)
+    def users_bulk(self, users: list, updates: dict):
+        
+        endpoint = "/users/bulk"
+        
+        target_users = [{"userId": user} for user in users]
+        
+        data = {
+            "users": target_users,
+            "data": updates 
+        }
+        
+        return self.requester.put(endpoint, data=data)
 
-def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
-    
-    endpoint = "/users"
-    
-    needed_feilds = {
-        "serviceProviderId": service_provider_id,
-        "groupId": group_id,
-        "userId": user_id
-    }
-    
-    
-    
-    
-    
-    
 
+    def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
+        
+        endpoint = "/users"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["userId"] = [user_id]
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def user_portal_passcode(self, user_id: str, new_passcode: int):
+        
+        #TODO: Passcode needs to be checked not lower than 4 and higher than 6
+        #TODO: give option to generate random one
+        
+        endpoint = "/users/portal-passcode"
+        
+        data = {
+            "userId": user_id,
+            "newPasscode": new_passcode
+        }
+        
+        return self.requester.put(endpoint, data=data)
+   
+    
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON
 #VIRTUAL ON-NET ENTERPRISE EXTENSIONS
@@ -226,8 +238,3 @@ def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
 #ODIN TASKS COPY
 #ODIN CONNECTORS
 #LOCALES
-
-def _check_and_update_data(feilds_needed: dict, data: dict):
-    for key, value in feilds_needed:
-        if key not in data:
-            data[key] = [value]
