@@ -1,7 +1,6 @@
 import requests.exceptions
 
 from odin_api.exceptions import *
-from odin_api.utils.formatting import check_and_update_dict
 
 class Put():
     def __init__(self, requester):
@@ -150,19 +149,18 @@ class Put():
 #SERVICE PROVIDERS
 #SERVICES
 
-def user_services(self, user_id: str, licenses: list, assign: bool =True):
+    def user_services(self, user_id: str, services: list, assigned: bool =True):
+        
+        endpoint = "/users/services"
+        
+        data = {
+            "userId": user_id,
+            "userServices": [{'service': service, 'assigned': assigned} for service in services]
+        }
+        
+        return self.requester.put(endpoint, data=data)
     
-    endpoint = "/users/services"
     
-    data = {
-        "userId": user_id,
-        "userServices": [
-            {
-                "serviceName": "Basic Call Logs",
-                "assigned": ""
-            }
-        ]
-    }
 
 #SHARED CALL APPEARANCE
 #SILENT ALERTING
