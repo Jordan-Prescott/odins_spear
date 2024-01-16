@@ -25,6 +25,40 @@ class Put():
 #ATTENDANT CONSOLE
 #AUTHENTICATION
 #AUTO ATTENDANTS
+
+    def auto_attendants(self, service_user_id: list, status: bool =True):
+        
+        endpoint = f"/groups/auto-attendants/status"
+        
+        data = {     
+            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
+                          for service_user_id in service_user_id]
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+        
+    def auto_attendant(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/auto-attendants"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["serviceUserId"] = [service_user_id]
+        
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def auto_attendant_submenu(self, service_user_id: str, submenu_id: str, updates: dict):
+        
+        endpoint = f"/groups/auto-attendants/submenus"
+        
+        updates["serviceUserId"] = service_user_id,
+        updates["submenuId"] = submenu_id
+        
+        self.request.put(endpoint, data=updates)
+        
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT
@@ -100,6 +134,50 @@ class Put():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
+
+    def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/hunt-groups"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["serviceUserId"] = [service_user_id]
+        
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def group_hunt_groups_status(self, service_user_ids: list, status: bool =True):
+    
+        endpoint = f"/groups/hunt-groups/status"
+        
+        data = {     
+            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
+                          for service_user_id in service_user_ids]
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+        
+    def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, service_user_id: str, 
+                                                    agents: list):
+        
+        endpoint = f"/groups/hunt-groups/weighted-call-distribution"
+        
+        max_weights = 100
+        assigned_weight = 0
+        
+        for agent in agents:
+            assigned_weight += agent["weight"]            
+            
+        if not assigned_weight == max_weights:
+            raise AOInvalidWeighting
+        
+        return self.requester.put(endpoint, data=agents)
+        
+        
+        
+        
+
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
 #INTEGRATED IMP
@@ -151,7 +229,7 @@ class Put():
 
     def user_services(self, user_id: str, services: list, assigned: bool =True):
         
-        endpoint = "/users/services"
+        endpoint = f"/users/services"
         
         data = {
             "userId": user_id,
@@ -159,7 +237,6 @@ class Put():
         }
         
         return self.requester.put(endpoint, data=data)
-    
     
 
 #SHARED CALL APPEARANCE
