@@ -1,5 +1,22 @@
 {
-   "Features":[
+   "Group Services": [
+      "Account/Authorization Codes",
+      "Auto Attendant - Basic",
+      "Auto Attendant - Standard",
+      "Call Park",
+      "Call Pickup",
+      "Emergency Zones",
+      "Group Paging",
+      "Hunt Group",
+      "Incoming Calling Plan",
+      "Meet-Me Conferencing",
+      "Music On Hold",
+      "Outgoing Calling Plan",
+      "Trunk Group",
+      "Voice Messaging Group",
+      "VoiceXML"
+   ],
+   "User Services": [
       "Advice Of Charge",
       "Alternate Numbers",
       "Anonymous Call Rejection",
