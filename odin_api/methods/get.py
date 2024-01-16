@@ -209,6 +209,13 @@ class Get():
 #SERVICE PACKS
 #SERVICE PROVIDERS
 #SERVICES
+
+    def user_services(self, user_id: str):
+       
+        endpoint = f"/users/services?userId={user_id}"
+       
+        return self.requester.get(endpoint)
+      
 #SHARED CALL APPEARANCE
 #SILENT ALERTING
 #SIMULTANEOUS RING PERSONAL
