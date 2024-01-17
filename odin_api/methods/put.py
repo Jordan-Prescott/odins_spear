@@ -26,7 +26,7 @@ class Put():
 #AUTHENTICATION
 #AUTO ATTENDANTS
 
-    def auto_attendants(self, service_user_id: list, status: bool =True):
+    def auto_attendants_status(self, service_user_id: list, status: bool =True):
         
         endpoint = f"/groups/auto-attendants/status"
         
@@ -72,6 +72,71 @@ class Put():
 #BUSY LAMP FIELD
 #CALL CAPACITY
 #CALL CENTER
+
+    def group_call_centers_status(self, service_user_id: list, status: bool =True):
+        
+        endpoint = f"/groups/call-centers/status"
+        
+        data = {     
+            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
+                          for service_user_id in service_user_id]
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+        
+    def group_call_center(self, service_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers"
+        
+        updates["serviceUserId"] = [service_user_id]
+
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def group_call_center_agents(self, service_user_id: str, agents: list):
+        
+        endpoint = f"/groups/call-centers/agents"
+        
+        data = {
+            "serviceUserId": service_user_id,
+            "agents": [{"userId": agent} for agent in agents]
+        }
+
+        return self.requester.put(endpoint, data=data)
+        
+    
+    def group_call_center_agents_levels(self, service_user_id: str, agents: list, 
+                                        skill_level: int):
+        
+        endpoint = f"/groups/call-centers/agents"
+        
+        data = {
+            "serviceUserId": service_user_id,
+            "agents": [{"userId": agent, "skillLevel": skill_level} for agent in agents]
+        }
+
+        return self.requester.put(endpoint, data=data) 
+    
+    
+    def group_call_center_bounced_calls(self, service_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/bounced-calls"
+        
+        updates["serviceUserId"]: service_user_id
+        
+        return self.requester.put(endpoint, data=updates) 
+    
+    
+    def group_call_center_dnis_instance(self, service_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/dnis/instances"
+        
+        updates["serviceUserID"] = service_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+
 #CALL CONTROL
 #CALL FORWARDING ALWAYS
 #CALL FORWARDING ALWAYS SECONDARY
@@ -134,17 +199,6 @@ class Put():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
-
-    def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
-        
-        endpoint = f"/groups/hunt-groups"
-        
-        updates["serviceProviderId"] = [service_provider_id]
-        updates["groupId"] = [group_id]
-        updates["serviceUserId"] = [service_user_id]
-        
-        return self.requester.put(endpoint, data=updates)
-    
     
     def group_hunt_groups_status(self, service_user_ids: list, status: bool =True):
     
@@ -157,22 +211,39 @@ class Put():
         
         self.requester.put(endpoint, data=data)
         
+    
+    def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+    
+        endpoint = f"/groups/hunt-groups"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["serviceUserId"] = [service_user_id]
+        
+        return self.requester.put(endpoint, data=updates)
+            
         
     def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, service_user_id: str, 
-                                                    agents: list):
+                                                    agents: dict):
         
         endpoint = f"/groups/hunt-groups/weighted-call-distribution"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "serviceUserId": service_user_id,
+            "agents": agents
+        }
         
         max_weights = 100
         assigned_weight = 0
         
         for agent in agents:
-            assigned_weight += agent["weight"]            
-            
+            assigned_weight += agent["weight"]                
         if not assigned_weight == max_weights:
             raise AOInvalidWeighting
-        
-        return self.requester.put(endpoint, data=agents)
+      
+        return self.requester.put(endpoint, data=data)
         
         
         
