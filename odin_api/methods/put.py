@@ -176,12 +176,22 @@ class Put():
         return self.requester.put(endpoint, data=data) 
     
     
-    # TODO: This needs completing
-    def user_call_center(self, service_user_id: str, supervisor: list):
+    def user_call_center(self, user_id: str, updates: dict):
+        """
+        available in this means joined in the call center object
+    
+            {
+                "serviceUserId":"testing_test@testlab.ev.com",
+                "available":true,
+                "skillLevel":10
+            }
+        """
         
         endpoint = f"/users/call-center"
         
-        pass
+        updates["userId"] = user_id
+           
+        return self.requester.put(endpoint, data=updates)
 
 
     def user_call_center_agents_update(self, user_id: str, call_center_service_ids: list):
