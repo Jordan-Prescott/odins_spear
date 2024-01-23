@@ -26,34 +26,34 @@ class Put():
 #AUTHENTICATION
 #AUTO ATTENDANTS
 
-    def auto_attendants_status(self, service_user_id: list, status: bool =True):
+    def auto_attendants_status(self, auto_attendant_user_ids: list, status: bool =True):
         
         endpoint = f"/groups/auto-attendants/status"
         
         data = {     
-            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
-                          for service_user_id in service_user_id]
+            "instances": [{'serviceUserId': auto_attendant_user_id, 'isActive': status} 
+                          for auto_attendant_user_id in auto_attendant_user_ids]
         }
         
         self.requester.put(endpoint, data=data)
         
         
-    def auto_attendant(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+    def auto_attendant(self, service_provider_id: str, group_id, auto_attendant_user_id: str, updates: dict):
         
         endpoint = f"/groups/auto-attendants"
         
-        updates["serviceProviderId"] = [service_provider_id]
-        updates["groupId"] = [group_id]
-        updates["serviceUserId"] = [service_user_id]
-        
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["serviceUserId"] = auto_attendant_user_id
+    
         return self.requester.put(endpoint, data=updates)
     
     
-    def auto_attendant_submenu(self, service_user_id: str, submenu_id: str, updates: dict):
+    def auto_attendant_submenu(self, auto_attendant_user_id: str, submenu_id: str, updates: dict):
         
         endpoint = f"/groups/auto-attendants/submenus"
         
-        updates["serviceUserId"] = service_user_id,
+        updates["serviceUserId"] = auto_attendant_user_id,
         updates["submenuId"] = submenu_id
         
         self.request.put(endpoint, data=updates)
@@ -73,70 +73,152 @@ class Put():
 #CALL CAPACITY
 #CALL CENTER
 
-    def group_call_centers_status(self, service_user_id: list, status: bool =True):
+    def group_call_centers_status(self, call_center_user_ids: list, status: bool =True):
         
         endpoint = f"/groups/call-centers/status"
         
         data = {     
-            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
-                          for service_user_id in service_user_id]
+            "instances": [{'serviceUserId': call_center_user_id, 'isActive': status} 
+                          for call_center_user_id in call_center_user_ids]
         }
         
         self.requester.put(endpoint, data=data)
         
         
-    def group_call_center(self, service_user_id: str, updates: dict):
+    def group_call_center(self, call_center_user_id: str, updates: dict):
         
         endpoint = f"/groups/call-centers"
         
-        updates["serviceUserId"] = [service_user_id]
+        updates["serviceUserId"] = call_center_user_id
 
         return self.requester.put(endpoint, data=updates)
     
     
-    def group_call_center_agents(self, service_user_id: str, agents: list):
+    def group_call_center_agents(self, call_center_user_id: str, agent_user_ids: list):
         
         endpoint = f"/groups/call-centers/agents"
         
         data = {
-            "serviceUserId": service_user_id,
-            "agents": [{"userId": agent} for agent in agents]
+            "serviceUserId": call_center_user_id,
+            "agents": [{"userId": agent_id} for agent_id in agent_user_ids]
         }
 
         return self.requester.put(endpoint, data=data)
         
     
-    def group_call_center_agents_levels(self, service_user_id: str, agents: list, 
+    def group_call_center_agents_levels(self, call_center_user_id: str, agent_user_ids: list, 
                                         skill_level: int):
         
         endpoint = f"/groups/call-centers/agents"
         
         data = {
-            "serviceUserId": service_user_id,
-            "agents": [{"userId": agent, "skillLevel": skill_level} for agent in agents]
+            "serviceUserId": call_center_user_id,
+            "agents": [{"userId": agent_id, "skillLevel": skill_level} for agent_id in agent_user_ids]
         }
 
         return self.requester.put(endpoint, data=data) 
     
     
-    def group_call_center_bounced_calls(self, service_user_id: str, updates: dict):
+    def group_call_center_bounced_calls(self, call_center_user_id: str, updates: dict):
         
         endpoint = f"/groups/call-centers/bounced-calls"
         
-        updates["serviceUserId"]: service_user_id
+        updates["serviceUserId"]: call_center_user_id
         
         return self.requester.put(endpoint, data=updates) 
     
     
-    def group_call_center_dnis_instance(self, service_user_id: str, updates: dict):
+    def group_call_center_dnis_instance(self, call_center_user_id: str, updates: dict):
         
         endpoint = f"/groups/call-centers/dnis/instances"
         
-        updates["serviceUserID"] = service_user_id
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+    
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/forced-forwarding"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+
+
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/stranded-calls"
+        
+        updates["serviceUserID"] = call_center_user_id
 
         return self.requester.put(endpoint, data=updates) 
     
 
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/stranded-calls-unavailable"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+    
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, supervisor_ids: list):
+        
+        endpoint = f"/groups/call-centers/supervisors"
+        
+        data = {
+            "serviceUserId": call_center_user_id,
+            "supervisors": [{"userId": supervisor_id} for supervisor_id in supervisor_ids]
+        }
+
+        return self.requester.put(endpoint, data=data) 
+    
+    
+    # TODO: This needs completing
+    def user_call_center(self, service_user_id: str, supervisor: list):
+        
+        endpoint = f"/users/call-center"
+        
+        pass
+
+
+    def user_call_center_agents_update(self, user_id: str, call_center_service_ids: list):
+        
+        endpoint = f"/user/call-centers/agents"
+        
+        data = {
+            "agentUserId": user_id,
+            "callCenters": [{"userId": call_center_id} for call_center_id in call_center_service_ids]
+        }
+
+        return self.requester.put(endpoint, data=data)   
+
+
+    def user_call_center_agent_sign_out(self, user_id: str):
+        
+        endpoint = f"/user/call-centers/agents/sign-out"
+        
+        data = {
+            "agentUserId": user_id,
+        }
+
+        return self.requester.put(endpoint, data=data)  
+    
+    
+    def user_call_center_supervisor_agents(self, call_center_service_id: str, supervisor_user_id: str,
+                                           user_ids: list):
+        
+        endpoint = f"/user/call-centers/agents/sign-out"
+        
+        data = {
+            "serviceUserId": call_center_service_id,
+            "supervisorUserId": supervisor_user_id,
+            "users": [{"userId": user_id} for user_id in user_ids]
+        }
+
+        return self.requester.put(endpoint, data=data)      
 #CALL CONTROL
 #CALL FORWARDING ALWAYS
 #CALL FORWARDING ALWAYS SECONDARY
