@@ -1,10 +1,10 @@
 import requests
 import os
-import threading
 
 from odin_api.requester import Requester
 from odin_api.methods import *
 from odin_api.scripter import Scripter
+from odin_api.reporter import Reporter
 from odin_api.exceptions import (OAApiAuthenticationFail, 
                                  AOSessionRefreshFail, 
                                  AOFailedToLocateSession)
@@ -40,15 +40,14 @@ class Api:
         self.delete = delete.Delete(self.requester)
         
         self.scripter = Scripter(api=self)
+        self.reporter = Reporter(api=self)
  
  
     def authenticate(self):
         
         try:
             response = self.post.session(self.username, self.password)
-            self.token = response["token"]
-            self.requester.headers["Authorization"] = f"Bearer {self.token}"
-            self.authorised = True
+            self._update_requester(response)
             return True
         except requests.exceptions.HTTPError:
             raise OAApiAuthenticationFail()
@@ -58,9 +57,7 @@ class Api:
         
         try:
             response = self.put.session()
-            self.token = response["token"]
-            self.requester.headers["Authorization"] = f"Bearer {self.token}"
-            self.authorised = True
+            self._update_requester(response)
             return True
         except requests.exceptions.HTTPError:
             raise AOSessionRefreshFail()
@@ -72,6 +69,12 @@ class Api:
             return self.get.session()
         except requests.exceptions.HTTPError:
             raise AOFailedToLocateSession()
+
+
+    def _update_requester(self, session_response):
+        self.token = session_response["token"]
+        self.requester.headers["Authorization"] = f"Bearer {self.token}"
+        self.authorised = True
 
 
     def __str__(self) -> str:
