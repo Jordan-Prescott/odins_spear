@@ -1,5 +1,6 @@
 
-class Reporter():
+class Reporter:
     ''' generates human friendly reports
     '''
-    pass
+    def __init__(self, api) -> None:
+        self.api = api
