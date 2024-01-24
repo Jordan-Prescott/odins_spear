@@ -25,6 +25,40 @@ class Put():
 #ATTENDANT CONSOLE
 #AUTHENTICATION
 #AUTO ATTENDANTS
+
+    def auto_attendants_status(self, auto_attendant_user_ids: list, status: bool =True):
+        
+        endpoint = f"/groups/auto-attendants/status"
+        
+        data = {     
+            "instances": [{'serviceUserId': auto_attendant_user_id, 'isActive': status} 
+                          for auto_attendant_user_id in auto_attendant_user_ids]
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+        
+    def auto_attendant(self, service_provider_id: str, group_id, auto_attendant_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/auto-attendants"
+        
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["serviceUserId"] = auto_attendant_user_id
+    
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def auto_attendant_submenu(self, auto_attendant_user_id: str, submenu_id: str, updates: dict):
+        
+        endpoint = f"/groups/auto-attendants/submenus"
+        
+        updates["serviceUserId"] = auto_attendant_user_id,
+        updates["submenuId"] = submenu_id
+        
+        self.request.put(endpoint, data=updates)
+        
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT
@@ -38,6 +72,163 @@ class Put():
 #BUSY LAMP FIELD
 #CALL CAPACITY
 #CALL CENTER
+
+    def group_call_centers_status(self, call_center_user_ids: list, status: bool =True):
+        
+        endpoint = f"/groups/call-centers/status"
+        
+        data = {     
+            "instances": [{'serviceUserId': call_center_user_id, 'isActive': status} 
+                          for call_center_user_id in call_center_user_ids]
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+        
+    def group_call_center(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers"
+        
+        updates["serviceUserId"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def group_call_center_agents(self, call_center_user_id: str, agent_user_ids: list):
+        
+        endpoint = f"/groups/call-centers/agents"
+        
+        data = {
+            "serviceUserId": call_center_user_id,
+            "agents": [{"userId": agent_id} for agent_id in agent_user_ids]
+        }
+
+        return self.requester.put(endpoint, data=data)
+        
+    
+    def group_call_center_agents_levels(self, call_center_user_id: str, agent_user_ids: list, 
+                                        skill_level: int):
+        
+        endpoint = f"/groups/call-centers/agents"
+        
+        data = {
+            "serviceUserId": call_center_user_id,
+            "agents": [{"userId": agent_id, "skillLevel": skill_level} for agent_id in agent_user_ids]
+        }
+
+        return self.requester.put(endpoint, data=data) 
+    
+    
+    def group_call_center_bounced_calls(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/bounced-calls"
+        
+        updates["serviceUserId"]: call_center_user_id
+        
+        return self.requester.put(endpoint, data=updates) 
+    
+    
+    def group_call_center_dnis_instance(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/dnis/instances"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+    
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/forced-forwarding"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+
+
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/stranded-calls"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        
+        endpoint = f"/groups/call-centers/stranded-calls-unavailable"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+    
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, supervisor_ids: list):
+        
+        endpoint = f"/groups/call-centers/supervisors"
+        
+        data = {
+            "serviceUserId": call_center_user_id,
+            "supervisors": [{"userId": supervisor_id} for supervisor_id in supervisor_ids]
+        }
+
+        return self.requester.put(endpoint, data=data) 
+    
+    
+    def user_call_center(self, user_id: str, updates: dict):
+        """
+        available in this means joined in the call center object
+    
+            {
+                "serviceUserId":"testing_test@testlab.ev.com",
+                "available":true,
+                "skillLevel":10
+            }
+        """
+        
+        endpoint = f"/users/call-center"
+        
+        updates["userId"] = user_id
+           
+        return self.requester.put(endpoint, data=updates)
+
+
+    def user_call_center_agents_update(self, user_id: str, call_center_service_ids: list):
+        
+        endpoint = f"/user/call-centers/agents"
+        
+        data = {
+            "agentUserId": user_id,
+            "callCenters": [{"userId": call_center_id} for call_center_id in call_center_service_ids]
+        }
+
+        return self.requester.put(endpoint, data=data)   
+
+
+    def user_call_center_agent_sign_out(self, user_id: str):
+        
+        endpoint = f"/user/call-centers/agents/sign-out"
+        
+        data = {
+            "agentUserId": user_id,
+        }
+
+        return self.requester.put(endpoint, data=data)  
+    
+    
+    def user_call_center_supervisor_agents(self, call_center_service_id: str, supervisor_user_id: str,
+                                           user_ids: list):
+        
+        endpoint = f"/user/call-centers/agents/sign-out"
+        
+        data = {
+            "serviceUserId": call_center_service_id,
+            "supervisorUserId": supervisor_user_id,
+            "users": [{"userId": user_id} for user_id in user_ids]
+        }
+
+        return self.requester.put(endpoint, data=data)      
 #CALL CONTROL
 #CALL FORWARDING ALWAYS
 #CALL FORWARDING ALWAYS SECONDARY
@@ -100,6 +291,56 @@ class Put():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
+    
+    def group_hunt_groups_status(self, service_user_ids: list, status: bool =True):
+    
+        endpoint = f"/groups/hunt-groups/status"
+        
+        data = {     
+            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
+                          for service_user_id in service_user_ids]
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+    
+    def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+    
+        endpoint = f"/groups/hunt-groups"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["serviceUserId"] = [service_user_id]
+        
+        return self.requester.put(endpoint, data=updates)
+            
+        
+    def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, service_user_id: str, 
+                                                    agents: dict):
+        
+        endpoint = f"/groups/hunt-groups/weighted-call-distribution"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "serviceUserId": service_user_id,
+            "agents": agents
+        }
+        
+        max_weights = 100
+        assigned_weight = 0
+        
+        for agent in agents:
+            assigned_weight += agent["weight"]                
+        if not assigned_weight == max_weights:
+            raise AOInvalidWeighting
+      
+        return self.requester.put(endpoint, data=data)
+        
+        
+        
+        
+
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
 #INTEGRATED IMP
@@ -148,6 +389,19 @@ class Put():
 #SERVICE PACKS
 #SERVICE PROVIDERS
 #SERVICES
+
+    def user_services(self, user_id: str, services: list, assigned: bool =True):
+        
+        endpoint = f"/users/services"
+        
+        data = {
+            "userId": user_id,
+            "userServices": [{'service': service, 'assigned': assigned} for service in services]
+        }
+        
+        return self.requester.put(endpoint, data=data)
+    
+
 #SHARED CALL APPEARANCE
 #SILENT ALERTING
 #SIMULTANEOUS RING PERSONAL
@@ -163,6 +417,47 @@ class Put():
 #TRUNK GROUPS
 #TWO STAGE DIALING
 #USERS
+
+    def users_bulk(self, users: list, updates: dict):
+        
+        endpoint = "/users/bulk"
+        
+        target_users = [{"userId": user} for user in users]
+        
+        data = {
+            "users": target_users,
+            "data": updates 
+        }
+        
+        return self.requester.put(endpoint, data=data)
+
+
+    def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
+        
+        endpoint = "/users"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["userId"] = [user_id]
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def user_portal_passcode(self, user_id: str, new_passcode: int):
+        
+        if new_passcode < 4 or new_passcode > 6:
+            raise AOInvalidCode
+        
+        endpoint = "/users/portal-passcode"
+        
+        data = {
+            "userId": user_id,
+            "newPasscode": new_passcode
+        }
+        
+        return self.requester.put(endpoint, data=data)
+   
+    
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON
 #VIRTUAL ON-NET ENTERPRISE EXTENSIONS
