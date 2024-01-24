@@ -1,7 +1,7 @@
 import os
 import requests.exceptions
 
-from odin_api.exceptions import *
+from odins_spear.exceptions import *
 
 class Post():
     

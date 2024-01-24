@@ -1,4 +1,4 @@
-from odin_api.utils import format_filter
+from odins_spear.utils import format_filter
 
 class Get():
     
