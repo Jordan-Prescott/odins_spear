@@ -1,10 +1,9 @@
 import re
 import time
-
 from tqdm import tqdm
 
-from odin_api.exceptions import AOAliasNotFound
-import odin_api.logger as logger
+from odins_spear.exceptions import AOAliasNotFound
+import odins_spear.logger as logger
 
 def locate_alias(alias, aliases: list):
     for a in aliases:
@@ -34,10 +33,10 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     :return str: Returns type and name/ userId of entity where alias located. 
     :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
     """   
-    
-    retry_queue = []
-    max_retries = 2  
-    object_with_alias = []
+
+    RETRY_QUEUE = []
+    MAX_RETRIES = 2  
+    OBJECT_WITH_ALIAS = []
     
     auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
     hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
@@ -56,7 +55,6 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         
     for broadwork_entity in tqdm(broadwork_entities_user_ids, desc="Fetching AA, HG, and CC details"):
         # add some buffer time for odins api 
-        time.sleep(0.3)
         
         formatted = {}
         formatted["type"] = broadwork_entity[0] 
@@ -74,19 +72,19 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
             formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
             formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
             
-            object_with_alias.append(formatted)
+            OBJECT_WITH_ALIAS.append(formatted)
             
         except Exception:
             # add a retry count and add this entity to retry queue
             broadwork_entity.append(0)
-            retry_queue.append(broadwork_entity)
+            RETRY_QUEUE.append(broadwork_entity)
              
 
     # objects failed in first instance
-    if retry_queue:
+    if RETRY_QUEUE:
         logger.log_info("Retrying failed instances.")
-    while retry_queue:
-        entity_type, service_user_id, retry_count = retry_queue.pop(0)  # Get the first item from the queue
+    while RETRY_QUEUE:
+        entity_type, service_user_id, retry_count = RETRY_QUEUE.pop(0)  # Get the first item from the queue
         
         formatted = {}
         formatted["type"] = entity_type
@@ -103,29 +101,26 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
             formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
             formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
             
-            object_with_alias.append(formatted)
+            OBJECT_WITH_ALIAS.append(formatted)
             
         except Exception:
-            if retry_count < max_retries:
-                retry_queue.append((entity_type, service_user_id, retry_count + 1))  # Increment retry count and re-add to the queue
+            if retry_count < MAX_RETRIES:
+                RETRY_QUEUE.append((entity_type, service_user_id, retry_count + 1))  # Increment retry count and re-add to the queue
             else:
-                logger.log_error(f"Failed to process {entity_type} - {service_user_id} after {max_retries} retries. Skipping.")
+                logger.log_error(f"Failed to process {entity_type} - {service_user_id} after {MAX_RETRIES} retries. Skipping.")
 
-    for broadwork_entity in tqdm(object_with_alias, desc=f"Searching AA, HG, and CC for alias {alias}"):
-        time.sleep(0.1)
+    for broadwork_entity in tqdm(OBJECT_WITH_ALIAS, desc=f"Searching AA, HG, and CC for alias {alias}"):
+
         if locate_alias(alias, broadwork_entity['aliases']):
             return f"""
-        Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}
-        """
+        Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"""
         
     users = api.get.users(service_provider_id, group_id, extended=True)
     logger.log_info("Fetched users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
-        time.sleep(0.1)
-        if locate_alias(alias, user['aliases']):
-            return f"""
-        Alias ({alias}) found: User - {user['userId']}
-        """
 
-    raise AOAliasNotFound
+        if locate_alias(alias, user['aliases']):
+            return f"\n\n\tAlias ({alias}) found: User - {user['userId']}"
+    
+    return f"\n\n\tAlias ({alias}) not found."
