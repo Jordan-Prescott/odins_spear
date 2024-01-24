@@ -1,6 +1,6 @@
 import requests.exceptions
 
-from odin_api.exceptions import *
+from odins_spear.exceptions import *
 
 class Put():
     def __init__(self, requester):

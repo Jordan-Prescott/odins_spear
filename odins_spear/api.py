@@ -1,11 +1,11 @@
 import requests
 import os
 
-from odin_api.requester import Requester
-from odin_api.methods import *
-from odin_api.scripter import Scripter
-from odin_api.reporter import Reporter
-from odin_api.exceptions import (OAApiAuthenticationFail, 
+from odins_spear.requester import Requester
+from odins_spear.methods import *
+from odins_spear.scripter import Scripter
+from odins_spear.reporter import Reporter
+from odins_spear.exceptions import (OAApiAuthenticationFail, 
                                  AOSessionRefreshFail, 
                                  AOFailedToLocateSession)
 
