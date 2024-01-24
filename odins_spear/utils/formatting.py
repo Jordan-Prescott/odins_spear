@@ -1,4 +1,4 @@
-from odin_api.exceptions import *
+from odins_spear.exceptions import *
 
 def format_filter(filter, type, value):
     if type.lower() == "equal to":

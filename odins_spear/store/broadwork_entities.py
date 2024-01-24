@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field, InitVar
 from typing import List, Type
 
-from odin_api.utils import generators as gen
+from odins_spear.utils import generators as gen
    
 @dataclass(kw_only=True)
 class ServiceProvider:

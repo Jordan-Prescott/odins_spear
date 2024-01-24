@@ -1,5 +1,6 @@
 import requests
 import json
+
 class Requester():
 
     def __init__(self, base_url):
