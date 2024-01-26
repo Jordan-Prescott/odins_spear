@@ -84,3 +84,11 @@ class AOInvalidWeighting(OAError):
 
     def __str__(self) -> str:
         return f"Weighted call distribution is not equal to 100. This weight must add up to 100."
+    
+
+class AOInvalidData(OAError):
+    """ Raised when data used in request is invalid or incomplete.
+    """
+
+    def __str__(self) -> str:
+        return f"Data invalid or incomplete, please check data passed to method is correct."
