@@ -36,7 +36,7 @@ class Put():
             which will be applied to list of AAs. Defaults to True.
             
         Returns:
-            None: This function does not return any specific value.
+            None: This method does not return any specific value.
         """
         
         endpoint = f"/groups/auto-attendants/status"
@@ -60,7 +60,7 @@ class Put():
             updates (dict): _description_
 
         Returns:
-            _type_: _description_
+            JSON Data: This method returns json representation of AA updated.  
         """
         
         endpoint = f"/groups/auto-attendants"
@@ -73,13 +73,23 @@ class Put():
     
     
     def auto_attendant_submenu(self, auto_attendant_user_id: str, submenu_id: str, updates: dict):
+        """This method allows you to update the configuration of the submenus for your AAs
+        Args:
+            auto_attendant_user_id (str): Service user ID of your auto attendant.
+            submenu_id (str): Service user ID of your submenu
+            updates (dict): Updates your applying to your submenu.
+            
+        Returns:
+            None: This method does not return any specific value.
+        """
+        
         
         endpoint = f"/groups/auto-attendants/submenus"
         
         updates["serviceUserId"] = auto_attendant_user_id,
         updates["submenuId"] = submenu_id
         
-        self.request.put(endpoint, data=updates)
+        return self.request.put(endpoint, data=updates)
         
 
 #AUTOMATIC CALLBACK
@@ -97,7 +107,17 @@ class Put():
 #CALL CENTER
 
     def group_call_centers_status(self, call_center_user_ids: list, status: bool =True):
-        
+        """Updates a list of call centers (CC) status to either active or inactive.
+
+
+        Args:
+            call_center_user_ids(list): List of service user IDs (CC IDs), the status given will be applied to these.
+            status (bool): Boolean value of True (Activate) or False (Deactivate) which will be applied to list of AAs.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+
         endpoint = f"/groups/call-centers/status"
         
         data = {     
@@ -105,7 +125,7 @@ class Put():
                           for call_center_user_id in call_center_user_ids]
         }
         
-        self.requester.put(endpoint, data=data)
+        return self.requester.put(endpoint, data=data)
         
         
     def group_call_center(self, call_center_user_id: str, updates: dict):
@@ -324,7 +344,7 @@ class Put():
                           for service_user_id in service_user_ids]
         }
         
-        self.requester.put(endpoint, data=data)
+        return self.requester.put(endpoint, data=data)
         
     
     def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
