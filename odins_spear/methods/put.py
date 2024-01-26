@@ -27,6 +27,17 @@ class Put():
 #AUTO ATTENDANTS
 
     def auto_attendants_status(self, auto_attendant_user_ids: list, status: bool =True):
+        """Updates a list of auto attendants (AA) status to either active or inactive.
+
+        Args:
+            auto_attendant_user_ids (list): List of service user IDs (AA IDs), the status given 
+            will be applied to these.
+            status (bool, optional): Boolean value of True (Activate) or False (Deactivate) 
+            which will be applied to list of AAs. Defaults to True.
+            
+        Returns:
+            None: This function does not return any specific value.
+        """
         
         endpoint = f"/groups/auto-attendants/status"
         
@@ -35,10 +46,22 @@ class Put():
                           for auto_attendant_user_id in auto_attendant_user_ids]
         }
         
-        self.requester.put(endpoint, data=data)
+        return self.requester.put(endpoint, data=data)
+
         
         
     def auto_attendant(self, service_provider_id: str, group_id, auto_attendant_user_id: str, updates: dict):
+        """_summary_
+
+        Args:
+            service_provider_id (str): _description_
+            group_id (_type_): _description_
+            auto_attendant_user_id (str): _description_
+            updates (dict): _description_
+
+        Returns:
+            _type_: _description_
+        """
         
         endpoint = f"/groups/auto-attendants"
         
