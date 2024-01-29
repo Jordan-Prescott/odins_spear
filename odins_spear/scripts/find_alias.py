@@ -1,8 +1,6 @@
 import re
-import time
 from tqdm import tqdm
 
-from odins_spear.exceptions import AOAliasNotFound
 import odins_spear.logger as logger
 
 def locate_alias(alias, aliases: list):

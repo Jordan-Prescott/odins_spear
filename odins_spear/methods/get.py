@@ -57,16 +57,22 @@ class Get():
 #CALL CAPACITY
 #CALL CENTER
 
-    def group_call_centers(self, service_provider_id, group_id):
+    def group_call_centers(self, service_provider_id: str, group_id: str):
 
         endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
         
         return self.requester.get(endpoint)
 
 
-    def group_call_center(self, service_user_id):
+    def group_call_center(self, service_user_id: str):
 
         endpoint = f"/groups/call-centers?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    def user_call_center(self, user_id: str):
+
+        endpoint = f"/users/call-center?userId={user_id}"
         
         return self.requester.get(endpoint)
     
@@ -81,6 +87,13 @@ class Get():
 #CALL NOTIFY
 #CALL PARK
 #CALL PICKUP
+
+    def call_pickup_group_user(self, service_provider_id, group_id, user_id):
+
+        endpoint = f"/groups/call-pickup/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
+        
+        return self.requester.get(endpoint)
+
 #CALL POLICIES
 #CALL PROCESSING POLICIES
 #CALL RECORDING
@@ -145,6 +158,14 @@ class Get():
         endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
             
         return self.requester.get(endpoint)
+    
+    
+    def group_hunt_group_user(self, service_provider_id, group_id, user_id):
+    
+        endpoint = f"/groups/hunt-groups/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
+            
+        return self.requester.get(endpoint)
+    
 
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
@@ -183,7 +204,7 @@ class Get():
 #REMOTE OFFICE
 #REPORTS
 
-    def user_report(self, user_id):
+    def user_report(self, user_id: str):
         """ Detailed report of user including services and service packs assigned.
 
         Args:

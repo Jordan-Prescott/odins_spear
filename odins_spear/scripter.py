@@ -43,3 +43,6 @@ class Scripter:
     
     def user_huntgroup_membership(self, user):
         return scripts.user_huntgroup_membership.main(self.api, user)
+
+    def user_association(self, service_provider_id: str, group_id: str, user_id: str):
+        return scripts.user_association.main(self.api, service_provider_id, group_id, user_id)
