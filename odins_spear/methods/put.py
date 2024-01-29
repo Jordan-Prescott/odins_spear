@@ -62,7 +62,7 @@ class Put():
             updates (dict): _description_
 
         Returns:
-            JSON Data: This method returns json representation of AA updated.  
+            Dict: AA updated.  
         """
         
         endpoint = f"/groups/auto-attendants"
@@ -138,7 +138,7 @@ class Put():
             updates (dict): Updates to apply in in a dictionary format.
 
         Returns:
-            JSON Data: JSON data representation of the call center with the new applied updates.
+            Dict: The call center with the new applied updates.
         """
         
         endpoint = f"/groups/call-centers"
@@ -159,7 +159,7 @@ class Put():
             agent_user_ids (list): List of user IDs to be added to call center.
 
         Returns:
-            _type_: _description_
+            Dict: Dictionary 
         """
         
         endpoint = f"/groups/call-centers/agents"
@@ -174,6 +174,16 @@ class Put():
     
     def group_call_center_agents_levels(self, call_center_user_id: str, agent_user_ids: list, 
                                         skill_level: int):
+        """Update a list of agents skill level in a single Call Center (CC).
+
+        Args:
+            call_center_user_id (str): Service user ID of the call center users belong to. 
+            agent_user_ids (list): List of the target users.
+            skill_level (int): Skill level that will be applied to the list of users in the target call center.
+
+        Returns:
+            Dict: CC ID and list of the agent and their updated skill level.
+        """
         
         endpoint = f"/groups/call-centers/agents"
         
@@ -186,6 +196,15 @@ class Put():
     
     
     def group_call_center_bounced_calls(self, call_center_user_id: str, updates: dict):
+        """Update the bounced call settings of a single Call Center (CC)
+
+        Args:
+            call_center_user_id (str): Service user ID of the target CC.   
+            updates (dict): Updates to apply to target CC.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/call-centers/bounced-calls"
         
@@ -195,6 +214,15 @@ class Put():
     
     
     def group_call_center_dnis_instance(self, call_center_user_id: str, updates: dict):
+        """Update a DNIS instance of a single Call Center (CC).
+
+        Args:
+            call_center_user_id (str): Service user ID of the target CC. 
+            updates (dict): Updates to apply to target CC.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/call-centers/dnis/instances"
         
@@ -204,15 +232,51 @@ class Put():
     
     
     def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        """Update the forced forwarding settings of a single Call Center (CC).
+
+        Args:
+            call_center_user_id (str): Service user ID of the target CC. 
+            updates (dict): Updates to apply to target CC.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/call-centers/forced-forwarding"
         
         updates["serviceUserID"] = call_center_user_id
 
         return self.requester.put(endpoint, data=updates) 
+    
 
+    def group_call_center_overflow(self, call_center_user_id: str, updates: dict):
+        """Update the overflow settings of a single Call Center (CC).
 
-    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+        Args:
+            call_center_user_id (str): Service user ID of the target CC. 
+            updates (dict): Updates to apply to target CC.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+        
+        endpoint = f"/groups/call-centers/overflow"
+        
+        updates["serviceUserID"] = call_center_user_id
+
+        return self.requester.put(endpoint, data=updates) 
+    
+
+    def group_call_center_stranded_calls(self, call_center_user_id: str, updates: dict):
+        """Update the stranded calls settings of a single Call Center (CC).
+
+        Args:
+            call_center_user_id (str): Service user ID of the target CC. 
+            updates (dict): Updates to apply to target CC.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/call-centers/stranded-calls"
         
@@ -221,7 +285,16 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
 
-    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+    def group_call_center_stranded_calls_unavailable(self, call_center_user_id: str, updates: dict):
+        """Update the stranded calls unavailable settings of a single Call Center (CC).
+
+        Args:
+            call_center_user_id (str): Service user ID of the target CC. 
+            updates (dict): Updates to apply to target CC.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/call-centers/stranded-calls-unavailable"
         
@@ -230,12 +303,23 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
     
-    def group_call_center_forced_forwarding(self, call_center_user_id: str, supervisor_ids: list):
+    def user_call_center_supervised_agents(self, call_center_user_id: str, supervisor_user_id: str, supervisor_ids: list):
+        """Update the list of agents a supervisor has in a single Call Center (CC).
+
+        Args:
+            call_center_user_id (str): Service user ID of the target CC. 
+            supervisor_user_id (str): User ID of the supervisor.
+            supervisor_ids (list): List of user IDs of agents to apply to supervisor.
+
+        Returns:
+            Dict: Superivor ID and list of agents they supervise.
+        """
         
         endpoint = f"/groups/call-centers/supervisors"
         
         data = {
             "serviceUserId": call_center_user_id,
+            "supervisorUserId": supervisor_user_id,
             "supervisors": [{"userId": supervisor_id} for supervisor_id in supervisor_ids]
         }
 
@@ -243,14 +327,14 @@ class Put():
     
     
     def user_call_center(self, user_id: str, updates: dict):
-        """
-        available in this means joined in the call center object
-    
-            {
-                "serviceUserId":"testing_test@testlab.ev.com",
-                "available":true,
-                "skillLevel":10
-            }
+        """Update an agents status in a Call Center (CC).
+
+        Args:
+            user_id (str): User ID of the target user.
+            updates (dict): Updates to be applied to the user.
+
+        Returns:
+            Dict: Agents ACD status and status in each CC they are assigned to.
         """
         
         endpoint = f"/users/call-center"
@@ -261,6 +345,15 @@ class Put():
 
 
     def user_call_center_agents_update(self, user_id: str, call_center_service_ids: list):
+        """Update the Call Centers (CC) a user is assigned to. 
+
+        Args:
+            user_id (str): User ID of the target user.
+            call_center_service_ids (list): List of CC service user IDs to update the user with.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/user/call-centers/agents"
         
@@ -273,6 +366,14 @@ class Put():
 
 
     def user_call_center_agent_sign_out(self, user_id: str):
+        """Sign the user out of their assigned Call Centers (CC).
+
+        Args:
+            user_id (str): User ID of the target user.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/user/call-centers/agents/sign-out"
         
@@ -281,24 +382,11 @@ class Put():
         }
 
         return self.requester.put(endpoint, data=data)  
-    
-    
-    def user_call_center_supervisor_agents(self, call_center_service_id: str, supervisor_user_id: str,
-                                           user_ids: list):
-        
-        endpoint = f"/user/call-centers/agents/sign-out"
-        
-        data = {
-            "serviceUserId": call_center_service_id,
-            "supervisorUserId": supervisor_user_id,
-            "users": [{"userId": user_id} for user_id in user_ids]
-        }
-
-        return self.requester.put(endpoint, data=data)      
+          
 #CALL CONTROL
 #CALL FORWARDING ALWAYS
 #CALL FORWARDING ALWAYS SECONDARY
-#CALL FORWARDING BUSY
+#CALL FORWARDING BUSY 
 #CALL FORWARDING NO ANSWER
 #CALL FORWARDING NOT REACHABLE
 #CALL FORWARDING SELECTIVE
@@ -359,6 +447,15 @@ class Put():
 #HUNT GROUPS
     
     def group_hunt_groups_status(self, service_user_ids: list, status: bool =True):
+        """Updates a list of Hunt Groups (HG) status to either active or inactive.
+
+        Args:
+            service_user_ids (list): List of service user IDs of target HGs.
+            status (bool, optional): Status to apply to target HGs. Defaults to True.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
     
         endpoint = f"/groups/hunt-groups/status"
         
@@ -371,6 +468,17 @@ class Put():
         
     
     def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+        """Update a Hunt Groups (HG) settings.
+
+        Args:
+            service_provider_id (str): Service provider ID of where the group that hosts the HG is located.
+            group_id (_type_): Group ID of where the HG is located.
+            service_user_id (str): Target service user ID of the HG.
+            updates (dict): Updates to be applied to HG.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
     
         endpoint = f"/groups/hunt-groups"
         
@@ -383,6 +491,20 @@ class Put():
         
     def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, service_user_id: str, 
                                                     agents: dict):
+        """Update the Weighted Call Distribution (WCD) between users in a Hunt Group (HG).
+
+        Args:
+            service_provider_id (str): Service provider ID where the group is located. 
+            group_id (_type_): Group ID where the HG is located.
+            service_user_id (str): Service user ID of the target HG.
+            agents (dict): Updates of WCD to be applied to HG.
+
+        Raises:
+            AOInvalidWeighting: The WCD must equal 100 if it does not this error will be returned.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/hunt-groups/weighted-call-distribution"
         
@@ -457,6 +579,16 @@ class Put():
 #SERVICES
 
     def user_services(self, user_id: str, services: list, assigned: bool =True):
+        """Update the services assigend to a user. NOT service/ feature packs.
+
+        Args:
+            user_id (str): User ID of the target user.
+            services (list): List of services to be applied to user.
+            assigned (bool, optional): Assign (True) or unassign(False). Defaults to True.
+
+        Returns:
+            Dict: User services assigned to the user. 
+        """
         
         endpoint = f"/users/services"
         
