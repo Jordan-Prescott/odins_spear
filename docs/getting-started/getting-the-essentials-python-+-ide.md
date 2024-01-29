@@ -1,6 +1,6 @@
 # 🐍 Getting the Essentials (Python + IDE)
 
-To _run_ Python code you first need to install Python on your machine, below is the link to the Python website where you can download this.&#x20;
+To _run_ Python code you first need to install Python on your machine, below is the link to the Python website where you can download this. I recommend if you are on Windows, install this through the Windows store and get the latest version.
 
 {% embed url="https://www.python.org/downloads/" %}
 

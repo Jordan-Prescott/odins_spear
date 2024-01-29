@@ -1,4 +1,4 @@
-# 🔎 Find Alias (Script)
+# 🔎 Find Alias
 
 Locates alias if assigned to Broadworks entity.
 
@@ -34,8 +34,6 @@ from odin_api import api
 magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 magic.authenticate()
 
-magic.scripter.{script}
-
 # find alias method
 print(magic.scripter.find_alias('Service Provider ID', 'Group ID', alias=11))
 ```
@@ -50,7 +48,7 @@ Searching AA, HG, and CC for alias 11: 100%|████████████
 2024-01-03 13:05:33,003 - INFO - Fetched users.
 Searching Users for alias: 11:  38%|███████████████████████████████████████████████▎                            
 
-        Alias (11) found: User - FourteenIPUK2015@voip.14ip.net
+        Alias (11) found: User - userid@domain.com
         
 ```
 {% endcode %}
