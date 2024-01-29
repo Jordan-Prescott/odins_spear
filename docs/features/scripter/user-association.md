@@ -10,9 +10,9 @@ This script uses the below methods to achieve this:
 
 ```python
 api.get.call_pickup_group_user()
-hunt_groups = api.get.group_hunt_group_user
-call_centers = api.get.user_call_center
-user = api.get.user_report(user_id)
+api.get.group_hunt_group_user()
+api.get.user_call_center()
+api.get.user_report()
 ```
 
 ### Parameters&#x20;
