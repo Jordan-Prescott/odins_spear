@@ -25,9 +25,9 @@ class Scripter:
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
         """ Locates alias if assigned to broadworks entity. 
 
-        :param service_provider_id: Service Prodiver where group is hosted.
-        :param group_id: Group where alias is located.
-        :param alias: Alias number to identify e.g. 0
+        :param service_provider_id (str): Service Prodiver where group is hosted.
+        :param group_id (str): Group where alias is located.
+        :param alias (int): Alias number to identify e.g. 0
 
         :return str: Returns type and name/ userId of entity where alias located. 
         :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
@@ -45,4 +45,13 @@ class Scripter:
         return scripts.user_huntgroup_membership.main(self.api, user)
 
     def user_association(self, service_provider_id: str, group_id: str, user_id: str):
+        """ identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
+        and Pick Up Groups.
+        
+        :pararm service_provider_id (str): Service Provider where the group is hosted.
+        :pararm group_id (str): Group where the User is located.
+        :pararm user_id (str): Target user ID.
+            
+        :returns (str): Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
+        """
         return scripts.user_association.main(self.api, service_provider_id, group_id, user_id)

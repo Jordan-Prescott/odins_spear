@@ -3,14 +3,17 @@ from tqdm import tqdm
 import odins_spear.logger as logger
 
 def main(api, service_provider_id: str, group_id: str, user_id: str):
-    """ Identifies all huntgroups a user is associated to and returns a list.
-    if no huntgroup associacted None is returned.
+    """ identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
+    and Pick Up Groups.
     
-    :param x:
-    :param y:
-    :param z:
-
-    :return r:
+    Args:
+        service_provider_id (str): Service Provider where the group is hosted.
+        group_id (str): Group where the User is located.
+        user_id (str): Target user ID.
+        
+        
+    Returns:
+        str: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
     """
     
     USER_DATA = {

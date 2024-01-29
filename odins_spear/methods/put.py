@@ -51,7 +51,9 @@ class Put():
         
         
     def auto_attendant(self, service_provider_id: str, group_id, auto_attendant_user_id: str, updates: dict):
-        """_summary_
+        """Updates a specific Auto Attendant.
+        
+        Note: Needs the service instance profile to use this method.
 
         Args:
             service_provider_id (str): _description_
@@ -74,6 +76,7 @@ class Put():
     
     def auto_attendant_submenu(self, auto_attendant_user_id: str, submenu_id: str, updates: dict):
         """This method allows you to update the configuration of the submenus for your AAs
+        
         Args:
             auto_attendant_user_id (str): Service user ID of your auto attendant.
             submenu_id (str): Service user ID of your submenu
@@ -109,7 +112,6 @@ class Put():
     def group_call_centers_status(self, call_center_user_ids: list, status: bool =True):
         """Updates a list of call centers (CC) status to either active or inactive.
 
-
         Args:
             call_center_user_ids(list): List of service user IDs (CC IDs), the status given will be applied to these.
             status (bool): Boolean value of True (Activate) or False (Deactivate) which will be applied to list of AAs.
@@ -129,6 +131,15 @@ class Put():
         
         
     def group_call_center(self, call_center_user_id: str, updates: dict):
+        """Allows you to update a specific call center.
+
+        Args:
+            call_center_user_id (str): Service user id of the target call center. 
+            updates (dict): Updates to apply in in a dictionary format.
+
+        Returns:
+            JSON Data: JSON data representation of the call center with the new applied updates.
+        """
         
         endpoint = f"/groups/call-centers"
         
@@ -138,6 +149,18 @@ class Put():
     
     
     def group_call_center_agents(self, call_center_user_id: str, agent_user_ids: list):
+        """Add or remove agents to a call center. 
+        
+        Note: Leave the agent_user_ids blank to remove all users and to remove some only include
+        the users you would like to include in this call center.
+        
+        Args:
+            call_center_user_id (str): Service user ID of the target call center.
+            agent_user_ids (list): List of user IDs to be added to call center.
+
+        Returns:
+            _type_: _description_
+        """
         
         endpoint = f"/groups/call-centers/agents"
         
