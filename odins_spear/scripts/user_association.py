@@ -49,10 +49,10 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     for cc in call_centers["callCenters"]:
         USER_DATA["call_centers"].append(cc["serviceUserId"])
         
-    print("User Data:")
+    print(f"{user_id} Details:\n")
     for key, value in USER_DATA.items():
         if isinstance(value, list):
             value = ', '.join(map(str, value))
         elif value is None:
             value = "N/A"
-        print(f"\t{key.replace('_', ' ').title()}: {value}")
+        print(f"{key.replace('_', ' ').title()}: {value}")
