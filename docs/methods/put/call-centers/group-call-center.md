@@ -31,7 +31,7 @@ call_centers = [
 ]
 
 my_api.put.group_call_centers_status(
-    call_center_user_ids = call_centers,
+    call_center_user_id = call_centers,
     status= False
 )
 ```
