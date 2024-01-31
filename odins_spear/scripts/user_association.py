@@ -55,12 +55,11 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     except Exception:
         USER_DATA["call_centers"] = None
     
-        
+       
     print(f"\n{user_id} Details:\n")
     for key, value in USER_DATA.items():
         if isinstance(value, list):
             value = ', '.join(map(str, value))
         elif value is None:
             value = "N/A"
-        print(f"{key.replace('_', ' ').title()}: {value}")#
-        
+        print(f"{key.replace('_', ' ').title()}: {value}")
