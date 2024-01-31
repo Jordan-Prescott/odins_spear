@@ -22,6 +22,7 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
         "last_name": None,
         "extension": None,
         "phone_number": None,
+        "aliases": None,
         "services": None,
         "feature_packs": None,
         "hunt_groups": [],
@@ -36,6 +37,7 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     USER_DATA["phone_number"] = user["phoneNumber"]
     USER_DATA["services"] = user["userServices"]
     USER_DATA["feature_packs"] = user["servicePacks"]
+    USER_DATA["aliases"] = user["aliases"]
     
     
     pick_up_group = api.get.call_pickup_group_user(service_provider_id, group_id, user_id)
@@ -45,14 +47,20 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     for hg in hunt_groups:
         USER_DATA["hunt_groups"].append(hg["serviceUserId"])
     
-    call_centers = api.get.user_call_center(user_id)
-    for cc in call_centers["callCenters"]:
-        USER_DATA["call_centers"].append(cc["serviceUserId"])
+    # if the user does not have a license for CC this call errors
+    try:
+        call_centers = api.get.user_call_center(user_id)
+        for cc in call_centers["callCenters"]:
+            USER_DATA["call_centers"].append(cc["serviceUserId"])
+    except Exception:
+        USER_DATA["call_centers"] = None
+    
         
-    print("User Data:")
+    print(f"\n{user_id} Details:\n")
     for key, value in USER_DATA.items():
         if isinstance(value, list):
             value = ', '.join(map(str, value))
         elif value is None:
             value = "N/A"
-        print(f"\t{key.replace('_', ' ').title()}: {value}")
+        print(f"{key.replace('_', ' ').title()}: {value}")#
+        
