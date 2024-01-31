@@ -159,7 +159,7 @@ class Put():
             agent_user_ids (list): List of user IDs to be added to call center.
 
         Returns:
-            Dict: Dictionary 
+            Dict: Dictionary of the new state of the CC.
         """
         
         endpoint = f"/groups/call-centers/agents"
@@ -303,13 +303,13 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
     
-    def user_call_center_supervised_agents(self, call_center_user_id: str, supervisor_user_id: str, supervisor_ids: list):
+    def user_call_center_supervised_agents(self, call_center_user_id: str, supervisor_user_id: str, agent_ids: list):
         """Update the list of agents a supervisor has in a single Call Center (CC).
 
         Args:
             call_center_user_id (str): Service user ID of the target CC. 
             supervisor_user_id (str): User ID of the supervisor.
-            supervisor_ids (list): List of user IDs of agents to apply to supervisor.
+            agent_ids (list): List of user IDs of agents to apply to supervisor.
 
         Returns:
             Dict: Superivor ID and list of agents they supervise.
@@ -320,7 +320,7 @@ class Put():
         data = {
             "serviceUserId": call_center_user_id,
             "supervisorUserId": supervisor_user_id,
-            "supervisors": [{"userId": supervisor_id} for supervisor_id in supervisor_ids]
+            "supervisors": [{"userId": agent_id} for agent_id in agent_ids]
         }
 
         return self.requester.put(endpoint, data=data) 
@@ -446,7 +446,7 @@ class Put():
 #HOTELING HOST
 #HUNT GROUPS
     
-    def group_hunt_groups_status(self, service_user_ids: list, status: bool =True):
+    def group_hunt_groups_status(self, hunt_group_user_ids: list, status: bool =True):
         """Updates a list of Hunt Groups (HG) status to either active or inactive.
 
         Args:
@@ -460,18 +460,18 @@ class Put():
         endpoint = f"/groups/hunt-groups/status"
         
         data = {     
-            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
-                          for service_user_id in service_user_ids]
+            "instances": [{'serviceUserId': hunt_group_user_id, 'isActive': status} 
+                          for hunt_group_user_id in hunt_group_user_ids]
         }
         
         return self.requester.put(endpoint, data=data)
         
     
-    def group_hunt_group(self, service_provider_id: str, group_id, service_user_id: str, updates: dict):
+    def group_hunt_group(self, service_provider_id: str, group_id: str, hunt_group_user_id: str, updates: dict):
         """Update a Hunt Groups (HG) settings.
 
         Args:
-            service_provider_id (str): Service provider ID of where the group that hosts the HG is located.
+            hunt_group_user_id (str): Service provider ID of where the group that hosts the HG is located.
             group_id (_type_): Group ID of where the HG is located.
             service_user_id (str): Target service user ID of the HG.
             updates (dict): Updates to be applied to HG.
@@ -484,20 +484,20 @@ class Put():
         
         updates["serviceProviderId"] = [service_provider_id]
         updates["groupId"] = [group_id]
-        updates["serviceUserId"] = [service_user_id]
+        updates["serviceUserId"] = [hunt_group_user_id]
         
         return self.requester.put(endpoint, data=updates)
             
         
-    def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, service_user_id: str, 
-                                                    agents: dict):
+    def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, hunt_group_user_id: str, 
+                                                    agents: list):
         """Update the Weighted Call Distribution (WCD) between users in a Hunt Group (HG).
 
         Args:
             service_provider_id (str): Service provider ID where the group is located. 
             group_id (_type_): Group ID where the HG is located.
-            service_user_id (str): Service user ID of the target HG.
-            agents (dict): Updates of WCD to be applied to HG.
+            hunt_group_user_id (str): Service user ID of the target HG.
+            agents (list): Updates of WCD to be applied to HG.
 
         Raises:
             AOInvalidWeighting: The WCD must equal 100 if it does not this error will be returned.
@@ -511,7 +511,7 @@ class Put():
         data = {
             "serviceProviderId": service_provider_id,
             "groupId": group_id,
-            "serviceUserId": service_user_id,
+            "serviceUserId": hunt_group_user_id,
             "agents": agents
         }
         
