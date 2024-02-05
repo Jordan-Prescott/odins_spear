@@ -1,5 +1,6 @@
 from . import scripts
 
+
 class Scripter:
     """ This object acts as the gateway to all pre-written scripts in /scripts/.
 
@@ -11,17 +12,18 @@ class Scripter:
 
     :param api: api object in package odin_api, this is used in the scripts to achieve objective.
     """
+
     def __init__(self, api) -> None:
         self.api = api
 
-    #TODO: How will users be passed in
+    # TODO: How will users be passed in
     def bulk_enable_voicemail(self, users):
         return scripts.bulk_enable_voicemail.main(self.api, users)
-    
-    #TODO: How will users be passed in
+
+    # TODO: How will users be passed in
     def bulk_password_reset(self, users):
         return scripts.bulk_password_reset.main(self.api, users)
-    
+
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
         """ Locates alias if assigned to broadworks entity. 
 
@@ -31,27 +33,27 @@ class Scripter:
 
         :return str: Returns type and name/ userId of entity where alias located. 
         :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
-        """   
-        return scripts.find_alias.main(self.api, service_provider_id, group_id, 
+        """
+        return scripts.find_alias.main(self.api, service_provider_id, group_id,
                                        alias)
-    
-    def group_audit(self, group):
-        return scripts.group_audit.main(self.api, group)
-    
+
+    def group_audit(self, service_provider_id, group_id):
+        return scripts.group_audit.main(self.api, service_provider_id, group_id)
+
     def user_activity(self, user):
         return scripts.user_activity.main(self.api, user)
-    
+
     def user_huntgroup_membership(self, user):
         return scripts.user_huntgroup_membership.main(self.api, user)
 
     def user_association(self, service_provider_id: str, group_id: str, user_id: str):
         """ identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
         and Pick Up Groups.
-        
+
         :pararm service_provider_id (str): Service Provider where the group is hosted.
         :pararm group_id (str): Group where the User is located.
         :pararm user_id (str): Target user ID.
-            
+
         :returns (str): Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
         """
         return scripts.user_association.main(self.api, service_provider_id, group_id, user_id)
