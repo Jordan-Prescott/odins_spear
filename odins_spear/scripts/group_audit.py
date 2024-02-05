@@ -1,5 +1,6 @@
 import odins_spear.logger as logger
 import json
+from tqdm import tqdm
 
 
 def main(api, service_provider_id: str, group_id: str):
@@ -23,7 +24,7 @@ def main(api, service_provider_id: str, group_id: str):
     assigned_group_services = []
     assigned_service_pack_services = []
 
-    for us in service_report["userServices"]:
+    for us in tqdm(service_report["userServices"], desc="Analysing User Services..."):
         if us["usage"] > 0:
             del us["authorized"]
             del us["assigned"]
@@ -43,7 +44,7 @@ def main(api, service_provider_id: str, group_id: str):
 
             assigned_user_services.append(us)
 
-    for gs in service_report["groupServices"]:
+    for gs in tqdm(service_report["groupServices"], desc="Analysing Group Services..."):
         if gs["usage"] > 0:
             del gs["authorized"]
             del gs["assigned"]
@@ -55,7 +56,7 @@ def main(api, service_provider_id: str, group_id: str):
             del gs["alias"]
             assigned_group_services.append(gs)
 
-    for sps in service_report["servicePackServices"]:
+    for sps in tqdm(service_report["servicePackServices"], desc="Analysing Service Packs..."):
         if sps["usage"] > 0:
             del sps["authorized"]
             del sps["assigned"]
