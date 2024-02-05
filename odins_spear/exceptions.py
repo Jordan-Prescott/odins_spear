@@ -92,4 +92,10 @@ class AOInvalidData(OAError):
 
     def __str__(self) -> str:
         return f"Data invalid or incomplete, please check data passed to method is correct."
-    
+
+class OSInvalidBroadworkService(OAError):
+    """ Raised when service given by user is not a valid license of Broadworks.
+    """
+
+    def __str__(self) -> str:
+        return f"Service invalid, please check the services you have given are valid Broadwork services."
