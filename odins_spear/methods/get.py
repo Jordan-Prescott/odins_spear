@@ -232,6 +232,15 @@ class Get():
 #SERVICES
 
     def user_services(self, user_id: str):
+        """Fetch all services assigned to a broadwrok entity, this can be 
+        a user, AA, CC, or HG.
+
+        Args:
+            user_id (str): User ID of the target Broadworks entity.
+
+        Returns:
+            Dict: Broadwork entiy and a list of services assigned.
+        """
        
         endpoint = f"/users/services?userId={user_id}"
        
