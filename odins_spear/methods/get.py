@@ -259,6 +259,24 @@ class Get():
 
         return self.requester.get(endpoint)
 
+    def group_services_assigned(self, group_id: str, service_provider_id: str, service_name: str, service_type: str):
+        """
+        Get details of the user/service instances where a particular service is assigned.
+
+        Args:
+            group_id (str): GroupID being targeted
+            service_provider_id (str): Service provider/Enterprise ID where the group is located.
+            service_name (str): Name of the service querying
+            service_type (str): Type of service. Either: serviceName or servicePackName
+
+        Returns:
+            Dict: Users/Service Instances where the service is assigned.
+        """
+
+        endpoint = f"/groups/services/assigned?serviceProviderId={service_provider_id}&groupId={group_id}&serviceType={service_type}&serviceName={service_name}"
+
+        return self.requester.get(endpoint)
+
 # SHARED CALL APPEARANCE
 # SILENT ALERTING
 # SIMULTANEOUS RING PERSONAL

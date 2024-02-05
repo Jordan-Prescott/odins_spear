@@ -35,6 +35,12 @@ def main(api, service_provider_id: str, group_id: str):
             del us["groupServiceAssignable"]
             del us["tags"]
             del us["alias"]
+
+            users = api.get.group_services_assigned(
+                group_id, service_provider_id, us["serviceName"], "serviceName")
+            userIDs = [u["userId"] for u in users["users"]]
+            us["users"] = userIDs
+
             assigned_user_services.append(us)
 
     for gs in service_report["groupServices"]:
@@ -58,6 +64,12 @@ def main(api, service_provider_id: str, group_id: str):
             del sps["serviceName"]
             del sps["quantity"]
             del sps["alias"]
+
+            users = api.get.group_services_assigned(
+                group_id, service_provider_id, sps["servicePackName"], "servicePackName")
+            userIDs = [u["userId"] for u in users["users"]]
+            sps["users"] = userIDs
+
             assigned_service_pack_services.append(sps)
 
     return json.dumps({
