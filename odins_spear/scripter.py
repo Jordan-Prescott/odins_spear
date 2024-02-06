@@ -37,7 +37,16 @@ class Scripter:
         return scripts.find_alias.main(self.api, service_provider_id, group_id,
                                        alias)
 
-    def group_audit(self, service_provider_id, group_id):
+    def group_audit(self, service_provider_id: str, group_id: str):
+        """
+        Produces a report of key information within the group.
+        Reports on DN usage, Service and Service pack usage, Trunking call capacity and group info.
+
+        :param service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
+        :param group_id (str): Group ID to generate the report for.
+
+        :return str: A JSON formatted report of the group.
+        """
         return scripts.group_audit.main(self.api, service_provider_id, group_id)
 
     def user_activity(self, user):
