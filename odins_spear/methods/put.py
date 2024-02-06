@@ -598,10 +598,6 @@ class Put():
         }
         
         if services:
-            from odins_spear.utils import broadwork_services as bs
-            for service in services:
-                if service not in bs["User Services"]:
-                    raise OSInvalidBroadworkService
             data["userServices"] = [{'serviceName': service, 'assigned': assigned} for service in services]
         if service_packs:
             data["servicePackServices"] = [{'serviceName': service_pack, 'assigned': assigned} for service_pack in service_packs]
