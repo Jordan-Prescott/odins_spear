@@ -41,6 +41,7 @@
     * [🤖 Scripter](docs/features/scripter/README.md)
       * [🔎 Find Alias](docs/features/scripter/find-alias-script.md)
       * [🔗 User Association](docs/features/scripter/user-association.md)
+      * [☑ Group Audit](docs/features/scripter/group-audit.md)
     * [📈 Reporter](docs/features/reporter.md)
   * [🖌 Library Design](docs/library-design/README.md)
     * [🔗 Object Relationship](docs/library-design/object-relationship.md)
