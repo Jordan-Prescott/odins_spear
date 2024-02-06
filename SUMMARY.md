@@ -34,6 +34,8 @@
         * [🟢 Group Hunt Groups Status](docs/methods/put/hunt-groups/group-hunt-groups-status.md)
         * [🍏 Group Hunt Group](docs/methods/put/hunt-groups/group-hunt-group.md)
         * [💯 Group Hunt Group Weighted Call Distribution](docs/methods/put/hunt-groups/group-hunt-group-weighted-call-distribution.md)
+      * [🍒 Services](docs/methods/put/services/README.md)
+        * [🧍 User Services](docs/methods/put/services/user-services.md)
     * [🚮 Delete](docs/methods/delete.md)
   * [🙌 Features](docs/features/README.md)
     * [🤖 Scripter](docs/features/scripter/README.md)
