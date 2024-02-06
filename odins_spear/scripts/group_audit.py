@@ -18,7 +18,7 @@ def main(api, service_provider_id: str, group_id: str):
     MAX_RETRIES = 2
 
     # all Services
-    service_report = api.get.group_servivces(group_id, service_provider_id)
+    service_report = api.get.group_services(group_id, service_provider_id)
 
     assigned_user_services = []
     assigned_group_services = []

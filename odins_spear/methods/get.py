@@ -243,7 +243,7 @@ class Get():
 
         return self.requester.get(endpoint)
 
-    def group_servivces(self, group_id: str, service_provider_id: str):
+    def group_services(self, group_id: str, service_provider_id: str):
         """
         Fetch all userServices, groupServices and servicePackServices assigned to a group.
 
