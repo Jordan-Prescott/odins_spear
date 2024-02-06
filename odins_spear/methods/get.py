@@ -125,6 +125,13 @@ class Get():
 # DIRECTED CALL PICKUP WITH BARGE IN
 # DIRECTROUTE
 # DN
+    
+    def group_dns(self, service_provider_id:str, group_id:str):
+
+        endpoint = f"/groups/dns?serviceProviderId={service_provider_id}&groupId={group_id}"
+
+        return self.requester.get(endpoint)
+
 # DO NOT DISTURB
 # DOMAINS
 # EMERGENCY NOTIFICATIONS
@@ -140,6 +147,13 @@ class Get():
 # FLEXIBLE SEATING
 # GROUP PAGING
 # GROUPS
+    
+    def group(self, service_provider_id, group_id):
+
+        endpoint = f"/groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+
+        return self.requester.get(endpoint)
+
 # GROUP NAVIGATION
 # HOTELING GUEST
 # HOTELING HOST
@@ -290,6 +304,13 @@ class Get():
 # THIRD PARTY EMERGENCY CALLING
 # TIME ZONES
 # TRUNK GROUPS
+    
+    def group_trunk_groups_call_capacity(self, service_provider_id, group_id):
+        
+        endpoint = f"/groups/trunk-groups/call-capacity?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+
 # TWO STAGE DIALING
 # USERS
 

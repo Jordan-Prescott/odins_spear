@@ -14,9 +14,6 @@ def main(api, service_provider_id: str, group_id: str):
     :return r:
     """
 
-    RETRY_QUEUE = []
-    MAX_RETRIES = 2
-
     # all Services
     service_report = api.get.group_services(group_id, service_provider_id)
 
@@ -73,8 +70,58 @@ def main(api, service_provider_id: str, group_id: str):
 
             assigned_service_pack_services.append(sps)
 
+    # Group DNs
+    dn_report = api.get.group_dns(service_provider_id, group_id)
+    all_dns = {
+        "assigned": {
+            "activated":[],
+            "deactivated": []
+        },
+        "unassigned": {
+            "activated": [],
+            "deactivated": []
+        }
+    }
+
+    for dn in tqdm(dn_report["dns"], desc="Analysing Group DNs..."):
+        if dn["assigned"] and dn["activated"]:
+            all_dns["assigned"]["activated"] += dn["list"]
+        elif dn["assigned"] and not dn["activated"]:
+            all_dns["assigned"]["deactivated"] += dn["list"]
+        elif not dn["assigned"] and dn["activated"]:
+            all_dns["unassigned"]["activated"] += dn["list"]
+        elif not dn["assigned"] and not dn["activated"]:
+            all_dns["unassigned"]["deactivated"] += dn["list"]
+
+    total_assigned_activated = len(all_dns["assigned"]["activated"])
+    total_assigned_deactivated = len(all_dns["assigned"]["deactivated"])
+    total_unassigned_activated = len(all_dns["unassigned"]["activated"])
+    total_unassigned_deactivated = len(all_dns["unassigned"]["deactivated"])
+    total_dns = total_assigned_activated + total_assigned_deactivated + total_unassigned_activated + total_unassigned_deactivated
+
+    all_dns["total_DNs"] = total_dns
+    all_dns["assigned"]["total_assigned_DNs"] = total_assigned_activated + total_assigned_deactivated
+    all_dns["unassigned"]["total_unassigned_DNs"] = total_unassigned_activated + total_unassigned_deactivated
+
+    # Group Detail
+    group_detail = api.get.group(service_provider_id,group_id)
+
+    #Trunking detail
+    try:
+        trunk_detail = api.get.group_trunk_groups_call_capacity(service_provider_id,group_id)
+        del trunk_detail["serviceProviderId"]
+        del trunk_detail["groupId"]
+    except:
+        trunk_detail = []
+
     return json.dumps({
-        "user_services": assigned_user_services,
-        "group_services": assigned_group_services,
-        "service_pack_services": assigned_service_pack_services
+        "group_detail": group_detail,
+        "licence_breakdown": {
+            "user_services": assigned_user_services,
+            "group_services": assigned_group_services,
+            "service_pack_services": assigned_service_pack_services
+        },
+        "group_DNs": all_dns,
+        "group_trunking": trunk_detail
+
     })
