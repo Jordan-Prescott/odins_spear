@@ -578,12 +578,13 @@ class Put():
 #SERVICE PROVIDERS
 #SERVICES
 
-    def user_services(self, user_id: str, services: list, assigned: bool =True):
+    def user_services(self, user_id: str, services: list =None, service_packs: list =None, assigned: bool =True):
         """Update the services assigend to a user. NOT service/ feature packs.
 
         Args:
             user_id (str): User ID of the target user.
             services (list): List of services to be applied to user.
+            service_packs (list): List of service packs to be applied to user.
             assigned (bool, optional): Assign (True) or unassign(False). Defaults to True.
 
         Returns:
@@ -593,9 +594,13 @@ class Put():
         endpoint = f"/users/services"
         
         data = {
-            "userId": user_id,
-            "userServices": [{'service': service, 'assigned': assigned} for service in services]
+            "userId": user_id
         }
+        
+        if services:
+            data["userServices"] = [{'serviceName': service, 'assigned': assigned} for service in services]
+        if service_packs:
+            data["servicePackServices"] = [{'serviceName': service_pack, 'assigned': assigned} for service_pack in service_packs]
         
         return self.requester.put(endpoint, data=data)
     
