@@ -16,13 +16,16 @@ class Scripter:
     def __init__(self, api) -> None:
         self.api = api
 
+
     # TODO: How will users be passed in
     def bulk_enable_voicemail(self, users):
         return scripts.bulk_enable_voicemail.main(self.api, users)
 
+
     # TODO: How will users be passed in
     def bulk_password_reset(self, users):
         return scripts.bulk_password_reset.main(self.api, users)
+
 
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
         """ Locates alias if assigned to broadworks entity. 
@@ -37,6 +40,7 @@ class Scripter:
         return scripts.find_alias.main(self.api, service_provider_id, group_id,
                                        alias)
 
+
     def group_audit(self, service_provider_id: str, group_id: str):
         """
         Produces a report of key information within the group.
@@ -49,11 +53,28 @@ class Scripter:
         """
         return scripts.group_audit.main(self.api, service_provider_id, group_id)
 
+
+    def service_pack_audit(self, servive_provider_id, group_id):
+        """
+        A stripped down version of group audit focussing only on the service packs assigned within
+        the group. This only shows the service packs assigned and total count of unlike group audit 
+        which details the users this is assigned to.
+
+        :param service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
+        :param group_id (str): Group ID to generate the report for.
+
+        :return str: A JSON formatted report of service packs assigend in the group.
+        """
+        return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
+
+
     def user_activity(self, user):
         return scripts.user_activity.main(self.api, user)
 
+
     def user_association(self, service_provider_id: str, group_id: str, user_id: str):
-        """ identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
+        """ 
+        identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
         and Pick Up Groups.
 
         :pararm service_provider_id (str): Service Provider where the group is hosted.
