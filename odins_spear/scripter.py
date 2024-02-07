@@ -63,7 +63,7 @@ class Scripter:
         :param service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
         :param group_id (str): Group ID to generate the report for.
 
-        :return str: A JSON formatted report of service packs assigend in the group.
+        :return str: A JSON formatted report of service packs assigned in the group.
         """
         return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
 
