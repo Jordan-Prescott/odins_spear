@@ -1,3 +1,7 @@
+---
+description: api.scripter.group_audit()
+---
+
 # ☑ Group Audit
 
 This script will  generate a JSON output containing detail, and summaries, of elements of the group which are typically chargeable to a customer.
