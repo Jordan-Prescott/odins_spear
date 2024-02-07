@@ -242,6 +242,16 @@ class Get():
 # SERVICE PROVIDERS
 # SERVICES
 
+    def user_services_assigned(self, user_id: str):
+        """
+
+        Args:
+            user_id (str): _description_
+        """
+        endpoint = f"/users/services/assigned?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+
     def user_services(self, user_id: str):
         """Fetch all services assigned to a broadwrok entity, this can be 
         a user, AA, CC, or HG.

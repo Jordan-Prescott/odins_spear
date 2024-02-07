@@ -16,6 +16,8 @@ class Scripter:
     def __init__(self, api) -> None:
         self.api = api
 
+    def aa_cc_hg_audit(self, service_provider_id: str, group_id: str):
+        return scripts.aa_cc_hg_audit.main(self.api, service_provider_id, group_id)
 
     # TODO: How will users be passed in
     def bulk_enable_voicemail(self, users):

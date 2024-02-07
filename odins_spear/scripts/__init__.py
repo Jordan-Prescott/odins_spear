@@ -1,4 +1,5 @@
 __all__ = [
+    "aa_cc_hg_audit",
     "bulk_enable_voicemail",
     "bulk_password_reset",
     "find_alias",
@@ -8,6 +9,7 @@ __all__ = [
     "user_association"
 ]
 
+from .aa_cc_hg_audit import main
 from .bulk_enable_voicemail import main
 from .bulk_password_reset import main
 from .find_alias import main
