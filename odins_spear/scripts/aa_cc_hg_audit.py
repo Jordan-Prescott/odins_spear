@@ -20,12 +20,21 @@ def remove_excess_details(aa_cc_hg: dict):
             del aa_cc_hg["policy"]
         
 def main(api, service_provider_id: str, group_id: str):
+    """
+    
+
+    :param service_provider_id: Service Prodiver where group is hosted.
+    :param group_id: Group where alias is located.
+    :param alias: Alias number to identify e.g. 0
+
+    :return str: Returns type and name/ userId of entity where alias located. 
+    """  
 
     print("aa_cc_hg_audit start.")
     return_data = {
-        "Auto Attendants": [],
-        "Call Centres": [],
-        "Hunt Groups": []
+        "auto_attendants": [],
+        "call_centers": [],
+        "hunt_groups": []
     }
     auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
     call_centers = api.get.group_call_centers(service_provider_id, group_id)
@@ -51,13 +60,13 @@ def main(api, service_provider_id: str, group_id: str):
         
         if aa_cc_hg["type_tag"] == "AA":
             del aa_cc_hg["type_tag"]
-            return_data["Auto Attendants"].append(aa_cc_hg)
+            return_data["auto_attendants"].append(aa_cc_hg)
         elif aa_cc_hg["type_tag"] == "CC":
             del aa_cc_hg["type_tag"]
-            return_data["Call Centres"].append(aa_cc_hg)
+            return_data["call_centers"].append(aa_cc_hg)
         elif aa_cc_hg["type_tag"] == "HG":
             del aa_cc_hg["type_tag"]
-            return_data["Hunt Groups"].append(aa_cc_hg)
+            return_data["hunt_groups"].append(aa_cc_hg)
         
     return json.dumps(return_data)
         
