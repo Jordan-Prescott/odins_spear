@@ -45,7 +45,7 @@ def main(api, service_provider_id: str, group_id: str):
         
     aa_cc_hgs = auto_attendants + call_centers + hunt_groups
     
-    for aa_cc_hg in aa_cc_hgs:
+    for aa_cc_hg in tqdm(aa_cc_hgs, desc="Fetching User Services"):
         response = api.get.user_services_assigned(aa_cc_hg["serviceUserId"])
         aa_cc_hg["services"] = response["userServices"]
         
