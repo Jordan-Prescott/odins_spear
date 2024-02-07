@@ -21,13 +21,16 @@ def remove_excess_details(aa_cc_hg: dict):
         
 def main(api, service_provider_id: str, group_id: str):
     """
+    This script returns the services assigned to Auto Attendants, 
+    Call Centres, and Hunt Groups. Only services are applied to these 
+    entities and there are scenarios one would need to focus services 
+    assigned to these entities.
     
 
-    :param service_provider_id: Service Prodiver where group is hosted.
-    :param group_id: Group where alias is located.
-    :param alias: Alias number to identify e.g. 0
+    :param service_provider_id: Service Provider ID or Enterprise ID containing the Group ID.
+    :param group_id: Group ID to generate the report for.
 
-    :return str: Returns type and name/ userId of entity where alias located. 
+    :return JSON: A JSON formatted report of service packs assigned to AA, CC, and HG. 
     """  
 
     print("aa_cc_hg_audit start.")

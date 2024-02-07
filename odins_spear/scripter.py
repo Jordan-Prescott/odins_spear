@@ -17,6 +17,18 @@ class Scripter:
         self.api = api
 
     def aa_cc_hg_audit(self, service_provider_id: str, group_id: str):
+        """
+        This script returns the services assigned to Auto Attendants, 
+        Call Centres, and Hunt Groups. Only services are applied to these 
+        entities and there are scenarios one would need to focus services 
+        assigned to these entities.
+        
+
+        :param service_provider_id: Service Provider ID or Enterprise ID containing the Group ID.
+        :param group_id: Group ID to generate the report for.
+
+        :return JSON: A JSON formatted report of service packs assigned to AA, CC, and HG. 
+        """  
         return scripts.aa_cc_hg_audit.main(self.api, service_provider_id, group_id)
 
     # TODO: How will users be passed in
