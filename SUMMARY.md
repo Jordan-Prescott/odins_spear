@@ -43,6 +43,7 @@
       * [🔗 User Association](docs/features/scripter/user-association.md)
       * [☑ Group Audit](docs/features/scripter/group-audit.md)
       * [✅ Service Pack Audit](docs/features/scripter/service-pack-audit.md)
+      * [✔ AA, CC, HG Audit](docs/features/scripter/aa-cc-hg-audit.md)
     * [📈 Reporter](docs/features/reporter.md)
   * [🖌 Library Design](docs/library-design/README.md)
     * [🔗 Object Relationship](docs/library-design/object-relationship.md)

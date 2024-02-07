@@ -8,9 +8,8 @@ A stripped down version of group audit focussing only on the service packs assig
 
 The script makes use of the following methods:
 
-```python
-api.get.group_services(group_id, service_provider_id)
-```
+<pre class="language-python"><code class="lang-python"><strong>api.get.group_services(group_id, service_provider_id)
+</strong></code></pre>
 
 ### Parameters&#x20;
 
