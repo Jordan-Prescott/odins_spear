@@ -99,9 +99,9 @@ def main(api, service_provider_id: str, group_id: str):
     total_unassigned_deactivated = len(all_dns["unassigned"]["deactivated"])
     total_dns = total_assigned_activated + total_assigned_deactivated + total_unassigned_activated + total_unassigned_deactivated
 
-    all_dns["total_DNs"] = total_dns
-    all_dns["assigned"]["total_assigned_DNs"] = total_assigned_activated + total_assigned_deactivated
-    all_dns["unassigned"]["total_unassigned_DNs"] = total_unassigned_activated + total_unassigned_deactivated
+    all_dns["totalDNs"] = total_dns
+    all_dns["assigned"]["totalAssignedDNs"] = total_assigned_activated + total_assigned_deactivated
+    all_dns["unassigned"]["totalUassignedDNs"] = total_unassigned_activated + total_unassigned_deactivated
 
     # Group Detail
     group_detail = api.get.group(service_provider_id,group_id)
@@ -115,13 +115,13 @@ def main(api, service_provider_id: str, group_id: str):
         trunk_detail = []
 
     return json.dumps({
-        "group_detail": group_detail,
-        "licence_breakdown": {
-            "user_services": assigned_user_services,
-            "group_services": assigned_group_services,
-            "service_pack_services": assigned_service_pack_services
+        "groupDetail": group_detail,
+        "licenceBreakdown": {
+            "userServices": assigned_user_services,
+            "groupServices": assigned_group_services,
+            "servicePackServices": assigned_service_pack_services
         },
-        "group_DNs": all_dns,
-        "group_trunking": trunk_detail
+        "groupDNs": all_dns,
+        "groupTrunking": trunk_detail
 
     })
