@@ -315,9 +315,16 @@ class Get():
 # TIME ZONES
 # TRUNK GROUPS
     
-    def group_trunk_groups_call_capacity(self, service_provider_id, group_id):
+    def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str):
         
         endpoint = f"/groups/trunk-groups/call-capacity?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str):
+        
+        endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}&name={trunk_group_name}"
         
         return self.requester.get(endpoint)
 
