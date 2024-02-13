@@ -9,7 +9,7 @@ In this method, you can control the status of your Call Centers (CC) by activati
 ### Parameters&#x20;
 
 * call\_center\_user\_ids(list): List of service user IDs (CC IDs), the status given will be applied to these.
-* status (bool): Boolean value of True (Activate) or False (Deactivate) which will be applied to list of AAs.
+* status (bool): The boolean value of True (Activate) or False (Deactivate) which will be applied to list of AAs.
 
 ### Returns
 
