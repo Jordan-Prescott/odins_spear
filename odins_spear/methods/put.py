@@ -208,7 +208,7 @@ class Put():
         
         endpoint = f"/groups/call-centers/bounced-calls"
         
-        updates["serviceUserId"]: call_center_user_id
+        updates["serviceUserId"] = call_center_user_id
         
         return self.requester.put(endpoint, data=updates) 
     
