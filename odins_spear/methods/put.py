@@ -422,6 +422,164 @@ class Put():
 #DEPARTMENTS
 #DEVICE POLICIES
 #DEVICES
+
+
+    def group_devices(self, service_provider_id: str, group_id: str, device_name: str, updates: dict):
+        
+        endpoint = f"/groups/devices"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["deviceName"] = [device_name]
+        
+        return self.requester.put(endpoint, data=updates)  
+    
+    
+    def service_provider_device(self, service_provider_id: str, device_name: str, updates: dict):
+        
+        endpoint = "/service-providers/devices"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["deviceName"] = [device_name]
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def system_devices(self, device_name: str, updates: dict):
+        
+        endpoint = "/service-providers/devices"
+        
+        updates["deviceName"] = [device_name]
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def system_device_file(self, device_name: str, updates: dict):
+        
+        endpoint = "/system/devices/files"
+        
+        updates["deviceName"] = [device_name]
+        
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def service_provider_device_file(self, device_name: str, updates: dict):
+        
+        endpoint = "/service_provider/devices/files"
+        
+        updates["deviceName"] = [device_name]
+        
+        return self.requester.put(endpoint, data=updates)
+    
+
+    def group_device_file(self, device_name: str, updates: dict):
+        
+        endpoint = "/groups/devices/files"
+        
+        updates["deviceName"] = [device_name]
+        
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def group_device_tags_profile(self, service_provider_id: str, group_id: str, device_name: str, tags: list):
+        
+        endpoint = "/groups/devices/profile"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "deviceName": device_name,
+            "tags": [
+                {
+                    "elements": tags
+                }
+            ]
+        }
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def group_device_tag(self, service_provider_id: str, group_id: str, device_name: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/groups/devices/tags"
+        
+        data = {
+            "tagName": f"%{tag_name}%",
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "deviceName": device_name
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def service_provider_device_tag(self, service_provider_id: str, device_name: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/service-providers/devices/tags"
+        
+        data = {
+            "tagName": f"%{tag_name}%",
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "deviceName": device_name
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+        
+        
+    def system_device_tag(self, device_name: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/system/devices/tags"
+        
+        data = {
+            "tagName": tag_name,
+            "tagValue": tag_value,
+            "deviceName": device_name
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def group_device_type_file(self, service_provider_id: str, group_id: str, device_type: str, updates: dict):
+    
+        endpoint = "/groups/device-types/files"
+        
+        updates["serviceProviderId"] = [service_provider_id]
+        updates["groupId"] = [group_id]
+        updates["deviceType"] = [device_type] 
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def group_device_type_tag(self, service_provider_id: str, group_id: str, device_type: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/groups/system/device-types/tags"
+        
+        data = {
+            "tagName": tag_name,
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "deviceType": device_type
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def service_provider_device_type_tag(self, service_provider_id: str, device_type: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/service-providers/device-types/tags"
+        
+        data = {
+            "tagName": tag_name,
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "deviceType": device_type
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
