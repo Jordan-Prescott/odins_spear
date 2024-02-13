@@ -26,7 +26,8 @@ class Put():
 #AUTHENTICATION
 #AUTO ATTENDANTS
 
-    def auto_attendants_status(self, auto_attendant_user_ids: list, status: bool =True):
+    def auto_attendants_status(self, auto_attendant_user_ids: list, 
+                               status: bool =True):
         """Updates a list of auto attendants (AA) status to either active or inactive.
 
         Args:
@@ -50,7 +51,8 @@ class Put():
 
         
         
-    def auto_attendant(self, service_provider_id: str, group_id, auto_attendant_user_id: str, updates: dict):
+    def auto_attendant(self, service_provider_id: str, group_id, 
+                       auto_attendant_user_id: str, updates: dict):
         """Updates a specific Auto Attendant.
         
         Note: Needs the service instance profile to use this method.
@@ -74,7 +76,8 @@ class Put():
         return self.requester.put(endpoint, data=updates)
     
     
-    def auto_attendant_submenu(self, auto_attendant_user_id: str, submenu_id: str, updates: dict):
+    def auto_attendant_submenu(self, auto_attendant_user_id: str, 
+                               submenu_id: str, updates: dict):
         """This method allows you to update the configuration of the submenus for your AAs
         
         Args:
@@ -109,7 +112,8 @@ class Put():
 #CALL CAPACITY
 #CALL CENTER
 
-    def group_call_centers_status(self, call_center_user_ids: list, status: bool =True):
+    def group_call_centers_status(self, call_center_user_ids: list, 
+                                  status: bool =True):
         """Updates a list of call centers (CC) status to either active or inactive.
 
         Args:
@@ -148,7 +152,8 @@ class Put():
         return self.requester.put(endpoint, data=updates)
     
     
-    def group_call_center_agents(self, call_center_user_id: str, agent_user_ids: list):
+    def group_call_center_agents(self, call_center_user_id: str, 
+                                 agent_user_ids: list):
         """Add or remove agents to a call center. 
         
         Note: Leave the agent_user_ids blank to remove all users and to remove some only include
@@ -172,7 +177,8 @@ class Put():
         return self.requester.put(endpoint, data=data)
         
     
-    def group_call_center_agents_levels(self, call_center_user_id: str, agent_user_ids: list, 
+    def group_call_center_agents_levels(self, call_center_user_id: str, 
+                                        agent_user_ids: list, 
                                         skill_level: int):
         """Update a list of agents skill level in a single Call Center (CC).
 
@@ -195,7 +201,8 @@ class Put():
         return self.requester.put(endpoint, data=data) 
     
     
-    def group_call_center_bounced_calls(self, call_center_user_id: str, updates: dict):
+    def group_call_center_bounced_calls(self, call_center_user_id: str, 
+                                        updates: dict):
         """Update the bounced call settings of a single Call Center (CC)
 
         Args:
@@ -213,7 +220,8 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
     
-    def group_call_center_dnis_instance(self, call_center_user_id: str, updates: dict):
+    def group_call_center_dnis_instance(self, call_center_user_id: str, 
+                                        updates: dict):
         """Update a DNIS instance of a single Call Center (CC).
 
         Args:
@@ -231,7 +239,8 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
     
-    def group_call_center_forced_forwarding(self, call_center_user_id: str, updates: dict):
+    def group_call_center_forced_forwarding(self, call_center_user_id: str, 
+                                            updates: dict):
         """Update the forced forwarding settings of a single Call Center (CC).
 
         Args:
@@ -249,7 +258,8 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
 
-    def group_call_center_overflow(self, call_center_user_id: str, updates: dict):
+    def group_call_center_overflow(self, call_center_user_id: str, 
+                                   updates: dict):
         """Update the overflow settings of a single Call Center (CC).
 
         Args:
@@ -267,7 +277,8 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
 
-    def group_call_center_stranded_calls(self, call_center_user_id: str, updates: dict):
+    def group_call_center_stranded_calls(self, call_center_user_id: str, 
+                                         updates: dict):
         """Update the stranded calls settings of a single Call Center (CC).
 
         Args:
@@ -285,7 +296,8 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
 
-    def group_call_center_stranded_calls_unavailable(self, call_center_user_id: str, updates: dict):
+    def group_call_center_stranded_calls_unavailable(self, call_center_user_id: str, 
+                                                     updates: dict):
         """Update the stranded calls unavailable settings of a single Call Center (CC).
 
         Args:
@@ -303,7 +315,8 @@ class Put():
         return self.requester.put(endpoint, data=updates) 
     
     
-    def user_call_center_supervised_agents(self, call_center_user_id: str, supervisor_user_id: str, agent_ids: list):
+    def user_call_center_supervised_agents(self, call_center_user_id: str, 
+                                           supervisor_user_id: str, agent_ids: list):
         """Update the list of agents a supervisor has in a single Call Center (CC).
 
         Args:
@@ -344,7 +357,8 @@ class Put():
         return self.requester.put(endpoint, data=updates)
 
 
-    def user_call_center_agents_update(self, user_id: str, call_center_service_ids: list):
+    def user_call_center_agents_update(self, user_id: str, 
+                                       call_center_service_ids: list):
         """Update the Call Centers (CC) a user is assigned to. 
 
         Args:
@@ -422,6 +436,250 @@ class Put():
 #DEPARTMENTS
 #DEVICE POLICIES
 #DEVICES
+
+
+    def group_devices(self, service_provider_id: str, group_id: str, 
+                      device_name: str, updates: dict):
+        """Update a single device in a group. 
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            group_id (str): Group ID where target device is located.
+            device_name (str): Device name of the target device.
+            updates (dict): Updates to apply to the target device.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
+        
+        endpoint = f"/groups/devices"
+        
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["deviceName"] = device_name
+        
+        return self.requester.put(endpoint, data=updates)  
+    
+    
+    def service_provider_device(self, service_provider_id: str, device_name: str, 
+                                updates: dict):
+        """Update a single device in a Service Provider or Enterprise.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where device is located.
+            device_name (str): Device name of the target device.
+            updates (dict): Updates to apply to the target device.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
+        
+        endpoint = "/service-providers/devices"
+        
+        updates["serviceProviderId"] = service_provider_id
+        updates["deviceName"] = device_name
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def system_devices(self, device_name: str, updates: dict):
+        """Update a single device in the Broadworks system.
+
+        Args:
+            device_name (str): Device name of the target device.
+            updates (dict): Updates to apply to the target device.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
+    
+        endpoint = "/service-providers/devices"
+        
+        updates["deviceName"] = device_name
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def system_device_file(self, device_name: str, updates: dict):
+        """Update a config file for a single device at the system level.
+
+        Args:
+            device_name (str): Device name of the target device.
+            updates (dict): Updates to apply to the target device.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+        
+        endpoint = "/system/devices/files"
+        
+        updates["deviceName"] = device_name
+        
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def service_provider_device_file(self, device_name: str, updates: dict):
+        """Update a config file for a single device at Service Provider or
+        Enterprise level.
+
+        Args:
+            device_name (str): Device name of the target device.
+            updates (dict): Updates to apply to the target device.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+        
+        endpoint = "/service_provider/devices/files"
+
+        updates["deviceName"] = device_name
+        
+        return self.requester.put(endpoint, data=updates)
+    
+
+    def group_device_file(self, device_name: str, updates: dict):
+        """Update a config file for a single device at Group level.
+
+        Args:
+            device_name (str): Device name of the target device.
+            updates (dict): Updates to apply to the target device.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+        
+        endpoint = "/groups/devices/files"
+        
+        updates["deviceName"] = device_name
+        
+        return self.requester.put(endpoint, data=updates)
+    
+    
+    def group_device_tags_profile(self, service_provider_id: str, group_id: str, 
+                                  device_name: str, tags: list):
+        """Update tags assigned to single device at group level.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            group_id (str): Group ID where target device is located.
+            device_name (str): Device name of the target device.
+            tags (dict): List of dictionaries tag name and value entries.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
+        
+        endpoint = "/groups/devices/profile"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "deviceName": device_name,
+            "tags": [
+                {
+                    "elements": tags
+                }
+            ]
+        }
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def group_device_tag(self, service_provider_id: str, group_id: str, device_name: str, 
+                         tag_name: str, tag_value: str):
+        """Update a single tag assigned to a device at group level.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            group_id (str): Group ID where target device is located.
+            device_name (str): Device name of the target device.
+            tag_name (str): Name of the tag to add or update.
+            tag_value (str): Value of tag to add or update.
+
+        Returns:
+            _type_: _description_
+        """
+        
+        endpoint = "/groups/devices/tags"
+        
+        data = {
+            "tagName": f"%{tag_name}%",
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "deviceName": device_name
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def service_provider_device_tag(self, service_provider_id: str, device_name: str, 
+                                    tag_name: str, tag_value: str):
+        
+        endpoint = "/service-providers/devices/tags"
+        
+        data = {
+            "tagName": f"%{tag_name}%",
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "deviceName": device_name
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+        
+        
+    def system_device_tag(self, device_name: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/system/devices/tags"
+        
+        data = {
+            "tagName": f"%{tag_name}%",
+            "tagValue": tag_value,
+            "deviceName": device_name
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def group_device_type_file(self, service_provider_id: str, group_id: str, device_type: str, updates: dict):
+    
+        endpoint = "/groups/device-types/files"
+        
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["deviceType"] = device_type
+        
+        return self.requester.put(endpoint, data=updates)
+        
+    
+    def group_device_type_tag(self, service_provider_id: str, group_id: str, device_type: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/groups/system/device-types/tags"
+        
+        data = {
+            "tagName": tag_name,
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "deviceType": device_type
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+    
+    
+    def service_provider_device_type_tag(self, service_provider_id: str, device_type: str, tag_name: str, tag_value: str):
+        
+        endpoint = "/service-providers/device-types/tags"
+        
+        data = {
+            "tagName": tag_name,
+            "tagValue": tag_value,
+            "serviceProviderId": service_provider_id,
+            "deviceType": device_type
+        }     
+        
+        return self.requester.put(endpoint, data=data)
+
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE

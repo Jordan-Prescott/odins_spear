@@ -349,7 +349,7 @@ class Get():
         Returns:
             dict: List of users.
 
-        #### Supported Filters
+        # Supported Filters
         macAddress: search by device
         lastName: filter by lastName
         firstName: filter by firstName
