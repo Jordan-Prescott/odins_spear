@@ -742,6 +742,26 @@ class Put():
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
 #DN
+
+    def group_dns(self, service_provider_id: str, group_id: str, activated: bool, numbers: list, 
+                  country_code: int):
+        
+        endpoint = "/groups/dns"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "dns": [{
+                "activated": activated,
+                "list": numbers.sort(),
+                "min": numbers[0],
+                "max": None
+            }]
+        }
+        
+        return self.requester.put(endpoint, data=data)
+        
+
 #DO NOT DISTURB
 #DOMAINS
 #EMERGENCY NOTIFICATIONS

@@ -9,3 +9,13 @@ def format_filter(filter, type, value):
         return f"{filter}=*{value}*"
     else:
         raise OAUnsupportedFilter
+    
+    
+def format_list_of_numbers(counrty_code: int, numbers: list):
+    
+    highest_number = 0
+    formatted_numbers = []
+    
+    for num in numbers:
+        if num > highest_number:
+            pass

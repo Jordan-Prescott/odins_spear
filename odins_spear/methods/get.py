@@ -131,7 +131,78 @@ class Get():
         endpoint = f"/groups/dns?serviceProviderId={service_provider_id}&groupId={group_id}"
 
         return self.requester.get(endpoint)
+    
+    
+    def group_dn_search(self, service_provider_id:str, group_id:str, dn: int,
+                        filter_type: str = None, limit: int = None):
 
+        endpoint = f"/groups/dns/search?&serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        if filter_type:
+            endpoint += f"&{format_filter('dn', filter_type, dn)}"
+        if limit:
+            # TODO: Limit is failing when needed, odin to resolve
+            endpoint += f"&limit={limit}"
+
+        return self.requester.get(endpoint)
+    
+    
+    def group_dn_details(self, service_provider_id:str, group_id:str):
+        
+        endpoint = f"/groups/dns/details?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn_search(self, dn: int):
+        
+        endpoint = f"/system/dns/search?dn=%2b{dn}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn(self, dn: int):
+        
+        endpoint = f"/system/dns?phoneNumber={dn}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn_summary(self, dn: int):
+        
+        endpoint = f"/system/dns/summary?dn={dn}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn_utilization(self):
+        
+        endpoint = f"/system/dns/utilization"   
+       
+        return self.requester.get(endpoint) 
+    
+    
+    def service_provider_dn_search(self, service_provider_id:str, dn: int,
+                        filter_type: str = None, limit: int = None):
+
+        endpoint = f"/service-providers/dns/search?&serviceProviderId={service_provider_id}"
+        
+        if filter_type:
+            endpoint += f"&{format_filter('dn', filter_type, dn)}"
+        if limit:
+            # TODO: Limit is failing when needed, odin to resolve
+            endpoint += f"&limit={limit}"
+
+        return self.requester.get(endpoint)
+        
+    
+    def service_provider_dns(self, service_provider_id: str):
+        
+        endpoint = f"/service-providers/dns?serviceProviderId={service_provider_id}"
+        
+        return self.requester.get(endpoint)
+        
+    
 # DO NOT DISTURB
 # DOMAINS
 # EMERGENCY NOTIFICATIONS

@@ -70,6 +70,13 @@ class Delete():
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
 #DN
+
+def group_dns(self, service_provider_id: str, group_id: str, trunk_group_name: str):
+        
+        endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}&name={trunk_group_name}"
+        
+        return self.requester.delete(endpoint)
+
 #DO NOT DISTURB
 #DOMAINS
 #EMERGENCY NOTIFICATIONS
