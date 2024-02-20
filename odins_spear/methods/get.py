@@ -125,7 +125,7 @@ class Get():
 # DIRECTED CALL PICKUP WITH BARGE IN
 # DIRECTROUTE
 # DN
-    
+
     def group_dns(self, service_provider_id:str, group_id:str):
 
         endpoint = f"/groups/dns?serviceProviderId={service_provider_id}&groupId={group_id}"
@@ -331,7 +331,7 @@ class Get():
 # TWO STAGE DIALING
 # USERS
 
-    def users(self, servive_provider_id: str = None, group_id: str = None,
+    def users(self, service_provider_id: str = None, group_id: str = None,
               filter: str = None, filter_type: str = None, filter_value: str = None,
               limit: int = None, extended=False):
         """
@@ -374,12 +374,12 @@ class Get():
 
         endpoint = f"/users?"
 
-        if servive_provider_id:
-            endpoint += f"serviceProviderId={servive_provider_id}"
+        if service_provider_id:
+            endpoint += f"serviceProviderId={service_provider_id}"
             if group_id:
                 endpoint += f"&groupId={group_id}"
         if filter:
-            if servive_provider_id:
+            if service_provider_id:
                 endpoint += "&"
             endpoint += f"{format_filter(filter, filter_type, filter_value)}"
         if limit:
