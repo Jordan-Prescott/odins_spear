@@ -23,5 +23,5 @@ Finally, place that folder where you would like to write code that uses the libr
 <figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-While the library is in development this is the current way to use it. Please note this will change once version 0.1.0 is released. (3/1/12)
+While the library is in development this is the current way to use it. Please note this will change once version 0.1.0 is released.
 {% endhint %}
