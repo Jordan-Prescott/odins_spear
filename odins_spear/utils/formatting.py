@@ -12,10 +12,8 @@ def format_filter(filter, type, value):
     
     
 def format_list_of_numbers(counrty_code: int, numbers: list):
+    numbers.sort()
     
-    highest_number = 0
-    formatted_numbers = []
-    
-    for num in numbers:
-        if num > highest_number:
-            pass
+    formatted_numbers = [f'+{str(counrty_code)}-{str(num)}' for num in numbers]
+     
+    return formatted_numbers
