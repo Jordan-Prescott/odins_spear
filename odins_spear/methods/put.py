@@ -743,13 +743,8 @@ class Put():
 #DIRECTROUTE
 #DN
 
-    def group_dns(self, service_provider_id: str, group_id: str, activated: bool, numbers: list, 
-                  country_code: int):
-        
-        from odins_spear.utils.formatting import format_list_of_numbers
-        
-        formatted_numbers = format_list_of_numbers(country_code, numbers)
-        
+    def group_dns(self, service_provider_id: str, group_id: str, activated: bool, numbers: list):
+
         endpoint = "/groups/dns"
         
         data = {
@@ -757,13 +752,26 @@ class Put():
             "groupId": group_id,
             "dns": [{
                 "activated": activated,
-                "list": formatted_numbers,
-                "min": formatted_numbers[0],
+                "list": numbers,
+                "min": numbers[0],
                 "max": None
             }]
         }
         
-        # return self.requester.put(endpoint, data=data)
+        return self.requester.put(endpoint, data=data)
+    
+
+    def group_dns_activate(self, service_provider_id: str, group_id: str, activated: bool, numbers: list):
+
+        endpoint = "/groups/dns"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "dns": [{"activated": activated, "min": num, "max": None} for num in numbers]
+        }
+        
+        return self.requester.put(endpoint, data=data)
         
 
 #DO NOT DISTURB

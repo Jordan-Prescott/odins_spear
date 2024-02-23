@@ -15,5 +15,4 @@ def format_list_of_numbers(counrty_code: int, numbers: list):
     numbers.sort()
     
     formatted_numbers = [f'+{str(counrty_code)}-{str(num)}' for num in numbers]
-     
     return formatted_numbers

@@ -99,6 +99,78 @@ class Post():
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
 #DN
+
+    def group_dns(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
+        
+        endpoint = f"/groups/dns"
+        
+        data = {
+			"serviceProvider": service_provider_id,
+            "groupId": group_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.post(endpoint, data=data)
+    
+    
+    def group_dns_assign_bulk(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
+        
+        endpoint = f"/groups/dns/assign/bulk"
+        
+        data = {
+			"serviceProvider": service_provider_id,
+            "groupId": group_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.post(endpoint, data=data)
+    
+    
+    def group_dns_unassign_bulk(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
+        
+        endpoint = f"/groups/dns/unassign/bulk"
+        
+        data = {
+			"serviceProvider": service_provider_id,
+            "groupId": group_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.post(endpoint, data=data)
+    
+    
+    def service_provider_dns(self, service_provider_id: str, start_of_range_number: int, end_of_range_number: int):
+        
+        endpoint = f"/groups/dns"
+        
+        data = {
+			"serviceProvider": service_provider_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.post(endpoint, data=data)
+
+
 #DO NOT DISTURB
 #DOMAINS
 #EMERGENCY NOTIFICATIONS

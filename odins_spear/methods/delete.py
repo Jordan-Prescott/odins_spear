@@ -71,11 +71,39 @@ class Delete():
 #DIRECTROUTE
 #DN
 
-def group_dns(self, service_provider_id: str, group_id: str, trunk_group_name: str):
+    def group_dns(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
         
-        endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}&name={trunk_group_name}"
+        endpoint = f"/groups/dns"
         
-        return self.requester.delete(endpoint)
+        data = {
+			"serviceProvider": service_provider_id,
+			"groupId": group_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.delete(endpoint, data=data)
+    
+    
+    def group_dns(self, service_provider_id: str, start_of_range_number: int, end_of_range_number: int):
+        
+        endpoint = f"/service-providers/dns"
+        
+        data = {
+			"serviceProvider": service_provider_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.delete(endpoint, data=data)
 
 #DO NOT DISTURB
 #DOMAINS
