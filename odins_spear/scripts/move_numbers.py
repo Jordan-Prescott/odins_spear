@@ -25,7 +25,7 @@ def main(api, current_service_provider_id: str, current_group_id: str, target_se
             end_of_range_number = end_of_range_number
         )
         
-        logger.log_info(f"Adding number to {target_service_provider_id} > {target_group_id}.")
+        logger.log_info(f"Adding number to SP/ Ent: {target_service_provider_id} Group: {target_group_id}.")
         # assign to new group
         api.post.group_dns_assign_bulk(
             target_service_provider_id,
