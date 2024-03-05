@@ -348,6 +348,105 @@ class Get():
 # OUTLOOK INTEGRATION
 # PASSCODE RULES
 # PASSWORD GENERATE
+
+    def password_generate(self, service_provider_id: str, group_id: str) -> dict:
+        """Generates a single passwords following the groups rules.
+
+        Args:
+            service_provider_id (str): Service Provider ID where Group is located.
+            group_id (str): Group ID to generate password for. 
+
+        Returns:
+            dict: Single password generated according to the groups rules.
+        """
+        
+        endpoint = f"/password/generate?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def passwords_generate(self, service_provider_id: str, group_id: str, limit: int =10) -> dict:
+        """Generates a multiple passwords to the limit set in pararmeters.
+
+        Args:
+            service_provider_id (str): Service Provider ID where Group is located.
+            group_id (str): Group ID to generate password for. 
+            limit (int, optional): Number of passwords api will return. Defaults to 10.
+
+        Returns:
+            dict: Multiple passwords generated according to the groups rules.
+        """
+                
+        endpoint = f"/password/generate?serviceProviderId={service_provider_id}&groupId={group_id}&limit={limit}"
+        
+        return self.requester.get(endpoint)
+        
+    
+    def passcode_generate(self, service_provider_id: str, group_id: str) -> dict:
+        """Generates a single passcode following group rules.
+
+        Args:
+            service_provider_id (str): Service Provider ID where Group is located.
+            group_id (str): Group ID to generate passcode for. 
+
+        Returns:
+            dict: Single passcode generated according to the groups rules.
+        """
+        
+        endpoint = f"/passcode/generate?serviceProviderId={service_provider_id}&groupId={group_id}"
+    
+        return self.requester.get(endpoint)
+    
+    
+    def passcodes_generate(self, service_provider_id: str, group_id: str, limit: int =10) -> dict:
+        """Generates a multiple passcodes to the limit set in pararmeters.
+
+        Args:
+            service_provider_id (str): Service Provider ID where Group is located.
+            group_id (str): Group ID to generate passcodes for. 
+            limit (int, optional): Number of passwords api will return. Defaults to 10.
+
+        Returns:
+            dict: Multiple passcodes generated according to the groups rules.
+        """
+        
+        endpoint = f"/passcode/generate?serviceProviderId={service_provider_id}&groupId={group_id}&limit={limit}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def sip_password_generate(self) -> dict:
+        """Generates a single SIP password.
+
+        Args:
+            service_provider_id (str): Service Provider ID where Group is located.
+            group_id (str): Group ID to generate SIP password for. 
+
+        Returns:
+            dict: Single SIP password generated according to the groups rules.
+        """
+        
+        endpoint = f"/sip-password/generate"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def sip_passwords_generate(self, limit: int =10) -> dict:
+        """Generates multiple SIP passwords to the limit set in parameters. Defaults to 10.
+
+        Args:
+            service_provider_id (str): Service Provider ID where Group is located.
+            group_id (str): Group ID to generate SIP password for. 
+            limit (int, optional): Number of passwords api will return. Defaults to 10.
+
+        Returns:
+            dict: Mutliple SIP passwords generated according to the groups rules.
+        """
+
+        endpoint = f"/sip-password/generate&limit={limit}"
+        
+        return self.requester.get(endpoint)
+
 # PASSWORD RULES
 # PERSONAL PHONE LIST
 # PHONE DIRECTORY

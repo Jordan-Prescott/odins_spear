@@ -24,6 +24,27 @@ class Put():
 #ANONYMOUS CALL REJECTION
 #ATTENDANT CONSOLE
 #AUTHENTICATION
+
+    def user_authentication_service(self, user_id: str, new_password: str):
+        """_summary_
+
+        Args:
+            user_id (str): _description_
+            new_password (str): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        
+        endpoint = "/users/authentication"
+        
+        data = {
+            "userId": user_id,
+            "newPassword": new_password
+        }
+        
+        return self.requester.put(endpoint, data=data)
+
 #AUTO ATTENDANTS
 
     def auto_attendants_status(self, auto_attendant_user_ids: list, 
@@ -989,6 +1010,18 @@ class Put():
         
     
     def user_portal_passcode(self, user_id: str, new_passcode: int):
+        """_summary_
+
+        Args:
+            user_id (str): User ID of the target user you would like to change the portal passcode for. 
+            new_passcode (int): New portal passcode to set for the target user.
+
+        Raises:
+            AOInvalidCode: If code is less than 4 or higher than 6.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         
         if new_passcode < 4 or new_passcode > 6:
             raise AOInvalidCode
