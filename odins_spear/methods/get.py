@@ -1,4 +1,4 @@
-from odins_spear.utils import format_filter
+from odins_spear.utils.formatting import format_filter
 
 
 class Get():
@@ -125,13 +125,163 @@ class Get():
 # DIRECTED CALL PICKUP WITH BARGE IN
 # DIRECTROUTE
 # DN
-    
+
     def group_dns(self, service_provider_id:str, group_id:str):
+        """Gets all numbers assigned to group.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where group is hosted.
+            group_id (str): Group ID of target group.
+
+        Returns:
+            Dict: Dictionary containing all DNs assigned to group. 
+        """
 
         endpoint = f"/groups/dns?serviceProviderId={service_provider_id}&groupId={group_id}"
 
         return self.requester.get(endpoint)
+    
+    
+    def group_dn_search(self, service_provider_id:str, group_id:str, dn: int,
+                        filter_type: str = None, limit: int = None):
+        """Searches for numbers assigned to group and allows search criteria and limiting result.
 
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where group is hosted.
+            group_id (str): Group ID of target group where numbers are located.
+            dn (int): Number/ part of number to search for.
+            filter_type (str, optional): Options: equal to, starts with, or contains. Defaults to None.
+            limit (int, optional): Limits the amount of values API returns. Defaults to None.
+
+        Returns:
+            List: List of numbers matching search criteria
+        """
+
+        endpoint = f"/groups/dns/search?&serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        if filter_type:
+            endpoint += f"&{format_filter('dn', filter_type, dn)}"
+        if limit:
+            # TODO: Limit is failing when needed, odin to resolve
+            endpoint += f"&limit={limit}"
+
+        return self.requester.get(endpoint)
+    
+    
+    def group_dn_details(self, service_provider_id:str, group_id:str):
+        """Gets all numbers assigned to Group in detail. This will show where the number is assigned
+        in a group such as which user or hunt group. 
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where group is hosted.
+            group_id (str): Group ID of target group where numbers are located.
+
+        Returns:
+            Dict: Dictionary of numbers with details of each number.
+        """
+        
+        endpoint = f"/groups/dns/details?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn_search(self, dn: int):
+        """Searches for number from System level. This will return where the number is located on the system.
+        It will show the Service Provider/ Enterprise, Group ID, and User ID the number is assigned to.
+
+        Args:
+            dn (int): Target number excluding country code e.g. 123456789
+
+        Returns:
+            List: List of dictionaries containing details of each number that fit the search criteria. 
+        """
+        
+        endpoint = f"/system/dns/search?dn=%2b{dn}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn(self, dn: int):
+        """Searches for number from System level. This will return where the number is located on the system.
+        It will show the Service Provider/ Enterprise, Group ID, and User ID the number is assigned to.
+
+        Args:
+            dn (int): Target number excluding country code e.g. 123456789
+
+        Returns:
+            List: List of dictionaries containing details of each number that fit the search criteria. 
+        """
+        
+        endpoint = f"/system/dns?phoneNumber={dn}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn_summary(self):
+        """Returns all numbers assigned to system.
+
+        Returns:
+            List: List of all Service Providers/ Enterprises and numbers assigned in ranges.
+        """
+        
+        endpoint = f"/system/dns/summary"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def system_dn_utilization(self):
+        """Returns DN statistics for each Service Provider/ Enterprise such as total DNs assigned.
+
+        Returns:
+            List: List of all Service Provider/ Enterprises with statistics of DNs for each.
+        """
+        
+        endpoint = f"/system/dns/utilization"   
+       
+        return self.requester.get(endpoint) 
+    
+    
+    def service_provider_dn_search(self, service_provider_id:str, dn: int,
+                        filter_type: str = None, limit: int = None):
+        """Searches for numbers assigned to Service Provider/ Enterprise and allows search criteria and limiting result.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where group is hosted.
+            dn (int): Number/ part of number to search for.
+            filter_type (str, optional): Options: equal to, starts with, or contains. Defaults to None.
+            limit (int, optional): Limits the amount of values API returns. Defaults to None.
+
+        Returns:
+            List: List of numbers matching search criteria
+        """
+
+        endpoint = f"/service-providers/dns/search?&serviceProviderId={service_provider_id}"
+        
+        if filter_type:
+            endpoint += f"&{format_filter('dn', filter_type, dn)}"
+        if limit:
+            # TODO: Limit is failing when needed, odin to resolve
+            endpoint += f"&limit={limit}"
+
+        return self.requester.get(endpoint)
+        
+    
+    def service_provider_dns(self, service_provider_id: str):
+        """Returns all numbers assigned to Service Provider/ Enterprise with the group its assigned to
+        and if the numbers can be deleted.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where target numbers are located.
+
+        Returns:
+            Dict: All numbers assigend to Service Provider/ Enterprise with group and delete status.
+        """
+        
+        endpoint = f"/service-providers/dns?serviceProviderId={service_provider_id}"
+        
+        return self.requester.get(endpoint)
+        
+    
 # DO NOT DISTURB
 # DOMAINS
 # EMERGENCY NOTIFICATIONS
@@ -331,7 +481,7 @@ class Get():
 # TWO STAGE DIALING
 # USERS
 
-    def users(self, servive_provider_id: str = None, group_id: str = None,
+    def users(self, service_provider_id: str = None, group_id: str = None,
               filter: str = None, filter_type: str = None, filter_value: str = None,
               limit: int = None, extended=False):
         """
@@ -374,12 +524,12 @@ class Get():
 
         endpoint = f"/users?"
 
-        if servive_provider_id:
-            endpoint += f"serviceProviderId={servive_provider_id}"
+        if service_provider_id:
+            endpoint += f"serviceProviderId={service_provider_id}"
             if group_id:
                 endpoint += f"&groupId={group_id}"
         if filter:
-            if servive_provider_id:
+            if service_provider_id:
                 endpoint += "&"
             endpoint += f"{format_filter(filter, filter_type, filter_value)}"
         if limit:

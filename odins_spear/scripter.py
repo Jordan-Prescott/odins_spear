@@ -98,3 +98,45 @@ class Scripter:
         :returns (str): Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
         """
         return scripts.user_association.main(self.api, service_provider_id, group_id, user_id)
+
+
+    def move_numbers(self, current_service_provider_id: str, current_group_id: str, target_service_provider_id: str, 
+                     target_group_id: str, start_of_range_number: str, end_of_range_number: str = None) -> bool:
+        """Moves a list of numbers from existing group to another group on the same broadworks instance. 
+        This can move numbers between Service Provider/ Enterprise and groups in the same Service Provider/ Enterprise.
+        
+        Note: Numbers need to be strings and follow this format: +{country code}-{number}.
+
+        Args:
+            current_service_provider_id (str): Current Service Provider/ Enterprise where numbers are located.
+            current_group_id (str): Current Group ID where numbers are located.
+            target_service_provider_id (str): Target Service Provider/ Enterprise to move the numbers to.
+            target_group_id (str): Target Group to move numbers to.
+            start_of_number_range (str): Starting number in range of numbers you would like to move. 
+            end_of_number_range (str): Ending nummber in range of numbers you would like to move. If you need to move
+            only one number do not enter a value for this paramter. Defaults to None.
+    
+        Returns:
+            Bool: Returns a True once complete.
+        """
+        return scripts.move_numbers.main(self.api, current_service_provider_id, current_group_id, 
+                                        target_service_provider_id, target_group_id, start_of_range_number, 
+                                        end_of_range_number )
+        
+        
+    def remove_numbers(self, service_provider_id: str, group_id: str, start_of_range_number: str, 
+                       end_of_range_number: str = None):
+        """Removes a singular or range of numbers from the entire Broadworks instance.
+
+        Note: Numbers need to be strings and follow this format: +{country code}-{number}.
+        
+        Args:
+            service_provider_id (str): Service Provider/ Enterprise ID where Group is located which hosts target numbers.
+            group_id (str): Group ID where target numbers are located.
+            start_of_number_range (str): Starting number in range of numbers you would like to remove. 
+            end_of_number_range (str): Ending nummber in range of numbers you would like to remove. If you need to remove
+            only one number do not enter a value for this paramter. Defaults to None.
+        """
+        return scripts.remove_numbers(self.api, service_provider_id, group_id, start_of_range_number, 
+                       end_of_range_number)
+    

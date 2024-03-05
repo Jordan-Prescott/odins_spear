@@ -70,6 +70,62 @@ class Delete():
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
 #DN
+
+    def group_dns(self, service_provider_id: str, group_id: str, 
+                  start_of_range_number: int, end_of_range_number: int):
+        """Removes range of numbers from a Group. 
+
+        Args:
+            service_provider_id (str): Service provider ID where the group is located. 
+            group_id (str): Group ID where numbers are hosted.
+            start_of_range_number (str): Starting number in range to remove from group. 
+            end_of_range_number (str): Ending number in range to remove from group.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+        
+        endpoint = f"/groups/dns"
+        
+        data = {
+			"serviceProviderId": service_provider_id,
+			"groupId": group_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number,
+                }
+            ]
+		}
+        
+        return self.requester.delete(endpoint, data=data)
+    
+    
+    def service_provider_dns(self, service_provider_id: str, start_of_range_number: int, end_of_range_number: int):
+        """Removes range of numbers from a Service Proiver or Enterprise. 
+
+        Args:
+            service_provider_id (str): Service provider ID where target numbers are located. 
+            start_of_range_number (str): Starting number in range to remove from service provider. 
+            end_of_range_number (str): Ending number in range to remove from service provider.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+        endpoint = f"/service-providers/dns"
+        
+        data = {
+			"serviceProviderId": service_provider_id,
+			"dns": [
+                {
+                    "min": start_of_range_number,
+                    "max": end_of_range_number
+                }
+            ]
+		}
+        
+        return self.requester.delete(endpoint, data=data)
+
 #DO NOT DISTURB
 #DOMAINS
 #EMERGENCY NOTIFICATIONS

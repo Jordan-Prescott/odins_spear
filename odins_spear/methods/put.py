@@ -597,7 +597,7 @@ class Put():
             tag_value (str): Value of tag to add or update.
 
         Returns:
-            _type_: _description_
+            Dict: Python dictionary of the new state after updates have been applied.
         """
         
         endpoint = "/groups/devices/tags"
@@ -615,6 +615,17 @@ class Put():
     
     def service_provider_device_tag(self, service_provider_id: str, device_name: str, 
                                     tag_name: str, tag_value: str):
+        """Update a single tag assigned to a device at the Service Provider or Enterprise level.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            device_name (str): Device name of the target device.
+            tag_name (str): Name of the tag to add or update.
+            tag_value (str): Value of tag to add or update.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
         
         endpoint = "/service-providers/devices/tags"
         
@@ -629,6 +640,16 @@ class Put():
         
         
     def system_device_tag(self, device_name: str, tag_name: str, tag_value: str):
+        """Update a single tag assigned to a device at the System level.
+
+        Args:
+            device_name (str): Device name of the target device.
+            tag_name (str): Name of the tag to add or update.
+            tag_value (str): Value of tag to add or update.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
         
         endpoint = "/system/devices/tags"
         
@@ -641,7 +662,19 @@ class Put():
         return self.requester.put(endpoint, data=data)
     
     
-    def group_device_type_file(self, service_provider_id: str, group_id: str, device_type: str, updates: dict):
+    def group_device_type_file(self, service_provider_id: str, group_id: str, 
+                               device_type: str, updates: dict):
+        """Set config file for all devices of a spceific type at the group level.
+
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            group_id (str): Group ID where target device is located.
+            device_type (str): The device type you would like to apply the changes to.
+            updates (dict): Cupdates (dict): Updates to apply to the target device.
+            
+        Returns:
+            None: This method does not return any specific value.
+        """
     
         endpoint = "/groups/device-types/files"
         
@@ -652,7 +685,20 @@ class Put():
         return self.requester.put(endpoint, data=updates)
         
     
-    def group_device_type_tag(self, service_provider_id: str, group_id: str, device_type: str, tag_name: str, tag_value: str):
+    def group_device_type_tag(self, service_provider_id: str, group_id: str, 
+                              device_type: str, tag_name: str, tag_value: str):
+        """Update tags applied to device types at the Group level. 
+                
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            group_id (str): Group ID where target device is located.
+            device_type (str): The target device type to apply the updates.
+            tag_name (str): Name of the tag to add or update.
+            tag_value (str): Value of tag to add or update.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
         
         endpoint = "/groups/system/device-types/tags"
         
@@ -667,7 +713,19 @@ class Put():
         return self.requester.put(endpoint, data=data)
     
     
-    def service_provider_device_type_tag(self, service_provider_id: str, device_type: str, tag_name: str, tag_value: str):
+    def service_provider_device_type_tag(self, service_provider_id: str, device_type: str, 
+                                         tag_name: str, tag_value: str):
+        """Update tags applied to device types at the Service Provider or Enterprise level. 
+                
+        Args:
+            service_provider_id (str): Service Provider or Enterprise ID where Group is located.
+            device_type (str): The target device type to apply the updates.
+            tag_name (str): Name of the tag to add or update.
+            tag_value (str): Value of tag to add or update.
+
+        Returns:
+            Dict: Python dictionary of the new state after updates have been applied.
+        """
         
         endpoint = "/service-providers/device-types/tags"
         
@@ -684,6 +742,32 @@ class Put():
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
 #DN
+
+    def group_dns_activate(self, service_provider_id: str, group_id: str, activated: bool, 
+                           numbers: list):
+        """Update activation state of a list of numbers assigned to a group.
+
+        Args:
+            service_provider_id (str): Service provider ID where the group is located. 
+            group_id (str): Group ID where numbers are hosted.
+            activated (bool): True to activate number and False to deactivate.
+            numbers (list): List of target numbers to update.
+
+        Returns:
+            JSON: All numbers assigned to group with activation state.
+        """
+        
+        endpoint = "/groups/dns"
+        
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "dns": [{"activated": activated, "min": num, "max": None} for num in numbers]
+        }
+        
+        return self.requester.put(endpoint, data=data)
+        
+
 #DO NOT DISTURB
 #DOMAINS
 #EMERGENCY NOTIFICATIONS
@@ -730,7 +814,7 @@ class Put():
 
         Args:
             hunt_group_user_id (str): Service provider ID of where the group that hosts the HG is located.
-            group_id (_type_): Group ID of where the HG is located.
+            group_id (str): Group ID of where the HG is located.
             service_user_id (str): Target service user ID of the HG.
             updates (dict): Updates to be applied to HG.
 
