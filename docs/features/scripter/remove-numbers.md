@@ -38,7 +38,7 @@ may_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", pass
 my_api.authenticate()
 
 <strong># Removes the range 234567891-3 from Broadworks instance.
-</strong>magic.scripter.move_numbers(
+</strong>api.scripter.move_numbers(
     service_provider_id="ServiceProviderID-A",
     group_id="GroupID-A",
     start_of_range_number="+1-234567891",
@@ -46,7 +46,7 @@ my_api.authenticate()
 )
 
 # Removes the range 234567891 from Broadworks instance.
-magic.scripter.move_numbers(
+api.scripter.move_numbers(
     service_provider_id="ServiceProviderID-A",
     group_id="GroupID-A",
     start_of_range_number="+1-234567891"

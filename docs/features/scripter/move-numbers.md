@@ -45,7 +45,7 @@ may_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", pass
 my_api.authenticate()
 
 # Moving the range 234567891-3 from GroupID-A to GroupID-B
-magic.scripter.move_numbers(
+api.scripter.move_numbers(
     current_service_provider_id="ServiceProviderID-A",
     current_group_id="GroupID-A",
     target_service_provider_id="ServiceProverID-B",
@@ -56,7 +56,7 @@ magic.scripter.move_numbers(
 
 
 # Moving the number 234567891 from GroupID-A to GroupID-B
-magic.scripter.move_numbers(
+api.scripter.move_numbers(
     current_service_provider_id="ServiceProviderID-A",
     current_group_id="GroupID-A",
     target_service_provider_id="ServiceProverID-B",
