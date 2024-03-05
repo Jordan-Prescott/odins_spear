@@ -743,12 +743,13 @@ class Put():
 #DIRECTROUTE
 #DN
 
-    def group_dns_activate(self, service_provider_id: str, group_id: str, activated: bool, numbers: list):
+    def group_dns_activate(self, service_provider_id: str, group_id: str, activated: bool, 
+                           numbers: list):
         """Update activation state of a list of numbers assigned to a group.
 
         Args:
             service_provider_id (str): Service provider ID where the group is located. 
-            group_id (str): Group ID where the HG is located.
+            group_id (str): Group ID where numbers are hosted.
             activated (bool): True to activate number and False to deactivate.
             numbers (list): List of target numbers to update.
 

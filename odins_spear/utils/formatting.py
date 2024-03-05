@@ -24,7 +24,7 @@ def format_filter(filter, type, value):
         raise OAUnsupportedFilter
     
     
-def format_list_of_numbers(counrty_code: int, numbers: list):
+def format_int_list_of_numbers(counrty_code: int, numbers: list):
     """_summary_
 
     Args:

@@ -82,18 +82,18 @@ class Delete():
             end_of_range_number (str): Ending number in range to remove from group.
 
         Returns:
-            JSON: This method does not return any specific value.
+            None: This method does not return any specific value.
         """
         
         endpoint = f"/groups/dns"
         
         data = {
-			"serviceProvider": service_provider_id,
+			"serviceProviderId": service_provider_id,
 			"groupId": group_id,
 			"dns": [
                 {
                     "min": start_of_range_number,
-                    "max": end_of_range_number
+                    "max": end_of_range_number,
                 }
             ]
 		}
@@ -101,12 +101,21 @@ class Delete():
         return self.requester.delete(endpoint, data=data)
     
     
-    def group_dns(self, service_provider_id: str, start_of_range_number: int, end_of_range_number: int):
-        
+    def service_provider_dns(self, service_provider_id: str, start_of_range_number: int, end_of_range_number: int):
+        """Removes range of numbers from a Service Proiver or Enterprise. 
+
+        Args:
+            service_provider_id (str): Service provider ID where target numbers are located. 
+            start_of_range_number (str): Starting number in range to remove from service provider. 
+            end_of_range_number (str): Ending number in range to remove from service provider.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
         endpoint = f"/service-providers/dns"
         
         data = {
-			"serviceProvider": service_provider_id,
+			"serviceProviderId": service_provider_id,
 			"dns": [
                 {
                     "min": start_of_range_number,
