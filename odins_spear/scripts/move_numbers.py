@@ -1,5 +1,3 @@
-from tqdm import tqdm
-
 import odins_spear.logger as logger
 
 def main(api, current_service_provider_id: str, current_group_id: str, target_service_provider_id: str, 
