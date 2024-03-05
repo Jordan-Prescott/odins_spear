@@ -743,26 +743,19 @@ class Put():
 #DIRECTROUTE
 #DN
 
-    def group_dns(self, service_provider_id: str, group_id: str, activated: bool, numbers: list):
-
-        endpoint = "/groups/dns"
-        
-        data = {
-            "serviceProviderId": service_provider_id,
-            "groupId": group_id,
-            "dns": [{
-                "activated": activated,
-                "list": numbers,
-                "min": numbers[0],
-                "max": None
-            }]
-        }
-        
-        return self.requester.put(endpoint, data=data)
-    
-
     def group_dns_activate(self, service_provider_id: str, group_id: str, activated: bool, numbers: list):
+        """Update activation state of a list of numbers assigned to a group.
 
+        Args:
+            service_provider_id (str): Service provider ID where the group is located. 
+            group_id (str): Group ID where the HG is located.
+            activated (bool): True to activate number and False to deactivate.
+            numbers (list): List of target numbers to update.
+
+        Returns:
+            JSON: All numbers assigned to group with activation state.
+        """
+        
         endpoint = "/groups/dns"
         
         data = {
@@ -820,7 +813,7 @@ class Put():
 
         Args:
             hunt_group_user_id (str): Service provider ID of where the group that hosts the HG is located.
-            group_id (_type_): Group ID of where the HG is located.
+            group_id (str): Group ID of where the HG is located.
             service_user_id (str): Target service user ID of the HG.
             updates (dict): Updates to be applied to HG.
 

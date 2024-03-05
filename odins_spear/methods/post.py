@@ -101,6 +101,17 @@ class Post():
 #DN
 
     def group_dns(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
+        """Adds a range of numbers to a Group. Range of numbers must be complete and 
+        format of number must follow: +{country code}-{number}.
+        
+        Adding a singular number - Set both the start and end of range parameters as the same number.
+       
+        Args:
+            service_provider_id (str): Service provider ID where the target group is located. 
+            group_id (str): Group ID where numbers should be added to.
+            start_of_range_number (int): Starting number in range to add to group. 
+            end_of_range_number (int): Ending number in range to add to group. 
+        """
         
         endpoint = f"/groups/dns"
         
@@ -119,6 +130,17 @@ class Post():
     
     
     def group_dns_assign_bulk(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
+        """Adds a range of numbers to a Group. Range of numbers must be complete and 
+        format of number must follow: +{country code}-{number}.
+        
+        Adding a singular number - Set both the start and end of range parameters as the same number.
+       
+        Args:
+            service_provider_id (str): Service provider ID where the target group is located. 
+            group_id (str): Group ID where numbers should be added to.
+            start_of_range_number (int): Starting number in range to add to group. 
+            end_of_range_number (int): Ending number in range to add to group. 
+        """
         
         endpoint = f"/groups/dns/assign/bulk"
         

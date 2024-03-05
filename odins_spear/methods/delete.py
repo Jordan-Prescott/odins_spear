@@ -71,7 +71,19 @@ class Delete():
 #DIRECTROUTE
 #DN
 
-    def group_dns(self, service_provider_id: str, group_id: str, start_of_range_number: int, end_of_range_number: int):
+    def group_dns(self, service_provider_id: str, group_id: str, 
+                  start_of_range_number: int, end_of_range_number: int):
+        """Removes range of numbers from a Group. 
+
+        Args:
+            service_provider_id (str): Service provider ID where the group is located. 
+            group_id (str): Group ID where numbers are hosted.
+            start_of_range_number (str): Starting number in range to remove from group. 
+            end_of_range_number (str): Ending number in range to remove from group.
+
+        Returns:
+            JSON: This method does not return any specific value.
+        """
         
         endpoint = f"/groups/dns"
         
