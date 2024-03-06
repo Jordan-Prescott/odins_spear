@@ -1009,7 +1009,7 @@ class Put():
         return self.requester.put(endpoint, data=updates)
         
     
-    def user_portal_passcode(self, user_id: str, new_passcode: int):
+    def user_portal_passcode(self, user_id: str, new_passcode: str):
         """_summary_
 
         Args:
@@ -1023,7 +1023,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        if new_passcode < 4 or new_passcode > 6:
+        if len(new_passcode) < 4 or len(new_passcode) > 6:
             raise AOInvalidCode
         
         endpoint = "/users/portal-passcode"
