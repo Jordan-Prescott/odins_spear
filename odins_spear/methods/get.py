@@ -435,15 +435,13 @@ class Get():
         """Generates multiple SIP passwords to the limit set in parameters. Defaults to 10.
 
         Args:
-            service_provider_id (str): Service Provider ID where Group is located.
-            group_id (str): Group ID to generate SIP password for. 
             limit (int, optional): Number of passwords api will return. Defaults to 10.
 
         Returns:
             dict: Mutliple SIP passwords generated according to the groups rules.
         """
 
-        endpoint = f"/sip-password/generate&limit={limit}"
+        endpoint = f"/password/generate?limit={limit}"
         
         return self.requester.get(endpoint)
 
