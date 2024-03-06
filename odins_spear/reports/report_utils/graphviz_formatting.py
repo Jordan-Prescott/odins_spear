@@ -1,62 +1,60 @@
 """ Graphviz formatting for standardisation in reports.
 """
     
+class GraphvizFormatter:
     
-class GraphvizFormatter():
+    """
+    Colours:
+    - Black: 020300
+    - Orange: FFA400 - Darker: B87700
+    - Red: 95190C - Darker: 5E1008
+    - Purple: 5B5F97 - Darker: 3D4066
+    - Redish: A23E48 - Darker: 68272E
+    """
     
     def __init__(self):
-        self.flow_node = {
-                'shape': 'box',
-                'style': 'filled',
-                'margin': '0.2',
-                'color': '#01162a',
-                'fontname': 'Arial',
-                'fontcolor': 'white'}
-        self.interactive_node = {
-            'shape': 'Mrecord',
-            'penwidth': '2',
+        self.start = {
+            'shape': 'oval',
             'style': 'filled',
-            'fontname': 'Helvetica',
-            'fontcolor': 'white',
-            'fillcolor': '#594d6b',
-            'color': '#292037'}
-        self.info_node = {
-            'shape': 'Mrecord',
-            'penwidth': '2',
-            'width': '2',
-            'style': 'filled',
-            'fontname': 'Helvetica',
-            'fontcolor': 'white',
-            'fillcolor': '#9d6fb8',
-            'color': '#6E4E81',
+            'margin': '0.2',
+            'color': '#020300',
+            'fillcolor': 'white',
+            'fontname': 'Arial',
+            'fontcolor': 'white'
         }
-        self.script_node = {
-            'shape': 'Mrecord',
-            'penwidth': '2',
-            'width': '2',
+        self.auto_attendant = {
+            'shape': 'circle',
             'style': 'filled',
-            'fontname': 'Helvetica',
-            'fontcolor': 'white',
-            'fillcolor': '#b37196',
-            'color': '#7B4F68'
+            'margin': '0.2',
+            'color': '#95190C',
+            'fillcolor': 'white',
+            'fontname': 'Arial',
+            'fontcolor': 'white'
         }
-        self.transfer_node = {
-            'shape': 'Mrecord',
-            'penwidth': '2',
-            'width': '2',
+        self.call_centre = {
+            'shape': 'parallelogram',
             'style': 'filled',
-            'fontname': 'Helvetica',
-            'fontcolor': 'white',
-            'fillcolor': '#c87273',
-            'color': '#c87273'
+            'margin': '0.2',
+            'color': '#A23E48',
+            'fillcolor': 'white',
+            'fontname': 'Arial',
+            'fontcolor': 'white'
         }
-        self.sms_node = {
-            'shape': 'Mrecord',
-            'penwidth': '2',
-            'width': '2',
+        self.hunt_group = {
+            'shape': 'parallelogram',
             'style': 'filled',
-            'fontname': 'Helvetica',
-            'fontcolor': 'white',
-            'fillcolor': '#c87273',
-            'color': '#844B4C'
+            'margin': '0.2',
+            'color': '#5B5F97',
+            'fillcolor': 'white',
+            'fontname': 'Arial',
+            'fontcolor': 'white'
+        }
+        self.user = {
+            'shape': 'diamond',
+            'style': 'filled',
+            'margin': '0.2',
+            'color': '#FFA400',
+            'fillcolor': 'white',
+            'fontname': 'Arial',
+            'fontcolor': 'white'
         }
