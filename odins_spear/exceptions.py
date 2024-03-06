@@ -99,3 +99,11 @@ class OSInvalidBroadworkService(OAError):
 
     def __str__(self) -> str:
         return f"Service invalid, please check the services you have given are valid Broadwork services."
+    
+ 
+class OSInvalidPasswordType(OAError):
+    """ Raised when password requested is invalid or not supported.  
+    """
+
+    def __str__(self) -> str:
+        return f"Invalid or unsupported password, please review supported passwords."   

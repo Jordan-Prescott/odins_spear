@@ -36,9 +36,20 @@ class Scripter:
         return scripts.bulk_enable_voicemail.main(self.api, users)
 
 
-    # TODO: How will users be passed in
-    def bulk_password_reset(self, users):
-        return scripts.bulk_password_reset.main(self.api, users)
+    def bulk_password_reset(self, service_provider_id: str, group_id: str, users: list, password_type: str):
+        """ Resets a list of users SIP passwords or Voicemail passcodes. Specifify in password_type with the options of
+        'SIP' or 'Voicemail' and the script will perform the necessary actions. 
+
+        Args:
+            service_provider_id (str): Service Provider ID where group is hosted.
+            group_id (str): Group ID where target users are located.
+            users (list): List of User IDs of the target users to reset the password.
+            password_type (str): Type of password to reset either 'SIP' or 'Voicemail'. Only accepts these two options. 
+
+        Returns:
+            Dict: Users and their new passwords.
+        """
+        return scripts.bulk_password_reset.main(self.api, service_provider_id, group_id, users, password_type)
 
 
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
