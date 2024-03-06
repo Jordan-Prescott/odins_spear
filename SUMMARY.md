@@ -61,6 +61,7 @@
       * [✔️ AA, CC, HG Audit](docs/features/scripter/aa-cc-hg-audit.md)
       * [🔢 Move Numbers](docs/features/scripter/move-numbers.md)
       * [🔢 Remove Numbers](docs/features/scripter/remove-numbers.md)
+      * [🔑 Bulk Password Reset](docs/features/scripter/bulk-password-reset.md)
     * [📈 Reporter](docs/features/reporter.md)
   * [🖌️ Library Design](docs/library-design/README.md)
     * [🔗 Object Relationship](docs/library-design/object-relationship.md)
