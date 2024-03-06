@@ -175,9 +175,9 @@ class Post():
        
         Args:
             service_provider_id (str): Service provider ID where the target group is located. 
-            group_id (str): Group ID where numbers should be added to.
-            start_of_range_number (str): Starting number in range to add to group. 
-            end_of_range_number (str): Ending number in range to add to group. 
+            group_id (str): Group ID where numbers where numbers are located.
+            start_of_range_number (str): Starting number in range to unassign in group. 
+            end_of_range_number (str): Ending number in range to unassign in group.
             
         Returns:
             None: This method does not return any specific value. 

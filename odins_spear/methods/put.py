@@ -772,7 +772,7 @@ class Put():
             service_provider_id (str): Service provider ID where the group is located. 
             group_id (str): Group ID where numbers are hosted.
             activated (bool): True to activate number and False to deactivate.
-            numbers (list): List of target numbers to update.
+            numbers (list): List of target numbers to update. These must be strings and follow correct format.
 
         Returns:
             JSON: All numbers assigned to group with activation state.

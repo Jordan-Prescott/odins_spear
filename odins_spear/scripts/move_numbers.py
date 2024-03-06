@@ -2,6 +2,8 @@ import odins_spear.logger as logger
 
 def main(api, current_service_provider_id: str, current_group_id: str, target_service_provider_id: str, 
          target_group_id: str, start_of_range_number: str, end_of_range_number: str = None) -> bool:
+    """ Moves singular or a range of numbers from one group to another located on the same Broadwork instance.
+    """
     
     logger.log_info(f"Removing numbers from {current_group_id}.")
     # delete number from group

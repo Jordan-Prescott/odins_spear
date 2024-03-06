@@ -9,7 +9,7 @@ def main(api, service_provider_id: str, group_id: str, users: list, password_typ
     if password_type.lower() == "sip":
         
         logger.log_info("Generating new SIP passwords.")
-        new_passwords = api.get.passwords_generate(service_provider_id, group_id, len(users))['passwords']
+        new_passwords = api.get.sip_passwords_generate(service_provider_id, group_id, len(users))['passwords']
         users_and_new_passwords = list(zip(users, new_passwords))
         
         logger.log_info("Setting new SIP passwords.")

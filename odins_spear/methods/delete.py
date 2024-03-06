@@ -72,7 +72,7 @@ class Delete():
 #DN
 
     def group_dns(self, service_provider_id: str, group_id: str, 
-                  start_of_range_number: int, end_of_range_number: int):
+                  start_of_range_number: str, end_of_range_number: str):
         """Removes range of numbers from a Group. 
 
         Args:
@@ -101,7 +101,7 @@ class Delete():
         return self.requester.delete(endpoint, data=data)
     
     
-    def service_provider_dns(self, service_provider_id: str, start_of_range_number: int, end_of_range_number: int):
+    def service_provider_dns(self, service_provider_id: str, start_of_range_number: str, end_of_range_number: str):
         """Removes range of numbers from a Service Proiver or Enterprise. 
 
         Args:
