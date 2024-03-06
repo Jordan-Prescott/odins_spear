@@ -2,7 +2,7 @@
 description: my_api.get.sip_passwords_generate()
 ---
 
-# 🗝️ Copy of SIP Password Generate
+# 🗝️ SIP Passwords Generate
 
 Generates multiple SIP passwords to the limit set in parameters. Defaults to 10.
 

@@ -24,7 +24,7 @@
         * [🗝️ Passcode Generate](docs/methods/get/password-generate/passcode-generate.md)
         * [🗝️ Passcodes Generate](docs/methods/get/password-generate/passcodes-generate.md)
         * [🗝️ SIP Password Generate](docs/methods/get/password-generate/sip-password-generate.md)
-        * [🗝️ Copy of SIP Password Generate](docs/methods/get/password-generate/copy-of-sip-password-generate.md)
+        * [🗝️ SIP Passwords Generate](docs/methods/get/password-generate/sip-passwords-generate.md)
     * [✉️ Post](docs/methods/post.md)
       * [🔢 DNs](docs/methods/post/dns/README.md)
         * [1️⃣ Group DNs](docs/methods/post/dns/group-dns.md)
