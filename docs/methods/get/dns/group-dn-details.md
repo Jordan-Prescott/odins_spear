@@ -1,0 +1,538 @@
+---
+description: my_api.get.group_dn_details()
+---
+
+# 3️⃣ Group DN Details
+
+Gets all numbers assigned to Group in detail. This will show where the number is assigned in a group such as which user or hunt group.
+
+### Parameters&#x20;
+
+* service\_provider\_id (str): Service Provider or Enterprise ID where group is hosted.&#x20;
+* group\_id (str): Group ID of target group where numbers are located.
+
+### Returns
+
+* List: List of numbers matching search criteria
+
+### How To Use:
+
+{% code overflow="wrap" %}
+```python
+from odins_spear import api
+
+my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api.authenticate()
+
+my_api.get.group_dn_details(
+    "serviceProviderId",
+    "groupID",
+)
+```
+{% endcode %}
+
+### Example Returned Data of SIP Passwords (Formatted)
+
+```
+{
+  "serviceProviderId": "ent.odin",
+  "groupId": "grp.odin",
+  "dns": [
+    {
+      "phoneNumbers": "+1-2345678900",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": "Group Calling Line ID",
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-2345678900",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-2345678900",
+      "department": null,
+      "activated": false,
+      "userId": "group.paging2@parkbenchsolutions.com",
+      "lastName": "group.paging2",
+      "firstName": "Group Paging",
+      "extension": 78900,
+      "emailAddress": null,
+      "userType": "Group Paging",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-2345678900",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-2345678905",
+      "department": null,
+      "activated": true,
+      "userId": "huntgroup1@parkbenchsolutions.com",
+      "lastName": "huntgroup1",
+      "firstName": "Hunt Group",
+      "extension": null,
+      "emailAddress": null,
+      "userType": "Hunt Group",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-2345678905",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-2345678908",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-2345678908",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-5132224003",
+      "department": null,
+      "activated": false,
+      "userId": "aavis1@parkbenchsolutions.com",
+      "lastName": "aavis1",
+      "firstName": "Auto Attendant",
+      "extension": 24003,
+      "emailAddress": null,
+      "userType": "Auto Attendant",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-5132224003",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-5134004000 - +1-5134004002",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-5134004000",
+      "max": "+1-5134004002"
+    },
+    {
+      "phoneNumbers": "+1-5134004003",
+      "department": null,
+      "activated": true,
+      "userId": "6106424235X4020@parkbenchsolutions.com",
+      "lastName": 4003,
+      "firstName": 4003,
+      "extension": "04003",
+      "emailAddress": "developer@parkbenchsolutions.com",
+      "userType": "Normal",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-5134004003",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-5135564000",
+      "department": null,
+      "activated": true,
+      "userId": "5135564000@parkbenchsolutions.com",
+      "lastName": "Demo user",
+      "firstName": "Marc",
+      "extension": 64000,
+      "emailAddress": null,
+      "userType": "Normal",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-5135564000",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-5135564001 - +1-5135564004",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-5135564001",
+      "max": "+1-5135564004"
+    },
+    {
+      "phoneNumbers": "+1-5135779000 - +1-5135779005",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-5135779000",
+      "max": "+1-5135779005"
+    },
+    {
+      "phoneNumbers": "+1-7275551000",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-7275551000",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8001236780 - +1-8001236782",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8001236780",
+      "max": "+1-8001236782"
+    },
+    {
+      "phoneNumbers": "+1-8135551001",
+      "department": null,
+      "activated": true,
+      "userId": "flexible1@parkbenchsolutions.com",
+      "lastName": "flexible1",
+      "firstName": "Flexible Seating Host",
+      "extension": 51001,
+      "emailAddress": null,
+      "userType": "Flexible Seating Host",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8135551001",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8135551002",
+      "department": null,
+      "activated": true,
+      "userId": "4001@parkbenchsolutions.com",
+      "lastName": 4001,
+      "firstName": 4001,
+      "extension": 51401,
+      "emailAddress": "developer@parkbenchsolutions.com",
+      "userType": "Normal",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8135551002",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8135551004",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8135551004",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8135551005",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8135551005",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8135551006 - +1-8135551008",
+      "department": null,
+      "activated": true,
+      "userId": "huntgroup1@parkbenchsolutions.com",
+      "lastName": "huntgroup1",
+      "firstName": "Hunt Group",
+      "extension": null,
+      "emailAddress": null,
+      "userType": "Hunt Group",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8135551006",
+      "max": "+1-8135551008"
+    },
+    {
+      "phoneNumbers": "+1-8135551009",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8135551009",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551001",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551001",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551020",
+      "department": null,
+      "activated": true,
+      "userId": "aatest1@parkbenchsolutions.com",
+      "lastName": "aatest11",
+      "firstName": "Auto Attendant",
+      "extension": 51020,
+      "emailAddress": null,
+      "userType": "Auto Attendant",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551020",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551021 - +1-8595551022",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551021",
+      "max": "+1-8595551022"
+    },
+    {
+      "phoneNumbers": "+1-8595551023",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551023",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551024",
+      "department": null,
+      "activated": true,
+      "userId": "group.paging1@parkbenchsolutions.com",
+      "lastName": "group.paging1",
+      "firstName": "Group Paging",
+      "extension": 51024,
+      "emailAddress": null,
+      "userType": "Group Paging",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551024",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551025 - +1-8595551029",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551025",
+      "max": "+1-8595551029"
+    },
+    {
+      "phoneNumbers": "+1-8595551031 - +1-8595551102",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551031",
+      "max": "+1-8595551102"
+    },
+    {
+      "phoneNumbers": "+1-8595551104 - +1-8595551202",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551104",
+      "max": "+1-8595551202"
+    },
+    {
+      "phoneNumbers": "+1-8595551204 - +1-8595551400",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551204",
+      "max": "+1-8595551400"
+    },
+    {
+      "phoneNumbers": "+1-8595551401",
+      "department": null,
+      "activated": true,
+      "userId": "4001@parkbenchsolutions.com",
+      "lastName": 4001,
+      "firstName": 4001,
+      "extension": 51401,
+      "emailAddress": "developer@parkbenchsolutions.com",
+      "userType": "Normal",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551401",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551402",
+      "department": null,
+      "activated": true,
+      "userId": "flexible2@parkbenchsolutions.com",
+      "lastName": "flexible2",
+      "firstName": "Flexible Seating Host",
+      "extension": 51402,
+      "emailAddress": null,
+      "userType": "Flexible Seating Host",
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551402",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551403",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551403",
+      "max": ""
+    },
+    {
+      "phoneNumbers": "+1-8595551404 - +1-8595552001",
+      "department": null,
+      "activated": true,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-8595551404",
+      "max": "+1-8595552001"
+    },
+    {
+      "phoneNumbers": "+1-9709010012 - +1-9709010014",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-9709010012",
+      "max": "+1-9709010014"
+    },
+    {
+      "phoneNumbers": "+1-9709580011",
+      "department": null,
+      "activated": false,
+      "userId": null,
+      "lastName": null,
+      "firstName": null,
+      "extension": null,
+      "emailAddress": null,
+      "userType": null,
+      "countryCode": 1,
+      "nationalPrefix": null,
+      "min": "+1-9709580011",
+      "max": ""
+    }
+  ]
+}
+```

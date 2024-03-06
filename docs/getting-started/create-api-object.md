@@ -1,10 +1,10 @@
-# ⚙ Create API Object
+# ⚙️ Create API Object
 
 The API object is the core object of the library, all functionality is accessed through this object. The first step is to create the object and pass it the base URL of the API, your username, and the environment variable.&#x20;
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```python
-from odin_api import api
+from odins_spear import api
 
 magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 ```
@@ -12,7 +12,7 @@ magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", passw
 
 Once you have built the object the next step is to authenticate it, this authorizes the object to interact with the Odin API it is the equivalent of you logging in through the web portal. To authenticate this call the .authenticate() method on the object.&#x20;
 
-<pre class="language-python" data-overflow="wrap" data-line-numbers><code class="lang-python"><strong>from odin_api import api
+<pre class="language-python" data-overflow="wrap" data-line-numbers><code class="lang-python"><strong>from odins_spear import api
 </strong><strong>
 </strong><strong>magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 </strong>magic.authenticate()

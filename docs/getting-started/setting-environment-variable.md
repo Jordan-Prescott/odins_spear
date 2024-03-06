@@ -1,4 +1,4 @@
-# ⚠ Setting Environment Variable
+# ⚠️ Setting Environment Variable
 
 In the library to send requests an API object is built which needs your Odin username and password. The username is passed in as a variable however the password parameter is the key to your local environment variable where the value is your password. The API object will pull this password from your local machine and use it to authenticate.&#x20;
 
@@ -12,7 +12,7 @@ Setting environment variable (Windows):
 
 Passing environment variable to API object:
 
-<pre class="language-python" data-overflow="wrap"><code class="lang-python"><strong>from odin_api import api
+<pre class="language-python" data-overflow="wrap"><code class="lang-python"><strong>from odins_spear import api
 </strong>
 magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 </code></pre>
