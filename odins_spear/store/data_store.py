@@ -6,10 +6,9 @@ from odins_spear.utils import parsing
 from . import broadwork_entities as bre
 
 class DataStore:
-    """ Local store of objects, when each object is instantiated it is added to
-    the appropriate list.
+    """ Data store for objects in program. 
 
-    Singleton design pattern to get store use get_instance().
+    Note: Singleton design pattern to get store use get_instance().
     """
 
     __instance = None
@@ -36,24 +35,15 @@ class DataStore:
             self.devices: List[bre.Device] = []
 
             DataStore.__instance = self
-            
-            
-    def get_group_state(api, group: bre.Group) -> None:
-        """ takes in group id and loads group state into broadworks entities.
-
-        :param api: API object used to send requests to create group state in store.
-        :param group: Group object of Broadworks group user would like to load state.
-        """
-        pass
 
 
     def store_object(self, *entities) -> None:
-        """ Takes in objects within the odin_api and custom and stores in lists
-        depending on type.
+        """ Takes in a list/ single Broadwork enetities and saves them to the correct list.
 
-        :param entity: broadwork entities used in odin_api
-        """
-
+        Args: 
+            entities (args): broadwork entities such as user, hunt group, call center etc.
+        """      
+        
         for e in entities:
             if isinstance(e, api.Api):
                 self.apis.append(e)
@@ -77,9 +67,15 @@ class DataStore:
                 self.other_entities.append(e)
     
     
-    def export_store(self) -> str:
-        """Export all objects in the store and their relationships in JSON format."""
+    def export_store_to_json(self) -> str:
+        """Creates a JSON output of all the entities in Data Store.
+
+        Returns:
+            str: JSON output of all entities in Data Store.
+        """
+        
         export_data = {}
+        
         object_lists = {
             'apis': self.apis,
             'service_providers': self.service_providers,
@@ -100,11 +96,10 @@ class DataStore:
 
 
     def __str__(self) -> str:
-        """ returns complete list of entities in store.
-        """
-        entities = self.apis + self.enterprises + self.service_providers + self.groups + self.trunk_groups + \
-            self.hunt_groups + self.users
-
-        # loops entities and joins into string
+        
+        entities = self.apis + self.enterprises + self.service_providers + self.groups + \
+        self.trunk_groups + self.hunt_groups + self.users
+            
         string = lambda e: "\n".join(map(str, e))
+        
         return string(entities)
