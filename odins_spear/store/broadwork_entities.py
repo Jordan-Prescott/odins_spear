@@ -9,7 +9,6 @@ class ServiceProvider:
     name: str
     groups: List['Group'] = field(default_factory=list)
     is_enterprise: bool = False
-    default_domain: str = None
    
     
 @dataclass(kw_only=True)
@@ -19,6 +18,7 @@ class Group:
     name: str
     default_domain: str
     calling_line_id_phone_number: str = None
+    auto_attendants: List['AutoAttendant'] = field(default_factory=list)
     trunk_groups: List['TrunkGroup'] = field(default_factory=list)
     call_centers: List['CallCenter'] = field(default_factory=list)
     hunt_groups: List['HuntGroup'] = field(default_factory=list)
@@ -32,14 +32,14 @@ class Group:
         
 @dataclass(kw_only=True)
 class TrunkGroup:
-    name: str
+    service_user_id: str
     group: Type['Group']
     users: List['User'] = field(default_factory=list)
-    enable_bursting: bool = False
     max_active_calls: int = None
+    bursting_max_active_calls: bool = False
 
     def __post_init__(self):
-        self.service_provider_id = self.group.service_provider_id.id
+        self.group.trunk_groups.append(self)
 
 
 @dataclass(kw_only=True)
@@ -61,7 +61,6 @@ class AAMenu:
 @dataclass(kw_only=True)
 class AutoAttendant:
     service_user_id: str
-    name: str
     group: Type['Group']
     aliases: List[str] = field(default_factory= [list])
     type: str = None
@@ -69,13 +68,12 @@ class AutoAttendant:
     after_hours_menu: Type['AAMenu'] = None
 
     def __post_init__(self):
-        self.serviceProviderId = self.group.ServiceProvider.id
+        self.group.auto_attendants.append(self)
         
 
 @dataclass(kw_only=True)
 class CallCenter:
     service_user_id: str
-    name: str
     group: Type['Group']
     agents: List['User'] = field(default_factory=list)
     type: str = None
@@ -92,7 +90,6 @@ class CallCenter:
     stranded_call_unavailable_transfer_to_phone_number: bool = False
     
     def __post_init__(self):
-        self.service_provider_id = self.group.service_provider_id.id
         self.group.call_centers.append(self)
 
 
@@ -111,7 +108,6 @@ class HuntGroup:
     
     
     def __post_init__(self):
-        self.service_provider_id = self.group.service_provider_id.id
         self.group.hunt_groups.append(self)
     
         
@@ -125,10 +121,9 @@ class User:
     phone_number: str = None
     aliases: List[str] = field(default_factory=list)
 
+
     def __post_init__(self):
         self.group.users.append(self)
-        self.id = self.id + self.group.default_domain
-        self.group_id = self.group.id
  
         
 @dataclass(kw_only=True)
