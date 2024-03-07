@@ -63,25 +63,143 @@ class Get():
 
         return self.requester.get(endpoint)
 
+
     def group_call_center(self, service_user_id: str):
 
         endpoint = f"/groups/call-centers?serviceUserId={service_user_id}"
 
         return self.requester.get(endpoint)
 
+
     def user_call_center(self, user_id: str):
 
         endpoint = f"/users/call-center?userId={user_id}"
 
         return self.requester.get(endpoint)
+    
+    
+    def group_call_center_bounced_calls(self, service_user_id: str):
+        
+        endpoint = f"/groups/call-centers/bounced-calls?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def group_call_center_forced_forwarding(self, service_user_id: str):
+        
+        endpoint = f"/groups/call-centers/forced-forwarding?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def group_call_center_overflow(self, service_user_id):
+        
+        endpoint = f"/groups/call-centers/overflow?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def group_call_center_stranded_calls(self, service_user_id):
+        
+        endpoint = f"/groups/call-centers/stranded-calls?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def group_call_center_stranded_calls_unavailable(self, service_user_id):
+        
+        endpoint = f"/groups/call-centers/stranded-calls-unavailable?serviceUserId={service_user_id}"
+        
+        return self.requester.get(endpoint)
 
 # CALL CONTROL
 # CALL FORWARDING ALWAYS
+
+    def user_call_forwarding_always(self, user_id: str):
+        
+        endpoint = f"/users/call-forwarding-always?userId={user_id}"
+        
+        return self.requester.get(endpoint) 
+    
+    
+    def bulk_call_forwarding_always(self, service_provider_id: str, group_id: str):
+        
+        endpoint = f"/users/call-forwarding-always/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
 # CALL FORWARDING ALWAYS SECONDARY
 # CALL FORWARDING BUSY
+
+    def user_call_forwarding_busy(self, user_id: str):
+        
+        endpoint = f"/users/call-forwarding-busy?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def bulk_call_forwarding_busy(self, service_provider_id: str, group_id: str):
+        
+        endpoint = f"/users/call-forwarding-busy/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
 # CALL FORWARDING NO ANSWER
+
+    def user_call_forwarding_no_answer(self, user_id: str):
+        
+        endpoint = f"/users/call-forwarding-no-answer?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def bulk_call_forwarding_no_answer(self, service_provider_id: str, group_id: str):
+        
+        endpoint = f"/users/call-forwarding-no-answer/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+
 # CALL FORWARDING NOT REACHABLE
+
+    def user_call_forwarding_not_reachable(self, user_id: str):
+        
+        endpoint = f"/users/call-forwarding-not-reachable?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def bulk_call_forwarding_not_reachable(self, service_provider_id: str, group_id: str):
+        
+        endpoint = f"/users/call-forwarding-not-reachable/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+
+
 # CALL FORWARDING SELECTIVE
+
+    def user_call_forwarding_selective(self, user_id: str):
+        
+        endpoint = f"/users/call-forwarding-selective?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def user_call_forwarding_selective_criterias(self, user_id: str):
+        
+        endpoint = f"/users/call-forwarding-selective/criteria?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def user_call_forwarding_selective_criteria(self, user_id: str, criteria_name: str):
+        
+        endpoint = f"/users/call-forwarding-selective/criteria?criteriaName={criteria_name}&userId={user_id}"
+        
+        return self.requester.get(endpoint)
+    
+
 # CALL FORWARDING SETTINGS
 # CALL NOTIFY
 # CALL PARK
