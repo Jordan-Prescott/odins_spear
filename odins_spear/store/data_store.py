@@ -20,6 +20,7 @@ class DataStore:
             DataStore()
         return DataStore.__instance
 
+
     def __init__(self):
         if DataStore.__instance is not None:
             raise Exception("Singleton cannot be instantiated more than once!")
@@ -33,9 +34,9 @@ class DataStore:
             self.hunt_groups: List[bre.HuntGroup] = []
             self.users: List[bre.User] = []
             self.devices: List[bre.Device] = []
-            self.other_entities = [] #Non-common or custom objects
 
             DataStore.__instance = self
+            
             
     def get_group_state(api, group: bre.Group) -> None:
         """ takes in group id and loads group state into broadworks entities.
@@ -44,6 +45,7 @@ class DataStore:
         :param group: Group object of Broadworks group user would like to load state.
         """
         pass
+
 
     def store_object(self, *entities) -> None:
         """ Takes in objects within the odin_api and custom and stores in lists
@@ -74,6 +76,7 @@ class DataStore:
             else:
                 self.other_entities.append(e)
     
+    
     def export_store(self) -> str:
         """Export all objects in the store and their relationships in JSON format."""
         export_data = {}
@@ -88,13 +91,13 @@ class DataStore:
             'hunt_groups': self.hunt_groups,
             'users': self.users,
             'devices': self.devices,
-            'other_entities': self.other_entities
         }
 
         for key, object_list in object_lists.items():
             export_data[key] = parsing.export_objects(object_list)
 
         return json.dumps(export_data, indent=2)
+
 
     def __str__(self) -> str:
         """ returns complete list of entities in store.
