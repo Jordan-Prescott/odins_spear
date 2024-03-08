@@ -53,7 +53,6 @@ class AAKey:
 
 @dataclass(kw_only=True)
 class AAMenu:
-    announcement_selection: str = None
     enable_first_menu_level_extension_dialing: bool = False
     keys: List[AAKey] = field(default_factory=list)
 
