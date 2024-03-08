@@ -148,6 +148,6 @@ class Scripter:
             end_of_number_range (str): Ending nummber in range of numbers you would like to remove. If you need to remove
             only one number do not enter a value for this paramter. Defaults to None.
         """
-        return scripts.remove_numbers(self.api, service_provider_id, group_id, start_of_range_number, 
+        return scripts.remove_numbers.main(self.api, service_provider_id, group_id, start_of_range_number, 
                        end_of_range_number)
     
