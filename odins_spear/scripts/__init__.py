@@ -12,7 +12,7 @@ __all__ = [
     "user_association"
 ]
 
-from _reporter_call_flow import main
+from ._reporter_call_flow import main
 from .aa_cc_hg_audit import main
 from .bulk_enable_voicemail import main
 from .bulk_password_reset import main
