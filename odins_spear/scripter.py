@@ -153,4 +153,16 @@ class Scripter:
         """
         return scripts.remove_numbers.main(self.api, service_provider_id, group_id, start_of_range_number, 
                        end_of_range_number)
+        
+    
+    def service_provider_trunking_capacity(self, service_provider_id: str):
+        """_summary_
+
+        Args:
+            service_provider_id (str): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        return scripts.service_provider_trunking_capacity.main(self.api, service_provider_id)
     
