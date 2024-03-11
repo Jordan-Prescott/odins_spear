@@ -37,6 +37,8 @@
     * [📤 Put](docs/methods/put/README.md)
       * [🔢 DNs](docs/methods/put/dns.md)
         * [1️⃣ Group DNs Activate](docs/methods/put/dns/group-dns-activate.md)
+      * [🔑 Authentication](docs/methods/put/authentication/README.md)
+        * [🔏 User Web Authentication Password](docs/methods/put/authentication/user-web-authentication-password.md)
       * [💬 Auto Attendants](docs/methods/put/auto-attendants/README.md)
         * [🟢 Auto Attendant Status](docs/methods/put/auto-attendants/auto-attendant-status.md)
         * [🍅 Auto Attendant](docs/methods/put/auto-attendants/auto-attendant.md)

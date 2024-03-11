@@ -19,6 +19,8 @@ api.get.passwords_generate()
 api.put.user_authentication_service()
 api.get.passcodes_generate()
 api.put.user_portal_passcode()
+api.get.passwords_generate()
+api.put.user_web_authentication_password()
 ```
 
 ### Parameters&#x20;
@@ -64,7 +66,15 @@ my_api.scripter.bulk_password_reset(
         "ServiceProviderID",
         "GroupID",
         users=users,
-        password_type="Voicemail"   
+        password_type="vm"   
+    )
+    
+# changes Web Authentication password for users
+my_api.scripter.bulk_password_reset(
+        "ServiceProviderID",
+        "GroupID",
+        users=users,
+        password_type="web"   
     )
 ```
 
