@@ -30,9 +30,9 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     - get.user_call_forwarding_not_reachable - X
     
     
-    - get.group_schedules
-    - get.group_events  
-    - get.user_alternate_numbers  
+    - get.group_schedules - X
+    - get.group_events  - X
+    - get.user_alternate_numbers  - X
     """
     
     # locate number using broadworks_entity_type to zone in on correct location
