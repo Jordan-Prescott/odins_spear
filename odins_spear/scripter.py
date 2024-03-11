@@ -46,6 +46,9 @@ class Scripter:
             users (list): List of User IDs of the target users to reset the password.
             password_type (str): Type of password to reset either 'SIP' or 'Voicemail'. Only accepts these two options. 
 
+        Raises:
+            OSInvalidPasswordType: Only valid password options are SIP, AUTH, WEB. If another is requested this will be raised. 
+            
         Returns:
             Dict: Users and their new passwords.
         """
