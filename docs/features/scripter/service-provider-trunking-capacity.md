@@ -2,7 +2,7 @@
 description: my_api.scripter.service_provider_trunking_capacity()
 ---
 
-# 🔑 Service Provider Trunking Capacity
+# 📜 Service Provider Trunking Capacity
 
 Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at calculated.
 

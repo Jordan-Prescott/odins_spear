@@ -96,7 +96,7 @@
       * [🔢 Move Numbers](docs/features/scripter/move-numbers.md)
       * [🔢 Remove Numbers](docs/features/scripter/remove-numbers.md)
       * [🔑 Bulk Password Reset](docs/features/scripter/bulk-password-reset.md)
-      * [🔑 Service Provider Trunking Capacity](docs/features/scripter/bulk-password-reset-1.md)
+      * [📜 Service Provider Trunking Capacity](docs/features/scripter/service-provider-trunking-capacity.md)
     * [📈 Reporter](docs/features/reporter.md)
   * [🖌️ Library Design](docs/library-design/README.md)
     * [🔗 Object Relationship](docs/library-design/object-relationship.md)
