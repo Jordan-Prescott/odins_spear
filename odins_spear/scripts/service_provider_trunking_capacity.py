@@ -5,17 +5,17 @@ from tqdm import tqdm
 import odins_spear.logger as logger
 
 def main(api: object, service_provider_id: str):
-    
-    """
-    
-    service_provider_trunk_group_call_capacity
-    
-    
-    {{url}}/api/v2/groups?serviceProviderId=ent.odin
-    group_trunk_group_call_capacity
-    group_trunk_groups
-    group_trunk_group
-    
+    """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
+    This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
+    At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at 
+    calculated.
+
+    Args:
+        service_provider_id (str): Target Service Provider ID/ Enterprise ID that you would like the \
+            Trunk Call Capacity breakdown.
+
+    Returns:
+        JSON: JSON data of Trunking Call Capacity details of SP/ ENT, Groups, and Trunk Groups.
     """
     
     return_data = {}

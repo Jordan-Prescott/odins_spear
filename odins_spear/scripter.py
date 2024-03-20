@@ -156,13 +156,17 @@ class Scripter:
         
     
     def service_provider_trunking_capacity(self, service_provider_id: str):
-        """_summary_
+        """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
+        This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
+        At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at 
+        calculated.
 
         Args:
-            service_provider_id (str): _description_
+            service_provider_id (str): Target Service Provider ID/ Enterprise ID that you would like the \
+                Trunk Call Capacity breakdown.
 
         Returns:
-            _type_: _description_
+            JSON: JSON data of Trunking Call Capacity details of SP/ ENT, Groups, and Trunk Groups.
         """
         return scripts.service_provider_trunking_capacity.main(self.api, service_provider_id)
     
