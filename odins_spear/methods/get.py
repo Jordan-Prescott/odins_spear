@@ -54,7 +54,7 @@ class Get():
 # BROADWORKS RECEPTIONIST OFFICE
 # BROADWORKS RECEPTIONIST SMALL BUSINESS
 # BUSY LAMP FIELD
-# CALL CAPACITY
+# CALL CAPACITY  
 # CALL CENTER
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
@@ -297,6 +297,13 @@ class Get():
 # FLEXIBLE SEATING
 # GROUP PAGING
 # GROUPS
+    
+    def groups(self, service_provider_id: str):
+
+        endpoint = f"/groups?serviceProviderId={service_provider_id}"
+
+        return self.requester.get(endpoint)
+    
     
     def group(self, service_provider_id, group_id):
 
@@ -605,6 +612,27 @@ class Get():
         endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}&name={trunk_group_name}"
         
         return self.requester.get(endpoint)
+    
+    
+    def group_trunk_groups(self, service_provider_id: str, group_id: str):
+        
+        endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def service_provider_trunk_group_call_capacity(self, service_provider_id: str):
+        
+        endpoint = f"/service-providers/trunk-groups/call-capacity?serviceProviderId={service_provider_id}"
+        
+        return self.requester.get(endpoint)
+    
+    def service_provider_trunk_call_capacity_report(self, servive_provider_id: str):
+        
+        endpoint = f"/service-providers/trunk-groups/call-capacity/reports?serviceProviderId={servive_provider_id}"
+        
+        return self.requester.get(endpoint)
+        
 
 # TWO STAGE DIALING
 # USERS

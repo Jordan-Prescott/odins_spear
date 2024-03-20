@@ -7,6 +7,7 @@ __all__ = [
     "move_numbers",
     "remove_numbers",
     "service_pack_audit",
+    "service_provider_trunking_capacity",
     "user_activity",
     "user_association"
 ]
@@ -19,5 +20,6 @@ from .group_audit import main
 from .move_numbers import main
 from .remove_numbers import main
 from .service_pack_audit import main
+from .service_provider_trunking_capacity import main
 from .user_activity import main
 from .user_association import main
