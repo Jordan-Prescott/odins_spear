@@ -27,8 +27,6 @@ def main(api: object, service_provider_id: str):
     return_data["burstingMaxActiveCalls"] = service_provider_capacity["burstingMaxActiveCalls"]
     return_data["groupsCallCapacityTotal"] = 0
     return_data["groupsBurstingCallCapacityTotal"] = 0
-    return_data["callCapacityDifference"] = 0
-    return_data["burstingCallCapacityDifference"] = 0
     return_data["groups"] = []
     
     logger.log_info(f"Fetching complete list of groups in {service_provider_id}.")
