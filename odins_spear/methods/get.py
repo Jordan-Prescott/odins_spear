@@ -601,6 +601,15 @@ class Get():
 # TRUNK GROUPS
     
     def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str):
+        """Fetches Trunk Call Capacity data for a single Group. 
+
+        Args:
+            service_provider_id (str): Service Provider/ Enterprise ID where Group is located.
+            group_id (str): Target Group to return data on.
+
+        Returns:
+            Dict: Trunk Group Call Capacity data of target group.
+        """
         
         endpoint = f"/groups/trunk-groups/call-capacity?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -608,6 +617,16 @@ class Get():
     
     
     def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str):
+        """Fetches all Trunk Group details of a single Trunk Group in a Group .
+
+        Args:
+            service_provider_id (str): Service Provider/ Enterprise ID where Group is located.
+            group_id (str): Group ID where the target Trunk Group is located.
+            trunk_group_name (str): Target Trunk Group Name.
+
+        Returns:
+            Dict: Details of a target trunk group.
+        """
         
         endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}&name={trunk_group_name}"
         
@@ -615,6 +634,15 @@ class Get():
     
     
     def group_trunk_groups(self, service_provider_id: str, group_id: str):
+        """Fetches list of all trunk groups in a single group.
+
+        Args:
+            service_provider_id (str): Service Provider/ Enterprise ID where Group is located.
+            group_id (str): Group ID where the target Trunk Group is located.
+
+        Returns:
+            List: List of core details of all Trunk Groups located in a single Group.
+        """
         
         endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -622,12 +650,30 @@ class Get():
     
     
     def service_provider_trunk_group_call_capacity(self, service_provider_id: str):
+        """Fetches trunk call capacity details of a single Service Provider.
+
+        Args:
+            service_provider_id (str): Target Service Provider/ Enterprise ID.
+
+        Returns:
+            Dict: Trunk call capacity details of a single Service Provider/ Enterprise ID.
+        """
         
         endpoint = f"/service-providers/trunk-groups/call-capacity?serviceProviderId={service_provider_id}"
         
         return self.requester.get(endpoint)
     
+    
     def service_provider_trunk_call_capacity_report(self, servive_provider_id: str):
+        """Fetches trunk call capacity details of Service Provider/ Enterprise and all Groups in the SP/ ENT.
+
+        Args:
+            servive_provider_id (str): Target Service Provider/ Enterprise ID.
+
+        Returns:
+            Dict: Breakdown of all trunk call capacity details of target Service Provider/ Enterprise and all Groups \
+                in the target SP/ ENT.
+        """
         
         endpoint = f"/service-providers/trunk-groups/call-capacity/reports?serviceProviderId={servive_provider_id}"
         
