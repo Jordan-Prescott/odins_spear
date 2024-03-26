@@ -23,6 +23,22 @@ class Get():
 # ADMINISTRATORS
 # ADVICE OF CHARGE
 # ALTERNATE NUMBERS
+
+    def user_alternate_numbers(self, user_id: str):
+        """Fetches a list of a user/ service such as Auto Attendant, Hunt Group, or Call Centres 
+        alternate numebrs.
+
+        Args:
+            user_id (str): Target user/ service_user_id
+
+        Returns:
+            Dict: List of all alternate numbers assigned to the user/ service.
+        """
+        
+        endpoint = f"/users/alternate-numbers?userId={user_id}"
+        
+        return self.requester.get(endpoint)
+
 # ANSWER CONFIRMATION
 # ALTERNATE USER ID
 # ANNOUNCEMENTS
@@ -598,6 +614,20 @@ class Get():
 # ROUTE LIST
 # ROUTING PROFILE
 # SCHEDULES
+
+    def group_schedules(self, service_provider_id: str, group_id: str):
+        
+        endpoint = f"/groups/schedules?serviceProviderId={service_provider_id}&groupId={group_id}"
+        
+        return self.requester.get(endpoint)
+    
+    
+    def group_events(self, service_provider_id: str, group_id: str, name: str, type: str):
+        
+        endpoint = f"/groups/events?serviceProviderId={service_provider_id}&groupId={group_id}&name={name}&type={type}"
+        
+        return self.requester.get(endpoint)    
+
 # SECURITY CLASSIFICATION
 # SELECTIVE CALL ACCEPTANCE
 # SELECTIVE CALL REJECTION

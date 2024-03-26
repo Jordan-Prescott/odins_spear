@@ -1,3 +1,5 @@
+import json
+
 import odins_spear.logger as logger
 
 from .report_utils.graphviz_module import GraphvizModule
@@ -30,10 +32,13 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     - get.user_call_forwarding_not_reachable - X
     
     
-    - get.group_schedules
-    - get.group_events  
-    - get.user_alternate_numbers  
+    - get.group_schedules - X
+    - get.group_events  - X
+    - get.user_alternate_numbers  - X
     """
+    
+    # with open(json_file_path, 'r') as file:
+    #     json_data = json.load(file)
     
     # locate number using broadworks_entity_type to zone in on correct location
     
