@@ -44,7 +44,7 @@ class TrunkGroup:
 
 @dataclass(kw_only=True)
 class AAKey:
-    key_number: int
+    number: int
     action: str
     description: str = None
     phone_number: str = None
@@ -60,11 +60,15 @@ class AAMenu:
 @dataclass(kw_only=True)
 class AutoAttendant:
     service_user_id: str
+    name: str
     group: Type['Group']
+    extension: str = None
+    phone_number: str = None
     aliases: List[str] = field(default_factory= [list])
     type: str = None
     business_hours_menu: Type['AAMenu'] = None
     after_hours_menu: Type['AAMenu'] = None
+    
 
     def __post_init__(self):
         self.group.auto_attendants.append(self)
@@ -75,18 +79,27 @@ class CallCenter:
     service_user_id: str
     group: Type['Group']
     agents: List['User'] = field(default_factory=list)
+    extension: str = None
+    phone_numner: str = None
+    name: str = None
     type: str = None
     policy: str = None
-    forced_forwarding_enabled: bool = False
-    forced_forwarding_forward_to_phone_number: str = None
+   
     bounced_calls_enabled: bool = False
     bounced_calls_transfer_to_phone_number: bool = False
-    overflow_calls_action: bool = False
+    overflow_calls_action: str = None
     overflow_calls_transfer_to_phone_number: bool = False
-    stranded_calls_action: bool = False
+    stranded_calls_action: str = None
     stranded_calls_transfer_to_phone_number: bool = False
-    stranded_call_unavailable_action: bool = False
+    stranded_call_unavailable_action: str = None
     stranded_call_unavailable_transfer_to_phone_number: bool = False
+    
+    #NOTE: Not sure which forwarding this is.
+    forced_forwarding_enabled: bool = False
+    forced_forwarding_forward_to_phone_number: str = None
+    
+    night_service: str = None
+    holiday_service: str = None
     
     def __post_init__(self):
         self.group.call_centers.append(self)
@@ -99,12 +112,17 @@ class HuntGroup:
     group: Type['Group']
     agents: List['User'] = field(default_factory=list)
     aliases: List[str] = field(default_factory=list)
+    extension: str = None
+    phone_number: str = None
     policy: str = None
-    hunt_after_no_answer: bool = None
-    no_answer_number_of_rings: int = None
-    forward_after_timeout: bool = None
-    forward_timeout_seconds: int = None
     
+    forward_after_timeout_enabled: bool = False
+    forward_timeout_seconds: int = None
+    no_answer_number_of_rings: int = None
+    no_answer_forward_to_phone_number: str = None
+    
+    call_forward_not_reachable_enabled: bool = False
+    call_forward_not_reachable_transfer_to_phone_number: str = None
     
     def __post_init__(self):
         self.group.hunt_groups.append(self)
