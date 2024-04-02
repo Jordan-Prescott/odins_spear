@@ -617,7 +617,7 @@ class Get():
     
     
     def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str):
-        """Fetches all Trunk Group details of a single Trunk Group in a Group .
+        """Fetches all Trunk Group details of a single Trunk Group in a Group.
 
         Args:
             service_provider_id (str): Service Provider/ Enterprise ID where Group is located.
