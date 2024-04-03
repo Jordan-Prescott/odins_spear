@@ -743,13 +743,14 @@ class Get():
         return self.requester.get(endpoint)
 
     def user_by_id(self, user_id: str):
-        """_summary_
+        """Returns extensive details of a single user including alias, enpoint device, and more common
+        details like first and last name. 
 
         Args:
-            user_id (_type_): _description_
+            user_id (str): Target user ID of the user you would like to review.
 
         Returns:
-            _type_: _description_
+            Dict: Python dictionary of the users details 
         """
 
         endpoint = f"/users?userId={user_id}"
