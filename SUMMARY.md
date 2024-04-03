@@ -38,6 +38,8 @@
         * [🚰 Group Trunk Groups](docs/methods/get/trunk-groups/group-trunk-groups.md)
         * [🚿 Service Provider Trunk Group Call Capacity](docs/methods/get/trunk-groups/service-provider-trunk-group-call-capacity.md)
         * [Service Provider Call Capacity Report](docs/methods/get/trunk-groups/service-provider-call-capacity-report.md)
+      * [🤵 User](docs/methods/get/user/README.md)
+        * [🆔 User By ID](docs/methods/get/user/user-by-id.md)
     * [✉️ Post](docs/methods/post.md)
       * [🔢 DNs](docs/methods/post/dns/README.md)
         * [1️⃣ 1️⃣ Group DNs](docs/methods/post/dns/group-dns.md)
