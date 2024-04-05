@@ -6,6 +6,11 @@ description: my_api.group_hunt_group()
 
 Update a Hunt Groups (HG) settings.
 
+{% hint style="warning" %}
+**Modifying Agents in Hunt Group -** Remember to follow the correct formatting, the list contains dictionaries of userId and the  users id.\
+Example - \[{"userId":"9709580001"}, {"userId":"9709580002"}]
+{% endhint %}
+
 ### Parameters&#x20;
 
 * service\_provider\_id (str): Service provider ID of where the group that hosts the HG is located.
