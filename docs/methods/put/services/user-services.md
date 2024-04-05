@@ -32,10 +32,6 @@ my_api.put.user_services(
     assigned=True
 )
 
-# unassigning hunt groups services
-hunt_group_user_id = "serviceUserId@domain.com"
-hunt_group_services = ["Alternate Numbers", "Call Forwarding Always"]
-
 my_api.user_services(
 user_id = hunt_group_user_id,
 services = hunt_group_services,
