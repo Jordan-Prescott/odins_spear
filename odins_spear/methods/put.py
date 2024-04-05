@@ -866,9 +866,9 @@ class Put():
     
         endpoint = f"/groups/hunt-groups"
         
-        updates["serviceProviderId"] = [service_provider_id]
-        updates["groupId"] = [group_id]
-        updates["serviceUserId"] = [hunt_group_user_id]
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["serviceUserId"] = hunt_group_user_id          
         
         return self.requester.put(endpoint, data=updates)
             
