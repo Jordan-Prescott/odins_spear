@@ -12,7 +12,8 @@ from odins_spear.exceptions import (OAApiAuthenticationFail,
 
 class Api:
     
-    def __init__(self, base_url: str, username: str, password: str) -> None:
+    def __init__(self, base_url: str, username: str, password: str,
+                rate_limit: bool) -> None:
         """ Connection to Odin API, all interactions with the api are here.
 
         Args:
@@ -28,11 +29,12 @@ class Api:
         self.base_url = base_url
         self.username = username
         self.password = os.getenv(password)
+        self.rate_limit = rate_limit
         
         self.authorised = False
         self.token = ""
         
-        self.requester = Requester(self.base_url)
+        self.requester = Requester(self.base_url, self.rate_limit)
         
         self.get = get.Get(self.requester)
         self.post = post.Post(self.requester)
