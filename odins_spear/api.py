@@ -13,7 +13,7 @@ from odins_spear.exceptions import (OAApiAuthenticationFail,
 class Api:
     
     def __init__(self, base_url: str, username: str, password: str,
-                rate_limit: bool) -> None:
+                rate_limit: bool = True) -> None:
         """ Connection to Odin API, all interactions with the api are here.
 
         Args:

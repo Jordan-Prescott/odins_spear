@@ -4,7 +4,7 @@ from ratelimit import limits, sleep_and_retry
 
 class Requester():
 
-    def __init__(self, base_url, rate_limit: bool = True):
+    def __init__(self, base_url, rate_limit: bool):
         self.base_url = base_url
         self.headers = {
             'Authorization': "",
