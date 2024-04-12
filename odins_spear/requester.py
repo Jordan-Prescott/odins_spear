@@ -43,7 +43,7 @@ class Requester():
         
 
     @sleep_and_retry
-    @limits(calls=1, period=10)
+    @limits(calls=5, period=1)
     def _rate_limited_request(self, method, endpoint, data=None):
         response = method(
             url=self.base_url + endpoint,
