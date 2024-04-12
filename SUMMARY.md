@@ -7,6 +7,7 @@
     * [⚠️ Setting Environment Variable](docs/getting-started/setting-environment-variable.md)
     * [⬇️ Downloading Library (BETA)](docs/getting-started/downloading-library-beta.md)
     * [⚙️ Create API Object](docs/getting-started/create-api-object.md)
+    * [🛑 Rate Limiting API Calls](docs/getting-started/rate-limiting-api-calls.md)
   * [📦 Methods](docs/methods/README.md)
     * [📥 Get](docs/methods/get.md)
       * [🔢 DNs](docs/methods/get/dns/README.md)

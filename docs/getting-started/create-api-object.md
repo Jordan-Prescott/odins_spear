@@ -6,7 +6,7 @@ The API object is the core object of the library, all functionality is accessed 
 ```python
 from odins_spear import api
 
-magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 ```
 {% endcode %}
 
@@ -14,7 +14,7 @@ Once you have built the object the next step is to authenticate it, this authori
 
 <pre class="language-python" data-overflow="wrap" data-line-numbers><code class="lang-python"><strong>from odins_spear import api
 </strong><strong>
-</strong><strong>magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+</strong><strong>my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 </strong>magic.authenticate()
 </code></pre>
 
