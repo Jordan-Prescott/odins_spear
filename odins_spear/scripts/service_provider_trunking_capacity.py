@@ -2,7 +2,7 @@ import json
 
 from tqdm import tqdm
 
-import odins_spear.logger as logger
+import odins_spear.utils.loggers as loggers
 
 def main(api: object, service_provider_id: str):
     """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
@@ -20,7 +20,7 @@ def main(api: object, service_provider_id: str):
     
     return_data = {}
     
-    logger.log_info(f"Fetching {service_provider_id} call capacity.")
+    loggers.log_info(f"Fetching {service_provider_id} call capacity.")
     service_provider_capacity = api.get.service_provider_trunk_group_call_capacity(service_provider_id)
     return_data["serviceProviderId"] = service_provider_capacity["serviceProviderId"]
     return_data["maxActiveCalls"] = service_provider_capacity["maxActiveCalls"]
@@ -29,7 +29,7 @@ def main(api: object, service_provider_id: str):
     return_data["groupsBurstingCallCapacityTotal"] = 0
     return_data["groups"] = []
     
-    logger.log_info(f"Fetching complete list of groups in {service_provider_id}.")
+    loggers.log_info(f"Fetching complete list of groups in {service_provider_id}.")
     groups_in_service_provider = api.get.groups(service_provider_id)
     
     # getting groups and group call capacities

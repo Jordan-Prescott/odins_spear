@@ -1,7 +1,7 @@
 import re
 from tqdm import tqdm
 
-import odins_spear.logger as logger
+import odins_spear.utils.loggers as loggers
 
 def locate_alias(alias, aliases: list):
     for a in aliases:
@@ -80,7 +80,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
 
     # objects failed in first instance
     if RETRY_QUEUE:
-        logger.log_info("Retrying failed instances.")
+        loggers.log_info("Retrying failed instances.")
     while RETRY_QUEUE:
         entity_type, service_user_id, retry_count = RETRY_QUEUE.pop(0)  # Get the first item from the queue
         
@@ -105,7 +105,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
             if retry_count < MAX_RETRIES:
                 RETRY_QUEUE.append((entity_type, service_user_id, retry_count + 1))  # Increment retry count and re-add to the queue
             else:
-                logger.log_error(f"Failed to process {entity_type} - {service_user_id} after {MAX_RETRIES} retries. Skipping.")
+                loggers.log_error(f"Failed to process {entity_type} - {service_user_id} after {MAX_RETRIES} retries. Skipping.")
 
     for broadwork_entity in tqdm(OBJECT_WITH_ALIAS, desc=f"Searching AA, HG, and CC for alias {alias}"):
 
@@ -114,7 +114,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"""
         
     users = api.get.users(service_provider_id, group_id, extended=True)
-    logger.log_info("Fetched users.")
+    loggers.log_info("Fetched users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
 

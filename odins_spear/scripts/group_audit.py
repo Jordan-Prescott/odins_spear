@@ -1,4 +1,4 @@
-import odins_spear.logger as logger
+import odins_spear.utils.loggers as loggers
 import json
 from tqdm import tqdm
 
