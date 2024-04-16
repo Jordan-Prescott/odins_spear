@@ -2,9 +2,6 @@ import requests
 import json
 
 from ratelimit import limits, sleep_and_retry
-
-from odins_spear.logger import Logger
-
 class Requester():
 
 
@@ -35,7 +32,7 @@ class Requester():
 
 
     def _request(self, method, endpoint, data=None):
-        self.logger.log_request(endpoint)
+        
         
         if self.rate_limit:
             return self._rate_limited_request(method, endpoint, data)
@@ -45,6 +42,7 @@ class Requester():
                 headers=self.headers,
                 data=json.dumps(data if data is not None else {})
             )
+            self.logger.log_request(endpoint, response.status_code)
             response.raise_for_status()
             return response.json()
         
@@ -57,6 +55,7 @@ class Requester():
             headers=self.headers,
             data=json.dumps(data if data is not None else {})
         )
+        self.logger.log_request(endpoint, response.status_code)
         response.raise_for_status()
         return response.json()
     

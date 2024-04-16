@@ -35,7 +35,7 @@ class Api:
         self.authorised = False
         self.token = ""
         
-        self.logger = Logger(api=self.base_url, user=self.username)
+        self.logger = Logger(user=self.username)
         self.requester = Requester(self.base_url, self.rate_limit, self.logger)
         
         self.get = get.Get(self.requester)
