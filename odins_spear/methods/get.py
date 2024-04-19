@@ -283,6 +283,21 @@ class Get():
         
     
 # DO NOT DISTURB
+
+    def user_do_not_disturb(self, user_id: str):
+        """Returns the specificied users DND and Ring Splash state.
+
+        Args:
+            user_id (str): Target user id to return data. 
+
+        Returns:
+            Dict: States DND and Ring Splash status.
+        """
+        
+        endpoint = f"/users/do-not-disturb?userId={user_id}"
+            
+        return self.requester.get(endpoint)
+
 # DOMAINS
 # EMERGENCY NOTIFICATIONS
 # EMERGENCY ZONES
