@@ -42,7 +42,7 @@ class Requester():
                 headers=self.headers,
                 data=json.dumps(data if data is not None else {})
             )
-            self.logger._log_request(endpoint, response.status_code)
+            self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
             response.raise_for_status()
             return response.json()
         
@@ -55,7 +55,7 @@ class Requester():
             headers=self.headers,
             data=json.dumps(data if data is not None else {})
         )
-        self.logger._log_request(endpoint, response.status_code)
+        self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
         response.raise_for_status()
         return response.json()
     

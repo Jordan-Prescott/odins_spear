@@ -119,6 +119,6 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
 
         if locate_alias(alias, user['aliases']):
-            return f"\n\n\tAlias ({alias}) found: User - {user['userId']}"
+            return f"\n\n\tAlias ({alias}) found: User - {user['userId']}\n"
     
     return f"\n\n\tAlias ({alias}) not found."
