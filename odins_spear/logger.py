@@ -2,6 +2,11 @@ from loguru import logger
 
 class Logger:
     def __init__(self, user: str = None) -> None:
+        """_summary_
+
+        Args:
+            user (str, optional): _description_. Defaults to None.
+        """
 
         self._user = user
              
@@ -12,7 +17,12 @@ class Logger:
     
     
     def set_up_file_handler(self, path='app.log'):
-          
+        """_summary_
+
+        Args:
+            path (str, optional): _description_. Defaults to 'app.log'.
+        """
+        
         self._logger_obj.add(
             path,
             format="{time} | {message} | {extra}"
@@ -20,6 +30,11 @@ class Logger:
                 
         
     def set_up_sys_log_handler(self, url: str):
+        """_summary_
+
+        Args:
+            url (str): _description_
+        """
         
         self.url = url
         
@@ -29,11 +44,16 @@ class Logger:
         )
         
         
-    def _log_request(self, endpoint: str, response_code: int):
+    def _log_request(self, **kwargs):
+        """_summary_
+
+        Args:
+            endpoint (str): _description_
+            response_code (int): _description_
+        """
         with self._logger_obj.contextualize(
             user=self._user, 
-            endpoint=endpoint, 
-            response_code=response_code):
+            **kwargs):
             
             self._logger_obj.info(
                 "odins_spear"
