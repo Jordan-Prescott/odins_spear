@@ -1,6 +1,15 @@
 from loguru import logger
 
 class Logger:
+    
+    __instance = None
+
+    @staticmethod
+    def get_instance(user: str):
+        if Logger.__instance is None:
+            Logger(user)
+        return Logger.__instance
+    
     def __init__(self, user: str = None) -> None:
         """_summary_
 
@@ -8,15 +17,22 @@ class Logger:
             user (str, optional): _description_. Defaults to None.
         """
 
-        self._user = user
-             
-        self._logger_obj = logger
-        self._logger_obj.remove() 
-        
-        self.set_up_file_handler()
+        if Logger.__instance is not None:
+            raise Exception("Singleton cannot be instantiated more than once!")
+        else:
+            
+            self._user = user
+                
+            self._log_format = "{time} | {message} | {extra}" 
+            self._logger_obj = logger
+            self._logger_obj.remove() 
+            
+            self.set_up_file_handler()
+            
+            Logger.__instance = self
     
     
-    def set_up_file_handler(self, path='app.log'):
+    def set_up_file_handler(self, path='OS.log'):
         """_summary_
 
         Args:
@@ -25,7 +41,7 @@ class Logger:
         
         self._logger_obj.add(
             path,
-            format="{time} | {message} | {extra}"
+            format=self._log_format
         )
                 
         
@@ -40,7 +56,8 @@ class Logger:
         
         self._logger_obj.add(
             self.url,
-            format="{time} | {message} | {extra}"
+            format=self._log_format,
+            serialize=True,
         )
         
         
@@ -56,6 +73,6 @@ class Logger:
             **kwargs):
             
             self._logger_obj.info(
-                "odins_spear"
+                "Odin's Spear"
             )
         
