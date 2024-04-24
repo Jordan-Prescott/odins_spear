@@ -540,6 +540,19 @@ class Get():
 # SERIES COMPLETION
 # SERVICE PACKS
 # SERVICE PROVIDERS
+
+    def service_providers(self, reseller_id=None):
+        """
+        Args:
+            reseller_id (str): Only list the Service Provider IDs within the specified Reseller.
+        """
+        endpoint = f"/service-providers"
+        if reseller_id:
+            endpoint += f"?resellerId={reseller_id}"
+        
+        return self.requester.get(endpoint)
+
+
 # SERVICES
 
     def user_services_assigned(self, user_id: str):
