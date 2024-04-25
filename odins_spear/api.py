@@ -3,6 +3,7 @@ import os
 
 from odins_spear.requester import Requester
 from odins_spear.methods import *
+from odins_spear.logger import Logger
 from odins_spear.scripter import Scripter
 from odins_spear.reporter import Reporter
 from odins_spear.exceptions import (OAApiAuthenticationFail, 
@@ -34,7 +35,8 @@ class Api:
         self.authorised = False
         self.token = ""
         
-        self.requester = Requester(self.base_url, self.rate_limit)
+        self.logger = Logger.get_instance(self.username)
+        self.requester = Requester(self.base_url, self.rate_limit, self.logger)
         
         self.get = get.Get(self.requester)
         self.post = post.Post(self.requester)

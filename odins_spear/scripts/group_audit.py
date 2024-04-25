@@ -1,4 +1,3 @@
-import odins_spear.logger as logger
 import json
 from tqdm import tqdm
 
