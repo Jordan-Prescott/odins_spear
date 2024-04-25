@@ -2,6 +2,8 @@ import json
 
 from tqdm import tqdm
 
+from odins_spear.exceptions import OSServiceNotAssigned
+
 def main(api: object, service_provider_id: str):
     """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
     This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
@@ -19,13 +21,20 @@ def main(api: object, service_provider_id: str):
     return_data = {}
     
     print(f"Fetching {service_provider_id} call capacity.")
-    service_provider_capacity = api.get.service_provider_trunk_group_call_capacity(service_provider_id)
+    
+    # OSServiceNotAssigned is returned if the Trunk Group service is not assigend to SP/ ENT
+    try:
+        service_provider_capacity = api.get.service_provider_trunk_group_call_capacity(service_provider_id)
+    except Exception:
+        raise OSServiceNotAssigned
+        
     return_data["serviceProviderId"] = service_provider_capacity["serviceProviderId"]
     return_data["maxActiveCalls"] = service_provider_capacity["maxActiveCalls"]
     return_data["burstingMaxActiveCalls"] = service_provider_capacity["burstingMaxActiveCalls"]
     return_data["groupsCallCapacityTotal"] = 0
     return_data["groupsBurstingCallCapacityTotal"] = 0
     return_data["groups"] = []
+    
     
     print(f"Fetching complete list of groups in {service_provider_id}.")
     groups_in_service_provider = api.get.groups(service_provider_id)
@@ -96,4 +105,3 @@ def main(api: object, service_provider_id: str):
     return_data["burstingCallCapacityDifference"] = return_data["burstingMaxActiveCalls"] - return_data["groupsBurstingCallCapacityTotal"]
         
     return json.dumps(return_data)
-    

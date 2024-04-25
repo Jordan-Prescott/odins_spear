@@ -1,6 +1,5 @@
-import requests.exceptions
-
 from odins_spear.exceptions import *
+
 
 class Put():
     def __init__(self, requester):
@@ -931,7 +930,7 @@ class Put():
         for agent in agents:
             assigned_weight += agent["weight"]                
         if not assigned_weight == max_weights:
-            raise AOInvalidWeighting
+            raise OSInvalidWeighting
       
         return self.requester.put(endpoint, data=data)
         
@@ -1071,7 +1070,7 @@ class Put():
         """
         
         if len(new_passcode) < 4 or len(new_passcode) > 6:
-            raise AOInvalidCode
+            raise OSInvalidCode
         
         endpoint = "/users/portal-passcode"
         
