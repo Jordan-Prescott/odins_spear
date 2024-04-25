@@ -6,9 +6,9 @@ from odins_spear.methods import *
 from odins_spear.logger import Logger
 from odins_spear.scripter import Scripter
 from odins_spear.reporter import Reporter
-from odins_spear.exceptions import (OAApiAuthenticationFail, 
-                                 AOSessionRefreshFail, 
-                                 AOFailedToLocateSession)
+from odins_spear.exceptions import (OSApiAuthenticationFail, 
+                                 OSSessionRefreshFail, 
+                                 OSFailedToLocateSession)
 
 
 class Api:
@@ -54,7 +54,7 @@ class Api:
             self._update_requester(response)
             return True
         except requests.exceptions.HTTPError:
-            raise OAApiAuthenticationFail()
+            raise OSApiAuthenticationFail()
     
     
     def refresh_authorisation(self):
@@ -64,7 +64,7 @@ class Api:
             self._update_requester(response)
             return True
         except requests.exceptions.HTTPError:
-            raise AOSessionRefreshFail()
+            raise OSSessionRefreshFail()
   
     
     def get_auth_details(self):
@@ -72,7 +72,7 @@ class Api:
         try:
             return self.get.session()
         except requests.exceptions.HTTPError:
-            raise AOFailedToLocateSession()
+            raise OSFailedToLocateSession()
 
 
     def _update_requester(self, session_response):
