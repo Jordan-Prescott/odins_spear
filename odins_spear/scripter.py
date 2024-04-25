@@ -160,6 +160,9 @@ class Scripter:
         This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
         At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at 
         calculated.
+        
+        Raises: 
+            OSServiceNotAssigned: Raises when the SP/ Ent does not have the service 'Trunk Group' assigned. 
 
         Args:
             service_provider_id (str): Target Service Provider ID/ Enterprise ID that you would like the \
