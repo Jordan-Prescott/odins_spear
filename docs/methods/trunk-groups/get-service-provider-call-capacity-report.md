@@ -2,7 +2,7 @@
 description: api.get.service_provider_trunk_call_capacity_report()
 ---
 
-# Service Provider Call Capacity Report
+# 📂 GET - Service Provider Call Capacity Report
 
 Fetches trunk call capacity details of Service Provider/ Enterprise and all Groups in the SP/ ENT.
 
@@ -10,8 +10,8 @@ Fetches trunk call capacity details of Service Provider/ Enterprise and all Grou
 Note the feature 'Service Provider Trunking Capacity' in Scripter also achieves this. Link below.
 {% endhint %}
 
-{% content-ref url="../../../features/scripter/service-provider-trunking-capacity.md" %}
-[service-provider-trunking-capacity.md](../../../features/scripter/service-provider-trunking-capacity.md)
+{% content-ref url="../../features/scripter/service-provider-trunking-capacity.md" %}
+[service-provider-trunking-capacity.md](../../features/scripter/service-provider-trunking-capacity.md)
 {% endcontent-ref %}
 
 ### Parameters&#x20;
