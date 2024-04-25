@@ -1,8 +1,8 @@
 # 1️⃣ Do You Need To Set Up Multiple Loggers For Multiple API Objects? No.
 
-The Logger object is a Singleton and can only be created once across even if you have multiple API objects for your multiple Broadwork instances. All API calls across all your API objects will be sent to the same places you defined in one API object.&#x20;
+The Logger object is a Singleton and can only be created once across multiple API objects for your multiple Broadwork instances. All API calls for all your API objects will be sent to the same places you defined in one API object.&#x20;
 
-The reason here is it allows administrators to see all uses of the library in one space. Howver, if there is a need to separate this so logs for different systems can be sent to different locations please contact us to discuss below.
+The reason here is it allows administrators to see all uses of the library in one space. However, if there is a need to separate this so logs for different systems can be sent to different locations please contact us to discuss below.
 
 {% content-ref url="../../../contact/" %}
 [contact](../../../contact/)
@@ -10,7 +10,7 @@ The reason here is it allows administrators to see all uses of the library in on
 
 ### How To Use:
 
-Like normal create your api objects however before authentication use the set up handler methods on one of your objects to specify locations the logs should be sent.&#x20;
+Like normal create your api objects however, before authentication use the set up handler methods on **one** of your objects to specify locations the logs should be sent.&#x20;
 
 ```python
 from odins_spear import api
