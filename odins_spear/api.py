@@ -21,6 +21,7 @@ class Api:
             base_url (str): Base url of your odin instance api.
             username (str): Username used when logging into odin account.
             password (str): Password used when logging into odin account stored as virtual environment.
+            rate_limit (bool): Enables (True) or Disables (False) rate limiting to 5 calls per second. Defaults to True.
             
         Vars: 
             authorised (bool): Boolean value to indicate if api is authorised.\
@@ -36,12 +37,12 @@ class Api:
         self.token = ""
         
         self.logger = Logger.get_instance(self.username)
-        self.requester = Requester(self.base_url, self.rate_limit, self.logger)
+        self._requester = Requester(self.base_url, self.rate_limit, self.logger)
         
-        self.get = get.Get(self.requester)
-        self.post = post.Post(self.requester)
-        self.put = put.Put(self.requester)
-        self.delete = delete.Delete(self.requester)
+        self.get = get.Get(self._requester)
+        self.post = post.Post(self._requester)
+        self.put = put.Put(self._requester)
+        self.delete = delete.Delete(self._requester)
         
         self.scripter = Scripter(api=self)
         self.reporter = Reporter(api=self)
@@ -77,7 +78,7 @@ class Api:
 
     def _update_requester(self, session_response):
         self.token = session_response["token"]
-        self.requester.headers["Authorization"] = f"Bearer {self.token}"
+        self._requester.headers["Authorization"] = f"Bearer {self.token}"
         self.authorised = True
 
 

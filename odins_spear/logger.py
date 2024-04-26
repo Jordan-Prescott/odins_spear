@@ -1,4 +1,4 @@
-# from loguru import logger
+import os
 import logging 
 from logging import Formatter
 
@@ -57,7 +57,15 @@ class Logger:
         
         from logging import FileHandler
         
-        file_handler = FileHandler(path)
+        try:
+            file_handler = FileHandler(path)
+            if not os.path.exists(path):
+                os.makedirs(path)
+        except Exception:
+            print(f'You do not have permission create {path}. Logs saved to os.logg')
+            path = 'os.log'
+            file_handler = FileHandler(path)
+        
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(self._format)
         
