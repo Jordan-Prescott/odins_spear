@@ -52,10 +52,23 @@ class TrunkGroup:
     group: Type['Group']
     users: List['User'] = field(default_factory=list)
     max_active_calls: int = None
+    bursting_enabled: bool = False
     bursting_max_active_calls: bool = False
+    pilot_user_id: str = None
 
     def __post_init__(self):
         self.group.trunk_groups.append(self)
+        
+    @classmethod
+    def from_dict(cls, group: Group, data):
+        return cls(
+            service_user_id= data.get(""),
+            group= group,
+            max_active_calls= data.get("maxActiveCalls"),
+            bursting_enabled= data.get("enableBursting")
+            bursting_max_active_calls= data.get("burstingMaxActiveCalls"),
+            pilot_user_id= data.get("pilotUserId")
+        )
 
 
 @dataclass(kw_only=True)
@@ -96,16 +109,16 @@ class AutoAttendant:
     after_hours_menu: Type['AAMenu'] = None
     
 
-    # def __post_init__(self):
-    #     self.group.auto_attendants.append(self)
+    def __post_init__(self):
+        self.group.auto_attendants.append(self)
         
         
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, group: Group, data):
         return cls(
             service_user_id=data.get("serviceUserId"),
             name=data.get("serviceInstanceProfile").get("name"),
-            group=None,
+            group= group,
             extension=data.get("serviceInstanceProfile").get("extension"),
             phone_number=data.get("serviceInstanceProfile").get("phoneNumber"),
             aliases=data.get("serviceInstanceProfile").get("aliases"),
@@ -124,7 +137,7 @@ class CallCenter:
     group: Type['Group']
     agents: List['User'] = field(default_factory=list)
     extension: str = None
-    phone_numner: str = None
+    phone_number: str = None
     name: str = None
     type: str = None
     policy: str = None
@@ -148,6 +161,34 @@ class CallCenter:
     def __post_init__(self):
         self.group.call_centers.append(self)
 
+
+    @classmethod
+    def from_dict(cls, group: Group, data):
+        return cls(
+            service_user_id= data.get("serviceUserId"),
+            group= group,
+            extension= data.get("serviceInstanceProfile").get("extension"),
+            phone_number=data.get("serviceInstanceProfile").get("phoneNumber"),
+            name= data.get("serviceInstanceProfile").get("name")
+            type= data.get("type")
+            policy= data.get("policy")
+        
+            bounced_calls_enabled: bool = False
+            bounced_calls_transfer_to_phone_number: bool = False
+            overflow_calls_action: str = None
+            overflow_calls_transfer_to_phone_number: bool = False
+            stranded_calls_action: str = None
+            stranded_calls_transfer_to_phone_number: bool = False
+            stranded_call_unavailable_action: str = None
+            stranded_call_unavailable_transfer_to_phone_number: bool = False
+            
+            #NOTE: Not sure which forwarding this is.
+            forced_forwarding_enabled: bool = False
+            forced_forwarding_forward_to_phone_number: str = None
+            
+            night_service: str = None
+            holiday_service: str = None
+        )
 
 @dataclass(kw_only=True)
 class HuntGroup:
