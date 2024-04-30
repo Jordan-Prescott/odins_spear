@@ -110,3 +110,4 @@
 * [🤙 Contact](contact/README.md)
   * [🗣️ General Feedback](contact/general-feedback.md)
   * [📢 Feature Feedback](contact/feedback.md)
+* [🙏 Support](support.md)
