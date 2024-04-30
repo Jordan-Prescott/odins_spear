@@ -1,7 +1,7 @@
-from dataclasses import dataclass, field, InitVar
-from typing import List, Type
+import json
 
-from odins_spear.utils import generators as gen
+from dataclasses import dataclass, field
+from typing import List, Type
    
 @dataclass(kw_only=True)
 class ServiceProvider:
@@ -9,7 +9,14 @@ class ServiceProvider:
     name: str
     groups: List['Group'] = field(default_factory=list)
     is_enterprise: bool = False
-   
+    
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            id= data.get("serviceProviderId"),
+            name= data.get("serviceProviderId"),
+            is_enterprise= data.get("isEnterprise")
+        )
     
 @dataclass(kw_only=True)
 class Group:
@@ -28,7 +35,16 @@ class Group:
 
         self.service_provider.groups.append(self)
         self.default_domain = '@' + self.default_domain
-     
+        
+    @classmethod
+    def from_dict(cls, service_provider: ServiceProvider, data):
+        return cls(
+            service_provider= service_provider,
+            id= data.get("groupId"),
+            name= data.get("groupName"),
+            default_domain= data.get("defaultDomain"),
+            calling_line_id_phone_number= data.get("callingLineIdPhoneNumber")
+        )
         
 @dataclass(kw_only=True)
 class TrunkGroup:
@@ -49,6 +65,16 @@ class AAKey:
     description: str = None
     phone_number: str = None
     submenu_id: int = None
+    
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            number= data.get("key"),
+            action= data.get("action"),
+            description= data.get("description"),
+            phone_number= data.get("phoneNumber"),
+            submenu_id= data.get("submenuId")
+        )
 
 
 @dataclass(kw_only=True)
@@ -70,9 +96,27 @@ class AutoAttendant:
     after_hours_menu: Type['AAMenu'] = None
     
 
-    def __post_init__(self):
-        self.group.auto_attendants.append(self)
+    # def __post_init__(self):
+    #     self.group.auto_attendants.append(self)
         
+        
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            service_user_id=data.get("serviceUserId"),
+            name=data.get("serviceInstanceProfile").get("name"),
+            group=None,
+            extension=data.get("serviceInstanceProfile").get("extension"),
+            phone_number=data.get("serviceInstanceProfile").get("phoneNumber"),
+            aliases=data.get("serviceInstanceProfile").get("aliases"),
+            type=data.get("type"),
+            business_hours_menu=AAMenu(
+                enable_first_menu_level_extension_dialing=data.get('businessHoursMenu').get('enableFirstMenuLevelExtensionDialing'),
+                keys= [AAKey.from_dict(key) for key in data.get('businessHoursMenu').get('keys')]),
+            after_hours_menu=AAMenu(
+                enable_first_menu_level_extension_dialing=data.get('afterHoursMenu').get('enableFirstMenuLevelExtensionDialing'),
+                keys= [AAKey.from_dict(key) for key in data.get('afterHoursMenu').get('keys')]),
+        )
 
 @dataclass(kw_only=True)
 class CallCenter:
