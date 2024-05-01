@@ -65,7 +65,7 @@ class TrunkGroup:
             service_user_id= data.get(""),
             group= group,
             max_active_calls= data.get("maxActiveCalls"),
-            bursting_enabled= data.get("enableBursting")
+            bursting_enabled= data.get("enableBursting"),
             bursting_max_active_calls= data.get("burstingMaxActiveCalls"),
             pilot_user_id= data.get("pilotUserId")
         )
@@ -169,25 +169,25 @@ class CallCenter:
             group= group,
             extension= data.get("serviceInstanceProfile").get("extension"),
             phone_number=data.get("serviceInstanceProfile").get("phoneNumber"),
-            name= data.get("serviceInstanceProfile").get("name")
-            type= data.get("type")
-            policy= data.get("policy")
+            name= data.get("serviceInstanceProfile").get("name"),
+            type= data.get("type"),
+            policy= data.get("policy"),
         
-            bounced_calls_enabled: bool = False
-            bounced_calls_transfer_to_phone_number: bool = False
-            overflow_calls_action: str = None
-            overflow_calls_transfer_to_phone_number: bool = False
-            stranded_calls_action: str = None
-            stranded_calls_transfer_to_phone_number: bool = False
-            stranded_call_unavailable_action: str = None
-            stranded_call_unavailable_transfer_to_phone_number: bool = False
+            bounced_calls_enabled= data.get("bouncedCallsEnabled"),
+            bounced_calls_transfer_to_phone_number= data.get("bouncedCallsTransferToPhoneNumber"),
+            overflow_calls_action= data.get("overFlowCallsAction"),
+            overflow_calls_transfer_to_phone_number= data.get("overflowCallsTransferToPhoneNumber"),
+            stranded_calls_action= data.get("strandedCallsAction"),
+            stranded_calls_transfer_to_phone_number= data.get("strandedCallsTransferToPhoneNumber"),
+            stranded_call_unavailable_action= data.get("strandedCallUnavailableAction"),
+            stranded_call_unavailable_transfer_to_phone_number= data.get("strandedCallUnavailableTransferToPhoneNumber"),
             
             #NOTE: Not sure which forwarding this is.
-            forced_forwarding_enabled: bool = False
-            forced_forwarding_forward_to_phone_number: str = None
+            forced_forwarding_enabled= data.get("forcedForwardingEnabled"),
+            forced_forwarding_forward_to_phone_number= data.get("forcedForwardingEnabled"),
             
-            night_service: str = None
-            holiday_service: str = None
+            night_service= data.get("nightService"),
+            holiday_service= data.get("holidayService")
         )
 
 @dataclass(kw_only=True)
@@ -212,6 +212,26 @@ class HuntGroup:
     def __post_init__(self):
         self.group.hunt_groups.append(self)
     
+    @classmethod
+    def from_dict(cls, group: Group, agents: List["User"],  data):
+        return cls(
+            service_user_id= data.get("serviceUserId"),
+            name= data.get("serviceInstanceProfile").get("name"),
+            group= group,
+            agents= agents,
+            aliases= data.get("serviceInstanceProfile").get("aliases"),
+            extension= data.get("serviceInstanceProfile").get("extension"),
+            phone_number= data.get("serviceInstanceProfile").get("phoneNumber"),
+            policy= data.get("policy"),
+            
+            forward_after_timeout_enabled= data.get("forwardAfterTimeoutEnabled"),
+            forward_timeout_seconds= data.get("forwardTimeoutSeconds"),
+            no_answer_number_of_rings= data.get("noAnswerNumberOfRings"),
+            no_answer_forward_to_phone_number= data.get("noAnswerForwardToPhoneNumber"),
+            
+            call_forward_not_reachable_enabled= data.get("callForwardNotReachableEnabled"),
+            call_forward_not_reachable_transfer_to_phone_number= data.get("callForwardNotReachableTransferToPhoneNumber")
+        )
         
 @dataclass(kw_only=True)
 class User:
