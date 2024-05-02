@@ -18,8 +18,8 @@ class Reporter:
             group_id (str): Group ID where target number for call flow is located. 
             number (str): Target number for call flow. 
             number_type (str): Type of number, options: DN, Extension, Alias
-            broadworks_entity_type (str): Broadworks entity type target number is associated with. 
-                Options: Auto Attendant, Call Centre, Hunt Group, User
+            broadworks_entity_type (str): Broadworks entity type target number is associated with. \
+                Options: Auto Attendant= AA, Call Centre= CC, Hunt Group= HG, User= U
         """
         
         return reports.call_flow.main(self.api, service_provider_id, group_id, number, number_type,

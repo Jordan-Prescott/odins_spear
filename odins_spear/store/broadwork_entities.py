@@ -247,6 +247,18 @@ class User:
     def __post_init__(self):
         self.group.users.append(self)
  
+ 
+    @classmethod
+    def from_dict(cls, group: Group, data):
+        return cls(
+            group= group,
+            id= data.get("userId"),
+            first_name= data.get("firstName"),
+            last_name= data.get("lastName"),
+            extension= data.get("extension"),
+            phone_number= data.get("phoneNumber"),
+            aliases= data.get("aliases")
+        )
         
 @dataclass(kw_only=True)
 class Contact:
@@ -254,6 +266,13 @@ class Contact:
     number: str = None
     email: str = None
     
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            name= data.get("name"),
+            number= data.get("number"),
+            email= data.get("email"),
+        )
     
 @dataclass(kw_only=True)
 class Address:
@@ -264,9 +283,27 @@ class Address:
     zip_or_postal_code: str
     country: str
 
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            address_line1= data.get("addressLine1"),
+            address_line2= data.get("addressLine2"),
+            city= data.get("city"),
+            state_or_province= data.get("stateOrProvince"),
+            zip_or_postal_code= data.get("zipOrPostalCode"),
+            country= data.get("country")
+        )
 
 @dataclass(kw_only=True)
 class Department:
     service_provider_id: str
     group_id: str
     name: str
+    
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            service_provider_id= data.get("serviceProviderId"),
+            group_id= data.get("groupId"),
+            name= data.get("name")
+        )

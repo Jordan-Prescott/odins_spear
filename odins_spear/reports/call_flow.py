@@ -1,8 +1,9 @@
 import json
 
-import odins_spear.logger as logger
-
 from .report_utils.graphviz_module import GraphvizModule
+
+from odins_spear.store import DataStore
+from odins_spear.store import broadwork_entities as bre
 
 def main(api, service_provider_id: str, group_id: str, number: str, number_type: str,
          broadworks_entity_type: str):
@@ -36,7 +37,20 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     - get.user_alternate_numbers  - X
     """
     
+    data_store = DataStore()
+    
     # Gather entities 
+    service_provider = bre.ServiceProvider.from_dict(data=api.get.service_provider(service_provider_id))
+    group = bre.Group.from_dict(service_provider=service_provider, data=api.get.group(service_provider_id, group_id))
+    
+    data_store.store_objects(service_provider, group)
+    
+    auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
+    for aa in auto_attendants:
+         auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
+         data_store.store_objects(auto_attendant)
+    
+    
     
     # locate number using broadworks_entity_type to zone in on correct location
     
