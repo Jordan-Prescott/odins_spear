@@ -45,12 +45,20 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     
     data_store.store_objects(service_provider, group)
     
-    auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    for aa in auto_attendants:
-         auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
-         data_store.store_objects(auto_attendant)
+    # auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
+    # for aa in auto_attendants:
+    #     auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
+    #     data_store.auto_attendants.append(auto_attendant)
     
+    # call_centers = api.get.group_call_centers(service_provider_id, group_id)
+    # for cc in call_centers:
+    #     call_center = bre.CallCenter.from_dict(group=group, data= api.get.group_call_center(cc['serviceUserId']))
+    #     data_store.call_centers.append(call_center)
     
+    hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
+    for hg in hunt_groups:
+        hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
+        data_store.hunt_groups.append(hunt_group)
     
     # locate number using broadworks_entity_type to zone in on correct location
     

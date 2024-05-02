@@ -138,6 +138,7 @@ class CallCenter:
     agents: List['User'] = field(default_factory=list)
     extension: str = None
     phone_number: str = None
+    aliases: List[str] = field(default_factory=list)
     name: str = None
     type: str = None
     policy: str = None
@@ -170,6 +171,7 @@ class CallCenter:
             extension= data.get("serviceInstanceProfile").get("extension"),
             phone_number=data.get("serviceInstanceProfile").get("phoneNumber"),
             name= data.get("serviceInstanceProfile").get("name"),
+            aliases= data.get("serviceInstanceProfile").get("aliases"),
             type= data.get("type"),
             policy= data.get("policy"),
         
