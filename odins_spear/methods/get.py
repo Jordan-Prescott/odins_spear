@@ -553,6 +553,16 @@ class Get():
         return self.requester.get(endpoint)
 
 
+    def service_provider(self, service_provider_id: str):
+        """
+        Args:
+            reseller_id (str): Only list the Service Provider IDs within the specified Reseller.
+        """
+        
+        endpoint = f"/service-providers?serviceProviderId={service_provider_id}"
+        
+        return self.requester.get(endpoint)
+
 # SERVICES
 
     def user_services_assigned(self, user_id: str):
