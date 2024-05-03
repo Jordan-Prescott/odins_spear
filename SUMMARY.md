@@ -46,6 +46,7 @@
       * [📂 GET - Service Provider Call Capacity Report](docs/methods/trunk-groups/get-service-provider-call-capacity-report.md)
     * [🤵 User](docs/methods/user/README.md)
       * [🆔 GET - User By ID](docs/methods/user/get-user-by-id.md)
+      * [👯 GET - Users](docs/methods/user/get-users.md)
     * [🔑 Authentication](docs/methods/authentication/README.md)
       * [🔏 PUT - User Web Authentication Password](docs/methods/authentication/user-web-authentication-password.md)
     * [💬 Auto Attendants](docs/methods/auto-attendants/README.md)
