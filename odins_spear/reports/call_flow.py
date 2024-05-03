@@ -50,6 +50,11 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     #     auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
     #     data_store.auto_attendants.append(auto_attendant)
     
+    users = api.get.users(service_provider_id, group_id, extended=True)
+    for u in users:
+         user = bre.User.from_dict(group=group, data=u)
+         data_store.users.append(user)
+    
     # call_centers = api.get.group_call_centers(service_provider_id, group_id)
     # for cc in call_centers:
     #     call_center = bre.CallCenter.from_dict(group=group, data= api.get.group_call_center(cc['serviceUserId']))

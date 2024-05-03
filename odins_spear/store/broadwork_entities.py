@@ -61,9 +61,15 @@ class TrunkGroup:
         
     @classmethod
     def from_dict(cls, group: Group, data):
+        
+        # gather user IDs to gather user object
+        user_ids = [agent["userId"] for agent in data["agents"]]
+        users = _get_user_object_from_id(group, user_ids)
+        
         return cls(
             service_user_id= data.get(""),
             group= group,
+            users= users,
             max_active_calls= data.get("maxActiveCalls"),
             bursting_enabled= data.get("enableBursting"),
             bursting_max_active_calls= data.get("burstingMaxActiveCalls"),
@@ -165,9 +171,15 @@ class CallCenter:
 
     @classmethod
     def from_dict(cls, group: Group, data):
+        
+        # gather user IDs to gather user object
+        agent_ids = [agent["userId"] for agent in data["agents"]]
+        agents = _get_user_object_from_id(group, agent_ids)
+        
         return cls(
             service_user_id= data.get("serviceUserId"),
             group= group,
+            agents= agents,
             extension= data.get("serviceInstanceProfile").get("extension"),
             phone_number=data.get("serviceInstanceProfile").get("phoneNumber"),
             name= data.get("serviceInstanceProfile").get("name"),
@@ -215,12 +227,17 @@ class HuntGroup:
         self.group.hunt_groups.append(self)
     
     @classmethod
-    def from_dict(cls, group: Group, agents: List["User"],  data):
+    def from_dict(cls, group: Group, data):
+
+        # gather user IDs to gather user object
+        agent_ids = [agent["userId"] for agent in data["agents"]]
+        agents = _get_user_object_from_id(group, agent_ids)
+        
         return cls(
             service_user_id= data.get("serviceUserId"),
             name= data.get("serviceInstanceProfile").get("name"),
             group= group,
-            agents= agents,
+            agents = agents,
             aliases= data.get("serviceInstanceProfile").get("aliases"),
             extension= data.get("serviceInstanceProfile").get("extension"),
             phone_number= data.get("serviceInstanceProfile").get("phoneNumber"),
@@ -309,3 +326,7 @@ class Department:
             group_id= data.get("groupId"),
             name= data.get("name")
         )
+        
+def _get_user_object_from_id(group, user_ids: list):
+    return list(filter(lambda user: any(user_id in user.id for user_id in user_ids),
+                       group.users))
