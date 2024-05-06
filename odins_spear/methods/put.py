@@ -3,7 +3,7 @@ from odins_spear.exceptions import *
 
 class Put():
     def __init__(self, requester):
-        self.requester = requester
+        self._requester = requester
         
 #SESSION
 
@@ -11,7 +11,7 @@ class Put():
         
         endpoint = "/auth/token"
         
-        return self.requester.put(endpoint)
+        return self._requester.put(endpoint)
         
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS
@@ -42,7 +42,7 @@ class Put():
             "newPassword": new_password
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
     
     
     def user_web_authentication_password(self, user_id: str, new_password: str):
@@ -63,7 +63,7 @@ class Put():
             "newPassword": new_password
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
 
 #AUTO ATTENDANTS
 
@@ -88,7 +88,7 @@ class Put():
                           for auto_attendant_user_id in auto_attendant_user_ids]
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
 
         
         
@@ -114,7 +114,7 @@ class Put():
         updates["groupId"] = group_id
         updates["serviceUserId"] = auto_attendant_user_id
     
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
     
     
     def auto_attendant_submenu(self, auto_attendant_user_id: str, 
@@ -172,7 +172,7 @@ class Put():
                           for call_center_user_id in call_center_user_ids]
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
         
         
     def group_call_center(self, call_center_user_id: str, updates: dict):
@@ -190,7 +190,7 @@ class Put():
         
         updates["serviceUserId"] = call_center_user_id
 
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
     
     
     def group_call_center_agents(self, call_center_user_id: str, 
@@ -215,7 +215,7 @@ class Put():
             "agents": [{"userId": agent_id} for agent_id in agent_user_ids]
         }
 
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
         
     
     def group_call_center_agents_levels(self, call_center_user_id: str, 
@@ -239,7 +239,7 @@ class Put():
             "agents": [{"userId": agent_id, "skillLevel": skill_level} for agent_id in agent_user_ids]
         }
 
-        return self.requester.put(endpoint, data=data) 
+        return self._requester.put(endpoint, data=data) 
     
     
     def group_call_center_bounced_calls(self, call_center_user_id: str, 
@@ -258,7 +258,7 @@ class Put():
         
         updates["serviceUserId"] = call_center_user_id
         
-        return self.requester.put(endpoint, data=updates) 
+        return self._requester.put(endpoint, data=updates) 
     
     
     def group_call_center_dnis_instance(self, call_center_user_id: str, 
@@ -277,7 +277,7 @@ class Put():
         
         updates["serviceUserID"] = call_center_user_id
 
-        return self.requester.put(endpoint, data=updates) 
+        return self._requester.put(endpoint, data=updates) 
     
     
     def group_call_center_forced_forwarding(self, call_center_user_id: str, 
@@ -296,7 +296,7 @@ class Put():
         
         updates["serviceUserID"] = call_center_user_id
 
-        return self.requester.put(endpoint, data=updates) 
+        return self._requester.put(endpoint, data=updates) 
     
 
     def group_call_center_overflow(self, call_center_user_id: str, 
@@ -315,7 +315,7 @@ class Put():
         
         updates["serviceUserID"] = call_center_user_id
 
-        return self.requester.put(endpoint, data=updates) 
+        return self._requester.put(endpoint, data=updates) 
     
 
     def group_call_center_stranded_calls(self, call_center_user_id: str, 
@@ -334,7 +334,7 @@ class Put():
         
         updates["serviceUserID"] = call_center_user_id
 
-        return self.requester.put(endpoint, data=updates) 
+        return self._requester.put(endpoint, data=updates) 
     
 
     def group_call_center_stranded_calls_unavailable(self, call_center_user_id: str, 
@@ -353,7 +353,7 @@ class Put():
         
         updates["serviceUserID"] = call_center_user_id
 
-        return self.requester.put(endpoint, data=updates) 
+        return self._requester.put(endpoint, data=updates) 
     
     
     def user_call_center_supervised_agents(self, call_center_user_id: str, 
@@ -377,7 +377,7 @@ class Put():
             "supervisors": [{"userId": agent_id} for agent_id in agent_ids]
         }
 
-        return self.requester.put(endpoint, data=data) 
+        return self._requester.put(endpoint, data=data) 
     
     
     def user_call_center(self, user_id: str, updates: dict):
@@ -395,7 +395,7 @@ class Put():
         
         updates["userId"] = user_id
            
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
 
 
     def user_call_center_agents_update(self, user_id: str, 
@@ -417,7 +417,7 @@ class Put():
             "callCenters": [{"userId": call_center_id} for call_center_id in call_center_service_ids]
         }
 
-        return self.requester.put(endpoint, data=data)   
+        return self._requester.put(endpoint, data=data)   
 
 
     def user_call_center_agent_sign_out(self, user_id: str):
@@ -436,7 +436,7 @@ class Put():
             "agentUserId": user_id,
         }
 
-        return self.requester.put(endpoint, data=data)  
+        return self._requester.put(endpoint, data=data)  
           
 #CALL CONTROL
 #CALL FORWARDING ALWAYS
@@ -499,7 +499,7 @@ class Put():
         updates["groupId"] = group_id
         updates["deviceName"] = device_name
         
-        return self.requester.put(endpoint, data=updates)  
+        return self._requester.put(endpoint, data=updates)  
     
     
     def service_provider_device(self, service_provider_id: str, device_name: str, 
@@ -520,7 +520,7 @@ class Put():
         updates["serviceProviderId"] = service_provider_id
         updates["deviceName"] = device_name
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
         
     
     def system_devices(self, device_name: str, updates: dict):
@@ -538,7 +538,7 @@ class Put():
         
         updates["deviceName"] = device_name
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
         
     
     def system_device_file(self, device_name: str, updates: dict):
@@ -556,7 +556,7 @@ class Put():
         
         updates["deviceName"] = device_name
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
     
     
     def service_provider_device_file(self, device_name: str, updates: dict):
@@ -575,7 +575,7 @@ class Put():
 
         updates["deviceName"] = device_name
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
     
 
     def group_device_file(self, device_name: str, updates: dict):
@@ -593,7 +593,7 @@ class Put():
         
         updates["deviceName"] = device_name
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
     
     
     def group_device_tags_profile(self, service_provider_id: str, group_id: str, 
@@ -623,7 +623,7 @@ class Put():
             ]
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
     
     
     def group_device_tag(self, service_provider_id: str, group_id: str, device_name: str, 
@@ -651,7 +651,7 @@ class Put():
             "deviceName": device_name
         }     
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
     
     
     def service_provider_device_tag(self, service_provider_id: str, device_name: str, 
@@ -677,7 +677,7 @@ class Put():
             "deviceName": device_name
         }     
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
         
         
     def system_device_tag(self, device_name: str, tag_name: str, tag_value: str):
@@ -700,7 +700,7 @@ class Put():
             "deviceName": device_name
         }     
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
     
     
     def group_device_type_file(self, service_provider_id: str, group_id: str, 
@@ -723,7 +723,7 @@ class Put():
         updates["groupId"] = group_id
         updates["deviceType"] = device_type
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
         
     
     def group_device_type_tag(self, service_provider_id: str, group_id: str, 
@@ -751,7 +751,7 @@ class Put():
             "deviceType": device_type
         }     
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
     
     
     def service_provider_device_type_tag(self, service_provider_id: str, device_type: str, 
@@ -777,7 +777,7 @@ class Put():
             "deviceType": device_type
         }     
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
 
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
@@ -806,7 +806,7 @@ class Put():
             "dns": [{"activated": activated, "min": num, "max": None} for num in numbers]
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
         
 
 #DO NOT DISTURB
@@ -832,7 +832,7 @@ class Put():
         
         endpoint = f"/users/do-not-disturb"
         
-        return self.requester.put(endpoint, data)
+        return self._requester.put(endpoint, data)
         
         
 
@@ -873,7 +873,7 @@ class Put():
                           for hunt_group_user_id in hunt_group_user_ids]
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
         
     
     def group_hunt_group(self, service_provider_id: str, group_id: str, hunt_group_user_id: str, updates: dict):
@@ -895,7 +895,7 @@ class Put():
         updates["groupId"] = group_id
         updates["serviceUserId"] = hunt_group_user_id          
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
             
         
     def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, hunt_group_user_id: str, 
@@ -932,7 +932,7 @@ class Put():
         if not assigned_weight == max_weights:
             raise OSInvalidWeighting
       
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
         
         
         
@@ -1011,7 +1011,7 @@ class Put():
         if service_packs:
             data["servicePackServices"] = [{'serviceName': service_pack, 'assigned': assigned} for service_pack in service_packs]
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
     
 
 #SHARED CALL APPEARANCE
@@ -1041,7 +1041,7 @@ class Put():
             "data": updates 
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
 
 
     def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
@@ -1052,7 +1052,7 @@ class Put():
         updates["groupId"] = [group_id]
         updates["userId"] = [user_id]
         
-        return self.requester.put(endpoint, data=updates)
+        return self._requester.put(endpoint, data=updates)
         
     
     def user_portal_passcode(self, user_id: str, new_passcode: str):
@@ -1079,7 +1079,7 @@ class Put():
             "newPasscode": new_passcode
         }
         
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
    
     
 #USER CUSTOM RINGBACK

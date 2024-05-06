@@ -3,7 +3,7 @@
 class Post():
     
     def __init__(self, requester):
-        self.requester = requester
+        self._requester = requester
             
 #SESSION
         
@@ -11,22 +11,22 @@ class Post():
         
         endpoint = "/auth/token"
         
-        data={
+        payload={
             "username": username,
             "password": password
         }
         
-        return self.requester.post(endpoint, data=data)
+        return self._requester.post(endpoint, data=payload)
         
     def session_switch(self, username: str):
         
         endpoint = "/auth/switch-user"
         
-        data = {
+        payload = {
             "username": username
         }
         
-        return self.requester.post(endpoint, data=data)
+        return self._requester.post(endpoint, data=payload)
         
 
 #ACCOUNT AUTHORIZATION CODES
@@ -127,7 +127,7 @@ class Post():
             ]
 		}
         
-        return self.requester.post(endpoint, data=data)
+        return self._requester.post(endpoint, data=data)
     
     
     def group_dns_assign_bulk(self, service_provider_id: str, group_id: str, 
@@ -160,7 +160,7 @@ class Post():
             ]
 		}
         
-        return self.requester.post(endpoint, data=data)
+        return self._requester.post(endpoint, data=data)
     
     
     def group_dns_unassign_bulk(self, service_provider_id: str, group_id: str, 
@@ -193,7 +193,7 @@ class Post():
             ]
 		}
         
-        return self.requester.post(endpoint, data=data)
+        return self._requester.post(endpoint, data=data)
     
     
     def service_provider_dns(self, service_provider_id: str, start_of_range_number: int, 
@@ -224,7 +224,7 @@ class Post():
             ]
 		}
         
-        return self.requester.post(endpoint, data=data)
+        return self._requester.post(endpoint, data=data)
 
 
 #DO NOT DISTURB
@@ -310,7 +310,7 @@ class Post():
 #TWO STAGE DIALING
 #USERS
         
-    def user(self, user):
+    def user(self, service_provider_id: str, group_id: str, data: dict):
         """_summary_
 
         Args:
@@ -319,10 +319,13 @@ class Post():
         Returns:
             _type_: _description_
         """
+        payload = data
+        payload["ServiceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
         
-        endpoint = "users"
+        endpoint = f"/users"
         
-        return self.requester.post(endpoint, data=user)
+        return self._requester.post(endpoint, data=payload)
     
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON

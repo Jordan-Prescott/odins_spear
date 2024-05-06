@@ -1,6 +1,6 @@
 class Delete():
     def __init__(self, requester):
-        self.requester = requester
+        self._requester = requester
     
 #SESSION
 #ACCOUNT AUTHORIZATION CODES
@@ -98,7 +98,7 @@ class Delete():
             ]
 		}
         
-        return self.requester.delete(endpoint, data=data)
+        return self._requester.delete(endpoint, data=data)
     
     
     def service_provider_dns(self, service_provider_id: str, start_of_range_number: str, end_of_range_number: str):
@@ -124,7 +124,7 @@ class Delete():
             ]
 		}
         
-        return self.requester.delete(endpoint, data=data)
+        return self._requester.delete(endpoint, data=data)
 
 #DO NOT DISTURB
 #DOMAINS
@@ -208,6 +208,21 @@ class Delete():
 #TRUNK GROUPS
 #TWO STAGE DIALING
 #USERS
+
+    def user(self, user_id: str):
+        """ Deletes a single user.
+
+        Args:
+            user_id (str): User ID of target user to delete.
+
+        Returns:
+            None: Doesnt return any specific data.
+        """
+        
+        endpoint = f"/users?userId={user_id}"
+        
+        return self._requester.delete(endpoint)
+
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON
 #VIRTUAL ON-NET ENTERPRISE EXTENSIONS
