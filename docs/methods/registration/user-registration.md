@@ -2,9 +2,13 @@
 description: my_api.get.user_regsitration()
 ---
 
-# 💚 User Registration
+# 💚 GET - User Registration
 
 Gets a users devices and if those devices are registered. This includes soft phones.
+
+{% hint style="info" %}
+If registrations is an empty list this means the user has no active registrations.&#x20;
+{% endhint %}
 
 ### Parameters&#x20;
 

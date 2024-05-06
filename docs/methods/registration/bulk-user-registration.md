@@ -2,9 +2,13 @@
 description: my_api.get.bulk_user_regsitration()
 ---
 
-# 💚 Bulk User Registration
+# 💚 GET - Bulk User Registration
 
 Gets all users in a group and their device registrations. This includes soft phones.
+
+{% hint style="info" %}
+If a users registrations is an empty list this means the user currently has no active registrations.
+{% endhint %}
 
 ### Parameters&#x20;
 
