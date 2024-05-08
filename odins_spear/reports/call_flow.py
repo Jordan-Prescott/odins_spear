@@ -15,11 +15,11 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     
     - get.group_call_centers - X
     - get.group_call_center - X 
-    - get.group_call_center_bounced_calls - X
-    - get.group_call_center_forced_forwarding - X
-    - get.group_call_center_overflow - X
-    - get.group_call_center_stranded_calls - X
-    - get.group_call_center_stranded_unavailable - X
+    - get.group_call_center_bounced_calls - 
+    - get.group_call_center_forced_forwarding - 
+    - get.group_call_center_overflow - 
+    - get.group_call_center_stranded_calls - 
+    - get.group_call_center_stranded_unavailable - 
     
     - get.group_hunt_groups - X
     - get.group_hunt_group - X
@@ -27,10 +27,10 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     - get.users - X
     - get.user_by_id - X
     
-    - get.user_call_forwarding_always - X
-    - get.user_call_forwarding_busy - X
-    - get.user_call_forwarding_no_answer - X
-    - get.user_call_forwarding_not_reachable - X
+    - get.user_call_forwarding_always - 
+    - get.user_call_forwarding_busy - 
+    - get.user_call_forwarding_no_answer - 
+    - get.user_call_forwarding_not_reachable - 
     
     - get.group_schedules - X
     - get.group_events  - X
@@ -60,10 +60,16 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     #     call_center = bre.CallCenter.from_dict(group=group, data= api.get.group_call_center(cc['serviceUserId']))
     #     data_store.call_centers.append(call_center)
     
-    hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    for hg in hunt_groups:
-        hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
-        data_store.hunt_groups.append(hunt_group)
+    # hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
+    # for hg in hunt_groups:
+    #     hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
+    #     data_store.hunt_groups.append(hunt_group)
+    
+    
+    
+    
+    
+    
     
     # locate number using broadworks_entity_type to zone in on correct location
     
