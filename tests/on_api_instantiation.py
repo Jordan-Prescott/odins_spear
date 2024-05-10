@@ -3,9 +3,9 @@ import os
 import sys
 
 
-class TestCoreFunctionality(unittest.TestCase):
+class TestOnApiInstantiation(unittest.TestCase):
     """ 
-    Test library is setting up correctly for core functionality e.g. ensuring objects are 
+    Test library is setting up correctly when instatiating API object e.g.ensuring objects are 
     handed to other objects that need them to function. Finally, tests authentication needed
     to utilise the library.
     """
@@ -71,7 +71,7 @@ class TestCoreFunctionality(unittest.TestCase):
             self.api.put._requester
         )
         
-        # DELET
+        # DELETE
         self.assertIs(
             self.api._requester,
             self.api.delete._requester
