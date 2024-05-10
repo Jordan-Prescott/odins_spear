@@ -1,6 +1,7 @@
 import json
 
 from .report_utils.graphviz_module import GraphvizModule
+from .report_utils.locaters import find_number
 
 from odins_spear.store import DataStore
 from odins_spear.store import broadwork_entities as bre
@@ -52,8 +53,8 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     
     users = api.get.users(service_provider_id, group_id, extended=True)
     for u in users:
-         user = bre.User.from_dict(group=group, data=u)
-         data_store.users.append(user)
+        user = bre.User.from_dict(group=group, data=u)
+        data_store.users.append(user)
     
     # call_centers = api.get.group_call_centers(service_provider_id, group_id)
     # for cc in call_centers:
@@ -64,14 +65,35 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     # for hg in hunt_groups:
     #     hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
     #     data_store.hunt_groups.append(hunt_group)
-    
-    
-    
-    
-    
+      
     
     
     # locate number using broadworks_entity_type to zone in on correct location
+    if broadworks_entity_type == "user":
+        call_flow_start = find_number(
+			number,
+			number_type,
+			data_store.users
+		)
+    if broadworks_entity_type == "auto attendant":
+        call_flow_start = find_number(
+			number,
+			number_type,
+			data_store.auto_attendants
+		)
+    if broadworks_entity_type == "hunt group":
+        call_flow_start = find_number(
+			number,
+			number_type,
+			data_store.hunt_groups
+		)
+    if broadworks_entity_type == "call center":
+        call_flow_start = find_number(
+			number,
+			number_type,
+			data_store.call_centers
+		)
+  
     
     # follow and map how the routing options. each routing instance will need to be followed.
     
