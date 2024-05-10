@@ -1,9 +1,9 @@
 __all__ = [
     "graphviz_module",
-    "locaters",
+    "helpers",
     "parsing"
 ]
 
 from .graphviz_module import *
-from .locaters import *
+from .helpers import *
 from .parsing import *

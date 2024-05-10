@@ -1,7 +1,7 @@
 import json
 
 from .report_utils.graphviz_module import GraphvizModule
-from .report_utils.locaters import find_number
+from .report_utils.helpers import find_number
 
 from odins_spear.store import DataStore
 from odins_spear.store import broadwork_entities as bre
@@ -69,11 +69,10 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     
     
     # locate number using broadworks_entity_type to zone in on correct location
-    if broadworks_entity_type == "user":
-        call_flow_start = find_number(
+    call_flow_start = find_number(
 			number,
 			number_type,
-			data_store.users
+			getattr(data_store, broadworks_entity_type + "s")
 		)
     if broadworks_entity_type == "auto attendant":
         call_flow_start = find_number(
