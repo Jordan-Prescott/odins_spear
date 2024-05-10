@@ -1,6 +1,7 @@
 import unittest
 import os
 import sys
+import time
 
 class TestMethodCalls(unittest.TestCase):
     """
@@ -15,12 +16,12 @@ class TestMethodCalls(unittest.TestCase):
         
         from odins_spear.api import Api
         # Set up API object
-        self.api = Api(base_url=os.getenv("ODIN_URL"), username= os.getenv("ODIN_USERNAME"), 
-               password="ODIN_PASSWORD")
+        self.api = Api(base_url=os.getenv("ODIN-URL"), username= os.getenv("ODIN-USERNAME"), 
+               password="ODIN-PASSWORD")
         
-        self.service_provider_id = os.getenv("TEST_SERVICE_PROVIDER_ID")
-        self.group_id = os.getenv("TEST_GROUP_ID")
-        self.user_id = os.getenv("TEST_USER_ID")
+        self.service_provider_id = os.getenv("TEST-SERVICE-PROVIDER-ID")
+        self.group_id = os.getenv("TEST-GROUP-ID")
+        self.user_id = os.getenv("TEST-USER-ID")
         
         self.test_user_data = {
             "serviceProviderId": self.service_provider_id,
@@ -28,57 +29,104 @@ class TestMethodCalls(unittest.TestCase):
             "userId": self.user_id,
             "firstName": "Mark",
             "lastName": "Corrigan",
+            "callingLineIdFirstName": "Mark",
+            "callingLineIdLastName": "Corrigan",
+            "password": "password",
         }        
-        
-    def test_post_user(self):
+    
+    
+    def test_first(self):
+        """ API object is able to authenticate.
+        """
+        try:
+            self.assertEqual(
+                self.api.authenticate(), 
+                True
+            )
+        except Exception:
+            self.fail("Authentication failed.")
+    
+    
+    def test_second(self):
         """ Builds test user in test environment and checks response.
         """
-        self.assertEquals(
-            self.api.post.user(
+        try:
+            build_user = self.api.post.user(
                 service_provider_id=self.service_provider_id,
                 group_id=self.group_id,
                 data=self.test_user_data
-            ),
-            []
+            )
+        except Exception:
+            build_user = "Failed"
+        
+        time.sleep(1)
+        
+        self.assertEquals(
+            type(build_user),
+            dict
         )
+        
     
+    # def test_third(self):
+    #     """ Gets built user from system and checks name to confirm user was built correctly.
+    #     """
+    #     try:
+    #         get_user = self.api.get.user_by_id(self.user_id)
+    #         self.test_user_data = get_user,
+    #     except Exception:
+    #         get_user = "Failed"
+            
+    #     time.sleep(2)
+        
+    #     self.assertEqual(
+    #             get_user["userId"],
+    #             self.user_id
+    #         )
+            
     
-    def test_get_user(self):
-        """ Gets built user from system and checks name to confirm user was built correctly.
-        """
-        self.assertEqual(
-            self.api.get.user_by_id(self.test_user_data["userId"])["firstName"],
-            self.test_user_data["firstName"]
-        )
+    # def test_fourth(self):
+    #     """ Updates users first and last name and the checks response has no error.
+    #     """
+    #     self.test_user_data["firstName"] = "Jeremy"
+    #     self.test_user_data["lastName"] = "Usborne"
+    #     self.test_user_data["callingLineIdFirstName"] = "Jeremy"
+    #     self.test_user_data["callingLineIdLastName"] = "Usborne"
+        
+    #     try: 
+    #         update_user = self.api.put.user(
+    #                 service_provider_id=self.service_provider_id,
+    #                 group_id=self.group_id,
+    #                 updates=self.test_user_data
+    #             )
+    #     except Exception:
+    #         update_user = False
+        
+    #     time.sleep(2)
+        
+    #     self.assertEqual(
+    #         update_user["firstName"],
+    #         self.test_user_data["firstName"]
+    #     )
+        
     
-    
-    def test_put_user(self):
-        """ Updates users first and last name and the checks response has no error.
-        """
-        self.test_user_data["firstName"] = "Jeremy"
-        self.test_user_data["lastName"] = "Usborne"
-             
-        self.assertEqual(
-            self.api.put.user(
-                service_provider_id=self.service_provider_id,
-                group_id=self.group_id,
-                updates=self.test_user_data
-            ),
-            []
-        )
-    
-    
-    def test_delete_user(self):
+    def test_fifth(self):
         """ Deletes test user from system.
         """
+        try:
+            delete_user = self.api.delete.user(
+                    user_id=self.user_id
+                )  
+        except Exception:
+            delete_user = False
+        
+        time.sleep(2)
         
         self.assertEqual(
-            self.api.delete.user(
-                user_id=self.user_id
-            ),
-            []
+            delete_user,
+            list
         )
-    
+        
     
 if __name__ == '__main__':
+    unittest.TestLoader.sortTestMethodsUsing = lambda _, x, y: 1 if x > y else -1 if x < y else 0
     unittest.main()

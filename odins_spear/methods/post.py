@@ -320,7 +320,7 @@ class Post():
             _type_: _description_
         """
         payload = data
-        payload["ServiceProviderId"] = service_provider_id
+        payload["serviceProviderId"] = service_provider_id
         payload["groupId"] = group_id
         
         endpoint = f"/users"

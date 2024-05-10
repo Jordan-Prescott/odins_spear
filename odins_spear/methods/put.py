@@ -1048,9 +1048,9 @@ class Put():
         
         endpoint = "/users"
         
-        updates["serviceProviderId"] = [service_provider_id]
-        updates["groupId"] = [group_id]
-        updates["userId"] = [user_id]
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["userId"] = user_id
         
         return self._requester.put(endpoint, data=updates)
         
