@@ -1,7 +1,7 @@
 import json
 
 from .report_utils.graphviz_module import GraphvizModule
-from .report_utils.helpers import find_number
+from .report_utils.helpers import find_entity_with_number_type
 
 from odins_spear.store import DataStore
 from odins_spear.store import broadwork_entities as bre
@@ -52,9 +52,37 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     #     data_store.auto_attendants.append(auto_attendant)
     
     users = api.get.users(service_provider_id, group_id, extended=True)
+    data_store.build_id_mapping()
+    
+    call_forward_always_users = [
+    {"service_assigned": item["service"]["assigned"], "userId": item["user"]["userId"]}
+    for item in api.get.bulk_call_forwarding_always(service_provider_id, group_id) if item["service"]["assigned"]
+    ]
+    
+    call_forward_busy_users = [
+    {"service_assigned": item["service"]["assigned"], "userId": item["user"]["userId"]}
+    for item in api.get.bulk_call_forwarding_busy(service_provider_id, group_id) if item["service"]["assigned"]
+    ]
+    
+    call_forward_no_answer_users = [
+    {"service_assigned": item["service"]["assigned"], "userId": item["user"]["userId"]}
+    for item in api.get.bulk_call_forwarding_no_answer(service_provider_id, group_id) if item["service"]["assigned"]
+    ]
+    
+    call_forward_not_reachable = [
+    {"service_assigned": item["service"]["assigned"], "userId": item["user"]["userId"]}
+    for item in api.get.bulk_call_forwarding_not_reachable(service_provider_id, group_id) if item["service"]["assigned"]
+    ]
+        
     for u in users:
         user = bre.User.from_dict(group=group, data=u)
+        
+        
         data_store.users.append(user)
+        
+    for u in call_forward_always_users:
+        if u["service"]["assigned"]:
+            pass
     
     # call_centers = api.get.group_call_centers(service_provider_id, group_id)
     # for cc in call_centers:
@@ -66,33 +94,19 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     #     hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
     #     data_store.hunt_groups.append(hunt_group)
       
-    
-    
+    # create mapping for easier searchability when gathering nodes
+    data_store.build_number_mapping()
+
     # locate number using broadworks_entity_type to zone in on correct location
-    call_flow_start = find_number(
+    call_flow_start_node = find_entity_with_number_type(
 			number,
 			number_type,
 			getattr(data_store, broadworks_entity_type + "s")
 		)
-    if broadworks_entity_type == "auto attendant":
-        call_flow_start = find_number(
-			number,
-			number_type,
-			data_store.auto_attendants
-		)
-    if broadworks_entity_type == "hunt group":
-        call_flow_start = find_number(
-			number,
-			number_type,
-			data_store.hunt_groups
-		)
-    if broadworks_entity_type == "call center":
-        call_flow_start = find_number(
-			number,
-			number_type,
-			data_store.call_centers
-		)
-  
+    
+    # Nodes used in the graph
+    
+    
     
     # follow and map how the routing options. each routing instance will need to be followed.
     

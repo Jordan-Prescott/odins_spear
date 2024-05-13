@@ -261,6 +261,11 @@ class User:
     extension: str = None
     phone_number: str = None
     aliases: List[str] = field(default_factory=list)
+    
+    call_forwarding_always: str = None
+    call_forwarding_busy: str = None
+    call_forwarding_no_answer: str = None
+    call_forwarding_not_reachable: str = None
 
 
     def __post_init__(self):
@@ -326,7 +331,7 @@ class Department:
             group_id= data.get("groupId"),
             name= data.get("name")
         )
-        
+    
 def _get_user_object_from_id(group, user_ids: list):
     return list(filter(lambda user: any(user_id in user.id for user_id in user_ids),
                        group.users))

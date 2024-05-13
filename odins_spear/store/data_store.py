@@ -24,7 +24,50 @@ class DataStore:
         self.devices: List[bre.Device] = []
         self.other_entities = [] #Non-common or custom objects
 
-            
+
+    def build_id_mapping(self):
+        """
+        Builds mapping of numbers IDs to entity.
+        
+        Example: {test@test.com: User, customID: CallCenter}
+        """
+        
+        self.id_mapping = {}
+        
+        entities = self.auto_attendants + self.call_centers + \
+        self.hunt_groups + self.users
+        
+        for e in entities:
+            try:
+                self.id_mapping[e.id] = e
+            except KeyError:
+                self.id_mapping[e.service_user_id] = e
+        
+    
+    def build_number_mapping(self):
+        """
+        Builds mapping of numbers (phone numbers, extension, aliases) to entity.
+        
+        Example: {101: User, +1-123456789: CallCenter}
+        """
+        import re
+    
+        self.number_mapping = {}
+        
+        entities = self.auto_attendants + self.call_centers + \
+        self.hunt_groups + self.users
+        
+        for e in entities: 
+            if e.phone_number:
+                self.number_mapping[e.phone_number] = e
+            if e.extension:
+                self.number_mapping[e.extension] = e 
+            if e.aliases:
+                for a in e.aliases:
+                    number = re.search(r'\d+', a).group()
+                    self.number_mapping[number] = e     
+        
+      
     def get_group_state(api, group: bre.Group) -> None:
         """ takes in group id and loads group state into broadworks entities.
 

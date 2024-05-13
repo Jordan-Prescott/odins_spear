@@ -1,8 +1,13 @@
-""" Graphviz formatting for standardisation in reports.
-"""
+from odins_spear.store import broadwork_entities as bre
 
-class CallFlowModule:
+NODES = [] 
+
+def call_flow_module(node: object, store: object):
+    start_node = node
     
-    def __init__(self):
-        pass
+
+#TODO: run over the entities and depening on what it is use the call forwards to pull the other entities
+def traverse_entities(entity):
+    pass
+
 
