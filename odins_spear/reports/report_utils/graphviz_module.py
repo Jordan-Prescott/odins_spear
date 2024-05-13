@@ -74,7 +74,15 @@ class GraphvizModule:
         self.output_directory = output_directory
         
    
-    def generate_call_flow_graph(self, flow: object, number: str):
+    def generate_call_flow_graph(self, nodes: list, number: str):
+        
+        
+        
+        
+        
+        
+        
+        
         self.dot.attr(name=f"calls_to_{number}", label=number, fontname='Arial',
                       fontcolor='white', rankdir="LR")
         

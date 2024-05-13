@@ -40,7 +40,7 @@ class DataStore:
         for e in entities:
             try:
                 self.id_mapping[e.id] = e
-            except KeyError:
+            except Exception:
                 self.id_mapping[e.service_user_id] = e
         
     

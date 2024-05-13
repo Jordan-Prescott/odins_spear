@@ -25,7 +25,3 @@ def find_entity_with_number_type(number: str, number_type: str, broadwork_entiti
                     return entity
                        
     return None
-
-
-def find_entity_without_number_type(number: str, data_store: object):
-    pass

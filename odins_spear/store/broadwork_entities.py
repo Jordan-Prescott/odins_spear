@@ -173,8 +173,11 @@ class CallCenter:
     def from_dict(cls, group: Group, data):
         
         # gather user IDs to gather user object
-        agent_ids = [agent["userId"] for agent in data["agents"]]
-        agents = _get_user_object_from_id(group, agent_ids)
+        try:
+            agent_ids = [agent["userId"] for agent in data["agents"]]
+            agents = _get_user_object_from_id(group, agent_ids)
+        except KeyError: 
+            agents = []
         
         return cls(
             service_user_id= data.get("serviceUserId"),
