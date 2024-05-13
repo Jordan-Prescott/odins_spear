@@ -20,7 +20,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     - get.group_call_center - X 
     - get.group_call_center_bounced_calls - 
     - get.group_call_center_forced_forwarding - 
-    - get.group_call_center_overflow - 
+    - get.group_overflow_settings - 
     - get.group_call_center_stranded_calls - 
     - get.group_call_center_stranded_unavailable - 
     
@@ -54,7 +54,6 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         data_store.auto_attendants.append(auto_attendant)
     
     users = api.get.users(service_provider_id, group_id, extended=True)
-    data_store.build_id_mapping()
     
     # Captures users with the forward fucntionality
     call_forward_always_users = [
@@ -96,9 +95,41 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     for cc in call_centers:
         call_center = bre.CallCenter.from_dict(group= group, data= api.get.group_call_center(cc['serviceUserId']))
         
+        try:
+            overflow_settings = api.get.group_call_center_overflow(call_center.service_user_id)
+            call_center.overflow_calls_action = overflow_settings["action"]
+            call_center.overflow_calls_transfer_to_phone_number = overflow_settings["transferToPhoneNumner"] \
+                if call_center.overflow_calls_action == "Transfer" else None
+        except Exception:
+            call_center.overflow_calls_action = None
+            call_center.overflow_calls_transfer_to_phone_number = None
         
+        try:
+            stranded_calls_settings = api.get.group_call_center_stranded_calls(call_center.service_user_id)
+            call_center.stranded_call_unavailable_action = stranded_calls_settings["action"]
+            call_center.stranded_call_unavailable_transfer_to_phone_number = stranded_calls_settings["transferPhoneNumber"] \
+                if call_center.stranded_call_unavailable_action == "Transfer" else None
+        except Exception:
+            call_center.stranded_call_unavailable_action = None
+            call_center.stranded_call_unavailable_transfer_to_phone_number = None
+            
+        try:
+            stranded_calls_unavailable_settings = api.get.group_call_center_stranded_calls_unavailable(call_center.service_user_id)
+            call_center.stranded_call_unavailable_action = stranded_calls_unavailable_settings["action"]
+            call_center.stranded_call_unavailable_transfer_to_phone_number = stranded_calls_unavailable_settings["transferPhoneNumber"] \
+                if call_center.stranded_call_unavailable_action == "Transfer" else None
+        except Exception:
+            call_center.stranded_call_unavailable_action = None
+            call_center.stranded_call_unavailable_transfer_to_phone_number = None
         
-        
+        try: 
+            forced_forwarding_settings = api.get.group_call_center_forced_forwarding(call_center.service_user_id)
+            call_center.forced_forwarding_enabled = forced_forwarding_settings["enabled"]
+            call_center.forced_forwarding_forward_to_phone_number = forced_forwarding_settings["forwardToPhoneNumber"] \
+                if call_center.forced_forwarding_enabled else None
+        except Exception:
+            call_center.forced_forwarding_enabled = False
+            call_center.forced_forwarding_forward_to_phone_number = None
         
         data_store.call_centers.append(call_center)
     
@@ -118,7 +149,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     # Nodes used in the graph
     bre_nodes = call_flow_module(call_flow_start_node, data_store)
     
-    # follow and map how the routing options. each routing instance will need to be followed.
+    # build, generate, save graph
     graph = GraphvizModule(
         "./os_reports/"
     )

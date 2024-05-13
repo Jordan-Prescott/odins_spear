@@ -150,7 +150,6 @@ class CallCenter:
     policy: str = None
    
     bounced_calls_enabled: bool = False
-    bounced_calls_transfer_to_phone_number: bool = False
     overflow_calls_action: str = None
     overflow_calls_transfer_to_phone_number: bool = False
     stranded_calls_action: str = None
@@ -191,7 +190,6 @@ class CallCenter:
             policy= data.get("policy"),
         
             bounced_calls_enabled= data.get("bouncedCallsEnabled"),
-            bounced_calls_transfer_to_phone_number= data.get("bouncedCallsTransferToPhoneNumber"),
             overflow_calls_action= data.get("overFlowCallsAction"),
             overflow_calls_transfer_to_phone_number= data.get("overflowCallsTransferToPhoneNumber"),
             stranded_calls_action= data.get("strandedCallsAction"),
