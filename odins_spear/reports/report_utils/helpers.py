@@ -15,7 +15,7 @@ def find_entity_with_number_type(number: str, number_type: str, broadwork_entiti
     """
     
     for entity in broadwork_entities:
-        if number_type == 'phone number' and number in entity.phone_number:
+        if number_type == 'dn' and number in entity.phone_number:
             return entity
         elif number_type == 'extension' and number in entity.extension:
             return entity
