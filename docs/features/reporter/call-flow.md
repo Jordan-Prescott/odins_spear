@@ -55,7 +55,7 @@ from odin_api import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-# find alias method
+# Generates a call flow chart for the number 123456789.
 my_api.reporter.call_flow(
     "serviceProviderId",
     "groupId",
