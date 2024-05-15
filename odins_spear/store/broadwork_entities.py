@@ -244,13 +244,13 @@ class HuntGroup:
             phone_number= data.get("serviceInstanceProfile").get("phoneNumber"),
             policy= data.get("policy"),
             
-            forward_after_timeout_enabled= data.get("forwardAfterTimeoutEnabled"),
+            forward_after_timeout_enabled= data.get("forwardAfterTimeout"),
             forward_timeout_seconds= data.get("forwardTimeoutSeconds"),
             no_answer_number_of_rings= data.get("noAnswerNumberOfRings"),
-            no_answer_forward_to_phone_number= data.get("noAnswerForwardToPhoneNumber"),
+            no_answer_forward_to_phone_number= data.get("forwardToPhoneNumber"),
             
-            call_forward_not_reachable_enabled= data.get("callForwardNotReachableEnabled"),
-            call_forward_not_reachable_transfer_to_phone_number= data.get("callForwardNotReachableTransferToPhoneNumber")
+            call_forward_not_reachable_enabled= data.get("enableNotReachableForwarding"),
+            call_forward_not_reachable_transfer_to_phone_number= data.get("notReachableForwardToPhoneNumber")
         )
         
 @dataclass(kw_only=True)

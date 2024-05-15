@@ -9,51 +9,85 @@ def call_flow_module(node: object, data_store: object):
     # create mapping for easier searchability when gathering nodes
     data_store.build_number_mapping()
     
+    # traverses the enities that forward to eachother and adds all to NODES
     _traverse_connecting_entities(node, data_store)
     
     return NODES
     
 
-#TODO: run over the entities and depening on what it is use the call forwards to pull the other entities
-def _traverse_connecting_entities(entity: object, data_store: object):
+def _traverse_connecting_entities(entity: object, data_store: object, visited= None):
+    if visited is None:
+        visited = []
+        
+    if entity in visited:
+        return
+    else:
+        visited.append(entity) 
+    
     try:
         if isinstance(entity, bre.User):
             entity.call_forwarding_always = data_store.number_mapping.get(entity.call_forwarding_always)
-            if entity.call_forwarding_always: 
-                _traverse_connecting_entities(entity.call_forwarding_always, data_store)
+            if entity.call_forwarding_always and entity.call_forwarding_always not in visited: 
+                _traverse_connecting_entities(entity.call_forwarding_always, data_store, visited)
             
             entity.call_forwarding_busy = data_store.number_mapping.get(entity.call_forwarding_busy)
-            if entity.call_forwarding_busy:
-                _traverse_connecting_entities(entity.call_forwarding_busy, data_store)
+            if entity.call_forwarding_busy and entity.call_forwarding_busy not in visited:
+                _traverse_connecting_entities(entity.call_forwarding_busy, data_store, visited)
             
             entity.call_forwarding_no_answer = data_store.number_mapping.get(entity.call_forwarding_no_answer)
-            if entity.call_forwarding_no_answer:
-                _traverse_connecting_entities(entity.call_forwarding_no_answer, data_store)
+            if entity.call_forwarding_no_answer and entity.call_forwarding_no_answer not in visited:
+                _traverse_connecting_entities(entity.call_forwarding_no_answer, data_store, visited)
             
             entity.call_forwarding_not_reachable = data_store.number_mapping.get(entity.call_forwarding_not_reachable)
-            if entity.call_forwarding_not_reachable:
-                _traverse_connecting_entities(entity.call_forwarding_not_reachable, data_store)
+            if entity.call_forwarding_not_reachable and entity.call_forwarding_not_reachable not in visited:
+                _traverse_connecting_entities(entity.call_forwarding_not_reachable, data_store, visited)
         
         if isinstance(entity, bre.CallCenter):
             if entity.bounced_calls_enabled:
-                entity.bounced_calls_transfer_to_phone_number = data_store.number_mapping.get(entity.bounced_calls_transfer_to_phone_number)
-                if entity.bounced_calls_transfer_to_phone_number:
-                    _traverse_connecting_entities(entity.bounced_calls_transfer_to_phone_number, data_store)
+                entity.bounced_calls_transfer_to_phone_number = data_store.number_mapping.get(str(entity.bounced_calls_transfer_to_phone_number))
+                if entity.bounced_calls_transfer_to_phone_number and entity.bounced_calls_transfer_to_phone_number not in visited:
+                    _traverse_connecting_entities(entity.bounced_calls_transfer_to_phone_number, data_store, visited)
             
             if entity.overflow_calls_action:
-                entity.overflow_calls_transfer_to_phone_number = data_store.number_mapping.get(entity.overflow_calls_transfer_to_phone_number)
-                if entity.overflow_calls_transfer_to_phone_number:
-                    _traverse_connecting_entities(entity.overflow_calls_transfer_to_phone_number, data_store)
+                entity.overflow_calls_transfer_to_phone_number = data_store.number_mapping.get(str(entity.overflow_calls_transfer_to_phone_number))
+                if entity.overflow_calls_transfer_to_phone_number and entity.overflow_calls_transfer_to_phone_number not in visited:
+                    _traverse_connecting_entities(entity.overflow_calls_transfer_to_phone_number, data_store, visited)
 
             if entity.stranded_calls_action:
-                entity.stranded_calls_transfer_to_phone_number = data_store.number_mapping.get(entity.stranded_calls_transfer_to_phone_number)
-                if entity.stranded_calls_transfer_to_phone_number:
-                    _traverse_connecting_entities(entity.stranded_calls_transfer_to_phone_number, data_store)
+                entity.stranded_calls_transfer_to_phone_number = data_store.number_mapping.get(str(entity.stranded_calls_transfer_to_phone_number))
+                if entity.stranded_calls_transfer_to_phone_number and entity.stranded_calls_transfer_to_phone_number not in visited:
+                    _traverse_connecting_entities(entity.stranded_calls_transfer_to_phone_number, data_store, visited)
         
             if entity.stranded_call_unavailable_action:
-                entity.stranded_call_unavailable_transfer_to_phone_number = data_store.number_mapping.get(entity.stranded_call_unavailable_transfer_to_phone_number)
-                if entity.stranded_call_unavailable_transfer_to_phone_number:
-                    _traverse_connecting_entities(entity.stranded_call_unavailable_transfer_to_phone_number, data_store)
+                entity.stranded_call_unavailable_transfer_to_phone_number = data_store.number_mapping.get(str(entity.stranded_call_unavailable_transfer_to_phone_number))
+                if entity.stranded_call_unavailable_transfer_to_phone_number and entity.stranded_call_unavailable_transfer_to_phone_number not in visited:
+                    _traverse_connecting_entities(entity.stranded_call_unavailable_transfer_to_phone_number, data_store, visited)
+        
+        if isinstance(entity, bre.HuntGroup):
+            if entity.forward_after_timeout_enabled:
+                entity.no_answer_forward_to_phone_number = data_store.number_mapping.get(str(entity.no_answer_forward_to_phone_number))
+                if entity.no_answer_forward_to_phone_number and entity.no_answer_forward_to_phone_number not in visited:
+                    _traverse_connecting_entities(entity.no_answer_forward_to_phone_number, data_store, visited)
+            
+            if entity.call_forward_not_reachable_enabled:
+                entity.call_forward_not_reachable_transfer_to_phone_number = data_store.number_mapping.get(str(entity.call_forward_not_reachable_transfer_to_phone_number))
+                if entity.call_forward_not_reachable_transfer_to_phone_number and entity.call_forward_not_reachable_transfer_to_phone_number not in visited:
+                    _traverse_connecting_entities(entity.call_forward_not_reachable_transfer_to_phone_number, data_store, visited)     
+        
+        if isinstance(entity, bre.AutoAttendant):
+            for key in entity.business_hours_menu.keys:
+                if "Transfer" in key.action:
+                    key.phone_number = data_store.number_mapping.get(str(key.phone_number))
+                    if key.phone_number and key.phone_number not in visited:
+                        _traverse_connecting_entities(key.phone_number, data_store, visited)
+            
+            for key in entity.after_hours_menu.keys:
+                if "Transfer" in key.action:
+                    key.phone_number = data_store.number_mapping.get(str(key.phone_number))
+                    if key.phone_number and key.phone_number not in visited:
+                        _traverse_connecting_entities(key.phone_number, data_store, visited)
     except TypeError:
-        pass                           
+        # this object is further up the tree and a loop has occured - Move one and come back 
+        pass
+
     NODES.append(entity)  # Append outside of the if condition

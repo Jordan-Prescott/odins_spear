@@ -19,10 +19,10 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     
     data_store.store_objects(service_provider, group)
     
-    # auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    # for aa in auto_attendants:
-    #     auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
-    #     data_store.auto_attendants.append(auto_attendant)
+    auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
+    for aa in auto_attendants:
+        auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
+        data_store.auto_attendants.append(auto_attendant)
     
     users = api.get.users(service_provider_id, group_id, extended=True)
     
@@ -69,7 +69,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         try:
             overflow_settings = api.get.group_call_center_overflow(call_center.service_user_id)
             call_center.overflow_calls_action = overflow_settings["action"]
-            call_center.overflow_calls_transfer_to_phone_number = overflow_settings["transferToPhoneNumner"] \
+            call_center.overflow_calls_transfer_to_phone_number = overflow_settings["transferPhoneNumber"] \
                 if call_center.overflow_calls_action == "Transfer" else None
         except Exception:
             call_center.overflow_calls_action = None
@@ -104,10 +104,10 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         
         data_store.call_centers.append(call_center)
     
-    # hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    # for hg in hunt_groups:
-    #     hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
-    #     data_store.hunt_groups.append(hunt_group)
+    hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
+    for hg in hunt_groups:
+        hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
+        data_store.hunt_groups.append(hunt_group)
       
     # locate number using broadworks_entity_type to zone in on correct location
     call_flow_start_node = find_entity_with_number_type(
@@ -128,4 +128,4 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         bre_nodes,
         number
     )
-    graph._save_graph
+    graph._save_graph(f"Calls To {number}")
