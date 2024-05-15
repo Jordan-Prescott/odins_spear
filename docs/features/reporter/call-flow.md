@@ -6,6 +6,18 @@ There is now no need to spend hours interrogating how calls to 0 flows through y
 
 <figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption><p>Test call flow generated</p></figcaption></figure>
 
+### Making Sense of The Graph
+
+What is does a red circle with 3001 in it mean and what does 'CFB' stand for? To make sense of the graph you will need to see the Node Key and the Abbreviation Key found below:
+
+{% content-ref url="help/node-key.md" %}
+[node-key.md](help/node-key.md)
+{% endcontent-ref %}
+
+{% content-ref url="help/abbreviation-key.md" %}
+[abbreviation-key.md](help/abbreviation-key.md)
+{% endcontent-ref %}
+
 ### Parameters&#x20;
 
 * service\_provider\_id (str): Service Provider/ Enterprise where group is hosted.&#x20;
