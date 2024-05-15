@@ -19,7 +19,7 @@ def find_entity_with_number_type(number: str, number_type: str, broadwork_entiti
             return entity
         elif number_type == 'extension' and number in entity.extension:
             return entity
-        elif number_type == 'aliases':
+        elif number_type == 'alias':
             for alias in entity.aliases:
                 if re.search(rf'\b{re.escape(alias)}\b', number):
                     return entity

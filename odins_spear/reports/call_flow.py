@@ -1,5 +1,7 @@
 import json
 
+from tqdm import tqdm
+
 from .report_utils.graphviz_module import GraphvizModule
 from .report_utils.helpers import find_entity_with_number_type
 from .report_utils.parsing import call_flow_module
@@ -13,6 +15,8 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     
     data_store = DataStore()
     
+    print("Start.\n")
+    print("Fetching Service Provider & Group details.")
     # Gather entities 
     service_provider = bre.ServiceProvider.from_dict(data=api.get.service_provider(service_provider_id))
     group = bre.Group.from_dict(service_provider=service_provider, data=api.get.group(service_provider_id, group_id))
@@ -20,7 +24,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     data_store.store_objects(service_provider, group)
     
     auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    for aa in auto_attendants:
+    for aa in tqdm(auto_attendants, desc=f"Fetching all Auto Attendants."):
         auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
         data_store.auto_attendants.append(auto_attendant)
     
@@ -47,7 +51,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         and item["data"]["isActive"]
     ]
 
-    for u in users:
+    for u in tqdm(users, desc=f"Fetching all Users."):
         user = bre.User.from_dict(group=group, data=u)
         
         if user.id in call_forward_always_users:
@@ -63,7 +67,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
 
 
     call_centers = api.get.group_call_centers(service_provider_id, group_id)    
-    for cc in call_centers:
+    for cc in tqdm(call_centers, desc=f"Fetching all Call Centers."):
         call_center = bre.CallCenter.from_dict(group= group, data= api.get.group_call_center(cc['serviceUserId']))
         
         try:
@@ -105,7 +109,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         data_store.call_centers.append(call_center)
     
     hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    for hg in hunt_groups:
+    for hg in tqdm(hunt_groups, desc=f"Fetching all Hunt Groups."):
         hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
         data_store.hunt_groups.append(hunt_group)
       
@@ -118,8 +122,10 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     call_flow_start_node._start_node = True
     
     # Nodes used in the graph
+    print("Gathering nodes in flow.")
     bre_nodes = call_flow_module(call_flow_start_node, data_store)
     
+    print("Generating report.")
     # build, generate, save graph
     graph = GraphvizModule(
         "./os_reports/"
@@ -128,4 +134,6 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         bre_nodes,
         number
     )
+    print("Saving report.")
     graph._save_graph(f"Calls To {number}")
+    print("\nEnd.")
