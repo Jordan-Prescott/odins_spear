@@ -24,7 +24,7 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'exit': {
-            'shape': 'box',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
             'color': '#020300',
@@ -32,13 +32,13 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'auto_attendant': {
-        'shape': 'circle',
-        'style': 'filled',
-        'margin': '0.2',
-        'color': '#5E1008',
-        'fillcolor': '#FF0000',
-        'fontname': 'Arial',
-        'fontcolor': 'white'
+            'shape': 'circle',
+            'style': 'filled',
+            'margin': '0.2',
+            'color': '#5E1008',
+            'fillcolor': '#FF0000',
+            'fontname': 'Arial',
+            'fontcolor': 'white'
         },
         'call_centre': {
             'shape': 'Mrecord',
@@ -94,8 +94,6 @@ class GraphvizModule:
                 self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["hunt_group"])
             elif isinstance(n, bre.AutoAttendant):
                 self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["auto_attendant"])
-            elif isinstance(n, external_number):
-                self.dot.node(n.id, n.id, GraphvizModule.NODE_STYLING["exit"])
             
         # build edges
         for n in nodes:
