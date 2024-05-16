@@ -28,6 +28,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
         data_store.auto_attendants.append(auto_attendant)
     
+    print("Fetching all users this may take a couple of minutes, please wait.")
     users = api.get.users(service_provider_id, group_id, extended=True)
     
     # Captures users with the forward fucntionality
@@ -51,7 +52,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         and item["data"]["isActive"]
     ]
 
-    for u in tqdm(users, desc=f"Fetching all Users."):
+    for u in tqdm(users, desc=f"Parsing all Users."):
         user = bre.User.from_dict(group=group, data=u)
         
         if user.id in call_forward_always_users:
@@ -61,7 +62,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         if user.id in call_forward_no_answer_users:
             user.call_forwarding_no_answer = str(api.get.user_call_forwarding_no_answer(user.id)["forwardToPhoneNumber"])
         if user.id in call_forward_not_reachable:
-            user.call_forwarding_not_reachable = str(api.get.user_call_forwarding_no_answer(user.id)["forwardToPhoneNumber"])
+            user.call_forwarding_not_reachable = str(api.get.user_call_forwarding_not_reachable(user.id)["forwardToPhoneNumber"])
         
         data_store.users.append(user)
 

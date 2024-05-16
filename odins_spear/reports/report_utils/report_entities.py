@@ -1,11 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List, Type
+
+@dataclass
 class call_flow:
-    def __init__(
-            self, name, nodes: list) -> None:
-        """Usually a call flow to a number and how calls to this number flows through the system.
+    name: str
+    nodes: List = field(default_factory=list)
 
-        :param name: Flow name.
-        :param nodes: List of the nodes that make up the flow.
-        """
 
-        self.name = name
-        self.nodes = nodes
+@dataclass
+class external_number:
+    id: str    

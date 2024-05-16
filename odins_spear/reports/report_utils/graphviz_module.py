@@ -1,7 +1,7 @@
 import graphviz
 
 from odins_spear.store import broadwork_entities as bre
-
+from .report_entities import external_number
 
 class GraphvizModule:
     
@@ -16,14 +16,14 @@ class GraphvizModule:
     
     NODE_STYLING = {
         'start' : {
-            'shape': 'oval',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
             'color': '#020300',
             'fontname': 'Arial',
             'fontcolor': 'white'
         },
-        'end': {
+        'exit': {
             'shape': 'box',
             'style': 'filled',
             'margin': '0.2',
@@ -41,7 +41,7 @@ class GraphvizModule:
         'fontcolor': 'white'
         },
         'call_centre': {
-            'shape': 'parallelogram',
+            'shape': 'Mrecord',
             'style': 'filled',
             'margin': '0.2',
             'color': '#68272E',
@@ -50,7 +50,7 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'hunt_group': {
-            'shape': 'parallelogram',
+            'shape': 'Mrecord',
             'style': 'filled',
             'margin': '0.2',
             'color': '#3D4066',
@@ -59,16 +59,20 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'user': {
-            'shape': 'diamond',
+            'shape': 'Mrecord',
             'style': 'filled',
             'margin': '0.2',
             'color': '#B87700',
             'fillcolor': '#FBA200',
             'fontname': 'Arial',
             'fontcolor': 'white'
-        }
+        },
+        
     }
-
+    EDGE_STYLYING = {
+        "fontname": "Arial"
+    }
+    
     def __init__(self, output_directory: str =None):
         
         self.dot = graphviz.Digraph()
@@ -90,12 +94,17 @@ class GraphvizModule:
                 self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["hunt_group"])
             elif isinstance(n, bre.AutoAttendant):
                 self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["auto_attendant"])
-        
+            elif isinstance(n, external_number):
+                self.dot.node(n.id, n.id, GraphvizModule.NODE_STYLING["exit"])
+            
         # build edges
         for n in nodes:
             try:
                 if n._start_node:
-                    self.dot.edge("Start", n.id)  
+                    try:
+                        self.dot.edge("Start", n.id)
+                    except Exception:
+                        self.dot.edge("Start", n.service_user_id)
             except AttributeError:
                 # node is note the start node
                 pass
@@ -121,25 +130,26 @@ class GraphvizModule:
             elif isinstance(n, bre.HuntGroup):
                 if n.forward_after_timeout_enabled:
                     self._format_edge(n, n.no_answer_forward_to_phone_number, "NACF")
-                if n.forward_after_timeout_enabled:
+                if n.call_forward_not_reachable_enabled:
                     self._format_edge(n, n.call_forward_not_reachable_transfer_to_phone_number, "CFNR")
                         
             elif isinstance(n, bre.AutoAttendant):
                 for key in n.business_hours_menu.keys:
                     if "Transfer" in key.action:
                         self._format_edge(n, key.phone_number, key.number)
+                        
     
     def _format_edge(self, node_a: str, node_b: str, label: str):
         try:
-            self.dot.edge(node_a.id, node_b.id, label)
+            self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
         except AttributeError:
             try:
-                self.dot.edge(node_a.id, node_b.service_user_id, label)
+                self.dot.edge(node_a.id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
             except AttributeError:
                 try:
-                    self.dot.edge(node_a.service_user_id, node_b.service_user_id, label)
+                    self.dot.edge(node_a.service_user_id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
                 except AttributeError:
-                    self.dot.edge(node_a.service_user_id, node_b.id, label)
+                    self.dot.edge(node_a.service_user_id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
 
             
     def _save_graph(self, filename: str):
