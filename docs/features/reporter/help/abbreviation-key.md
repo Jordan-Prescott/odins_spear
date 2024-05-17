@@ -8,10 +8,14 @@ description: >-
 
 <figure><img src="../../../../.gitbook/assets/image (17).png" alt=""><figcaption><p>Example of Call Flow showing abbreviations.</p></figcaption></figure>
 
-| Abbreviation | Meaning                    |
-| ------------ | -------------------------- |
-| CFB          | Call Forward Busy          |
-| CFNR         | Call Forward Not Reachable |
-| CFA          | Call Forward Always        |
-| OF           | Overflow                   |
-| NACF         | No Answer Call Forward     |
+| Abbreviation | Meaning                           |
+| ------------ | --------------------------------- |
+| CFB          | Call Forward Busy                 |
+| CFNR         | Call Forward Not Reachable        |
+| CFA          | Call Forward Always               |
+| OF           | Overflow                          |
+| NACF         | No Answer Call Forward            |
+| BCT          | Bounced Call Transfer             |
+| SCF          | Stranded Calls Transfer           |
+| USCF         | Unavailable Stranded Call Tranfer |
+
