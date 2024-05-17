@@ -107,6 +107,7 @@
       * [🆘 Help](docs/features/reporter/help/README.md)
         * [🔑 Node Key](docs/features/reporter/help/node-key.md)
         * [🔑 Abbreviation Key](docs/features/reporter/help/abbreviation-key.md)
+        * [📈 GraphViz](docs/features/reporter/help/graphviz.md)
     * [📜 Logger](docs/features/logger/README.md)
       * [📂 Sending Logs To A File](docs/features/logger/sending-logs-to-a-file.md)
       * [☁️ Sending Logs To A Syslog Server](docs/features/logger/sending-logs-to-a-syslog-server.md)
