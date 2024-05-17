@@ -15,13 +15,16 @@ def find_entity_with_number_type(number: str, number_type: str, broadwork_entiti
     """
     
     for entity in broadwork_entities:
-        if number_type == 'dn' and number in entity.phone_number:
-            return entity
-        elif number_type == 'extension' and number in entity.extension:
-            return entity
-        elif number_type == 'alias':
-            for alias in entity.aliases:
-                if re.search(rf'\b{re.escape(alias)}\b', number):
-                    return entity
-                       
+        try:
+            if number_type == 'dn' and number in entity.phone_number:
+                return entity
+            elif number_type == 'extension' and number in entity.extension:
+                return entity
+            elif number_type == 'alias':
+                for alias in entity.aliases:
+                    if re.search(rf'\b{re.escape(alias)}\b', number):
+                        return entity
+        except TypeError:
+            # issue when entity does not have a number, extenion, or alias assigned
+            continue
     return None

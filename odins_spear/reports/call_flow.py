@@ -82,16 +82,17 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         
         try:
             stranded_calls_settings = api.get.group_call_center_stranded_calls(call_center.service_user_id)
-            call_center.stranded_call_unavailable_action = stranded_calls_settings["action"]
-            call_center.stranded_call_unavailable_transfer_to_phone_number = stranded_calls_settings["transferPhoneNumber"] \
-                if call_center.stranded_call_unavailable_action == "Transfer" else None
+            call_center.stranded_calls_action = stranded_calls_settings["action"]
+            call_center.stranded_calls_transfer_to_phone_number = stranded_calls_settings["transferPhoneNumber"] \
+                if call_center.stranded_calls_action == "Transfer" else None
         except Exception:
-            call_center.stranded_call_unavailable_action = None
-            call_center.stranded_call_unavailable_transfer_to_phone_number = None
+            call_center.stranded_calls_action = None
+            call_center.stranded_calls_transfer_to_phone_number = None
             
         try:
             stranded_calls_unavailable_settings = api.get.group_call_center_stranded_calls_unavailable(call_center.service_user_id)
-            call_center.stranded_call_unavailable_action = stranded_calls_unavailable_settings["action"]
+            action_value = stranded_calls_unavailable_settings["action"]
+            call_center.stranded_call_unavailable_action = None if action_value == 'None' else action_value
             call_center.stranded_call_unavailable_transfer_to_phone_number = stranded_calls_unavailable_settings["transferPhoneNumber"] \
                 if call_center.stranded_call_unavailable_action == "Transfer" else None
         except Exception:
