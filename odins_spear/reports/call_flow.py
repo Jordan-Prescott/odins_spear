@@ -1,5 +1,3 @@
-import json
-
 from tqdm import tqdm
 
 from .report_utils.graphviz_module import GraphvizModule
@@ -13,6 +11,7 @@ from odins_spear.store import broadwork_entities as bre
 def main(api, service_provider_id: str, group_id: str, number: str, number_type: str,
          broadworks_entity_type: str):
     
+    # Creates data store for use later
     data_store = DataStore()
     
     print("Start.\n")
