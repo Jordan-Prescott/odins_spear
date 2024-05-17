@@ -12,31 +12,62 @@ class DataStore:
     Singleton design pattern to get store use get_instance().
     """
 
-    __instance = None
-
-    @staticmethod
-    def get_instance():
-        if DataStore.__instance is None:
-            DataStore()
-        return DataStore.__instance
-
     def __init__(self):
-        if DataStore.__instance is not None:
-            raise Exception("Singleton cannot be instantiated more than once!")
-        else:
-            self.apis: List[api.Api] = []
-            self.service_providers_enterprises: List[bre.ServiceProvider] = []
-            self.groups: List[bre.Group] = []
-            self.trunk_groups: List[bre.TrunkGroup] = []
-            self.auto_attendants: List[bre.AutoAttendant] = []
-            self.call_centers: List[bre.CallCenter] = []
-            self.hunt_groups: List[bre.HuntGroup] = []
-            self.users: List[bre.User] = []
-            self.devices: List[bre.Device] = []
-            self.other_entities = [] #Non-common or custom objects
+        self.apis: List[api.Api] = []
+        self.service_providers_enterprises: List[bre.ServiceProvider] = []
+        self.groups: List[bre.Group] = []
+        self.trunk_groups: List[bre.TrunkGroup] = []
+        self.auto_attendants: List[bre.AutoAttendant] = []
+        self.call_centers: List[bre.CallCenter] = []
+        self.hunt_groups: List[bre.HuntGroup] = []
+        self.users: List[bre.User] = []
+        self.devices: List[bre.Device] = []
+        self.other_entities = [] #Non-common or custom objects
 
-            DataStore.__instance = self
-            
+
+    def build_id_mapping(self):
+        """
+        Builds mapping of numbers IDs to entity.
+        
+        Example: {test@test.com: User, customID: CallCenter}
+        """
+        
+        self.id_mapping = {}
+        
+        entities = self.auto_attendants + self.call_centers + \
+        self.hunt_groups + self.users
+        
+        for e in entities:
+            try:
+                self.id_mapping[e.id] = e
+            except Exception:
+                self.id_mapping[e.service_user_id] = e
+        
+    
+    def build_number_mapping(self):
+        """
+        Builds mapping of numbers (phone numbers, extension, aliases) to entity.
+        
+        Example: {101: User, +1-123456789: CallCenter}
+        """
+        import re
+    
+        self.number_mapping = {}
+        
+        entities = self.auto_attendants + self.call_centers + \
+        self.hunt_groups + self.users
+        
+        for e in entities: 
+            if e.phone_number:
+                self.number_mapping[e.phone_number] = e
+            if e.extension:
+                self.number_mapping[e.extension] = e 
+            if e.aliases:
+                for a in e.aliases:
+                    number = re.search(r'\d+', a).group()
+                    self.number_mapping[number] = e     
+        
+      
     def get_group_state(api, group: bre.Group) -> None:
         """ takes in group id and loads group state into broadworks entities.
 
@@ -45,7 +76,7 @@ class DataStore:
         """
         pass
 
-    def store_object(self, *entities) -> None:
+    def store_objects(self, *entities) -> None:
         """ Takes in objects within the odin_api and custom and stores in lists
         depending on type.
 

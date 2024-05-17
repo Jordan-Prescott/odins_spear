@@ -162,5 +162,5 @@ sandbox.py
 
 # mac 
 *.DS_Store
-
+os_reports/
 call_flow_data-temp/

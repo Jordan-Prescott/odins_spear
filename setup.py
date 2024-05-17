@@ -6,7 +6,7 @@ setup(
     description='Encapsulates the Odin API easing the use as well as additional features such as find alias',
     author='Jordan Prescott',
     author_email='jprescott23@gmail.com',
-    url='https://github.com/Jordan-Prescott/odin_api',
+    url='https://github.com/Jordan-Prescott/odins_spear',
     packages=find_packages(),
     install_requires=[
         "certifi==2023.7.22",
