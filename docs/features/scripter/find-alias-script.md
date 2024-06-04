@@ -11,6 +11,18 @@ The search is conducted in two phases:
 
 If the alias is found, the method returns a string specifying the type of entity and its name or userID. If the alias is not found after checking all entities, an AOAliasNotFound exception is raised.
 
+The script makes use of the following methods:
+
+```python
+api.get.auto_attendants()
+api.get.auto_attendant()
+api.get.group_hunt_groups()
+api.get.group_hunt_group()
+api.get.call_centers()
+api.get.call_center()
+api.get.users()
+```
+
 ### Parameters&#x20;
 
 * service\_provider\_id: Service Prodiver where group is hosted.

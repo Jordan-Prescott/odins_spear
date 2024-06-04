@@ -2,17 +2,17 @@
 description: my_api.scripter.aa_cc_hg_audit()
 ---
 
-# ✔ AA, CC, HG Audit
+# ✔️ AA, CC, HG Audit
 
 This script returns the services assigned to Auto Attendants, Call Centres, and Hunt Groups. Only services are applied to these entities and there are scenarios one would need to focus services assigned to these entities.
 
 The script makes use of the following methods:
 
 ```python
-api.get.auto_attendants(service_provider_id, group_id)
-api.get.group_call_centers(service_provider_id, group_id)
-api.get.group_hunt_groups(service_provider_id, group_id)
-api.get.user_services_assigned(user_id)
+api.get.auto_attendants()
+api.get.group_call_centers()
+api.get.group_hunt_groups()
+api.get.user_services_assigned()
 ```
 
 ### Parameters&#x20;
