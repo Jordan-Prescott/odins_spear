@@ -2,7 +2,7 @@
 description: my_api.put.group_call_centers_status()
 ---
 
-# 🟢 Group Call Center Status
+# 🟢 PUT - Group Call Center Status
 
 In this method, you can control the status of your Call Centers (CC) by activating and deactivating them. The method takes in two parameters, they are a list of the CC service user IDs and a status which is a boolean value of True (Active) or False (Deactivate).
 
@@ -39,5 +39,5 @@ my_api.put.group_call_centers_status(
 
 #### Result:
 
-<figure><img src="../../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 

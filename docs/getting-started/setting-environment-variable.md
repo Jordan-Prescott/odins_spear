@@ -8,7 +8,7 @@ Before using the library set up an environment variable in your local machine an
 
 Setting environment variable (Windows):
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 Passing environment variable to API object:
 

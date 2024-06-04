@@ -4,7 +4,7 @@ Generates a visual call flow for a dedicated number for example calls to 0.
 
 There is now no need to spend hours interrogating how calls to 0 flows through your Braodworks/ Odin system building a call flow for management or to send to customers. This can now be done in seconds with Odins Spear Reporter. Give this feature the number (0), the number type (DN, Extension, Alias), and what its attached to (User, Hunt Group etc) and the feature will generate a flow like the below for you!
 
-<figure><img src="../../../.gitbook/assets/image (21).png" alt=""><figcaption><p>Simple call flow example of calls to the main number attached to an Auto Attendant</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (29).png" alt=""><figcaption><p>Simple call flow example of calls to the main number attached to an Auto Attendant</p></figcaption></figure>
 
 ### Making Sense of The Graph
 
