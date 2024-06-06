@@ -8,7 +8,8 @@ class Put():
 #SESSION
 
     def session(self):
-        
+        """ this updates session
+        """
         endpoint = "/auth/token"
         
         return self.requester.put(endpoint)
