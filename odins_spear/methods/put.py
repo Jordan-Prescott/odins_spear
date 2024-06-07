@@ -1027,6 +1027,19 @@ class Put():
 #THIRD PARTY EMERGENCY CALLING
 #TIME ZONES
 #TRUNK GROUPS
+
+    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, max_active_calls: int, bursting_max_active_calls: int):
+
+        endpoint = "/service-providers/trunk-groups/call-capacity"
+
+        data = {
+            "serviceProviderId": service_provider_id, 
+            "maxActiveCalls": max_active_calls, 
+            "burstingMaxActiveCalls": bursting_max_active_calls
+        }
+
+        return self.requester.put(endpoint, data=data)
+
 #TWO STAGE DIALING
 #USERS
 
