@@ -1035,7 +1035,7 @@ class Put():
         Args: 
             service_provider_id (str): service provider id for which the max active calls needs to be updated
             max_active_calls (int): the updated number of max active calls
-            bursting_max_active_calls: the updated number of bursting max active calls
+            bursting_max_active_calls (int): the updated number of bursting max active calls
         
         """
 
