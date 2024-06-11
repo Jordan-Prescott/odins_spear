@@ -1028,14 +1028,39 @@ class Put():
 #TIME ZONES
 #TRUNK GROUPS
 
+    def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str, max_active_calls: int):
+
+        """
+        Updates the maximum call capacity for trunk groups in the specified group. 
+
+        Args:
+            service_provider_id (str): Service provider ID where the target group is built
+            group_id (str): Group ID whose trunk group call capacity needs updating
+            max_active_calls (int): The updated number of max active calls
+
+        Returns: 
+            JSON: updated trunk group call capacity details
+        """
+
+        endpoint = "/groups/trunk-groups/call-capacity"
+
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "maxActiveCalls": max_active_calls
+        }
+
+        return self.requester.put(endpoint, data=data)
+
+    
     def service_providers_trunk_group_call_capacity(self, service_provider_id: str, max_active_calls: int, bursting_max_active_calls: int):
         """
         Updates the max active calls and the bursting max active calls for the given service provider.
 
         Args: 
-            service_provider_id (str): service provider id for which the max active calls needs to be updated
-            max_active_calls (int): the updated number of max active calls
-            bursting_max_active_calls (int): the updated number of bursting max active calls
+            service_provider_id (str): Service provider ID for which the max active calls needs to be updated
+            max_active_calls (int): The updated number of max active calls
+            bursting_max_active_calls (int): The updated number of bursting max active calls
         
         """
 
