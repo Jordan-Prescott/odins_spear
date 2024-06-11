@@ -104,7 +104,7 @@ class Post():
             device_type (str): Type of device. 
         
         Returns:
-            JSON data with the details of the newly created device. 
+            JSON: details of the newly created device. 
         """
         
         
