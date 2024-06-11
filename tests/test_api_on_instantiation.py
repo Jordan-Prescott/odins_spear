@@ -15,6 +15,7 @@ class TestOnApiInstantiation(unittest.TestCase):
         sys.path.append('..')
         
         from odins_spear.api import Api
+        
         # Set up API object
         self.api = Api(base_url=os.getenv("ODIN_URL"), username= os.getenv("ODIN_USERNAME"), 
                password="ODIN_PASSWORD")
