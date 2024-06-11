@@ -3,6 +3,7 @@ from . import scripts
 
 class Scripter:
     """ This object acts as the gateway to all pre-written scripts in /scripts/.
+    
 
     Each api object created creates its own associated Scripter object on api creation. 
     Additionally, this object can be created solely and passed an api, however, this 
