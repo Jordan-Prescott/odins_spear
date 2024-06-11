@@ -92,6 +92,33 @@ class Post():
 #DEPARTMENTS
 #DEVICE POLICIES
 #DEVICES
+
+    def group_device(self, service_provider_id: str, group_id: str, device_name: str, device_type: str):
+
+        """Adds a new device to a group. 
+
+        Args:
+            service_provider_id (str): Service provider ID where the device should be built.
+            group_id (str): Group ID where the device should be built
+            device_name (str): Name of the new device
+            device_type (str): Type of device. 
+        
+        Returns:
+            JSON data with the details of the newly created device. 
+        """
+        
+        
+        endpoint = "/groups/devices"
+
+        data = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id, 
+            "deviceName": device_name, 
+            "deviceType": device_type
+        }
+
+        return self.requester.post(endpoint, data=data)
+
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
