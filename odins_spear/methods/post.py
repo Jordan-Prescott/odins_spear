@@ -273,6 +273,46 @@ class Post():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
+
+    def group_hunt_group(self, service_provider_id: str, group_id: str, service_user_id: str, clid_first_name: str, clid_last_name:str, extension: str, policy: str ="Regular"):
+
+        """
+        Builds a hunt group (HG) in the specified group. 
+        "noAnswerNumberOfRings" is a required field which defaults to 5.
+        "forwardTimeoutSeconds" is a required field which defaults to 0. 
+
+        Args:
+            service_provider_id (str): The service provider ID in which the target group is built.
+            group_id (str): The group ID where the HG should be built.
+            service_user_id (str): The ervice user ID for the new HG.
+            clid_first_name (str): The Calling Line ID first name.
+            clid_last_name (str): The Calling Line ID last name. 
+            extension (str): The extension number for the HG. This must be entered as a string. 
+            policy (str, optional): Regular, Circular, Simultaneous, Uniform, Weighted. Defaults to Regular.
+
+        Returns:
+            JSON: HG profile.
+        """
+
+        endpoint = "/groups/hunt-groups"
+
+        data = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id, 
+            "serviceUserId": service_user_id, 
+            "noAnswerNumberOfRings": 5,
+            "forwardTimeoutSeconds": 0,
+            "policy": policy,
+            "serviceInstanceProfile": {
+                "callingLineIdFirstName": clid_first_name,
+                "callingLineIdLastName": clid_last_name,
+                "name": clid_first_name + " " + clid_last_name, 
+                "extension": extension
+            }
+        }
+
+        return self.requester.post(endpoint, data=data)
+
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
 #INTEGRATED IMP
