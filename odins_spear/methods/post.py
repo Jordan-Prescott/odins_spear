@@ -374,6 +374,70 @@ class Post():
 #THIRD PARTY EMERGENCY CALLING
 #TIME ZONES
 #TRUNK GROUPS
+
+    def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_name: str, max_active_calls: int):
+
+        """
+        Builds a Trunk Group (TG) in the specified group. 
+        Default fields: 
+            "capacityExceededTrapInitialCalls":0,
+            "capacityExceededTrapOffsetCalls":0,
+            "clidSourceForScreenedCallsPolicy":"Profile Name Profile Number",
+            "continuousOptionsSendingIntervalSeconds":30,
+            "failureOptionsSendingIntervalSeconds":10,
+            "failureThresholdCounter":1,
+            "invitationTimeout":6,
+            "inviteFailureThresholdCounter":1,
+            "inviteFailureThresholdWindowSeconds":30,
+            "pilotUserCallOptimizationPolicy":"Optimize For User Services",
+            "pilotUserCallingLineAssertedIdentityPolicy":"Unscreened Originating Calls",
+            "pilotUserCallingLineIdentityForEmergencyCallsPolicy":"No Calls",
+            "pilotUserCallingLineIdentityForExternalCallsPolicy":"No Calls",
+            "pilotUserChargeNumberPolicy":"No Calls",
+            "requireAuthentication":"false",
+            "successThresholdCounter":1,
+            "useSystemUserLookupPolicy":"true",
+            "userLookupPolicy":"Basic",
+
+        Args:
+            service_provider_id (str): The service provider ID in which the target group is built.
+            group_id (str): The group ID where the HG should be built.
+            trunk_name (str): The name of the new TG.
+            max_active_calls (str): The maximum active calls to be set on the TG.
+
+        Returns:
+            JSON: TG profile.
+        """
+
+        endpoint = "/groups/trunk-groups"
+
+        data = {
+            "capacityExceededTrapInitialCalls":0,
+            "capacityExceededTrapOffsetCalls":0,
+            "clidSourceForScreenedCallsPolicy":"Profile Name Profile Number",
+            "continuousOptionsSendingIntervalSeconds":30,
+            "failureOptionsSendingIntervalSeconds":10,
+            "failureThresholdCounter":1,
+            "invitationTimeout":6,
+            "inviteFailureThresholdCounter":1,
+            "inviteFailureThresholdWindowSeconds":30,
+            "pilotUserCallOptimizationPolicy":"Optimize For User Services",
+            "pilotUserCallingLineAssertedIdentityPolicy":"Unscreened Originating Calls",
+            "pilotUserCallingLineIdentityForEmergencyCallsPolicy":"No Calls",
+            "pilotUserCallingLineIdentityForExternalCallsPolicy":"No Calls",
+            "pilotUserChargeNumberPolicy":"No Calls",
+            "requireAuthentication":"false",
+            "successThresholdCounter":1,
+            "useSystemUserLookupPolicy":"true",
+            "userLookupPolicy":"Basic",
+            "name":trunk_name,
+            "maxActiveCalls":max_active_calls,
+            "serviceProviderId":service_provider_id,
+            "groupId":group_id
+        }
+
+        return self.requester.post(endpoint, data=data)
+
 #TWO STAGE DIALING
 #USERS
         
