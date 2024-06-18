@@ -451,6 +451,26 @@ class Put():
 #CALL PICKUP
 #CALL POLICIES
 #CALL PROCESSING POLICIES
+
+    def user_call_processing_policy(self, user_id: str, updates: dict):
+
+        """
+        Update the Call Processing Policies for a specified user. 
+
+        Args:
+            user_id (str): The user ID of the user whose call processing policies need updating.
+            updates (dict): Updates to apply to the specified user. 
+        
+        Returns:
+            JSON: Call Processing Policies for the specified user. 
+        """
+        
+        endpoint = '/users/call-processing-policy'
+
+        updates["userID"] = user_id
+
+        return self.requester.put(endpoint, data=updates)
+
 #CALL RECORDING
 #CALL RECORDS
 #CALL TRANSFER
