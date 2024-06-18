@@ -1,7 +1,6 @@
 import graphviz
 
 from odins_spear.store import broadwork_entities as bre
-from .report_entities import external_number
 
 class GraphvizModule:
     

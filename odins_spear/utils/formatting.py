@@ -21,7 +21,7 @@ def format_filter(filter, type, value):
     elif type.lower() == "contains":
         return f"{filter}=*{value}*"
     else:
-        raise OAUnsupportedFilter
+        raise OSUnsupportedFilter
     
     
 def format_int_list_of_numbers(counrty_code: int, numbers: list):

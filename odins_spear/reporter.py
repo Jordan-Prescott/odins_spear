@@ -24,5 +24,26 @@ class Reporter:
         
         return reports.call_flow.main(self.api, service_provider_id, group_id, number, number_type,
                                       broadworks_entity_type)
+        
+    def group_users_call_statistics(self, service_provider_id: str, group_id: str, 
+                                    start_date:str, end_date: str = None, 
+                                    start_time: str = "00:00:00", end_time:str = "23:59:59", 
+                                    time_zone: str = "Z"):
+        """_summary_
+
+        Args:
+            service_provider_id (str): _description_
+            group_id (str): _description_
+            start_date (str): _description_
+            end_date (str, optional): _description_. Defaults to None.
+            start_time (_type_, optional): _description_. Defaults to "00:00:00".
+            end_time (_type_, optional): _description_. Defaults to "23:59:59".
+            time_zone (str, optional): _description_. Defaults to "Z".
+
+        Returns:
+            _type_: _description_
+        """
+        return reports.group_users_call_statistics.main(self.api, service_provider_id, group_id, 
+                                                        start_date, end_date, start_time, end_time, time_zone)
       
     
