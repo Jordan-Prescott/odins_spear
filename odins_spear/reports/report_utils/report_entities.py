@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from typing import List
 
 @dataclass
@@ -13,6 +13,7 @@ class external_number:
     
 @dataclass
 class call_records_statistics:
+    extension: str
     userId: str
     total: int
     totalAnsweredAndMissed: str
@@ -26,10 +27,18 @@ class call_records_statistics:
     placedTotal: str
     placedMissed: str
     placedAnswered: str
+    
+    def __post_init__(self):
+        for field in fields(self):
+            value = getattr(self, field.name)
+            # Replace None with 0
+            if value is None:
+                setattr(self, field.name, 0)
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, extension, data):
         return cls(
+            extension = extension,
             userId= data.get("userId"),
             total= data.get("total"), 
             totalAnsweredAndMissed= str(data.get("totalAnsweredAndMissed")),
