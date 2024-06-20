@@ -32,7 +32,7 @@ class call_records_statistics:
         for field in fields(self):
             value = getattr(self, field.name)
             # Replace None with 0
-            if value is None:
+            if value is None or value == 'None':
                 setattr(self, field.name, 0)
 
     @classmethod
