@@ -1099,6 +1099,8 @@ class Put():
             max_active_calls (int): The updated number of max active calls
             bursting_max_active_calls (int): The updated number of bursting max active calls
         
+        Returns:
+            None: This method does not return any specific value.
         """
 
         endpoint = "/service-providers/trunk-groups/call-capacity"
