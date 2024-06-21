@@ -28,7 +28,7 @@ class call_records_statistics:
     placedMissed: str
     placedAnswered: str
     
-    def __post_init__(self):
+    def replace_none_with_0(self):
         for field in fields(self):
             value = getattr(self, field.name)
             # Replace None with 0
