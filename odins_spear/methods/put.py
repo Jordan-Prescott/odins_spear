@@ -462,12 +462,12 @@ class Put():
             updates (dict): Updates to apply to the specified user. 
         
         Returns:
-            JSON: Call Processing Policies for the specified user. 
+            None: This method does not return any specific value.
         """
         
         endpoint = '/users/call-processing-policy'
 
-        updates["userID"] = user_id
+        updates["userId"] = user_id
 
         return self.requester.put(endpoint, data=updates)
 
