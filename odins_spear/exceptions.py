@@ -115,3 +115,10 @@ class OSServiceNotAssigned(OSError):
 
     def __str__(self) -> str:
         return f"Service not assigend to target Broadworks entity. Please check services assigned."   
+
+class OSFileNotFound(OSError):
+    """ Raised when a file can not be found.  
+    """
+
+    def __str__(self) -> str:
+        return f"File can not be found, please check path and file name."   
