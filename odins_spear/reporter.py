@@ -29,19 +29,21 @@ class Reporter:
                                     start_date:str, end_date: str = None, 
                                     start_time: str = "00:00:00", end_time:str = "23:59:59", 
                                     time_zone: str = "Z"):
-        """_summary_
+        """Generates a CSV deatiling each users incoming and outgoing call statistics over 
+        a specified period for a single group. Each row contains user extension, user ID, and call stats.
 
         Args:
-            service_provider_id (str): _description_
-            group_id (str): _description_
-            start_date (str): _description_
-            end_date (str, optional): _description_. Defaults to None.
-            start_time (_type_, optional): _description_. Defaults to "00:00:00".
-            end_time (_type_, optional): _description_. Defaults to "23:59:59".
-            time_zone (str, optional): _description_. Defaults to "Z".
-
-        Returns:
-            _type_: _description_
+            service_provider_id (str):  Service Provider/ Enterprise where group is hosted.
+            group_id (str): Target Group you would like to know user statistics for.
+            start_date (str): Start date of desired time period. Date must follow format 'YYYY-MM-DD'
+            end_date (str, optional): End date of desired time period. Date must follow format 'YYYY-MM-DD'.\
+                If this date is the same as Start date you do not need this parameter. Defaults to None.
+            start_time (_type_, optional): Start time of desired time period. Time must follow formate 'HH:MM:SS'. \
+                If you do not need to filter by time and want the whole day leave this parameter. Defaults to "00:00:00". MAX Request is 3 months.
+            end_time (_type_, optional): End time of desired time period. Time must follow formate 'HH:MM:SS'. \
+                If you do not need to filter by time and want the whole day leave this parameter. Defaults to "23:59:59". MAX Request is 3 months.
+            time_zone (str, optional): A specified time you would like to see call records in. \
+                Time zone must follow format 'GMT', 'EST', 'PST'. Defaults to "Z" (UTC Time Zone).
         """
         return reports.group_users_call_statistics.main(self.api, service_provider_id, group_id, 
                                                         start_date, end_date, start_time, end_time, time_zone)
