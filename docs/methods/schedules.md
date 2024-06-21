@@ -1,3 +1,0 @@
-# 📆 Schedules
-
-All things schedules.

@@ -1,3 +1,0 @@
-# 🔢 DNs
-
-All things numbers.
