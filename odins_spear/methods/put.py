@@ -1048,33 +1048,28 @@ class Put():
 #TIME ZONES
 #TRUNK GROUPS
 
-    def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str, max_active_calls: int):
-
+    def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str, updates: dict):
         """
-        Updates the maximum call capacity for trunk groups in the specified group. 
+        Updates the trunking call capacity in the specified group. 
 
         Args:
             service_provider_id (str): Service provider ID where the target group is built
             group_id (str): Group ID whose trunk group call capacity needs updating
-            max_active_calls (int): The updated number of max active calls
+            updates (dict): The updates to be applied to the group's trunking call capacity.
 
         Returns: 
-            JSON: updated trunk group call capacity details
+            None: This method does not return any specific value.
         """
 
         endpoint = "/groups/trunk-groups/call-capacity"
 
-        data = {
-            "serviceProviderId": service_provider_id,
-            "groupId": group_id,
-            "maxActiveCalls": max_active_calls
-        }
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
 
-        return self.requester.put(endpoint, data=data)
-    
+        return self.requester.put(endpoint, data=updates)
+
 
     def group_trunk_group(self, service_provider_id: str, group_id: str, updates: dict):
-
         """
         Updates trunk group (TG) information.
 
@@ -1084,18 +1079,17 @@ class Put():
             updates (dict): Updates to be applied to the TG. 
 
         Returns:
-            JSON: Updated TG profile. 
-
+            None: This method does not return any specific value.
         """
 
         endpoint = "/groups/trunk-groups"
 
-        updates["serviceProviderId"] = [service_provider_id]
-        updates["groupId"] = [group_id]
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
 
         return self.requester.put(endpoint, data=updates)
 
-    
+
     def service_providers_trunk_group_call_capacity(self, service_provider_id: str, max_active_calls: int, bursting_max_active_calls: int):
         """
         Updates the max active calls and the bursting max active calls for the given service provider.
