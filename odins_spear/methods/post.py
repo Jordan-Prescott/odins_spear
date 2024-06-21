@@ -93,8 +93,7 @@ class Post():
 #DEVICE POLICIES
 #DEVICES
 
-    def group_device(self, service_provider_id: str, group_id: str, device_name: str, device_type: str):
-
+    def group_device(self, service_provider_id: str, group_id: str, device_name: str, device_type: str, payload: dict ={}):
         """Adds a new device to a group. 
 
         Args:
@@ -102,22 +101,20 @@ class Post():
             group_id (str): Group ID where the device should be built
             device_name (str): Name of the new device
             device_type (str): Type of device. 
+            payload (dict, optional): Device configuration data. 
         
         Returns:
             JSON: details of the newly created device. 
         """
         
-        
         endpoint = "/groups/devices"
 
-        data = {
-            "serviceProviderId": service_provider_id, 
-            "groupId": group_id, 
-            "deviceName": device_name, 
-            "deviceType": device_type
-        }
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["deviceName"] = device_name
+        payload["deviceType"] = device_type
 
-        return self.requester.post(endpoint, data=data)
+        return self.requester.post(endpoint, data=payload)
 
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
@@ -274,44 +271,49 @@ class Post():
 #HOTELING HOST
 #HUNT GROUPS
 
-    def group_hunt_group(self, service_provider_id: str, group_id: str, service_user_id: str, clid_first_name: str, clid_last_name:str, extension: str, policy: str ="Regular"):
-
+    def group_hunt_group(self, service_provider_id: str, group_id: str, service_user_id: str, 
+                         clid_first_name: str, clid_last_name:str, extension: str,  payload: dict={}, agents: list=[],
+                         policy: str ="Regular", no_answer_number_of_rings: int=5, forward_timeout_seconds: int=0):
         """
         Builds a hunt group (HG) in the specified group. 
-        "noAnswerNumberOfRings" is a required field which defaults to 5.
-        "forwardTimeoutSeconds" is a required field which defaults to 0. 
 
         Args:
             service_provider_id (str): The service provider ID in which the target group is built.
             group_id (str): The group ID where the HG should be built.
-            service_user_id (str): The ervice user ID for the new HG.
+            service_user_id (str): The service user ID for the new HG. This must include the domain of the user.
             clid_first_name (str): The Calling Line ID first name.
             clid_last_name (str): The Calling Line ID last name. 
             extension (str): The extension number for the HG. This must be entered as a string. 
+            payload (dict, optional): HG configuration data. 
+            agents (list, optional): List of user IDs (str) that should be assigned to the new HG. The user(s) must already exist in the group. 
             policy (str, optional): Regular, Circular, Simultaneous, Uniform, Weighted. Defaults to Regular.
+            no_answer_number_of_rings (int, optional): Defaults to 5.
+            forward_timeout_seconds (int, optional): Defaults to 0.
 
         Returns:
-            JSON: HG profile.
+            None: This method does not return any specific value.
         """
 
         endpoint = "/groups/hunt-groups"
 
-        data = {
-            "serviceProviderId": service_provider_id,
-            "groupId": group_id, 
-            "serviceUserId": service_user_id, 
-            "noAnswerNumberOfRings": 5,
-            "forwardTimeoutSeconds": 0,
-            "policy": policy,
-            "serviceInstanceProfile": {
-                "callingLineIdFirstName": clid_first_name,
-                "callingLineIdLastName": clid_last_name,
-                "name": clid_first_name + " " + clid_last_name, 
-                "extension": extension
-            }
-        }
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id 
+        payload["serviceUserId"] = service_user_id
+        payload["policy"] = policy
+        payload["noAnswerNumberOfRings"] = no_answer_number_of_rings
+        payload["forwardTimeoutSeconds"] = forward_timeout_seconds
 
-        return self.requester.post(endpoint, data=data)
+        payload["agents"] = [{'userId': agent_id} for agent_id in agents]
+
+        if 'serviceInstanceProfile' not in payload:     
+            payload.setdefault('serviceInstanceProfile', {})            
+
+        payload["serviceInstanceProfile"]["callingLineIdFirstName"] = clid_first_name
+        payload["serviceInstanceProfile"]["callingLineIdLastName"] = clid_last_name
+        payload["serviceInstanceProfile"]["name"] = f"{clid_first_name} {clid_last_name}"
+        payload["serviceInstanceProfile"]["extension"] = extension
+
+        return self.requester.post(endpoint, data=payload)
 
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
