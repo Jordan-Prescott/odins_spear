@@ -104,7 +104,7 @@ class Post():
             payload (dict, optional): Device configuration data. 
         
         Returns:
-            None: This method does not return any specific value. 
+            Dict: Returns the device profile. 
         """
         
         endpoint = "/groups/devices"
@@ -410,8 +410,11 @@ class Post():
             sip_authentication_username (str, optional): The SIP authentication username for the TG. This field is required if "requireAuthentication" is set to "true". 
             sip_authentication_password (str, optional): The SIP authentication password for the TG. You can generate a password for this using get.sip_password_generator. This field is required if "requireAuthentication" is set to "true". 
 
+        Note:
+            Several fields are set to have default values. Please refer to the online documentation. 
+
         Returns:
-            None: This method does not return any specific value.
+            Dict: Returns the Trunk Group profile. 
         """
 
         endpoint = "/groups/trunk-groups"
