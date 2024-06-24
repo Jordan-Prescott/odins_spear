@@ -1110,7 +1110,7 @@ class Put():
         Updates the max active calls and the bursting max active calls for the given service provider.
 
         Args: 
-            service_provider_id (str): Service provider ID for which the max active calls needs to be updated
+            service_provider_id (str): Service provider ID for which the max active calls needs to be updated 
             updates (dict): The updates to be applied to the service provider's trunking call capacity
         
         Returns:
