@@ -104,7 +104,7 @@ class Post():
             payload (dict, optional): Device configuration data. 
         
         Returns:
-            JSON: details of the newly created device. 
+            None: This method does not return any specific value. 
         """
         
         endpoint = "/groups/devices"
