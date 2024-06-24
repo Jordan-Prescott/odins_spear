@@ -1090,14 +1090,13 @@ class Put():
         return self.requester.put(endpoint, data=updates)
 
 
-    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, max_active_calls: int, bursting_max_active_calls: int):
+    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, updates: dict):
         """
         Updates the max active calls and the bursting max active calls for the given service provider.
 
         Args: 
             service_provider_id (str): Service provider ID for which the max active calls needs to be updated
-            max_active_calls (int): The updated number of max active calls
-            bursting_max_active_calls (int): The updated number of bursting max active calls
+            updates (dict): The updates to be applied to the service provider's trunking call capacity
         
         Returns:
             None: This method does not return any specific value.
@@ -1105,13 +1104,9 @@ class Put():
 
         endpoint = "/service-providers/trunk-groups/call-capacity"
 
-        data = {
-            "serviceProviderId": service_provider_id, 
-            "maxActiveCalls": max_active_calls, 
-            "burstingMaxActiveCalls": bursting_max_active_calls
-        }
+        updates["serviceProviderId"] = service_provider_id
 
-        return self.requester.put(endpoint, data=data)
+        return self.requester.put(endpoint, data=updates)
 
 #TWO STAGE DIALING
 #USERS
