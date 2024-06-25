@@ -1,12 +1,12 @@
 import requests
 import os
 
-from odins_spear.requester import Requester
-from odins_spear.methods import *
-from odins_spear.logger import Logger
-from odins_spear.scripter import Scripter
-from odins_spear.reporter import Reporter
-from odins_spear.exceptions import (OSApiAuthenticationFail, 
+from .requester import Requester
+from .methods import *
+from .logger import Logger
+from .scripter import Scripter
+from .reporter import Reporter
+from .exceptions import (OSApiAuthenticationFail, 
                                  OSSessionRefreshFail, 
                                  OSFailedToLocateSession)
 

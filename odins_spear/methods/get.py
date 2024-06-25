@@ -1,4 +1,4 @@
-from odins_spear.utils.formatting import format_filter
+from ..utils.formatting import format_filter
 
 
 class Get():

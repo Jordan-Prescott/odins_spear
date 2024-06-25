@@ -5,8 +5,8 @@ from .report_utils.helpers import find_entity_with_number_type
 from .report_utils.parsing import call_flow_module
 
 
-from odins_spear.store import DataStore
-from odins_spear.store import broadwork_entities as bre
+from ..store import DataStore
+from ..store import broadwork_entities as bre
 
 def main(api, service_provider_id: str, group_id: str, number: str, number_type: str,
          broadworks_entity_type: str):

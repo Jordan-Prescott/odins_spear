@@ -1,6 +1,6 @@
 import graphviz
 
-from odins_spear.store import broadwork_entities as bre
+from ...store import broadwork_entities as bre
 
 class GraphvizModule:
     

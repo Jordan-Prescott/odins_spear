@@ -2,7 +2,7 @@ import json
 
 from tqdm import tqdm
 
-from odins_spear.exceptions import OSServiceNotAssigned
+from ..exceptions import OSServiceNotAssigned
 
 def main(api: object, service_provider_id: str):
     """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 

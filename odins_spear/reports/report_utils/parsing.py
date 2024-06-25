@@ -1,4 +1,4 @@
-from odins_spear.store import broadwork_entities as bre
+from ...store import broadwork_entities as bre
 from .report_entities import external_number
 
 # nodes needed for graph generation
