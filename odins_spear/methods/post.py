@@ -92,6 +92,30 @@ class Post():
 #DEPARTMENTS
 #DEVICE POLICIES
 #DEVICES
+
+    def group_device(self, service_provider_id: str, group_id: str, device_name: str, device_type: str, payload: dict ={}):
+        """Adds a new device to a group. 
+
+        Args:
+            service_provider_id (str): Service provider ID where the device should be built.
+            group_id (str): Group ID where the device should be built
+            device_name (str): Name of the new device
+            device_type (str): Type of device. 
+            payload (dict, optional): Device configuration data. 
+        
+        Returns:
+            Dict: Returns the device profile. 
+        """
+        
+        endpoint = "/groups/devices"
+
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["deviceName"] = device_name
+        payload["deviceType"] = device_type
+
+        return self.requester.post(endpoint, data=payload)
+
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
@@ -246,6 +270,51 @@ class Post():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
+
+    def group_hunt_group(self, service_provider_id: str, group_id: str, service_user_id: str, 
+                         clid_first_name: str, clid_last_name:str, extension: str,  payload: dict={}, agents: list=[],
+                         policy: str ="Regular", no_answer_number_of_rings: int=5, forward_timeout_seconds: int=0):
+        """
+        Builds a hunt group (HG) in the specified group. 
+
+        Args:
+            service_provider_id (str): The service provider ID in which the target group is built.
+            group_id (str): The group ID where the HG should be built.
+            service_user_id (str): The service user ID for the new HG. This must include the domain of the user.
+            clid_first_name (str): The Calling Line ID first name.
+            clid_last_name (str): The Calling Line ID last name. 
+            extension (str): The extension number for the HG. This must be entered as a string. 
+            payload (dict, optional): HG configuration data. 
+            agents (list, optional): List of user IDs (str) that should be assigned to the new HG. The user(s) must already exist in the group. 
+            policy (str, optional): Regular, Circular, Simultaneous, Uniform, Weighted. Defaults to Regular.
+            no_answer_number_of_rings (int, optional): Defaults to 5.
+            forward_timeout_seconds (int, optional): Defaults to 0.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+
+        endpoint = "/groups/hunt-groups"
+
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id 
+        payload["serviceUserId"] = service_user_id
+        payload["policy"] = policy
+        payload["noAnswerNumberOfRings"] = no_answer_number_of_rings
+        payload["forwardTimeoutSeconds"] = forward_timeout_seconds
+
+        payload["agents"] = [{'userId': agent_id} for agent_id in agents]
+
+        if 'serviceInstanceProfile' not in payload:     
+            payload.setdefault('serviceInstanceProfile', {})            
+
+        payload["serviceInstanceProfile"]["callingLineIdFirstName"] = clid_first_name
+        payload["serviceInstanceProfile"]["callingLineIdLastName"] = clid_last_name
+        payload["serviceInstanceProfile"]["name"] = f"{clid_first_name} {clid_last_name}"
+        payload["serviceInstanceProfile"]["extension"] = extension
+
+        return self.requester.post(endpoint, data=payload)
+
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
 #INTEGRATED IMP
@@ -307,6 +376,83 @@ class Post():
 #THIRD PARTY EMERGENCY CALLING
 #TIME ZONES
 #TRUNK GROUPS
+
+    def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_name: str, max_active_calls: int, payload: dict={}, 
+                          sip_authentication_username: str="", sip_authentication_password: str=""):
+        """
+        Builds a Trunk Group (TG) in the specified group. 
+        Default fields: 
+            "capacityExceededTrapInitialCalls":0,
+            "capacityExceededTrapOffsetCalls":0,
+            "clidSourceForScreenedCallsPolicy":"Profile Name Profile Number",
+            "continuousOptionsSendingIntervalSeconds":30,
+            "failureOptionsSendingIntervalSeconds":10,
+            "failureThresholdCounter":1,
+            "invitationTimeout":6,
+            "inviteFailureThresholdCounter":1,
+            "inviteFailureThresholdWindowSeconds":30,
+            "pilotUserCallOptimizationPolicy":"Optimize For User Services",
+            "pilotUserCallingLineAssertedIdentityPolicy":"Unscreened Originating Calls",
+            "pilotUserCallingLineIdentityForEmergencyCallsPolicy":"No Calls",
+            "pilotUserCallingLineIdentityForExternalCallsPolicy":"No Calls",
+            "pilotUserChargeNumberPolicy":"No Calls",
+            "requireAuthentication":"false",
+            "successThresholdCounter":1,
+            "useSystemUserLookupPolicy":"true",
+            "userLookupPolicy":"Basic"
+
+        Args:
+            service_provider_id (str): The service provider ID in which the target group is built.
+            group_id (str): The group ID where the HG should be built.
+            trunk_name (str): The name of the new TG.
+            max_active_calls (str): The maximum active calls to be set on the TG.
+            payload (dict, optional): Configuration for the TG.
+            sip_authentication_username (str, optional): The SIP authentication username for the TG. This field is required if "requireAuthentication" is set to "true". 
+            sip_authentication_password (str, optional): The SIP authentication password for the TG. You can generate a password for this using get.sip_password_generator. This field is required if "requireAuthentication" is set to "true". 
+
+        Note:
+            Several fields are set to have default values. Please refer to the online documentation. 
+
+        Returns:
+            Dict: Returns the Trunk Group profile. 
+        """
+
+        endpoint = "/groups/trunk-groups"
+
+        payload["name"] = trunk_name
+        payload["maxActiveCalls"] = max_active_calls
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+
+        if payload["requireAuthentication"] == "true":
+            payload["sipAuthenticationUserName"] = sip_authentication_username
+            payload["sipAuthenticationPassword"] = sip_authentication_password
+
+        default_payload_values = {
+            "capacityExceededTrapInitialCalls": 0, 
+            "capacityExceededTrapOffsetCalls": 0,
+            "clidSourceForScreenedCallsPolicy": "Profile Name Profile Number",
+            "continuousOptionsSendingIntervalSeconds": 30,
+            "failureOptionsSendingIntervalSeconds": 10,
+            "failureThresholdCounter": 1,
+            "invitationTimeout": 6,
+            "inviteFailureThresholdCounter": 1,
+            "inviteFailureThresholdWindowSeconds": 30,
+            "pilotUserCallOptimizationPolicy": "Optimize For User Services",
+            "pilotUserCallingLineAssertedIdentityPolicy": "Unscreened Originating Calls",
+            "pilotUserCallingLineIdentityForEmergencyCallsPolicy": "No Calls",
+            "pilotUserCallingLineIdentityForExternalCallsPolicy": "No Calls",
+            "pilotUserChargeNumberPolicy": "No Calls",
+            "successThresholdCounter": 1,
+            "useSystemUserLookupPolicy": "true",
+            "userLookupPolicy": "Basic",
+            "requireAuthentication": "false"
+            }
+        for key, default_value in default_payload_values.items():
+            payload.setdefault(key, default_value)
+
+        return self.requester.post(endpoint, data=payload)
+
 #TWO STAGE DIALING
 #USERS
         

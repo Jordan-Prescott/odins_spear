@@ -452,6 +452,25 @@ class Put():
 #CALL PICKUP
 #CALL POLICIES
 #CALL PROCESSING POLICIES
+
+    def user_call_processing_policy(self, user_id: str, updates: dict):
+        """
+        Update the Call Processing Policies for a specified user. 
+
+        Args:
+            user_id (str): The user ID of the user whose call processing policies need updating.
+            updates (dict): Updates to apply to the specified user. 
+        
+        Returns:
+            Dict: Returns the updated call processing policies.
+        """
+        
+        endpoint = '/users/call-processing-policy'
+
+        updates["userId"] = user_id
+
+        return self.requester.put(endpoint, data=updates)
+
 #CALL RECORDING
 #CALL RECORDS
 #CALL TRANSFER
@@ -1029,26 +1048,81 @@ class Put():
 #TIME ZONES
 #TRUNK GROUPS
 
-    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, max_active_calls: int, bursting_max_active_calls: int):
+    def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str, max_active_calls: int=None,
+                                         max_available_active_calls: int=None, bursting_max_active_calls: int=None, 
+                                         number_of_bursting_btlus: int=None):
+        """
+        Updates the trunking call capacity in the specified group. 
+
+        Args:
+            service_provider_id (str): Service provider ID where the target group is built
+            group_id (str): Group ID whose trunk group call capacity needs updating
+            max_active_calls (int, optional): The max active calls for the group. 
+            max_available_active_calls (int, optional): The max available active calls for the group. 
+            bursting_max_active_calls (int, optional): The bursting max active calls for the group.
+            number_of_bursting_btlus (int, optional): The number of Business Trunking License Units for bursting. 
+
+        Returns: 
+            Dict: Returns the updated state of the trunk group call capacity.
+        """
+
+        endpoint = "/groups/trunk-groups/call-capacity"
+        
+        updates = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        if max_active_calls:
+            updates["maxActiveCalls"] = max_active_calls
+        if max_available_active_calls:
+            updates["maxAvailableActiveCalls"] = max_available_active_calls
+        if bursting_max_active_calls:
+            updates["burstingMaxActiveCalls"] = bursting_max_active_calls
+        if number_of_bursting_btlus:
+            updates["numberOfBurstingBTLUs"] = number_of_bursting_btlus
+
+        return self.requester.put(endpoint, data=updates)
+
+
+    def group_trunk_group(self, service_provider_id: str, group_id: str, updates: dict):
+        """
+        Updates trunk group (TG) information.
+
+        Args: 
+            service_provider_id (str): Service provider ID where the target group is built
+            group_id (str): Group ID whose trunk group call capacity needs updating
+            updates (dict): Updates to be applied to the TG. 
+
+        Returns:
+            Dict: Returns the updated Trunk Group profile.
+        """
+
+        endpoint = "/groups/trunk-groups"
+
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+
+        return self.requester.put(endpoint, data=updates)
+
+
+    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, updates: dict):
         """
         Updates the max active calls and the bursting max active calls for the given service provider.
 
         Args: 
-            service_provider_id (str): service provider id for which the max active calls needs to be updated
-            max_active_calls (int): the updated number of max active calls
-            bursting_max_active_calls (int): the updated number of bursting max active calls
+            service_provider_id (str): Service provider ID for which the max active calls needs to be updated 
+            updates (dict): The updates to be applied to the service provider's trunking call capacity
         
+        Returns:
+            Dict: Returns the updated call capacity for the service provider. 
         """
 
         endpoint = "/service-providers/trunk-groups/call-capacity"
 
-        data = {
-            "serviceProviderId": service_provider_id, 
-            "maxActiveCalls": max_active_calls, 
-            "burstingMaxActiveCalls": bursting_max_active_calls
-        }
+        updates["serviceProviderId"] = service_provider_id
 
-        return self.requester.put(endpoint, data=data)
+        return self.requester.put(endpoint, data=updates)
 
 #TWO STAGE DIALING
 #USERS
