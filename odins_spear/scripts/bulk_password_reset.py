@@ -1,6 +1,6 @@
 import json
 
-from odins_spear.exceptions import OSInvalidPasswordType
+from ..exceptions import OSInvalidPasswordType
 
 def main(api, service_provider_id: str, group_id: str, users: list, password_type: str):
     

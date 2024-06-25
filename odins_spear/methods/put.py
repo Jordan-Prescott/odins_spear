@@ -1,4 +1,4 @@
-from odins_spear.exceptions import *
+from ..exceptions import *
 
 
 class Put():

@@ -1,8 +1,8 @@
 from typing import List
 import json
 
-from odins_spear import api
-from odins_spear.utils import parsing
+from .. import api
+from ..utils import parsing
 from . import broadwork_entities as bre
 
 class DataStore:
