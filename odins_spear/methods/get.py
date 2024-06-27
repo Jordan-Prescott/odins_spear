@@ -74,6 +74,15 @@ class Get():
 # CALL CENTER
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
+        """Fetches a list of a groups active Call Centers.
+
+        Args:
+            service_provider_id (str): Target Service Provider
+            group_id (str): Target Group ID
+
+        Returns:
+            Dict: List of Call Centres and their settings.
+        """
 
         endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
 
@@ -81,6 +90,14 @@ class Get():
 
 
     def group_call_center(self, service_user_id: str):
+        """Fetches a list of a Call Center's settings and profile.
+
+        Args:
+            service_user_id (str): Target Call Center's UserID
+
+        Returns:
+            Dict: List of the Call Center's settings and profile
+        """
 
         endpoint = f"/groups/call-centers?serviceUserId={service_user_id}"
 
