@@ -151,6 +151,13 @@ class Get():
     
     
     def group_call_center_overflow(self, service_user_id):
+        """Fetches the number that a user is directed to when all call center agents are busy on the phone.
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, alongside any Audio Messages.
+        """
         
         endpoint = f"/groups/call-centers/overflow?serviceUserId={service_user_id}"
         
