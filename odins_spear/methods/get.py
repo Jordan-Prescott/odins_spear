@@ -74,7 +74,7 @@ class Get():
 # CALL CENTER
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
-        """Fetches a list of a groups active Call Centers.
+        """Fetches a list of a groups active Call Centers in a group.
 
         Args:
             service_provider_id (str): Target Service Provider
@@ -93,7 +93,7 @@ class Get():
         """Fetches a list of a Call Center's settings and profile.
 
         Args:
-            service_user_id (str): Target Call Center's UserID
+            service_user_id (str): Target Call Center's ID
 
         Returns:
             Dict: List of the Call Center's settings and profile
@@ -105,13 +105,30 @@ class Get():
 
 
     def user_call_center(self, user_id: str):
+        """Fetches a list of call centers the specified user is currently associated with.
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: List of the User's associated Call Centers.
+        """
 
         endpoint = f"/users/call-center?userId={user_id}"
 
         return self.requester.get(endpoint)
+        
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
+        """Fetches the amount of Rings before a call is Bounced from the Call Center
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Amount of Rings before a call is Bounced
+        """
         
         endpoint = f"/groups/call-centers/bounced-calls?serviceUserId={service_user_id}"
         
@@ -119,6 +136,14 @@ class Get():
     
     
     def group_call_center_forced_forwarding(self, service_user_id: str):
+        """Fetches the Forwarding Number if a Call Center is set to Forward Calls
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, alongside any Audio Messages.
+        """
         
         endpoint = f"/groups/call-centers/forced-forwarding?serviceUserId={service_user_id}"
         
