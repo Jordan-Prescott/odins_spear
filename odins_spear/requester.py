@@ -15,8 +15,8 @@ class Requester():
         self.logger = logger
     
     
-    def get(self, endpoint, data=None):
-        return self._request(requests.get, endpoint, data)
+    def get(self, endpoint, data=None, params=None):
+        return self._request(requests.get, endpoint, data, params)
 
     
     def post(self, endpoint, data=None):
@@ -31,16 +31,17 @@ class Requester():
         return self._request(requests.delete, endpoint, data)
 
 
-    def _request(self, method, endpoint, data=None):
+    def _request(self, method, endpoint, data=None, params=None):
         
         
         if self.rate_limit:
-            return self._rate_limited_request(method, endpoint, data)
+            return self._rate_limited_request(method, endpoint, data, params)
         else:
             response = method(
                 url=self.base_url + endpoint,
                 headers=self.headers,
-                data=json.dumps(data if data is not None else {})
+                data=json.dumps(data if data is not None else {}),
+                params=(params if params is not None else {})
             )
             self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
             response.raise_for_status()
@@ -49,11 +50,12 @@ class Requester():
 
     @sleep_and_retry
     @limits(calls=5, period=1)
-    def _rate_limited_request(self, method, endpoint, data=None):
+    def _rate_limited_request(self, method, endpoint, data=None, params=None):
         response = method(
             url=self.base_url + endpoint,
             headers=self.headers,
-            data=json.dumps(data if data is not None else {})
+            data=json.dumps(data if data is not None else {}),
+            params=(params if params is not None else {})
         )
         self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
         response.raise_for_status()
