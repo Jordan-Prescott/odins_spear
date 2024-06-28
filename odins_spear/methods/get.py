@@ -35,9 +35,13 @@ class Get():
             Dict: List of all alternate numbers assigned to the user/ service.
         """
         
-        endpoint = f"/users/alternate-numbers?userId={user_id}"
+        endpoint = f"/users/alternate-numbers"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # ANSWER CONFIRMATION
 # ALTERNATE USER ID
@@ -49,15 +53,24 @@ class Get():
 
     def auto_attendants(self, service_provider_id, group_id):
 
-        endpoint = f"/groups/auto-attendants?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/auto-attendants"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
     def auto_attendant(self, service_user_id):
 
-        endpoint = f"/groups/auto-attendants?serviceUserId={service_user_id}"
+        endpoint = f"/groups/auto-attendants"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # AUTOMATIC CALLBACK
 # AUTOMATIC HOLD RETRIEVE
@@ -75,145 +88,225 @@ class Get():
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
 
-        endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
-
-        return self.requester.get(endpoint)
+        endpoint = f"/groups/call-centers"
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+        return self.requester.get(endpoint, params=params)
 
 
     def group_call_center(self, service_user_id: str):
 
-        endpoint = f"/groups/call-centers?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
     def user_call_center(self, user_id: str):
 
-        endpoint = f"/users/call-center?userId={user_id}"
+        endpoint = f"/users/call-center"
 
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
         
-        endpoint = f"/groups/call-centers/bounced-calls?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers/bounced-calls"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_call_center_forced_forwarding(self, service_user_id: str):
         
-        endpoint = f"/groups/call-centers/forced-forwarding?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers/forced-forwarding"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_call_center_overflow(self, service_user_id):
         
-        endpoint = f"/groups/call-centers/overflow?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers/overflow"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_call_center_stranded_calls(self, service_user_id):
         
-        endpoint = f"/groups/call-centers/stranded-calls?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers/stranded-calls"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_call_center_stranded_calls_unavailable(self, service_user_id):
         
-        endpoint = f"/groups/call-centers/stranded-calls-unavailable?serviceUserId={service_user_id}"
+        endpoint = f"/groups/call-centers/stranded-calls-unavailable"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
 # CALL CONTROL
 # CALL FORWARDING ALWAYS
 
     def user_call_forwarding_always(self, user_id: str):
         
-        endpoint = f"/users/call-forwarding-always?userId={user_id}"
+        endpoint = f"/users/call-forwarding-always"
         
-        return self.requester.get(endpoint) 
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params) 
     
     
     def bulk_call_forwarding_always(self, service_provider_id: str, group_id: str):
         
-        endpoint = f"/users/call-forwarding-always/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/users/call-forwarding-always/bulk"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
 # CALL FORWARDING BUSY
 
     def user_call_forwarding_busy(self, user_id: str):
         
-        endpoint = f"/users/call-forwarding-busy?userId={user_id}"
+        endpoint = f"/users/call-forwarding-busy"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def bulk_call_forwarding_busy(self, service_provider_id: str, group_id: str):
         
-        endpoint = f"/users/call-forwarding-busy/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/users/call-forwarding-busy/bulk"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
 # CALL FORWARDING NO ANSWER
 
     def user_call_forwarding_no_answer(self, user_id: str):
         
-        endpoint = f"/users/call-forwarding-no-answer?userId={user_id}"
+        endpoint = f"/users/call-forwarding-no-answer"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def bulk_call_forwarding_no_answer(self, service_provider_id: str, group_id: str):
         
-        endpoint = f"/users/call-forwarding-no-answer/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/users/call-forwarding-no-answer/bulk"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
 # CALL FORWARDING NOT REACHABLE
 
     def user_call_forwarding_not_reachable(self, user_id: str):
         
-        endpoint = f"/users/call-forwarding-not-reachable?userId={user_id}"
+        endpoint = f"/users/call-forwarding-not-reachable"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def bulk_call_forwarding_not_reachable(self, service_provider_id: str, group_id: str):
         
-        endpoint = f"/users/call-forwarding-not-reachable/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/users/call-forwarding-not-reachable/bulk"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
 # CALL FORWARDING SELECTIVE
 
     def user_call_forwarding_selective(self, user_id: str):
         
-        endpoint = f"/users/call-forwarding-selective?userId={user_id}"
+        endpoint = f"/users/call-forwarding-selective"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def user_call_forwarding_selective_criterias(self, user_id: str):
         
-        endpoint = f"/users/call-forwarding-selective/criteria?userId={user_id}"
+        endpoint = f"/users/call-forwarding-selective/criteria"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def user_call_forwarding_selective_criteria(self, user_id: str, criteria_name: str):
         
-        endpoint = f"/users/call-forwarding-selective/criteria?criteriaName={criteria_name}&userId={user_id}"
+        endpoint = f"/users/call-forwarding-selective/criteria"
         
-        return self.requester.get(endpoint)
+        params = {
+            "criteriaName": criteria_name,
+            "userId": user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
 
 # CALL NOTIFY
 # CALL PARK
@@ -221,9 +314,15 @@ class Get():
 
     def call_pickup_group_user(self, service_provider_id, group_id, user_id):
 
-        endpoint = f"/groups/call-pickup/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
+        endpoint = f"/groups/call-pickup/user"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # CALL POLICIES
 # CALL PROCESSING POLICIES
@@ -254,10 +353,15 @@ class Get():
         if not end_date:
             end_date = start_date
         
-        endpoint = f"/users/call-records/stats?userIds={user_id}&startTime={start_date}T{start_time}{time_zone} \
-            &endTime={end_date}T{end_time}{time_zone}"
-        
-        return self.requester.get(endpoint)
+        endpoint = f"/users/call-records/stats"
+
+        params = {
+            "userIds": user_id,
+            "startTime": f"{start_date}T{start_time}{time_zone}",
+            "endTime": f"{end_date}T{end_time}{time_zone}"
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # CALL TRANSFER
 # CALL WAITING
@@ -299,9 +403,14 @@ class Get():
             Dict: Dictionary containing all DNs assigned to group. 
         """
 
-        endpoint = f"/groups/dns?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/dns"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
     
     
     def group_dn_search(self, service_provider_id:str, group_id:str, dn: int,
@@ -342,9 +451,14 @@ class Get():
             Dict: Dictionary of numbers with details of each number.
         """
         
-        endpoint = f"/groups/dns/details?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/dns/details"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def system_dn_search(self, dn: int):
@@ -358,9 +472,13 @@ class Get():
             List: List of dictionaries containing details of each number that fit the search criteria. 
         """
         
-        endpoint = f"/system/dns/search?dn=%2b{dn}"
-        
-        return self.requester.get(endpoint)
+        endpoint = f"/system/dns/search"
+
+        params = {
+            "dn": f"+{dn}"
+        }    
+
+        return self.requester.get(endpoint, params=params)
     
     
     def system_dn(self, dn: int):
@@ -374,9 +492,13 @@ class Get():
             List: List of dictionaries containing details of each number that fit the search criteria. 
         """
         
-        endpoint = f"/system/dns?phoneNumber={dn}"
+        endpoint = f"/system/dns"
         
-        return self.requester.get(endpoint)
+        params = {
+            "phoneNumber": f"+{dn}"
+        } 
+
+        return self.requester.get(endpoint, params=params)
     
     
     def system_dn_summary(self):
@@ -439,9 +561,13 @@ class Get():
             Dict: All numbers assigend to Service Provider/ Enterprise with group and delete status.
         """
         
-        endpoint = f"/service-providers/dns?serviceProviderId={service_provider_id}"
+        endpoint = f"/service-providers/dns"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
         
     
 # DO NOT DISTURB
@@ -456,9 +582,13 @@ class Get():
             Dict: States DND and Ring Splash status.
         """
         
-        endpoint = f"/users/do-not-disturb?userId={user_id}"
-            
-        return self.requester.get(endpoint)
+        endpoint = f"/users/do-not-disturb"
+        
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # DOMAINS
 # EMERGENCY NOTIFICATIONS
@@ -477,16 +607,25 @@ class Get():
     
     def groups(self, service_provider_id: str):
 
-        endpoint = f"/groups?serviceProviderId={service_provider_id}"
+        endpoint = f"/groups"
+        
+        params = {
+            "serviceProviderId": service_provider_id
+        }
 
-        return self.requester.get(endpoint)
+        return self.requester.get(endpoint, params=params)
     
     
     def group(self, service_provider_id, group_id):
 
-        endpoint = f"/groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # GROUP NAVIGATION
 # HOTELING GUEST
@@ -495,21 +634,36 @@ class Get():
 
     def group_hunt_groups(self, service_provider_id, group_id):
 
-        endpoint = f"/groups/hunt-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/hunt-groups"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
     def group_hunt_group(self, service_user_id):
 
-        endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
+        endpoint = f"/groups/hunt-groups"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceUserId" : service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
     def group_hunt_group_user(self, service_provider_id, group_id, user_id):
 
-        endpoint = f"/groups/hunt-groups/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
+        endpoint = f"/groups/hunt-groups/user"
+        
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "userId": user_id
+        }
 
-        return self.requester.get(endpoint)
+        return self.requester.get(endpoint, params=params)
 
 
 # IN CALL SERVICE ACTIVATION
@@ -544,9 +698,14 @@ class Get():
             dict: Single password generated according to the groups rules.
         """
         
-        endpoint = f"/password/generate?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/password/generate"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def passwords_generate(self, service_provider_id: str, group_id: str, limit: int =10) -> dict:
@@ -561,9 +720,15 @@ class Get():
             dict: Multiple passwords generated according to the groups rules.
         """
                 
-        endpoint = f"/password/generate?serviceProviderId={service_provider_id}&groupId={group_id}&limit={limit}"
+        endpoint = f"/password/generate"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "limit": limit
+        }
+
+        return self.requester.get(endpoint, params = params)
         
     
     def passcode_generate(self, service_provider_id: str, group_id: str) -> dict:
@@ -577,9 +742,14 @@ class Get():
             dict: Single passcode generated according to the groups rules.
         """
         
-        endpoint = f"/passcode/generate?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/passcode/generate"
     
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params = params)
     
     
     def passcodes_generate(self, service_provider_id: str, group_id: str, limit: int =10) -> dict:
@@ -594,9 +764,15 @@ class Get():
             dict: Multiple passcodes generated according to the groups rules.
         """
         
-        endpoint = f"/passcode/generate?serviceProviderId={service_provider_id}&groupId={group_id}&limit={limit}"
+        endpoint = f"/passcode/generate"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "limit": limit
+        }
+
+        return self.requester.get(endpoint, params = params)
     
     
     def sip_password_generate(self) -> dict:
@@ -625,9 +801,13 @@ class Get():
             dict: Mutliple SIP passwords generated according to the groups rules.
         """
 
-        endpoint = f"/password/generate?limit={limit}"
+        endpoint = f"/password/generate"
         
-        return self.requester.get(endpoint)
+        params = {
+            "limit": limit
+        }
+
+        return self.requester.get(endpoint, params = params)
 
 # PASSWORD RULES
 # PERSONAL PHONE LIST
@@ -654,9 +834,13 @@ class Get():
             dict: All users devices and details on device such as registration.
         """
         
-        endpoint = f"/users/registration/?userId={user_id}"
+        endpoint = f"/users/registration"
 
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def bulk_user_registration(self, service_provider_id: str, group_id: str):
@@ -670,9 +854,14 @@ class Get():
             dict: All users devices and details on device such as registration.
         """
         
-        endpoint = f"/users/registration/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/users/registration/bulk"
 
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # REMOTE OFFICE
 # REPORTS
@@ -687,9 +876,13 @@ class Get():
             dict: Detailed report of user including services and service packs.
         """
 
-        endpoint = f"/users/reports/users?userId={user_id}"
+        endpoint = f"/users/reports/users"
 
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # RESELLERS
 # ROUTE LIST
@@ -698,16 +891,28 @@ class Get():
 
     def group_schedules(self, service_provider_id: str, group_id: str):
         
-        endpoint = f"/groups/schedules?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/schedules"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_events(self, service_provider_id: str, group_id: str, name: str, type: str):
         
-        endpoint = f"/groups/events?serviceProviderId={service_provider_id}&groupId={group_id}&name={name}&type={type}"
+        endpoint = f"/groups/events"
         
-        return self.requester.get(endpoint)   
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "name": name,
+            "type": type
+        }
+
+        return self.requester.get(endpoint, params=params)   
     
     
 # SECURITY CLASSIFICATION
@@ -724,10 +929,11 @@ class Get():
             reseller_id (str): Only list the Service Provider IDs within the specified Reseller.
         """
         endpoint = f"/service-providers"
-        if reseller_id:
-            endpoint += f"?resellerId={reseller_id}"
+        params = {
+            "resellerId": reseller_id
+        }
         
-        return self.requester.get(endpoint)
+        return self.requester.get(endpoint, params=params)
 
 
     def service_provider(self, service_provider_id: str):
@@ -736,9 +942,13 @@ class Get():
             reseller_id (str): Only list the Service Provider IDs within the specified Reseller.
         """
         
-        endpoint = f"/service-providers?serviceProviderId={service_provider_id}"
+        endpoint = f"/service-providers"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # SERVICES
 
@@ -748,9 +958,13 @@ class Get():
         Args:
             user_id (str): _description_
         """
-        endpoint = f"/users/services/assigned?userId={user_id}"
+        endpoint = f"/users/services/assigned"
         
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
     def user_services(self, user_id: str):
         """Fetch all services assigned to a broadwrok entity, this can be 
@@ -763,9 +977,13 @@ class Get():
             Dict: Broadwork entiy and a list of services assigned.
         """
 
-        endpoint = f"/users/services?userId={user_id}"
+        endpoint = f"/users/services"
 
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
     def group_services(self, group_id: str, service_provider_id: str):
         """
@@ -779,9 +997,14 @@ class Get():
             Dict: Authorised and assigned services within the group.
         """
 
-        endpoint = f"/groups/services?groupId={group_id}&serviceProviderId={service_provider_id}"
+        endpoint = f"/groups/services"
 
-        return self.requester.get(endpoint)
+        params = {
+            "groupId": group_id,
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
     def group_services_assigned(self, group_id: str, service_provider_id: str, service_name: str, service_type: str):
         """
@@ -797,9 +1020,16 @@ class Get():
             Dict: Users/Service Instances where the service is assigned.
         """
 
-        endpoint = f"/groups/services/assigned?serviceProviderId={service_provider_id}&groupId={group_id}&serviceType={service_type}&serviceName={service_name}"
+        endpoint = f"/groups/services/assigned"
 
-        return self.requester.get(endpoint)
+        params = {
+            "groupId": group_id,
+            "serviceProviderId": service_provider_id,
+            "serviceType": service_type,
+            "serviceName": service_name
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # SHARED CALL APPEARANCE
 # SILENT ALERTING
@@ -826,9 +1056,14 @@ class Get():
             Dict: Trunk Group Call Capacity data of target group.
         """
         
-        endpoint = f"/groups/trunk-groups/call-capacity?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/trunk-groups/call-capacity"
         
-        return self.requester.get(endpoint)
+        params = {
+            "groupId": group_id,
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str):
@@ -843,9 +1078,15 @@ class Get():
             Dict: Details of a target trunk group.
         """
         
-        endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}&name={trunk_group_name}"
+        endpoint = f"/groups/trunk-groups"
         
-        return self.requester.get(endpoint)
+        params = {
+            "groupId": group_id,
+            "serviceProviderId": service_provider_id,
+            "name": trunk_group_name
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def group_trunk_groups(self, service_provider_id: str, group_id: str):
@@ -859,9 +1100,14 @@ class Get():
             List: List of core details of all Trunk Groups located in a single Group.
         """
         
-        endpoint = f"/groups/trunk-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
+        endpoint = f"/groups/trunk-groups"
         
-        return self.requester.get(endpoint)
+        params = {
+            "groupId": group_id,
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
     def service_provider_trunk_group_call_capacity(self, service_provider_id: str):
@@ -874,12 +1120,16 @@ class Get():
             Dict: Trunk call capacity details of a single Service Provider/ Enterprise ID.
         """
         
-        endpoint = f"/service-providers/trunk-groups/call-capacity?serviceProviderId={service_provider_id}"
+        endpoint = f"/service-providers/trunk-groups/call-capacity"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
     
     
-    def service_provider_trunk_call_capacity_report(self, servive_provider_id: str):
+    def service_provider_trunk_call_capacity_report(self, service_provider_id: str):
         """Fetches trunk call capacity details of Service Provider/ Enterprise and all Groups in the SP/ ENT.
 
         Args:
@@ -890,9 +1140,13 @@ class Get():
                 in the target SP/ ENT.
         """
         
-        endpoint = f"/service-providers/trunk-groups/call-capacity/reports?serviceProviderId={servive_provider_id}"
+        endpoint = f"/service-providers/trunk-groups/call-capacity/reports"
         
-        return self.requester.get(endpoint)
+        params = {
+            "serviceProviderId": service_provider_id
+        }
+
+        return self.requester.get(endpoint, params=params)
         
 
 # TWO STAGE DIALING
@@ -968,9 +1222,13 @@ class Get():
             Dict: Python dictionary of the users details 
         """
 
-        endpoint = f"/users?userId={user_id}"
+        endpoint = f"/users"
 
-        return self.requester.get(endpoint)
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 # USER CUSTOM RINGBACK
 # VIDEO ADD ON
