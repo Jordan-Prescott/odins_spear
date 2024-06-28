@@ -303,8 +303,6 @@ class Post():
         payload["noAnswerNumberOfRings"] = no_answer_number_of_rings
         payload["forwardTimeoutSeconds"] = forward_timeout_seconds
 
-        payload["agents"] = [{'userId': agent_id} for agent_id in agents]
-
         if 'serviceInstanceProfile' not in payload:     
             payload.setdefault('serviceInstanceProfile', {})            
 
@@ -456,19 +454,38 @@ class Post():
 #TWO STAGE DIALING
 #USERS
         
-    def user(self, user):
+    def user(self, service_provider_id: str, group_id: str, user_id: str, first_name: str, last_name: str, 
+             extension: str, web_auth_password: str, payload: dict ={}):
         """_summary_
 
         Args:
-            user (_type_): _description_
+            service_provider_id (str): _description_
+            group_id (str): _description_
+            user_id (str): _description_
+            first_name (str): _description_
+            last_name (str): _description_
+            extension (str): _description_
+            web_auth_password (str): _description_
+            payload (dict, optional): _description_. Defaults to {}.
 
         Returns:
             _type_: _description_
         """
         
-        endpoint = "users"
+        endpoint = "/users"
         
-        return self.requester.post(endpoint, data=user)
+        payload["callingLineIdFirstName"] = first_name if not payload["callingLineIdFirstName"] else payload["callingLineIdFirstName"]
+        payload["callingLineIdLastName"] = last_name if not payload["callingLineIdLastName"] else payload["callingLineIdLastName"]
+
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["userId"] = user_id
+        payload["firstName"] = first_name
+        payload["lastName"] = last_name
+        payload["extension"] = extension
+        payload["password"] = web_auth_password   
+        
+        return self.requester.post(endpoint, data=payload)
     
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON
