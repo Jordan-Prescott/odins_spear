@@ -455,21 +455,21 @@ class Post():
 #USERS
         
     def user(self, service_provider_id: str, group_id: str, user_id: str, first_name: str, last_name: str, 
-             extension: str, web_auth_password: str, payload: dict ={}):
+             extension: str, web_auth_password: str, payload: dict):
         """_summary_
 
         Args:
-            service_provider_id (str): _description_
-            group_id (str): _description_
-            user_id (str): _description_
-            first_name (str): _description_
-            last_name (str): _description_
-            extension (str): _description_
-            web_auth_password (str): _description_
-            payload (dict, optional): _description_. Defaults to {}.
+            service_provider_id (str): Service provider ID where Group is loctaed.
+            group_id (str): Group ID where new user will be built.
+            user_id (str): Complete User ID including group domain of new user.
+            first_name (str): First name of new user.
+            last_name (str): Last name of new user.
+            extension (str): Extension numebr of new user.
+            web_auth_password (str): Web authentication password. Note get.password_generate() can be used to get this.
+            payload (dict): User configuration.
 
         Returns:
-            _type_: _description_
+            Dict: New user entity.
         """
         
         endpoint = "/users"
