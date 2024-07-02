@@ -11,7 +11,7 @@ class Get():
     def __init__(self, requester):
         self.requester = requester
 
-# SESSION
+#SESSION
 
     def session(self):
 
@@ -19,10 +19,10 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# ACCOUNT AUTHORIZATION CODES
-# ADMINISTRATORS
-# ADVICE OF CHARGE
-# ALTERNATE NUMBERS
+#ACCOUNT AUTHORIZATION CODES
+#ADMINISTRATORS
+#ADVICE OF CHARGE
+#ALTERNATE NUMBERS
 
     def user_alternate_numbers(self, user_id: str):
         """Fetches a list of a user/ service such as Auto Attendant, Hunt Group, or Call Centres 
@@ -39,13 +39,13 @@ class Get():
         
         return self.requester.get(endpoint)
 
-# ANSWER CONFIRMATION
-# ALTERNATE USER ID
-# ANNOUNCEMENTS
-# ANONYMOUS CALL REJECTION
-# ATTENDANT CONSOLE
-# AUTHENTICATION
-# AUTO ATTENDANTS
+#ANSWER CONFIRMATION
+#ALTERNATE USER ID
+#ANNOUNCEMENTS
+#ANONYMOUS CALL REJECTION
+#ATTENDANT CONSOLE
+#AUTHENTICATION
+#AUTO ATTENDANTS
 
     def auto_attendants(self, service_provider_id, group_id):
 
@@ -59,19 +59,19 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# AUTOMATIC CALLBACK
-# AUTOMATIC HOLD RETRIEVE
-# BARGE IN EXEMPT
-# BASIC CALL LOGS
-# BROADWORKS ANYWHERE
-# BROADWORKS MOBILITY
-# BROADWORKS NAVIGATION
-# BROADWORKS RECEPTIONIST ENTERPRISE
-# BROADWORKS RECEPTIONIST OFFICE
-# BROADWORKS RECEPTIONIST SMALL BUSINESS
-# BUSY LAMP FIELD
-# CALL CAPACITY  
-# CALL CENTER
+#AUTOMATIC CALLBACK
+#AUTOMATIC HOLD RETRIEVE
+#BARGE IN EXEMPT
+#BASIC CALL LOGS
+#BROADWORKS ANYWHERE
+#BROADWORKS MOBILITY
+#BROADWORKS NAVIGATION
+#BROADWORKS RECEPTIONIST ENTERPRISE
+#BROADWORKS RECEPTIONIST OFFICE
+#BROADWORKS RECEPTIONIST SMALL BUSINESS
+#BUSY LAMP FIELD
+#CALL CAPACITY  
+#CALL CENTER
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
 
@@ -128,8 +128,8 @@ class Get():
         
         return self.requester.get(endpoint)
     
-# CALL CONTROL
-# CALL FORWARDING ALWAYS
+#CALL CONTROL
+#CALL FORWARDING ALWAYS
 
     def user_call_forwarding_always(self, user_id: str):
         
@@ -145,7 +145,7 @@ class Get():
         return self.requester.get(endpoint)
 
 
-# CALL FORWARDING BUSY
+#CALL FORWARDING BUSY
 
     def user_call_forwarding_busy(self, user_id: str):
         
@@ -161,7 +161,7 @@ class Get():
         return self.requester.get(endpoint)
 
 
-# CALL FORWARDING NO ANSWER
+#CALL FORWARDING NO ANSWER
 
     def user_call_forwarding_no_answer(self, user_id: str):
         
@@ -177,7 +177,7 @@ class Get():
         return self.requester.get(endpoint)
 
 
-# CALL FORWARDING NOT REACHABLE
+#CALL FORWARDING NOT REACHABLE
 
     def user_call_forwarding_not_reachable(self, user_id: str):
         
@@ -193,7 +193,7 @@ class Get():
         return self.requester.get(endpoint)
 
 
-# CALL FORWARDING SELECTIVE
+#CALL FORWARDING SELECTIVE
 
     def user_call_forwarding_selective(self, user_id: str):
         
@@ -215,9 +215,9 @@ class Get():
         
         return self.requester.get(endpoint)
 
-# CALL NOTIFY
-# CALL PARK
-# CALL PICKUP
+#CALL NOTIFY
+#CALL PARK
+#CALL PICKUP
 
     def call_pickup_group_user(self, service_provider_id, group_id, user_id):
 
@@ -225,10 +225,10 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# CALL POLICIES
-# CALL PROCESSING POLICIES
-# CALL RECORDING
-# CALL RECORDS
+#CALL POLICIES
+#CALL PROCESSING POLICIES
+#CALL RECORDING
+#CALL RECORDS
 
     def users_stats(self, user_id: str, start_date:str, end_date: str = None, 
                     start_time: str = "00:00:00", end_time:str = "23:59:59", time_zone: str = "Z"):
@@ -250,7 +250,7 @@ class Get():
             Dict: Users call record statistics for specified time period.
         """
         
-        # checks if end_date has been left and therefore we assume user wants same date.
+        #checks if end_date has been left and therefore we assume user wants same date.
         if not end_date:
             end_date = start_date
         
@@ -259,34 +259,34 @@ class Get():
         
         return self.requester.get(endpoint)
 
-# CALL TRANSFER
-# CALL WAITING
-# CALLING LINE ID BLOCKING OVERRIDE
-# CALLING LINE ID DELIVERY BLOCKING
-# CALLING NAME DELIVERY
-# CALLING NAME RETRIEVAL
-# CALLING NUMBER DELIVERY
-# CALLING PARTY CATEGORY
-# CALLING PLANS
-# CALLBACKS
-# CHARGENUMBER
-# CLASSMARK
-# CLONE
-# COLLABORATE
-# COMM PILOT CALL MANAGER
-# COMM PILOT EXPRESS
-# COMMON PHONE LIST
-# COMMUNICATION BARRING
-# COMMUNICATION BARRING USER
-# CONNECTED LINE IDENTIFICATION
-# CUSTOM CONTACT DIRECTORY
-# DEPARTMENTS
-# DEVICE POLICIES
-# DEVICES
-# DIAL PLAN POLICY
-# DIRECTED CALL PICKUP WITH BARGE IN
-# DIRECTROUTE
-# DN
+#CALL TRANSFER
+#CALL WAITING
+#CALLING LINE ID BLOCKING OVERRIDE
+#CALLING LINE ID DELIVERY BLOCKING
+#CALLING NAME DELIVERY
+#CALLING NAME RETRIEVAL
+#CALLING NUMBER DELIVERY
+#CALLING PARTY CATEGORY
+#CALLING PLANS
+#CALLBACKS
+#CHARGENUMBER
+#CLASSMARK
+#CLONE
+#COLLABORATE
+#COMM PILOT CALL MANAGER
+#COMM PILOT EXPRESS
+#COMMON PHONE LIST
+#COMMUNICATION BARRING
+#COMMUNICATION BARRING USER
+#CONNECTED LINE IDENTIFICATION
+#CUSTOM CONTACT DIRECTORY
+#DEPARTMENTS
+#DEVICE POLICIES
+#DEVICES
+#DIAL PLAN POLICY
+#DIRECTED CALL PICKUP WITH BARGE IN
+#DIRECTROUTE
+#DN
 
     def group_dns(self, service_provider_id:str, group_id:str):
         """Gets all numbers assigned to group.
@@ -324,7 +324,7 @@ class Get():
         if filter_type:
             endpoint += f"&{format_filter('dn', filter_type, dn)}"
         if limit:
-            # TODO: Limit is failing when needed, odin to resolve
+            #TODO: Limit is failing when needed, odin to resolve
             endpoint += f"&limit={limit}"
 
         return self.requester.get(endpoint)
@@ -422,7 +422,7 @@ class Get():
         if filter_type:
             endpoint += f"&{format_filter('dn', filter_type, dn)}"
         if limit:
-            # TODO: Limit is failing when needed, odin to resolve
+            #TODO: Limit is failing when needed, odin to resolve
             endpoint += f"&limit={limit}"
 
         return self.requester.get(endpoint)
@@ -444,7 +444,7 @@ class Get():
         return self.requester.get(endpoint)
         
     
-# DO NOT DISTURB
+#DO NOT DISTURB
 
     def user_do_not_disturb(self, user_id: str):
         """Returns the specificied users DND and Ring Splash state.
@@ -460,20 +460,20 @@ class Get():
             
         return self.requester.get(endpoint)
 
-# DOMAINS
-# EMERGENCY NOTIFICATIONS
-# EMERGENCY ZONES
-# ENTERPRISE TRUNKS
-# EXECUTIVE
-# EXECUTIVE ASSISTANT
-# EXTENSIONS
-# EXTERNAL CALLING LINE ID DELIVERY
-# EXTERNAL CUSTOM RINGBACK
-# FAX MESSAGING
-# FEATURE ACCESS CODES
-# FLEXIBLE SEATING
-# GROUP PAGING
-# GROUPS
+#DOMAINS
+#EMERGENCY NOTIFICATIONS
+#EMERGENCY ZONES
+#ENTERPRISE TRUNKS
+#EXECUTIVE
+#EXECUTIVE ASSISTANT
+#EXTENSIONS
+#EXTERNAL CALLING LINE ID DELIVERY
+#EXTERNAL CUSTOM RINGBACK
+#FAX MESSAGING
+#FEATURE ACCESS CODES
+#FLEXIBLE SEATING
+#GROUP PAGING
+#GROUPS
     
     def groups(self, service_provider_id: str):
 
@@ -488,10 +488,10 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# GROUP NAVIGATION
-# HOTELING GUEST
-# HOTELING HOST
-# HUNT GROUPS
+#GROUP NAVIGATION
+#HOTELING GUEST
+#HOTELING HOST
+#HUNT GROUPS
 
     def group_hunt_groups(self, service_provider_id, group_id):
 
@@ -512,26 +512,26 @@ class Get():
         return self.requester.get(endpoint)
 
 
-# IN CALL SERVICE ACTIVATION
-# INSTANT GROUP CALL
-# INTEGRATED IMP
-# INTERCEPT
-# INTERNAL CALLING LINE ID DELIVERY
-# LANGUAGES
-# LEGACY AUTOMATIC CALLBACK
-# MALICIOUS CALL TRACE
-# MEDIA
-# MEET-ME CONFERENCING
-# MUSIC ON HOLD
-# MWI DELIVERY TO MOBILE ENDPOINT
-# NETWORK CLASS OF SERVICE
-# NIGHT FORWARDING
-# NUMBER PORTABILITY ANNOUNCEMENT
-# NUMBER PORTABILITY QUERY
-# NUMBERS
-# OUTLOOK INTEGRATION
-# PASSCODE RULES
-# PASSWORD GENERATE
+#IN CALL SERVICE ACTIVATION
+#INSTANT GROUP CALL
+#INTEGRATED IMP
+#INTERCEPT
+#INTERNAL CALLING LINE ID DELIVERY
+#LANGUAGES
+#LEGACY AUTOMATIC CALLBACK
+#MALICIOUS CALL TRACE
+#MEDIA
+#MEET-ME CONFERENCING
+#MUSIC ON HOLD
+#MWI DELIVERY TO MOBILE ENDPOINT
+#NETWORK CLASS OF SERVICE
+#NIGHT FORWARDING
+#NUMBER PORTABILITY ANNOUNCEMENT
+#NUMBER PORTABILITY QUERY
+#NUMBERS
+#OUTLOOK INTEGRATION
+#PASSCODE RULES
+#PASSWORD GENERATE
 
     def password_generate(self, service_provider_id: str, group_id: str) -> dict:
         """Generates a single passwords following the groups rules.
@@ -629,20 +629,20 @@ class Get():
         
         return self.requester.get(endpoint)
 
-# PASSWORD RULES
-# PERSONAL PHONE LIST
-# PHONE DIRECTORY
-# PHYSICAL LOCATION
-# POLYCOM PHONE SERVICES
-# PRE ALERTING
-# PREFERRED CARRIER
-# PREPAID
-# PRIMARY ENDPOINT ADVANCED SETTING
-# PRIORITY ALERT
-# PRIVACY
-# PUSH REGISTRATION
-# PUSH TO TALK
-# REGISTRATION
+#PASSWORD RULES
+#PERSONAL PHONE LIST
+#PHONE DIRECTORY
+#PHYSICAL LOCATION
+#POLYCOM PHONE SERVICES
+#PRE ALERTING
+#PREFERRED CARRIER
+#PREPAID
+#PRIMARY ENDPOINT ADVANCED SETTING
+#PRIORITY ALERT
+#PRIVACY
+#PUSH REGISTRATION
+#PUSH TO TALK
+#REGISTRATION
 
     def user_registration(self, user_id: str):
         """Gets a users devices and if those devices are registered. This includes soft phones.
@@ -674,8 +674,8 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# REMOTE OFFICE
-# REPORTS
+#REMOTE OFFICE
+#REPORTS
 
     def user_report(self, user_id: str):
         """ Detailed report of user including services and service packs assigned.
@@ -691,10 +691,10 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# RESELLERS
-# ROUTE LIST
-# ROUTING PROFILE
-# SCHEDULES
+#RESELLERS
+#ROUTE LIST
+#ROUTING PROFILE
+#SCHEDULES
 
     def group_schedules(self, service_provider_id: str, group_id: str):
         
@@ -710,13 +710,13 @@ class Get():
         return self.requester.get(endpoint)   
     
     
-# SECURITY CLASSIFICATION
-# SELECTIVE CALL ACCEPTANCE
-# SELECTIVE CALL REJECTION
-# SEQUENTIAL RING
-# SERIES COMPLETION
-# SERVICE PACKS
-# SERVICE PROVIDERS
+#SECURITY CLASSIFICATION
+#SELECTIVE CALL ACCEPTANCE
+#SELECTIVE CALL REJECTION
+#SEQUENTIAL RING
+#SERIES COMPLETION
+#SERVICE PACKS
+#SERVICE PROVIDERS
 
     def service_providers(self, reseller_id=None):
         """
@@ -740,7 +740,7 @@ class Get():
         
         return self.requester.get(endpoint)
 
-# SERVICES
+#SERVICES
 
     def user_services_assigned(self, user_id: str):
         """
@@ -801,19 +801,19 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# SHARED CALL APPEARANCE
-# SILENT ALERTING
-# SIMULTANEOUS RING PERSONAL
-# SMARTY ADDRESS
-# SPEED DIAL 100
-# SPEED DIAL 8
-# STATES AND PROVINCES
-# SYSTEM
-# TERMINATING ALTERNATE TRUNK IDENTITY
-# THIRD PARTY VOICE MAIL SUPPORT
-# THIRD PARTY EMERGENCY CALLING
-# TIME ZONES
-# TRUNK GROUPS
+#SHARED CALL APPEARANCE
+#SILENT ALERTING
+#SIMULTANEOUS RING PERSONAL
+#SMARTY ADDRESS
+#SPEED DIAL 100
+#SPEED DIAL 8
+#STATES AND PROVINCES
+#SYSTEM
+#TERMINATING ALTERNATE TRUNK IDENTITY
+#THIRD PARTY VOICE MAIL SUPPORT
+#THIRD PARTY EMERGENCY CALLING
+#TIME ZONES
+#TRUNK GROUPS
     
     def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str):
         """Fetches Trunk Call Capacity data for a single Group. 
@@ -895,8 +895,8 @@ class Get():
         return self.requester.get(endpoint)
         
 
-# TWO STAGE DIALING
-# USERS
+#TWO STAGE DIALING
+#USERS
 
     def users(self, service_provider_id: str = None, group_id: str = None,
               filter: str = None, filter_type: str = None, filter_value: str = None,
@@ -916,7 +916,7 @@ class Get():
         Returns:
             dict: List of users.
 
-        # Supported Filters
+        #Supported Filters
         macAddress: search by device
         lastName: filter by lastName
         firstName: filter by firstName
@@ -925,7 +925,7 @@ class Get():
         userId: filter by userId
         extension: filter by extension
 
-        #### Examples
+        ####Examples
         Get all users in Enterprise ent1
         GET /api/v2/users?serviceProviderId=ent1
 
@@ -950,7 +950,7 @@ class Get():
                 endpoint += "&"
             endpoint += f"{format_filter(filter, filter_type, filter_value)}"
         if limit:
-            # TODO: Limit is failing when needed, odin to resolve
+            #TODO: Limit is failing when needed, odin to resolve
             endpoint += f"&limit={limit}"
         if extended:
             endpoint += f"&extended=True"
@@ -972,36 +972,36 @@ class Get():
 
         return self.requester.get(endpoint)
 
-# USER CUSTOM RINGBACK
-# VIDEO ADD ON
-# VIRTUAL ON-NET ENTERPRISE EXTENSIONS
-# VOICE MESSAGING
-# VOICE PORTAL CALLING
-# ZONE CALLING RESTRICTIONS
-# ODIN BRANDING
-# ODIN CALLBACKS
-# ODIN CONNECTORS
-# ODIN EMAIL
-# ODIN EVENTS
-# ODIN INVENTORY
-# ODIN REPORTS
-# ODIN SETTINGS
-# ODIN STATUS
-# ODIN SSO
-# ODIN SSO ALTERNATE USER IDS
-# ODIN TASKS
-# ODIN UI
-# ODIN VIEWABLE PACKS
-# ODIN WEBHOOKS
-# ODIN AUDIT
-# ODIN IMPORTS
-# ODIN EXPORTS
-# XSI
-# SIP AUTHENTICATION
-# POLICY
-# PASSWORD RESET
-# PARTNERS
-# USER UTILITIES
-# ODIN TASKS COPY
-# ODIN CONNECTORS
-# LOCALES
+#USER CUSTOM RINGBACK
+#VIDEO ADD ON
+#VIRTUAL ON-NET ENTERPRISE EXTENSIONS
+#VOICE MESSAGING
+#VOICE PORTAL CALLING
+#ZONE CALLING RESTRICTIONS
+#ODIN BRANDING
+#ODIN CALLBACKS
+#ODIN CONNECTORS
+#ODIN EMAIL
+#ODIN EVENTS
+#ODIN INVENTORY
+#ODIN REPORTS
+#ODIN SETTINGS
+#ODIN STATUS
+#ODIN SSO
+#ODIN SSO ALTERNATE USER IDS
+#ODIN TASKS
+#ODIN UI
+#ODIN VIEWABLE PACKS
+#ODIN WEBHOOKS
+#ODIN AUDIT
+#ODIN IMPORTS
+#ODIN EXPORTS
+#XSI
+#SIP AUTHENTICATION
+#POLICY
+#PASSWORD RESET
+#PARTNERS
+#USER UTILITIES
+#ODIN TASKS COPY
+#ODIN CONNECTORS
+#LOCALES
