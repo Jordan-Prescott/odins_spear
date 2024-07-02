@@ -74,10 +74,10 @@ class Get():
 # CALL CENTER
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
-        """Fetches a list of a groups active Call Centers in a group.
+        """Retrieves a list of active call centers within a specified group, along with their settings.
 
         Args:
-            service_provider_id (str): Target Service Provider
+            service_provider_id (str): Target Service Provider where group is hosted
             group_id (str): Target Group ID
 
         Returns:
@@ -90,7 +90,7 @@ class Get():
 
 
     def group_call_center(self, service_user_id: str):
-        """Fetches a list of a Call Center's settings and profile.
+        """Retrieves a list of a Call Center's settings and profile.
 
         Args:
             service_user_id (str): Target Call Center's ID
@@ -105,7 +105,7 @@ class Get():
 
 
     def user_call_center(self, user_id: str):
-        """Fetches a list of call centers the specified user is currently associated with.
+        """Retrieves a list of call centers that the specified user is currently associated with.
 
         Args:
             user_id (str): Target User ID
@@ -121,7 +121,7 @@ class Get():
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
-        """Fetches the amount of Rings before a call is Bounced from the Call Center
+        """Retrieves the number of rings before a call is bounced from the specified call center.
 
         Args:
             service_user_id (str): Target Call Center ID
@@ -136,7 +136,7 @@ class Get():
     
     
     def group_call_center_forced_forwarding(self, service_user_id: str):
-        """Fetches the Forwarding Number if a Call Center is set to Forward Calls
+        """Retrieves the forwarding number for a call center if it is set to forward calls, along with any associated audio messages.
 
         Args:
             service_user_id (str): Target Call Center ID
@@ -151,7 +151,8 @@ class Get():
     
     
     def group_call_center_overflow(self, service_user_id):
-        """Fetches the number that a user is directed to when all call center agents are busy on the phone.
+        """Retrieves the forwarding number for a user when all call center agents are busy, along with any associated audio messages.
+
         Args:
             service_user_id (str): Target Call Center ID
 
@@ -165,6 +166,14 @@ class Get():
     
     
     def group_call_center_stranded_calls(self, service_user_id):
+        """Retrieves the forwarding number for a user when a call center doesn't answer, along with any associated audio messages.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, alongside any Audio Messages.
+        """
         
         endpoint = f"/groups/call-centers/stranded-calls?serviceUserId={service_user_id}"
         
@@ -172,6 +181,14 @@ class Get():
     
     
     def group_call_center_stranded_calls_unavailable(self, service_user_id):
+        """Retrieves the forwarding number for a user when a call center doesn't answer, along with the count of agents with an unavailable code in the call center.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, and Agents with an Unavailable Code set.
+        """
         
         endpoint = f"/groups/call-centers/stranded-calls-unavailable?serviceUserId={service_user_id}"
         
@@ -181,6 +198,15 @@ class Get():
 # CALL FORWARDING ALWAYS
 
     def user_call_forwarding_always(self, user_id: str):
+
+        """Retrieves the Forwarding Always status for the specified User.
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-always?userId={user_id}"
         
@@ -188,6 +214,16 @@ class Get():
     
     
     def bulk_call_forwarding_always(self, service_provider_id: str, group_id: str):
+
+        """Retrieves the Forwarding Always status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-always/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -197,6 +233,14 @@ class Get():
 # CALL FORWARDING BUSY
 
     def user_call_forwarding_busy(self, user_id: str):
+        """Retrieves the Forwarding Not Reachable status for the specified user.
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-busy?userId={user_id}"
         
@@ -204,6 +248,16 @@ class Get():
     
     
     def bulk_call_forwarding_busy(self, service_provider_id: str, group_id: str):
+        """Retrieves the Forwarding Busy status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+            
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-busy/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -213,6 +267,14 @@ class Get():
 # CALL FORWARDING NO ANSWER
 
     def user_call_forwarding_no_answer(self, user_id: str):
+        """Retrieves the Forwarding No Answer status for the specified user
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-no-answer?userId={user_id}"
         
@@ -220,6 +282,16 @@ class Get():
     
     
     def bulk_call_forwarding_no_answer(self, service_provider_id: str, group_id: str):
+        """Retrieves the Forwarding No Answer status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+            
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-no-answer/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -229,6 +301,14 @@ class Get():
 # CALL FORWARDING NOT REACHABLE
 
     def user_call_forwarding_not_reachable(self, user_id: str):
+        """Retrieves the Forwarding Not Reachable status for the specified user
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-not-reachable?userId={user_id}"
         
@@ -236,6 +316,16 @@ class Get():
     
     
     def bulk_call_forwarding_not_reachable(self, service_provider_id: str, group_id: str):
+        """Retrieves the Forwarding Not Reachable status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+            
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-not-reachable/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
