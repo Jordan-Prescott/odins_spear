@@ -650,6 +650,14 @@ class Get():
 # GROUPS
     
     def groups(self, service_provider_id: str):
+        """Returns the specificied Service Provider's Groups.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+
+        Returns:
+            List: List of groups and their Names, alongside groupID's and userLimits.
+        """
 
         endpoint = f"/groups?serviceProviderId={service_provider_id}"
 
@@ -657,6 +665,15 @@ class Get():
     
     
     def group(self, service_provider_id, group_id):
+        """Returns the specificied Group's settings and information.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            Dict: Returns information about the specified group, such as the DID, userCount and Domain.
+        """
 
         endpoint = f"/groups?serviceProviderId={service_provider_id}&groupId={group_id}"
 
@@ -668,18 +685,45 @@ class Get():
 # HUNT GROUPS
 
     def group_hunt_groups(self, service_provider_id, group_id):
+        """Returns a list of all the Hunt Groups within the specified Group.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: Returns a list of every Hunt Group within a Group, alongside their extension and name.
+        """
 
         endpoint = f"/groups/hunt-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
 
         return self.requester.get(endpoint)
 
     def group_hunt_group(self, service_user_id):
+        """Returns information about the specified Hunt Group.
+
+        Args:
+            service_user_id (str): UserID of the target Hunt Group.
+
+        Returns:
+            Dict: Returns the specified Hunt Groups settings and information, such as group policies, agents, and extension.
+        """
 
         endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
 
         return self.requester.get(endpoint)
 
     def group_hunt_group_user(self, service_provider_id, group_id, user_id):
+        """Returns the Hunt Group's the specified User is apart of.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+            user_id (str): Target User ID
+
+        Returns:
+            List: Returns the Hunt Group's a user is within, alongside their settings within that Hunt Group.
+        """
 
         endpoint = f"/groups/hunt-groups/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
 
@@ -871,6 +915,15 @@ class Get():
 # SCHEDULES
 
     def group_schedules(self, service_provider_id: str, group_id: str):
+        """ Retrieves the Business Schedules for the specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: List of all the groups schedules, including Name, Type and Level.
+        """
         
         endpoint = f"/groups/schedules?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -878,6 +931,15 @@ class Get():
     
     
     def group_events(self, service_provider_id: str, group_id: str, name: str, type: str):
+        """ Retrieves the Business Schedules for the specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: List of all the groups schedules, including Name, Type and Level.
+        """
         
         endpoint = f"/groups/events?serviceProviderId={service_provider_id}&groupId={group_id}&name={name}&type={type}"
         
