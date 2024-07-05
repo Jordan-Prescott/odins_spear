@@ -81,7 +81,7 @@ class Get():
             group_id (str): Target Group ID
 
         Returns:
-            Dict: List of Call Centres and their settings.
+            Dict: List of Call Centers and their settings.
         """
 
         endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
@@ -335,6 +335,14 @@ class Get():
 # CALL FORWARDING SELECTIVE
 
     def user_call_forwarding_selective(self, user_id: str):
+        """Retrieves the Forwarding Selective status for a specified User, alongside the criteria.
+
+        Args:
+            user_id (str): Target User ID
+            
+        Returns:
+            Dict: Forwarding enabled status and the Forwarding criteria.
+        """
         
         endpoint = f"/users/call-forwarding-selective?userId={user_id}"
         
@@ -342,6 +350,14 @@ class Get():
     
     
     def user_call_forwarding_selective_criterias(self, user_id: str):
+        """Retrieves the Forwarding Selective status for a specified User, alongside the criteria's assigned.
+
+        Args:
+            user_id (str): Target User ID
+            
+        Returns:
+            Dict: Forwarding enabled status and the Forwarding criteria's names and settings.
+        """
         
         endpoint = f"/users/call-forwarding-selective/criteria?userId={user_id}"
         
@@ -349,6 +365,15 @@ class Get():
     
     
     def user_call_forwarding_selective_criteria(self, user_id: str, criteria_name: str):
+        """Retrieves the Forwarding Selective status for a specified User, alongside the specified Criteria
+
+        Args:
+            user_id (str): Target User ID
+            criteria_name (str): Target Criteria Name
+            
+        Returns:
+            Dict: Forwarding enabled status and the specified Criterias Settings.
+        """
         
         endpoint = f"/users/call-forwarding-selective/criteria?criteriaName={criteria_name}&userId={user_id}"
         
@@ -359,6 +384,16 @@ class Get():
 # CALL PICKUP
 
     def call_pickup_group_user(self, service_provider_id, group_id, user_id):
+        """Retrieves Pickup Group information for the specified user.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): The Target Group ID the user is apart of.
+            user_id (str): Target User ID
+            
+        Returns:
+            Dict: Specified users pickup group, and the users within that group.
+        """
 
         endpoint = f"/groups/call-pickup/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
 
