@@ -931,14 +931,16 @@ class Get():
     
     
     def group_events(self, service_provider_id: str, group_id: str, name: str, type: str):
-        """ Retrieves the Business Schedules for the specified group.
+        """ Retrieves the Business Schedule's Events for the specified group.
 
         Args:
             service_provider_id (str): Target Service Provider ID
             group_id (str): Target Group ID
+            name (str): Name of the target Busisness Schedule
+            type (str): The type of the Business Schedule (Time, Holiday)
 
         Returns:
-            List: List of all the groups schedules, including Name, Type and Level.
+            List: List of each Business Schedule Event, including startTime and endTime.
         """
         
         endpoint = f"/groups/events?serviceProviderId={service_provider_id}&groupId={group_id}&name={name}&type={type}"
