@@ -74,6 +74,15 @@ class Get():
 #CALL CENTER
 
     def group_call_centers(self, service_provider_id: str, group_id: str):
+        """Retrieves a list of active call centers within a specified group, along with their settings.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+
+        Returns:
+            Dict: List of Call Centers and their settings.
+        """
 
         endpoint = f"/groups/call-centers?serviceProviderId={service_provider_id}&groupId={group_id}"
 
@@ -81,6 +90,14 @@ class Get():
 
 
     def group_call_center(self, service_user_id: str):
+        """Retrieves a list of a Call Center's settings and profile.
+
+        Args:
+            service_user_id (str): Target Call Center's ID
+
+        Returns:
+            Dict: List of the Call Center's settings and profile
+        """
 
         endpoint = f"/groups/call-centers?serviceUserId={service_user_id}"
 
@@ -88,13 +105,30 @@ class Get():
 
 
     def user_call_center(self, user_id: str):
+        """Retrieves a list of call centers that the specified user is currently associated with.
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: List of the User's associated Call Centers.
+        """
 
         endpoint = f"/users/call-center?userId={user_id}"
 
         return self.requester.get(endpoint)
+        
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
+        """Retrieves the number of rings before a call is bounced from the specified call center.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Amount of Rings before a call is Bounced
+        """
         
         endpoint = f"/groups/call-centers/bounced-calls?serviceUserId={service_user_id}"
         
@@ -102,6 +136,14 @@ class Get():
     
     
     def group_call_center_forced_forwarding(self, service_user_id: str):
+        """Retrieves the forwarding number for a call center if it is set to forward calls, along with any associated audio messages.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, alongside any Audio Messages.
+        """
         
         endpoint = f"/groups/call-centers/forced-forwarding?serviceUserId={service_user_id}"
         
@@ -109,6 +151,14 @@ class Get():
     
     
     def group_call_center_overflow(self, service_user_id):
+        """Retrieves the forwarding number for a user when all call center agents are busy, along with any associated audio messages.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, alongside any Audio Messages.
+        """
         
         endpoint = f"/groups/call-centers/overflow?serviceUserId={service_user_id}"
         
@@ -116,6 +166,14 @@ class Get():
     
     
     def group_call_center_stranded_calls(self, service_user_id):
+        """Retrieves the forwarding number for a user when a call center doesn't answer, along with any associated audio messages.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, alongside any Audio Messages.
+        """
         
         endpoint = f"/groups/call-centers/stranded-calls?serviceUserId={service_user_id}"
         
@@ -123,6 +181,14 @@ class Get():
     
     
     def group_call_center_stranded_calls_unavailable(self, service_user_id):
+        """Retrieves the forwarding number for a user when a call center doesn't answer, along with the count of agents with an unavailable code in the call center.
+
+        Args:
+            service_user_id (str): Target Call Center ID
+
+        Returns:
+            Dict: Number to be Forwarded to, and Agents with an Unavailable Code set.
+        """
         
         endpoint = f"/groups/call-centers/stranded-calls-unavailable?serviceUserId={service_user_id}"
         
@@ -132,6 +198,15 @@ class Get():
 #CALL FORWARDING ALWAYS
 
     def user_call_forwarding_always(self, user_id: str):
+
+        """Retrieves the Forwarding Always status for the specified User.
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-always?userId={user_id}"
         
@@ -139,6 +214,16 @@ class Get():
     
     
     def bulk_call_forwarding_always(self, service_provider_id: str, group_id: str):
+
+        """Retrieves the Forwarding Always status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-always/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -148,6 +233,14 @@ class Get():
 #CALL FORWARDING BUSY
 
     def user_call_forwarding_busy(self, user_id: str):
+        """Retrieves the Forwarding Not Reachable status for the specified user.
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-busy?userId={user_id}"
         
@@ -155,6 +248,16 @@ class Get():
     
     
     def bulk_call_forwarding_busy(self, service_provider_id: str, group_id: str):
+        """Retrieves the Forwarding Busy status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+            
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-busy/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -164,6 +267,14 @@ class Get():
 #CALL FORWARDING NO ANSWER
 
     def user_call_forwarding_no_answer(self, user_id: str):
+        """Retrieves the Forwarding No Answer status for the specified user
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-no-answer?userId={user_id}"
         
@@ -171,6 +282,16 @@ class Get():
     
     
     def bulk_call_forwarding_no_answer(self, service_provider_id: str, group_id: str):
+        """Retrieves the Forwarding No Answer status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+            
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-no-answer/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -180,6 +301,14 @@ class Get():
 #CALL FORWARDING NOT REACHABLE
 
     def user_call_forwarding_not_reachable(self, user_id: str):
+        """Retrieves the Forwarding Not Reachable status for the specified user
+
+        Args:
+            user_id (str): Target User ID
+
+        Returns:
+            Dict: Forwarding enabled status, and the Number to be Forwarded to.
+        """
         
         endpoint = f"/users/call-forwarding-not-reachable?userId={user_id}"
         
@@ -187,6 +316,16 @@ class Get():
     
     
     def bulk_call_forwarding_not_reachable(self, service_provider_id: str, group_id: str):
+        """Retrieves the Forwarding Not Reachable status for all users within a specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider where group is hosted
+            group_id (str): Target Group ID
+            
+
+        Returns:
+            List: Forwarding enabled status, the Number to be Forwarded to, and User information.
+        """
         
         endpoint = f"/users/call-forwarding-not-reachable/bulk?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -196,6 +335,14 @@ class Get():
 #CALL FORWARDING SELECTIVE
 
     def user_call_forwarding_selective(self, user_id: str):
+        """Retrieves the Forwarding Selective status for a specified User, alongside the criteria.
+
+        Args:
+            user_id (str): Target User ID
+            
+        Returns:
+            Dict: Forwarding enabled status and the Forwarding criteria.
+        """
         
         endpoint = f"/users/call-forwarding-selective?userId={user_id}"
         
@@ -203,6 +350,14 @@ class Get():
     
     
     def user_call_forwarding_selective_criterias(self, user_id: str):
+        """Retrieves the Forwarding Selective status for a specified User, alongside the criteria's assigned.
+
+        Args:
+            user_id (str): Target User ID
+            
+        Returns:
+            Dict: Forwarding enabled status and the Forwarding criteria's names and settings.
+        """
         
         endpoint = f"/users/call-forwarding-selective/criteria?userId={user_id}"
         
@@ -210,6 +365,15 @@ class Get():
     
     
     def user_call_forwarding_selective_criteria(self, user_id: str, criteria_name: str):
+        """Retrieves the Forwarding Selective status for a specified User, alongside the specified Criteria
+
+        Args:
+            user_id (str): Target User ID
+            criteria_name (str): Target Criteria Name
+            
+        Returns:
+            Dict: Forwarding enabled status and the specified Criterias Settings.
+        """
         
         endpoint = f"/users/call-forwarding-selective/criteria?criteriaName={criteria_name}&userId={user_id}"
         
@@ -220,6 +384,16 @@ class Get():
 #CALL PICKUP
 
     def call_pickup_group_user(self, service_provider_id, group_id, user_id):
+        """Retrieves Pickup Group information for the specified user.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): The Target Group ID the user is apart of.
+            user_id (str): Target User ID
+            
+        Returns:
+            Dict: Specified users pickup group, and the users within that group.
+        """
 
         endpoint = f"/groups/call-pickup/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
 
@@ -476,6 +650,14 @@ class Get():
 #GROUPS
     
     def groups(self, service_provider_id: str):
+        """Returns the specificied Service Provider's Groups.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+
+        Returns:
+            List: List of groups and their Names, alongside groupID's and userLimits.
+        """
 
         endpoint = f"/groups?serviceProviderId={service_provider_id}"
 
@@ -483,6 +665,15 @@ class Get():
     
     
     def group(self, service_provider_id, group_id):
+        """Returns the specificied Group's settings and information.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            Dict: Returns information about the specified group, such as the DID, userCount and Domain.
+        """
 
         endpoint = f"/groups?serviceProviderId={service_provider_id}&groupId={group_id}"
 
@@ -494,18 +685,45 @@ class Get():
 #HUNT GROUPS
 
     def group_hunt_groups(self, service_provider_id, group_id):
+        """Returns a list of all the Hunt Groups within the specified Group.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: Returns a list of every Hunt Group within a Group, alongside their extension and name.
+        """
 
         endpoint = f"/groups/hunt-groups?serviceProviderId={service_provider_id}&groupId={group_id}"
 
         return self.requester.get(endpoint)
 
     def group_hunt_group(self, service_user_id):
+        """Returns information about the specified Hunt Group.
+
+        Args:
+            service_user_id (str): UserID of the target Hunt Group.
+
+        Returns:
+            Dict: Returns the specified Hunt Groups settings and information, such as group policies, agents, and extension.
+        """
 
         endpoint = f"/groups/hunt-groups?serviceUserId={service_user_id}"
 
         return self.requester.get(endpoint)
 
     def group_hunt_group_user(self, service_provider_id, group_id, user_id):
+        """Returns the Hunt Group's the specified User is apart of.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+            user_id (str): Target User ID
+
+        Returns:
+            List: Returns the Hunt Group's a user is within, alongside their settings within that Hunt Group.
+        """
 
         endpoint = f"/groups/hunt-groups/user?serviceProviderId={service_provider_id}&groupId={group_id}&userId={user_id}"
 
@@ -697,6 +915,15 @@ class Get():
 #SCHEDULES
 
     def group_schedules(self, service_provider_id: str, group_id: str):
+        """ Retrieves the Business Schedules for the specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: List of all the groups schedules, including Name, Type and Level.
+        """
         
         endpoint = f"/groups/schedules?serviceProviderId={service_provider_id}&groupId={group_id}"
         
@@ -704,6 +931,17 @@ class Get():
     
     
     def group_events(self, service_provider_id: str, group_id: str, name: str, type: str):
+        """ Retrieves the Business Schedule's Events for the specified group.
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+            name (str): Name of the target Busisness Schedule
+            type (str): The type of the Business Schedule (Time, Holiday)
+
+        Returns:
+            List: List of each Business Schedule Event, including startTime and endTime.
+        """
         
         endpoint = f"/groups/events?serviceProviderId={service_provider_id}&groupId={group_id}&name={name}&type={type}"
         
