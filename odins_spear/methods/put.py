@@ -1106,7 +1106,7 @@ class Put():
         return self.requester.put(endpoint, data=updates)
 
 
-    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, updates: dict):
+    def service_providers_trunk_group_call_capacity(self, service_provider_id: str, max_active_calls: int, bursting_max_active_calls: int =None):
         """
         Updates the max active calls and the bursting max active calls for the given service provider.
 
@@ -1119,10 +1119,16 @@ class Put():
         """
 
         endpoint = "/service-providers/trunk-groups/call-capacity"
+        
+        data = {
+            "maxActiveCalls": max_active_calls,
+            "serviceProviderId": service_provider_id
+        }
+        
+        if bursting_max_active_calls:
+            data["burstingMaxActiveCalls"] = bursting_max_active_calls
 
-        updates["serviceProviderId"] = service_provider_id
-
-        return self.requester.put(endpoint, data=updates)
+        return self.requester.put(endpoint, data=data)
 
 #TWO STAGE DIALING
 #USERS
@@ -1145,9 +1151,9 @@ class Put():
         
         endpoint = "/users"
         
-        updates["serviceProviderId"] = [service_provider_id]
-        updates["groupId"] = [group_id]
-        updates["userId"] = [user_id]
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
+        updates["userId"] = user_id
         
         return self.requester.put(endpoint, data=updates)
         
