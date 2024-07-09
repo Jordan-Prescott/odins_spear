@@ -34,23 +34,52 @@ def main(api: object, service_provider_id: str, group_id: str,
     
     # Fetches complete list of users in group
     users = api.get.users(service_provider_id, group_id)
+    failed_users = []
     
     # Pulls stats for each user, instantiates call_records_statistics, and append to group_users_statistics
     for user in tqdm(users, "Fetching individual stats for each user. This may take several minutes"):
-        user_statistics = api.get.users_stats(
-            user["userId"],
-            start_date,
-            end_date,
-            start_time,
-            end_time,
-            time_zone
-        )
+        
+        try:
+            user_statistics = api.get.users_stats(
+                user["userId"],
+                start_date,
+                end_date,
+                start_time,
+                end_time,
+                time_zone
+            )
+            
+            user_services = api.get.user_services(
+                user_id=user["userId"]
+            )
+            
+        except Exception:
+            # attempt 2
+            try:
+                user_statistics = api.get.users_stats(
+                    user["userId"],
+                    start_date,
+                    end_date,
+                    start_time,
+                    end_time,
+                    time_zone
+                )
+                
+                user_services = api.get.user_services(
+                user_id=user["userId"]
+                )
+                
+            except Exception:
+                failed_users.append(user)
+                continue
+        
+        user_statistics["servicePackServices"] = [service["serviceName"] for service in user_services["servicePackServices"] if service["assigned"]]
         
         # Correction for API removing userId if no calls made by user
         if user_statistics["userId"] is None:
             user_statistics["userId"] = user["userId"]
         
-        user_statistic_record = call_records_statistics.from_dict(user["extension"], user_statistics)
+        user_statistic_record = call_records_statistics.from_dict(user["firstName"], user["lastName"], user["extension"], user_statistics)
         group_users_statistics.append(user_statistic_record)
     
     # replace none with 0 if data returns None. Output is better if 0 allows user to make use of data better
@@ -71,6 +100,14 @@ def main(api: object, service_provider_id: str, group_id: str,
         
         for user in group_users_statistics:
             writer.writerow(user.__dict__)
+        
+        # Adds list of failed users to the bottom 
+        if failed_users:
+            writer.writerow({})
+            writer.writerow({fieldnames[1]: "Failed Users"})
+            
+            for failed_user in failed_users:
+                writer.writerow({fieldnames[1]: failed_user['userId']})
     
     # Add made_with_os.png for output   
     copy_single_file_to_target_directory("./odins_spear/assets/images/", "./os_reports/", "made_with_os.png")        
