@@ -138,7 +138,7 @@ class Post():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/dns"
+        endpoint = "/groups/dns"
         
         data = {
 			"serviceProviderId": service_provider_id,
@@ -171,7 +171,7 @@ class Post():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/dns/assign/bulk"
+        endpoint = "/groups/dns/assign/bulk"
         
         data = {
 			"serviceProviderId": service_provider_id,
@@ -204,7 +204,7 @@ class Post():
             None: This method does not return any specific value. 
         """
         
-        endpoint = f"/groups/dns/unassign/bulk"
+        endpoint = "/groups/dns/unassign/bulk"
         
         data = {
 			"serviceProviderId": service_provider_id,
@@ -236,7 +236,7 @@ class Post():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/dns"
+        endpoint = "/groups/dns"
         
         data = {
 			"serviceProviderId": service_provider_id,

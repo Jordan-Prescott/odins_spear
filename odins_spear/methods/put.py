@@ -82,7 +82,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/auto-attendants/status"
+        endpoint = "/groups/auto-attendants/status"
         
         data = {     
             "instances": [{'serviceUserId': auto_attendant_user_id, 'isActive': status} 
@@ -109,7 +109,7 @@ class Put():
             Dict: AA updated.  
         """
         
-        endpoint = f"/groups/auto-attendants"
+        endpoint = "/groups/auto-attendants"
         
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
@@ -132,7 +132,7 @@ class Put():
         """
         
         
-        endpoint = f"/groups/auto-attendants/submenus"
+        endpoint = "/groups/auto-attendants/submenus"
         
         updates["serviceUserId"] = auto_attendant_user_id,
         updates["submenuId"] = submenu_id
@@ -166,7 +166,7 @@ class Put():
             None: This method does not return any specific value.
         """
 
-        endpoint = f"/groups/call-centers/status"
+        endpoint = "/groups/call-centers/status"
         
         data = {     
             "instances": [{'serviceUserId': call_center_user_id, 'isActive': status} 
@@ -187,7 +187,7 @@ class Put():
             Dict: The call center with the new applied updates.
         """
         
-        endpoint = f"/groups/call-centers"
+        endpoint = "/groups/call-centers"
         
         updates["serviceUserId"] = call_center_user_id
 
@@ -209,7 +209,7 @@ class Put():
             Dict: Dictionary of the new state of the CC.
         """
         
-        endpoint = f"/groups/call-centers/agents"
+        endpoint = "/groups/call-centers/agents"
         
         data = {
             "serviceUserId": call_center_user_id,
@@ -233,7 +233,7 @@ class Put():
             Dict: CC ID and list of the agent and their updated skill level.
         """
         
-        endpoint = f"/groups/call-centers/agents"
+        endpoint = "/groups/call-centers/agents"
         
         data = {
             "serviceUserId": call_center_user_id,
@@ -255,7 +255,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/call-centers/bounced-calls"
+        endpoint = "/groups/call-centers/bounced-calls"
         
         updates["serviceUserId"] = call_center_user_id
         
@@ -274,7 +274,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/call-centers/dnis/instances"
+        endpoint = "/groups/call-centers/dnis/instances"
         
         updates["serviceUserID"] = call_center_user_id
 
@@ -293,7 +293,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/call-centers/forced-forwarding"
+        endpoint = "/groups/call-centers/forced-forwarding"
         
         updates["serviceUserID"] = call_center_user_id
 
@@ -312,7 +312,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/call-centers/overflow"
+        endpoint = "/groups/call-centers/overflow"
         
         updates["serviceUserID"] = call_center_user_id
 
@@ -331,7 +331,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/call-centers/stranded-calls"
+        endpoint = "/groups/call-centers/stranded-calls"
         
         updates["serviceUserID"] = call_center_user_id
 
@@ -350,7 +350,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/call-centers/stranded-calls-unavailable"
+        endpoint = "/groups/call-centers/stranded-calls-unavailable"
         
         updates["serviceUserID"] = call_center_user_id
 
@@ -370,7 +370,7 @@ class Put():
             Dict: Superivor ID and list of agents they supervise.
         """
         
-        endpoint = f"/groups/call-centers/supervisors"
+        endpoint = "/groups/call-centers/supervisors"
         
         data = {
             "serviceUserId": call_center_user_id,
@@ -392,7 +392,7 @@ class Put():
             Dict: Agents ACD status and status in each CC they are assigned to.
         """
         
-        endpoint = f"/users/call-center"
+        endpoint = "/users/call-center"
         
         updates["userId"] = user_id
            
@@ -411,7 +411,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/user/call-centers/agents"
+        endpoint = "/user/call-centers/agents"
         
         data = {
             "agentUserId": user_id,
@@ -431,7 +431,7 @@ class Put():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/user/call-centers/agents/sign-out"
+        endpoint = "/user/call-centers/agents/sign-out"
         
         data = {
             "agentUserId": user_id,
@@ -465,7 +465,7 @@ class Put():
             Dict: Returns the updated call processing policies.
         """
         
-        endpoint = '/users/call-processing-policy'
+        endpoint = "/users/call-processing-policy"
 
         updates["userId"] = user_id
 
