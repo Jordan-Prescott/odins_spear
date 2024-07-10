@@ -6,4 +6,4 @@ We value your feedback and are here to help with any questions or issues you may
 
 ***
 
-Thank you for reaching out to us. We will get back to you as soon as possible.​​
+Thank you for reaching out to us. We will get back to you as soon as possible!
