@@ -81,6 +81,7 @@
       * [📂 PUT - Group Device Type File](docs/methods/devices/group-device-type-file.md)
       * [🎐 PUT - Group Device Type Tag](docs/methods/devices/group-device-type-tag.md)
       * [🎐 PUT - Service Provider Device Type Tag](docs/methods/devices/service-provider-device-type-tag.md)
+      * [🗃️ POST - Group Device](docs/methods/devices/post-group_device.md)
     * [🍇 Hunt Groups](docs/methods/hunt-groups/README.md)
       * [🟢 PUT - Group Hunt Groups Status](docs/methods/hunt-groups/group-hunt-groups-status.md)
       * [🍏 PUT - Group Hunt Group](docs/methods/hunt-groups/group-hunt-group.md)
