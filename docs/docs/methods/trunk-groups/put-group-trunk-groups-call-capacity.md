@@ -5,6 +5,7 @@ description: api.put.group_trunk_groups_call_capacity()
 # 📞 PUT - Group Trunk Groups Call Capacity
 
 Updates the trunking call capacity in the specified group. 
+NOTE: The max available active calls cannot be changed here. Please see service_providers_trunk_group_call_capacity to update this.
 
 ### Parameters&#x20;
 

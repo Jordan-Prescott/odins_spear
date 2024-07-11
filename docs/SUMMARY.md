@@ -43,6 +43,7 @@
       * [🚰 GET - Group Trunk Groups](docs/methods/trunk-groups/get-group-trunk-groups.md)
       * [🚿 GET - Service Provider Trunk Group Call Capacity](docs/methods/trunk-groups/get-service-provider-trunk-group-call-capacity.md)
       * [📂 GET - Service Provider Call Capacity Report](docs/methods/trunk-groups/get-service-provider-call-capacity-report.md)
+      * [📞 PUT - Group Trunk Groups Call Capacity](docs/methods/trunk-groups/put-group-trunk--groups-call-capacity.md)
     * [🤵 User](docs/methods/user/README.md)
       * [🆔 GET - User By ID](docs/methods/user/get-user-by-id.md)
       * [👯 GET - Users](docs/methods/user/get-users.md)
