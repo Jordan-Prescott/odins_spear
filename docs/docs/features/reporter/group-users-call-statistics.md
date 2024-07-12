@@ -16,7 +16,7 @@ We have found that customers like to review how busy their users are and identif
 
 ### Example Output
 
-<figure><img src="../../../.gitbook/assets/group_users_call_statistics_example.jpg" alt=""><figcaption><p>Example output from feature</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (30).png" alt=""><figcaption><p>Output Example</p></figcaption></figure>
 
 ### Parameters&#x20;
 
@@ -38,6 +38,7 @@ The script makes use of the following methods:
 ```python
 api.get.users()
 api.get.users_stats()
+api.get.user_services()
 ```
 
 ### How To Use:
