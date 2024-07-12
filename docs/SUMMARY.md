@@ -86,6 +86,7 @@
       * [🟢 PUT - Group Hunt Groups Status](docs/methods/hunt-groups/group-hunt-groups-status.md)
       * [🍏 PUT - Group Hunt Group](docs/methods/hunt-groups/group-hunt-group.md)
       * [💯 PUT - Group Hunt Group Weighted Call Distribution](docs/methods/hunt-groups/group-hunt-group-weighted-call-distribution.md)
+      * [🙋‍♂️ POST - Group Hunt Group](docs/methods/hunt-groups/post-group-hunt-group.md)
     * [🍒 Services](docs/methods/services/README.md)
       * [🧍 PUT - User Services](docs/methods/services/user-services.md)
     * [🛑 Do Not Disturb](docs/methods/do-not-disturb/README.md)
