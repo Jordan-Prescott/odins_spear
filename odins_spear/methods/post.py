@@ -302,6 +302,9 @@ class Post():
         payload["policy"] = policy
         payload["noAnswerNumberOfRings"] = no_answer_number_of_rings
         payload["forwardTimeoutSeconds"] = forward_timeout_seconds
+        
+        if agents:
+            payload["agents"] = [{"userId": agent} for agent in agents]
 
         if 'serviceInstanceProfile' not in payload:     
             payload.setdefault('serviceInstanceProfile', {})            
