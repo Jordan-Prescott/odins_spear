@@ -1081,13 +1081,14 @@ class Put():
         return self.requester.put(endpoint, data=updates)
 
 
-    def group_trunk_group(self, service_provider_id: str, group_id: str, updates: dict):
+    def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str, updates: dict):
         """
         Updates trunk group (TG) information.
 
         Args: 
             service_provider_id (str): Service provider ID where the target group is built
             group_id (str): Group ID whose trunk group call capacity needs updating
+            trunk_group_name (str): The name of the trunk group that is being updated. 
             updates (dict): Updates to be applied to the TG. 
 
         Returns:
@@ -1098,6 +1099,7 @@ class Put():
 
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
+        updates["name"] = trunk_group_name
 
         return self.requester.put(endpoint, data=updates)
 
