@@ -2,7 +2,7 @@
 description: api.put.group_trunk_group()
 ---
 
-# 📞 PUT - Group Trunk Group
+# ☎️ PUT - Group Trunk Group
 
 Updates trunk group (TG) information.
 
