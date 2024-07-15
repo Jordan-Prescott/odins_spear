@@ -71,7 +71,7 @@
       * [🙋‍♂️ PUT - User Call Center Agents Update](docs/methods/call-centers/user-call-center-agents-update.md)
       * [🛑 PUT - User Call Center Agent Sign Out](docs/methods/call-centers/user-call-center-agent-sign-out.md)
     * [📞 Call Processing Policies](docs/methods/call-processing-policies/README.md)
-      * [🗃️ PUT - User Call Processing Policy](docs/methods/put-user-call-processing-policy.md)
+      * [🗃️ PUT - User Call Processing Policy](docs/methods/call-processing-policies/put-user-call-processing-policy.md)
     * [☎️ Devices](docs/methods/devices/README.md)
       * [📱 PUT - Group Devices](docs/methods/devices/group-devices.md)
       * [📞 PUT - Service Provider Device](docs/methods/devices/service-provider-device.md)
