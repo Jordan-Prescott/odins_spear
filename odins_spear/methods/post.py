@@ -381,25 +381,6 @@ class Post():
                           sip_authentication_username: str="", sip_authentication_password: str=""):
         """
         Builds a Trunk Group (TG) in the specified group. 
-        Default fields: 
-            "capacityExceededTrapInitialCalls":0,
-            "capacityExceededTrapOffsetCalls":0,
-            "clidSourceForScreenedCallsPolicy":"Profile Name Profile Number",
-            "continuousOptionsSendingIntervalSeconds":30,
-            "failureOptionsSendingIntervalSeconds":10,
-            "failureThresholdCounter":1,
-            "invitationTimeout":6,
-            "inviteFailureThresholdCounter":1,
-            "inviteFailureThresholdWindowSeconds":30,
-            "pilotUserCallOptimizationPolicy":"Optimize For User Services",
-            "pilotUserCallingLineAssertedIdentityPolicy":"Unscreened Originating Calls",
-            "pilotUserCallingLineIdentityForEmergencyCallsPolicy":"No Calls",
-            "pilotUserCallingLineIdentityForExternalCallsPolicy":"No Calls",
-            "pilotUserChargeNumberPolicy":"No Calls",
-            "requireAuthentication":"false",
-            "successThresholdCounter":1,
-            "useSystemUserLookupPolicy":"true",
-            "userLookupPolicy":"Basic"
 
         Args:
             service_provider_id (str): The service provider ID in which the target group is built.
@@ -424,10 +405,6 @@ class Post():
         payload["serviceProviderId"] = service_provider_id
         payload["groupId"] = group_id
 
-        if payload["requireAuthentication"] == "true":
-            payload["sipAuthenticationUserName"] = sip_authentication_username
-            payload["sipAuthenticationPassword"] = sip_authentication_password
-
         default_payload_values = {
             "capacityExceededTrapInitialCalls": 0, 
             "capacityExceededTrapOffsetCalls": 0,
@@ -450,6 +427,10 @@ class Post():
             }
         for key, default_value in default_payload_values.items():
             payload.setdefault(key, default_value)
+
+        if payload["requireAuthentication"] == "true":
+            payload["sipAuthenticationUserName"] = sip_authentication_username
+            payload["sipAuthenticationPassword"] = sip_authentication_password
 
         return self.requester.post(endpoint, data=payload)
 
