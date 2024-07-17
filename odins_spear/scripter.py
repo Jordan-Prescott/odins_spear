@@ -38,7 +38,7 @@ class Scripter:
 
 
     def bulk_password_reset(self, service_provider_id: str, group_id: str, users: list, password_type: str):
-        """ Resets a list of users SIP passwords or Voicemail passcodes. Specifify in password_type with the options of
+        """ Resets a list of users SIP passwords or Voicemail passcodes. Specify in password_type with the options of
         'SIP' or 'Voicemail' and the script will perform the necessary actions. 
 
         Args:
@@ -103,7 +103,7 @@ class Scripter:
 
     def user_association(self, service_provider_id: str, group_id: str, user_id: str):
         """ 
-        identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
+        Identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
         and Pick Up Groups.
 
         :pararm service_provider_id (str): Service Provider where the group is hosted.
