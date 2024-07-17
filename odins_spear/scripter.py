@@ -58,13 +58,18 @@ class Scripter:
 
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
         """ Locates alias if assigned to broadworks entity. 
+        
+        Args:
+            service_provider_id (str): Service Prodiver where group is hosted.
+            group_id (str): Group where alias is located.
+            alias (int): Alias number to identify e.g. 0
 
-        :param service_provider_id (str): Service Prodiver where group is hosted.
-        :param group_id (str): Group where alias is located.
-        :param alias (int): Alias number to identify e.g. 0
-
-        :return str: Returns type and name/ userId of entity where alias located. 
-        :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
+        Raises:
+             AOALiasNotFound: If alias not found AOAliasNotFound error raised
+        
+        Returns:
+            str: Returns type and name/ userId of entity where alias located. 
+        
         """
         return scripts.find_alias.main(self.api, service_provider_id, group_id,
                                        alias)
