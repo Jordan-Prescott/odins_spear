@@ -17,8 +17,6 @@ Update the Call Processing Policies for a specified user.
 
 ### How To Use:
 
-The below code will set the AA to deactivated.
-
 {% code overflow="wrap" %}
 ```python
 from odins_spear import api
