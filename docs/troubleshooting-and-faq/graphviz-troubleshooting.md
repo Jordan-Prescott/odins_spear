@@ -32,7 +32,7 @@ If you're still encountering errors, you can follow the steps below to add Graph
 
 After this, restart your computer to apply the changes and try your script again.
 
-If you're still encountering errors, you can follow the steps below to add Graphviz to your PATH, or open an issue on our GitHub page: [New Issue](https://github.com/Jordan-Prescott/odins_spear/issues/new)
+If you're still encountering errors, open an issue on our GitHub page: [New Issue](https://github.com/Jordan-Prescott/odins_spear/issues/new)
 
 # Installing Graphviz on Linux/Mac
 
