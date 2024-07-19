@@ -13,8 +13,11 @@ class external_number:
     
 @dataclass
 class call_records_statistics:
+    first_name: str
+    last_name: str
     extension: str
     userId: str
+    feature_packs: list 
     total: int
     totalAnsweredAndMissed: str
     answeredTotal: str
@@ -36,10 +39,13 @@ class call_records_statistics:
                 setattr(self, field.name, 0)
 
     @classmethod
-    def from_dict(cls, extension, data):
+    def from_dict(cls, first_name, last_name, extension, data):
         return cls(
+            first_name = first_name,
+            last_name  = last_name,
             extension = extension,
             userId= data.get("userId"),
+            feature_packs = data.get("servicePackServices"),
             total= data.get("total"), 
             totalAnsweredAndMissed= str(data.get("totalAnsweredAndMissed")),
             answeredTotal= data.get("answeredTotal"),

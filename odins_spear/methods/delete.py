@@ -85,7 +85,7 @@ class Delete():
             None: This method does not return any specific value.
         """
         
-        endpoint = f"/groups/dns"
+        endpoint = "/groups/dns"
         
         data = {
 			"serviceProviderId": service_provider_id,
@@ -112,7 +112,7 @@ class Delete():
         Returns:
             None: This method does not return any specific value.
         """
-        endpoint = f"/service-providers/dns"
+        endpoint = "/service-providers/dns"
         
         data = {
 			"serviceProviderId": service_provider_id,
