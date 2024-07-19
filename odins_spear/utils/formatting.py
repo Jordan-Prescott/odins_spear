@@ -1,10 +1,9 @@
 from ..exceptions import *
 
-def format_filter(filter, type, value):
+def format_filter_value(type, value):
     """_summary_
 
     Args:
-        filter (_type_): _description_
         type (_type_): _description_
         value (_type_): _description_
 
@@ -15,11 +14,11 @@ def format_filter(filter, type, value):
         _type_: _description_
     """
     if type.lower() == "equal to":
-        return f"{filter}={value}" 
+        return f"{value}" 
     elif type.lower() == "starts with":
-        return f"{filter}={value}*" 
+        return f"{value}*" 
     elif type.lower() == "contains":
-        return f"{filter}=*{value}*"
+        return f"*{value}*"
     else:
         raise OSUnsupportedFilter
     
