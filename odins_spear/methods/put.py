@@ -1049,16 +1049,15 @@ class Put():
 #TRUNK GROUPS
 
     def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str, max_active_calls: int=None,
-                                         max_available_active_calls: int=None, bursting_max_active_calls: int=None, 
-                                         number_of_bursting_btlus: int=None):
+                                         bursting_max_active_calls: int=None, number_of_bursting_btlus: int=None):
         """
         Updates the trunking call capacity in the specified group. 
+        NOTE: The max available active calls cannot be changed here. Please see service_providers_trunk_group_call_capacity to update this.
 
         Args:
             service_provider_id (str): Service provider ID where the target group is built
             group_id (str): Group ID whose trunk group call capacity needs updating
             max_active_calls (int, optional): The max active calls for the group. 
-            max_available_active_calls (int, optional): The max available active calls for the group. 
             bursting_max_active_calls (int, optional): The bursting max active calls for the group.
             number_of_bursting_btlus (int, optional): The number of Business Trunking License Units for bursting. 
 
@@ -1075,8 +1074,6 @@ class Put():
 
         if max_active_calls:
             updates["maxActiveCalls"] = max_active_calls
-        if max_available_active_calls:
-            updates["maxAvailableActiveCalls"] = max_available_active_calls
         if bursting_max_active_calls:
             updates["burstingMaxActiveCalls"] = bursting_max_active_calls
         if number_of_bursting_btlus:
@@ -1085,13 +1082,14 @@ class Put():
         return self.requester.put(endpoint, data=updates)
 
 
-    def group_trunk_group(self, service_provider_id: str, group_id: str, updates: dict):
+    def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str, updates: dict):
         """
         Updates trunk group (TG) information.
 
         Args: 
             service_provider_id (str): Service provider ID where the target group is built
             group_id (str): Group ID whose trunk group call capacity needs updating
+            trunk_group_name (str): The name of the trunk group that is being updated. 
             updates (dict): Updates to be applied to the TG. 
 
         Returns:
@@ -1102,6 +1100,7 @@ class Put():
 
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
+        updates["name"] = trunk_group_name
 
         return self.requester.put(endpoint, data=updates)
 
