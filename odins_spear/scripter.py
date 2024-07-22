@@ -19,16 +19,17 @@ class Scripter:
 
     def aa_cc_hg_audit(self, service_provider_id: str, group_id: str):
         """
-        This script returns the services assigned to Auto Attendants, 
-        Call Centres, and Hunt Groups. Only services are applied to these 
-        entities and there are scenarios one would need to focus services 
-        assigned to these entities.
+            This script returns the services assigned to Auto Attendants, 
+            Call Centres, and Hunt Groups. Only services are applied to these 
+            entities and there are scenarios one would need to focus services 
+            assigned to these entities.
         
+        Args:
+            service_provider_id: Service Provider ID or Enterprise ID containing the Group ID.
+            group_id: Group ID to generate the report for.
 
-        :param service_provider_id: Service Provider ID or Enterprise ID containing the Group ID.
-        :param group_id: Group ID to generate the report for.
-
-        :return JSON: A JSON formatted report of service packs assigned to AA, CC, and HG. 
+        Returns:
+            JSON: A JSON formatted report of service packs assigned to AA, CC, and HG. 
         """  
         return scripts.aa_cc_hg_audit.main(self.api, service_provider_id, group_id)
 
@@ -38,7 +39,7 @@ class Scripter:
 
 
     def bulk_password_reset(self, service_provider_id: str, group_id: str, users: list, password_type: str):
-        """ Resets a list of users SIP passwords or Voicemail passcodes. Specifify in password_type with the options of
+        """ Resets a list of users SIP passwords or Voicemail passcodes. Specify in password_type with the options of
         'SIP' or 'Voicemail' and the script will perform the necessary actions. 
 
         Args:
@@ -59,12 +60,17 @@ class Scripter:
     def find_alias(self, service_provider_id: str, group_id: str, alias: str):
         """ Locates alias if assigned to broadworks entity. 
 
-        :param service_provider_id (str): Service Prodiver where group is hosted.
-        :param group_id (str): Group where alias is located.
-        :param alias (int): Alias number to identify e.g. 0
+        Args:
+            service_provider_id (str): Service Prodiver where group is hosted.
+            group_id (str): Group where alias is located.
+            alias (int): Alias number to identify e.g. 0
 
-        :return str: Returns type and name/ userId of entity where alias located. 
-        :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised 
+        Raises:
+             AOALiasNotFound: If alias not found AOAliasNotFound error raised
+        
+        Returns:
+            str: Returns type and name/ userId of entity where alias located. 
+        
         """
         return scripts.find_alias.main(self.api, service_provider_id, group_id,
                                        alias)
@@ -75,10 +81,12 @@ class Scripter:
         Produces a report of key information within the group.
         Reports on DN usage, Service and Service pack usage, Trunking call capacity and group info.
 
-        :param service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
-        :param group_id (str): Group ID to generate the report for.
+        Args:
+            service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
+            group_id (str): Group ID to generate the report for.
 
-        :return str: A JSON formatted report of the group.
+        Returns:
+            str: A JSON formatted report of the group.
         """
         return scripts.group_audit.main(self.api, service_provider_id, group_id)
 
@@ -89,10 +97,12 @@ class Scripter:
         the group. This only shows the service packs assigned and total count of unlike group audit 
         which details the users this is assigned to.
 
-        :param service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
-        :param group_id (str): Group ID to generate the report for.
+        Args:
+            service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
+            group_id (str): Group ID to generate the report for.
 
-        :return str: A JSON formatted report of service packs assigned in the group.
+        Returns:
+            str: A JSON formatted report of service packs assigned in the group.
         """
         return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
 
@@ -103,14 +113,16 @@ class Scripter:
 
     def user_association(self, service_provider_id: str, group_id: str, user_id: str):
         """ 
-        identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
+        Identify a user's associations with Call Centers (CC), Hunt Groups (HG), 
         and Pick Up Groups.
 
-        :pararm service_provider_id (str): Service Provider where the group is hosted.
-        :pararm group_id (str): Group where the User is located.
-        :pararm user_id (str): Target user ID.
+        Args:
+            service_provider_id (str): Service Provider where the group is hosted.
+            group_id (str): Group where the User is located.
+            user_id (str): Target user ID.
 
-        :returns (str): Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
+        Returns:
+            str: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
         """
         return scripts.user_association.main(self.api, service_provider_id, group_id, user_id)
 

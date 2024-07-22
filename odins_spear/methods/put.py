@@ -26,7 +26,7 @@ class Put():
 #AUTHENTICATION
 
     def user_authentication_service(self, user_id: str, new_password: str):
-        """Set new SIP Authenticatino passowrd for a single user.
+        """Set new SIP Authentication password for a single user.
 
         Args:
             user_id (str): Target user ID to reset the web authentication password.
@@ -382,7 +382,7 @@ class Put():
     
     
     def user_call_center(self, user_id: str, updates: dict):
-        """Update an agents status in a Call Center (CC).
+        """Update an agent's status in a Call Center (CC).
 
         Args:
             user_id (str): User ID of the target user.
@@ -725,7 +725,7 @@ class Put():
     
     def group_device_type_file(self, service_provider_id: str, group_id: str, 
                                device_type: str, updates: dict):
-        """Set config file for all devices of a spceific type at the group level.
+        """Set config file for all devices of a specific type at the group level.
 
         Args:
             service_provider_id (str): Service Provider or Enterprise ID where Group is located.
@@ -832,7 +832,7 @@ class Put():
 #DO NOT DISTURB
 
     def user_do_not_disturb(self, user_id: str, dnd_active: bool = False, ring_splash_active: bool = False ):
-        """Updates a users DND and Ring Splash status.
+        """Updates a user's DND and Ring Splash status.
 
         Args:
             user_id (str): Target user id of user you would like to update the state of. 
@@ -1008,7 +1008,7 @@ class Put():
 #SERVICES
 
     def user_services(self, user_id: str, services: list =None, service_packs: list =None, assigned: bool =True):
-        """Update the services assigend to a user. NOT service/ feature packs.
+        """Update the services assigned to a user. NOT service/feature packs.
 
         Args:
             user_id (str): User ID of the target user.
@@ -1133,7 +1133,18 @@ class Put():
 #USERS
 
     def users_bulk(self, users: list, updates: dict):
+        """
+        Updates specified list of User's options, such as extension, name and etc.
+
+        Note: Available options to change can be seen through: get.user_by_id()
+
+        Args: 
+            users (list): List of specified User IDs to update
+            updates (dict): The updates to be applied to the list of Users e.g {"extension":"9999"}
         
+        Returns:
+            Dict: Returns the changes made including the list of User IDs and updates.
+        """
         endpoint = "/users/bulk"
         
         target_users = [{"userId": user} for user in users]
@@ -1146,8 +1157,21 @@ class Put():
         return self.requester.put(endpoint, data=data)
 
 
-    def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
+    def user(self, service_provider_id: str, group_id: str, user_id: str, updates: dict):
+        """
+        Updates specified User's options, such as extension, name and etc.
+
+        Note: Available options to change can be seen through: get.user_by_id()
+
+        Args: 
+            service_provider_id (str): Target Service Provider where group is located
+            group_id (str): Target Group ID where user is located
+            user_id (str): Target User ID
+            updates (dict): The updates to be applied to the list of Users e.g {"extension":"9999"}
         
+        Returns:
+            Dict: Returns the changes made including User ID and updates.
+        """
         endpoint = "/users"
         
         updates["serviceProviderId"] = service_provider_id
@@ -1158,7 +1182,7 @@ class Put():
         
     
     def user_portal_passcode(self, user_id: str, new_passcode: str):
-        """_summary_
+        """Updates the specified User's portal passcode.
 
         Args:
             user_id (str): User ID of the target user you would like to change the portal passcode for. 
