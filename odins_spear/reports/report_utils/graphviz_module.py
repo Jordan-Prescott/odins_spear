@@ -132,11 +132,13 @@ class GraphvizModule:
                         
             elif isinstance(n, bre.AutoAttendant):
                 for key in n.business_hours_menu.keys:
-                    if "Transfer" in key.action:
+                    if "Submenu" in key.action:
+                        self._format_edge(n, key.phone_number, f"{key.number}: Submenu")
+                    elif "Transfer" in key.action:
                         self._format_edge(n, key.phone_number, key.number)
                         
     
-    def _format_edge(self, node_a: str, node_b: str, label: str):
+    def _format_edge(self, node_a: str, node_b: str, label: str): 
         try:
             self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
         except AttributeError:

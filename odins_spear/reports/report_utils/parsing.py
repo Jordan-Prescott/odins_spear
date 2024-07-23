@@ -109,7 +109,10 @@ def _traverse_connecting_entities(entity: object, data_store: object, visited= N
         
         if isinstance(entity, bre.AutoAttendant):
             for key in entity.business_hours_menu.keys:
-                if "Transfer" in key.action:
+                if "Submenu" in key.action:
+                    key.id = key.submenu_id
+                    key.phone_number = key
+                elif "Transfer" in key.action:
                     if data_store.number_mapping.get(str(key.phone_number)) == None and len(str(key.phone_number)) >= 3 and str(key.phone_number)[2].isdigit():
                         key.phone_number = external_number(str(key.phone_number))
                     else:

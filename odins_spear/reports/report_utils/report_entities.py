@@ -11,6 +11,13 @@ class call_flow:
 class external_number:
     id: str    
     
+
+#NOTE: TEMP solution
+@dataclass
+class sub_menu:
+    id: str  
+    
+    
 @dataclass
 class call_records_statistics:
     first_name: str
