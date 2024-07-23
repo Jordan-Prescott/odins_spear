@@ -12,11 +12,11 @@ Alas, using the API is not perfect, each time I would write a script to help me 
 
 ## Introducing...
 
-![Odin's Spear Logo](./assets/images/logo.png)
+![Odin's Spear Logo](./assets/images/logo.svg)
 
 **Odin’s Spear** is a Python library that aims to do exactly that. It will encapsulate the entire functionality of Odin’s API making the use easy, efficient, and accessible. The project is stakeholder lead and all features have come from engineers that have been using Broadworks and now Odin for decades. It will also introduce other features requested such as a graph showing a call flow to a number, a group audit report for all things billable, and bulk management of call centers, hunt groups, and auto attendants. However, it was clear what the first feature had to be. For years now locating where an alias has been assigned on the Broadworks system has brought hosted telephony engineers to their knees. No more. With Odin’s Spears’ very first release (beta) I have addressed this issue making locating an alias a breeze. In 3 lines of code and 1 minute of your time, you can now achieve this once painstaking task, and more features are coming soon!
 
-![Odin's Spear Slogan](./assets/images/slogan.png)
+![Odin's Spear Slogan](./assets/images/slogan.svg)
 
 ## 📖 Documentation
 
