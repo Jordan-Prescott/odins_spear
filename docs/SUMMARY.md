@@ -94,6 +94,7 @@
       * [🙋‍♂️ POST - Group Hunt Group](docs/methods/hunt-groups/post-group-hunt-group.md)
     * [🍒 Services](docs/methods/services/README.md)
       * [🧍 PUT - User Services](docs/methods/services/user-services.md)
+      * [🧍 GET - User Services](docs/methods/services/user-services-assigned.md)
     * [🛑 Do Not Disturb](docs/methods/do-not-disturb/README.md)
       * [🛑 GET - User Do Not Disturb](docs/methods/do-not-disturb/get-user-do-not-disturb.md)
       * [🛑 PUT - User Do Not Disturb](docs/methods/do-not-disturb/put-user-do-not-disturb.md)

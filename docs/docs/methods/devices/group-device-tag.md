@@ -24,7 +24,7 @@ my_api.authenticate()
 
 my_api.put.group_device_tag(
     "servivce_provider_id",
-    "group_id"
+    "group_id",
     "device_name",
     tag_name= "tagName",
     tag_value= "tagValue"
