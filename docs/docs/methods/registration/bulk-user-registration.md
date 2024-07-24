@@ -1,5 +1,5 @@
 ---
-description: my_api.get.bulk_user_regsitration()
+description: my_api.get.bulk_user_registration()
 ---
 
 # 💚 GET - Bulk User Registration

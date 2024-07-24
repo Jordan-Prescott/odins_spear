@@ -44,7 +44,7 @@ tags = [
 
 my_api.put.group_device_tags_profile(
     "servivce_provider_id",
-    "group_id"
+    "group_id",
     "device_name",
     tags=tags
 )

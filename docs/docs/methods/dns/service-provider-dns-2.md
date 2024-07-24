@@ -1,5 +1,5 @@
 ---
-description: my_api.put.service_provider_dns()
+description: my_api.delete.service_provider_dns()
 ---
 
 # 2️⃣ DELETE - Service Provider DNs

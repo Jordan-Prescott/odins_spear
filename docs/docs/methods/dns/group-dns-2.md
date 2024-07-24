@@ -1,5 +1,5 @@
 ---
-description: my_api.put.group_dns()
+description: my_api.delete.group_dns()
 ---
 
 # 1️⃣ DELETE - Group DNs

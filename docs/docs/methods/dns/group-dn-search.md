@@ -1,5 +1,5 @@
 ---
-description: my_api.get.group_dns_search()
+description: my_api.get.group_dn_search()
 ---
 
 # 2️⃣ GET - Group DN Search
@@ -26,7 +26,7 @@ from odins_spear import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-my_api.get.group_dns_search(
+my_api.get.group_dn_search(
     "serviceProviderId",
     "groupID",
     dn= "01942",

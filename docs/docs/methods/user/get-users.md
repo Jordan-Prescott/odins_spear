@@ -15,6 +15,10 @@ Returns list of users depending on filter criteria you set. See supported filter
 * filter\_value (str, optional): Value filtering on e.g. firstName. Defaults to None.&#x20;
 * limit (int, optional): Limits the amount of values API returns. Defaults to None.
 
+### Returns
+
+* Dict: Python dictionary of the users details
+
 ## Supported Filters
 
 * macAddress: search by device&#x20;
@@ -86,9 +90,7 @@ my_api.get.users(
 )
 </code></pre>
 
-### Returns
 
-* Dict: Python dictionary of the users details
 
 ### How To Use:
 
