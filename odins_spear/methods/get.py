@@ -1,4 +1,5 @@
 from ..utils.formatting import format_filter_value
+from ..exceptions import *
 
 
 class Get():
@@ -139,8 +140,13 @@ class Get():
         params = {
             "userId": user_id
         }
-
-        return self.requester.get(endpoint, params=params)
+        try:
+            self.requester.get(endpoint, params=params)
+        except Exception as error: # If user is not found
+            if "404" in str(error):
+                return dict([]) # Return empty dict
+        else:
+            return
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
@@ -178,7 +184,13 @@ class Get():
             "serviceUserId": service_user_id
         }
 
-        return self.requester.get(endpoint, params=params)
+        try:
+            self.requester.get(endpoint, params=params)
+        except Exception as error: # If service is not found
+            if "404" in str(error):
+                return dict([]) # Return empty dict
+        else:
+            return
     
     
     def group_call_center_overflow(self, service_user_id):
