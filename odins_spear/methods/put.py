@@ -29,8 +29,8 @@ class Put():
         """Set new SIP Authentication password for a single user.
 
         Args:
-            user_id (str): Target user ID to reset the web authentication password.
-            new_password (str): New web authentication password to apply to new user.
+            user_id (str): Target user ID to reset the SIP authentication password.
+            new_password (str): New SIP authentication password to apply to new user.
 
         Returns:
             None: This method does not return any specific value.
