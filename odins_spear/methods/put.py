@@ -914,7 +914,8 @@ class Put():
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
         updates["serviceUserId"] = service_user_id
-        updates["serviceInstanceProfile"] = {}          
+        if updates.get("serviceInstanceProfile") is None:
+            updates["serviceInstanceProfile"] = {}          
         
         return self.requester.put(endpoint, data=updates)
             
