@@ -43,8 +43,8 @@ api.get.users()
 ```python
 from odin_api import api
 
-magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
-magic.authenticate()
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api.authenticate()
 
 # find alias method
 print(magic.scripter.find_alias('Service Provider ID', 'Group ID', alias=11))
