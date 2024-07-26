@@ -1248,7 +1248,7 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
-    def group_services_assigned(self, group_id: str, service_provider_id: str, service_name: str, service_type: str):
+    def group_services_user_assigned(self, group_id: str, service_provider_id: str, service_name: str, service_type: str):
         """
         Get details of the user/service instances where a particular service is assigned.
 

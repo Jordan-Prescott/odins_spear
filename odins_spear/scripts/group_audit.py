@@ -33,7 +33,7 @@ def main(api, service_provider_id: str, group_id: str):
             del us["tags"]
             del us["alias"]
 
-            users = api.get.group_services_assigned(
+            users = api.get.group_services_user_assigned(
                 group_id, service_provider_id, us["serviceName"], "serviceName")
             userIDs = [u["userId"] for u in users["users"]]
             us["users"] = userIDs
@@ -62,7 +62,7 @@ def main(api, service_provider_id: str, group_id: str):
             del sps["quantity"]
             del sps["alias"]
 
-            users = api.get.group_services_assigned(
+            users = api.get.group_services_user_assigned(
                 group_id, service_provider_id, sps["servicePackName"], "servicePackName")
             userIDs = [u["userId"] for u in users["users"]]
             sps["users"] = userIDs
