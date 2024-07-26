@@ -440,7 +440,8 @@ class Post():
         
     def user(self, service_provider_id: str, group_id: str, user_id: str, first_name: str, last_name: str, 
              extension: str, web_auth_password: str, payload: dict):
-        """_summary_
+        """
+            Creates a new user in the specified group with the configuration defined in the payload.
 
         Args:
             service_provider_id (str): Service provider ID where Group is loctaed.
@@ -448,7 +449,7 @@ class Post():
             user_id (str): Complete User ID including group domain of new user.
             first_name (str): First name of new user.
             last_name (str): Last name of new user.
-            extension (str): Extension numebr of new user.
+            extension (str): Extension number of new user.
             web_auth_password (str): Web authentication password. Note get.password_generate() can be used to get this.
             payload (dict): User configuration.
 
@@ -458,8 +459,8 @@ class Post():
         
         endpoint = "/users"
         
-        payload["callingLineIdFirstName"] = first_name if not payload["callingLineIdFirstName"] else payload["callingLineIdFirstName"]
-        payload["callingLineIdLastName"] = last_name if not payload["callingLineIdLastName"] else payload["callingLineIdLastName"]
+        payload["callingLineIdFirstName"] = first_name if not payload.get("callingLineIdFirstName") else payload["callingLineIdFirstName"]
+        payload["callingLineIdLastName"] = last_name if not payload.get("callingLineIdLastName") else payload["callingLineIdLastName"]
 
         payload["serviceProviderId"] = service_provider_id
         payload["groupId"] = group_id
