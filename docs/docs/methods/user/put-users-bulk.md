@@ -2,7 +2,7 @@
 description: api.put.users_bulk()
 ---
 
-# 📮 POST - Users Bulk
+# 👩‍👩‍👧‍👧 PUT - Users Bulk
 
 Updates specified list of User's options, such as extension, name and etc.
 

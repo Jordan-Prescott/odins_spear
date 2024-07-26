@@ -51,6 +51,7 @@
       * [🆔 GET - User By ID](docs/methods/user/get-user-by-id.md)
       * [👯 GET - Users](docs/methods/user/get-users.md)
       * [📮 POST - User](docs/methods/user/post-user.md)
+      * [👩‍💻 PUT - User](docs/methods/user/put-user.md)
       * [👩‍👩‍👧‍👧 PUT - Users Bulk](docs/methods/user/put-users-bulk.md)
     * [🔑 Authentication](docs/methods/authentication/README.md)
       * [🔏 PUT - User Web Authentication Password](docs/methods/authentication/put-user-web-authentication-password.md)
