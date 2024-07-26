@@ -16,7 +16,7 @@ We have found that customers like to review how busy their users are and identif
 
 ### Example Output
 
-<figure><img src="../../../.gitbook/assets/group_users_call_statistics_example.jpg" alt=""><figcaption><p>Example output from feature</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (30).png" alt=""><figcaption><p>Output Example</p></figcaption></figure>
 
 ### Parameters&#x20;
 
@@ -38,6 +38,7 @@ The script makes use of the following methods:
 ```python
 api.get.users()
 api.get.users_stats()
+api.get.user_services()
 ```
 
 ### How To Use:
@@ -46,8 +47,7 @@ api.get.users_stats()
 ```python
 from odins_spear.api import Api
 
-my_api= Api("https://magic.14ip.net/api/v2", "Jordan.Prescott", "MAGIC-US", rate_limit=False)
-my_api.logger.set_up_sys_log_handler("123.456.789.112", 48816)
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
 # Whole day in date range
