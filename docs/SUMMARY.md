@@ -53,6 +53,7 @@
       * [📮 POST - User](docs/methods/user/post-user.md)
       * [👩‍💻 PUT - User](docs/methods/user/put-user.md)
       * [👩‍👩‍👧‍👧 PUT - Users Bulk](docs/methods/user/put-users-bulk.md)
+      * [🔏 PUT - User Portal Passcode](docs/methods/user/put-user-portal-passcode.md)
     * [🔑 Authentication](docs/methods/authentication/README.md)
       * [🔏 PUT - User Web Authentication Password](docs/methods/authentication/put-user-web-authentication-password.md)
       * [👮‍♀️ PUT - User Authentication Service](docs/methods/authentication/put-user-authentication-service.md)
