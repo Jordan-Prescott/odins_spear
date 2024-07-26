@@ -897,10 +897,10 @@ class Put():
         
     
     def group_hunt_group(self, service_provider_id: str, group_id: str, hunt_group_user_id: str, updates: dict):
-        """Update a Hunt Groups (HG) settings.
+        """Update a Hunt Group's (HG) settings.
 
         Args:
-            hunt_group_user_id (str): Service provider ID of where the group that hosts the HG is located.
+            service_provider_id (str): Service provider ID of where the group that hosts the HG is located.
             group_id (str): Group ID of where the HG is located.
             service_user_id (str): Target service user ID of the HG.
             updates (dict): Updates to be applied to HG.
@@ -913,7 +913,8 @@ class Put():
         
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
-        updates["serviceUserId"] = hunt_group_user_id          
+        updates["serviceUserId"] = hunt_group_user_id
+        updates["serviceInstanceProfile"] = {}          
         
         return self.requester.put(endpoint, data=updates)
             
