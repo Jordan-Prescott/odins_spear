@@ -37,6 +37,8 @@
     * [🔢 Alternate Numbers](docs/methods/alternate-numbers/README.md)
       * [1️⃣ GET - User Alternate Numbers](docs/methods/alternate-numbers/get-user-alternate-numbers.md)
     * [📆 Schedules](docs/methods/schedules.md)
+      * [📆 GET - Group Schedules](docs/methods/schedules/get-group-schedules.md)
+      * [📆 GET - Group Events](docs/methods/schedules/get-group-events.md)
     * [🌊 Trunk Groups](docs/methods/trunk-groups/README.md)
       * [📞 GET - Group Trunk Groups Call Capacity](docs/methods/trunk-groups/get-group-trunk-groups-call-capacity.md)
       * [☎️ GET - Group Trunk Group](docs/methods/trunk-groups/get-group-trunk-group.md)
