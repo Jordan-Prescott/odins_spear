@@ -1,3 +1,7 @@
+---
+description: my_api.put.service_provider_device_tag()
+---
+
 # 🛰️ PUT - Service Provider Device Tag
 
 Update a single tag assigned to a device at the Service Provider or Enterprise level.

@@ -36,9 +36,9 @@ my_api.get.group_dn_search(
 ```
 {% endcode %}
 
-### Example Returned Data of SIP Passwords (Formatted)
+### Example Returned Data (Formatted)
 
-```
+```json
 [
   {
     "phoneNumbers": "+1-2345678900",

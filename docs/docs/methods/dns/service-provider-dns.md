@@ -29,7 +29,7 @@ my_api.get.service_provider_dns(
 ```
 {% endcode %}
 
-### Example Returned Data of SIP Passwords (Formatted)
+### Example Returned Data (Formatted)
 
 ```
 {

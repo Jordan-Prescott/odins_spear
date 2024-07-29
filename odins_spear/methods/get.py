@@ -612,6 +612,8 @@ class Get():
             params["dn"] = format_filter_value(filter_type, dn)
         if limit:
             params["limit"] = limit
+            
+        return self.requester.get(endpoint, params=params)
     
     
     def group_dn_details(self, service_provider_id:str, group_id:str):
@@ -650,7 +652,7 @@ class Get():
         endpoint = "/system/dns/search"
 
         params = {
-            "dn": "+{dn}"
+            "dn": f"+{dn}"
         }    
 
         return self.requester.get(endpoint, params=params)
@@ -1115,8 +1117,8 @@ class Get():
         """ Retrieves the Business Schedules for the specified group.
 
         Args:
-            service_provider_id (str): Target Service Provider ID
-            group_id (str): Target Group ID
+            service_provider_id (str): Target Service Provider ID where group is hosted.
+            group_id (str): Target Group ID with schedules.
 
         Returns:
             List: List of all the groups schedules, including Name, Type and Level.

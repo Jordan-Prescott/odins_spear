@@ -1,3 +1,7 @@
+---
+description: my_api.put.service_provider_device()
+---
+
 # 📞 PUT - Service Provider Device
 
 Update a single device in a Service Provider or Enterprise.

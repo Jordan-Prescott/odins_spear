@@ -23,7 +23,7 @@ my_api.get.system_dn_summary()
 ```
 {% endcode %}
 
-### Example Returned Data of SIP Passwords (Formatted)
+### Example Returned Data (Formatted)
 
 ```
 [
