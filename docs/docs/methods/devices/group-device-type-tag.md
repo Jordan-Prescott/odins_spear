@@ -1,3 +1,7 @@
+---
+description: my_api.put.group_device_type_tag()
+---
+
 # 🎐 PUT - Group Device Type Tag
 
 Update tags applied to device types at the Group level.

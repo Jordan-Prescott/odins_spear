@@ -1,3 +1,7 @@
+---
+description: my_api.put.group_device_tags_profile()
+---
+
 # 🏷️ PUT - Group Device Tags Profile
 
 Update a config file for a single device at the Group level.
