@@ -1,3 +1,7 @@
+---
+description: my_api.put.group_device_type_file()
+---
+
 # 📂 PUT - Group Device Type File
 
 Set config file for all devices of a spceific type at the group level.

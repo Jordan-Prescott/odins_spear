@@ -1,10 +1,13 @@
+---
+description: my_api.put.system_devices()
+---
+
 # 💻 PUT - System Devices
 
 Update a single device in the Broadworks system.
 
 ### Parameters&#x20;
 
-* service\_provider\_id (str): Service Provider or Enterprise ID where device is located. &#x20;
 * device\_name (str): Device name of the target device.&#x20;
 * updates (dict): Updates to apply to the target device.
 
