@@ -24,6 +24,7 @@
       * [1️⃣ PUT - Group DNs Activate](docs/methods/dns/group-dns-activate.md)
       * [1️⃣ DELETE - Group DNs](docs/methods/dns/group-dns-2.md)
       * [2️⃣ DELETE - Service Provider DNs](docs/methods/dns/service-provider-dns-2.md)
+      * [2️⃣ GET - System DN Search](docs/methods/dns/get-system-dn-search.md)
     * [🔑 Password Generate](docs/methods/password-generate/README.md)
       * [🔓 GET - Password Generate](docs/methods/password-generate/password-generate.md)
       * [🔓 GET - Passwords Generate](docs/methods/password-generate/passwords-generate.md)

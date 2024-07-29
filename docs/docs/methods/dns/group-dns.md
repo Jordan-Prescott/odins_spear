@@ -31,7 +31,7 @@ my_api.get.group_dns(
 ```
 {% endcode %}
 
-### Example Returned Data of SIP Passwords (Formatted)
+### Example Returned Data (Formatted)
 
 ```
 {
