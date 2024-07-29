@@ -64,6 +64,8 @@
       * [🟢 PUT - Auto Attendant Status](docs/methods/auto-attendants/auto-attendant-status.md)
       * [🍅 PUT - Auto Attendant](docs/methods/auto-attendants/auto-attendant.md)
       * [📖 PUT - Auto Attendant Submenu](docs/methods/auto-attendants/auto-attendant-submenu.md)
+      * [📞 GET - Auto Attendants](docs/methods/auto-attendants/get-auto-attendants.md)
+      * [🤙🏼 GET - Auto Attendant](docs/methods/auto-attendants/get-auto-attendant.md)
     * [📞 Call Centers](docs/methods/call-centers/README.md)
       * [🟢 PUT - Group Call Center Status](docs/methods/call-centers/group-call-center-status.md)
       * [🎧 PUT - Group Call Center](docs/methods/call-centers/group-call-center.md)

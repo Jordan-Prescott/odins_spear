@@ -51,7 +51,16 @@ class Get():
 #AUTHENTICATION
 #AUTO ATTENDANTS
 
-    def auto_attendants(self, service_provider_id, group_id):
+    def auto_attendants(self, service_provider_id: str, group_id: str):
+        """Returns a complete list of all Auto Attendants in a single group.
+
+        Args:
+            service_provider_id (str): Service Provider where Group is hosted.
+            group_id (str): Target Group where Auto Attendants are hosted.
+
+        Returns:
+            List: List of Auto Attendants with basic info on them.
+        """
 
         endpoint = "/groups/auto-attendants"
 
@@ -62,7 +71,15 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
-    def auto_attendant(self, service_user_id):
+    def auto_attendant(self, service_user_id: str):
+        """Returns detailed information of a singel Auto Attendant.
+
+        Args:
+            service_user_id (str): User ID of target Auto Attendant.
+
+        Returns:
+            dict: Detailed information of target Auto Attendant.
+        """
 
         endpoint = "/groups/auto-attendants"
 

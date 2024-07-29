@@ -25,7 +25,7 @@ my_api.get.system_dn_summary()
 
 ### Example Returned Data (Formatted)
 
-```
+```json
 [
   {
     "isEnterprise": true,
