@@ -75,6 +75,8 @@
       * [🚗 GET - User Call Forwarding Selective](docs/methods/call-forwarding/get-user-call-forwarding-selective.md)
     * [🧾 Call Records](docs/methods/call-records/README.md)
       * [🧾 GET - User Stats](docs/methods/call-records/get-call-stats.md)
+    * [💬 Call Pickup](docs/methods/call-pickup/README.md)
+      * [🤳 GET - Call Pickup Group User](docs/methods/call-pickup/get-call-pickup-group-user.md)
     * [🔑 Authentication](docs/methods/authentication/README.md)
       * [🔏 PUT - User Web Authentication Password](docs/methods/authentication/put-user-web-authentication-password.md)
       * [👮‍♀️ PUT - User Authentication Service](docs/methods/authentication/put-user-authentication-service.md)
