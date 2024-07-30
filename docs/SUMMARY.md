@@ -63,6 +63,7 @@
     * [🚗 User Call Forwarding](docs/methods/call-forwarding/README.md)
       * [🚗 GET - Bulk User Call Forwarding Always](docs/methods/call-forwarding/get-user-call-forwarding-always.md)
       * [🚗 GET - User Call Forwarding Always](docs/methods/call-forwarding/get-bulk-call-forwarding-always.md)
+
       * [🚗 GET - Bulk User Call Forwarding Busy](docs/methods/call-forwarding/get-user-call-forwarding-busy.md)
       * [🚗 GET - User Call Forwarding Busy](docs/methods/call-forwarding/get-bulk-call-forwarding-busy.md)
       * [🚗 GET - Bulk User Call Forwarding Not Reachable](docs/methods/call-forwarding/get-user-call-forwarding-not-reachable.md)
