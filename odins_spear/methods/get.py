@@ -867,7 +867,7 @@ class Get():
         return self.requester.get(endpoint, params=params)
 
     def group_hunt_group(self, service_user_id):
-        """Returns information about the specified Hunt Group.
+        """Returns detailed information about the specified Hunt Group.
 
         Args:
             service_user_id (str): UserID of the target Hunt Group.
