@@ -1,3 +1,3 @@
-# 💬 Auto Attendants
+# 💬 Call Pickup
 
-All things updating auto attendants.
+All things call pickup.
