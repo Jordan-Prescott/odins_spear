@@ -8,7 +8,7 @@ Retrieves a detailed report of the specified user including services and service
 
 ### Parameters&#x20;
 
-* user_id (str): Targert User ID&#x20;
+* user_id (str): Target User ID&#x20;
 
 ### Returns
 
