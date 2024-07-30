@@ -1,3 +1,7 @@
+---
+description: my_api.post.group_hunt_group()
+---
+
 # 🙋‍♂️ POST - Group Hunt Group
 
 Builds a hunt group (HG) in the specified group. 
