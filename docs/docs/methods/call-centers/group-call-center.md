@@ -1,5 +1,5 @@
 ---
-description: my_api.put.group_call_centers()
+description: my_api.put.group_call_center()
 ---
 
 # 🎧 PUT - Group Call Center
@@ -26,18 +26,23 @@ from odins_spear import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-call_centers = [
-    "basic_cc@domain.com"
-]
+my_changes = {
+    "serviceInstanceProfile": {
+    "name": "TestCallCenter@domain.com",
+    "callingLineIdLastName": "TestCallCenter@domain.com",
+    "callingLineIdFirstName": "TestCallCenter@domain.com",
+    "hiraganaLastName": "TestCallCenter@domain.com",
+    "hiraganaFirstName": "Call Center",
+  },
+  "type": "Premium",
+  "routingType": "Priority Based",
+  "policy": "Circular",
+  "enableVideo": False,
+}
 
-my_api.put.group_call_centers_status(
-    call_center_user_id = call_centers,
-    status= False
+my_api.put.group_call_center(
+    call_center_user_id = "TestCallCenter@domain.com",
+    updates=my_changes
 )
 ```
 {% endcode %}
-
-#### Result:
-
-<figure><img src="../../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
-

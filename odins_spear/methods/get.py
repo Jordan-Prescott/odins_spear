@@ -111,7 +111,7 @@ class Get():
             group_id (str): Target Group ID
 
         Returns:
-            Dict: List of Call Centers and their settings.
+            List: List of Call Centers and their settings.
         """
 
         endpoint = "/groups/call-centers"
@@ -123,13 +123,13 @@ class Get():
 
 
     def group_call_center(self, service_user_id: str):
-        """Retrieves a list of a Call Center's settings and profile.
+        """Retrieves deatiled information on a single Call Center.
 
         Args:
             service_user_id (str): Target Call Center's ID
 
         Returns:
-            Dict: List of the Call Center's settings and profile
+            Dict: Target Call Centers details.
         """
 
         endpoint = "/groups/call-centers"
@@ -148,7 +148,7 @@ class Get():
             user_id (str): Target User ID
 
         Returns:
-            Dict: List of the User's associated Call Centers.
+            Dict: Agents Call Centers setting and a list of the User's associated Call Centers.
         """
 
         endpoint = "/users/call-center"
@@ -205,7 +205,7 @@ class Get():
             service_user_id (str): Target Call Center ID
 
         Returns:
-            Dict: Number to be Forwarded to, alongside any Audio Messages.
+            Dict: Dict: Call Centers overflow configuration.
         """
         
         endpoint = "/groups/call-centers/overflow"
@@ -224,7 +224,7 @@ class Get():
             service_user_id (str): Target Call Center ID
 
         Returns:
-            Dict: Number to be Forwarded to, alongside any Audio Messages.
+            Dict: Call Centers stranded call configuration.
         """
         
         endpoint = "/groups/call-centers/stranded-calls"
