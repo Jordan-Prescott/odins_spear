@@ -1,5 +1,5 @@
 ---
-description: All things registration.
+description: All things Service Providers
 ---
 
 # 🏢️ Service Provider

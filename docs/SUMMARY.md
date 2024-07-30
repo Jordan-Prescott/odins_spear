@@ -76,6 +76,8 @@
     * [🏢️ Service Providers](docs/methods/service-providers/README.md)
       * [🏢️ GET - Service Provider](docs/methods/service-providers/get-service-provider.md)
       * [🏢️ GET - Service Providers](docs/methods/service-providers/get-service-providers.md)
+    * [📈 User Reports](docs/methods/reports/README.md)
+      * [📈 GET - User Report](docs/methods/reports/get-user-report.md)
     * [🧾 Call Records](docs/methods/call-records/README.md)
       * [🧾 GET - User Stats](docs/methods/call-records/get-call-stats.md)
     * [💬 Call Pickup](docs/methods/call-pickup/README.md)

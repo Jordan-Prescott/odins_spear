@@ -1,3 +1,5 @@
-# 🤝 Groups
+---
+description: All things Groups
+---
 
-Group information.
+# 🤝 Groups
