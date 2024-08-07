@@ -1,5 +1,5 @@
 from . import scripts
-
+from .utils import parsing
 
 class Scripter:
     """ This object acts as the gateway to all pre-written scripts in /scripts/.
@@ -88,7 +88,7 @@ class Scripter:
         Returns:
             str: A JSON formatted report of the group.
         """
-        return scripts.group_audit.main(self.api, service_provider_id, group_id)
+        return parsing.json_to_dictionary(scripts.group_audit.main(self.api, service_provider_id, group_id))
 
 
     def service_pack_audit(self, servive_provider_id, group_id):
