@@ -86,7 +86,7 @@ class Scripter:
             group_id (str): Group ID to generate the report for.
 
         Returns:
-            str: A JSON formatted report of the group.
+            dict: A python dictionary report of the group.
         """
         return parsing.json_to_dictionary(scripts.group_audit.main(self.api, service_provider_id, group_id))
 
