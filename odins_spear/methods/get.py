@@ -142,7 +142,7 @@ class Get():
         try:
             import requests.exceptions
             response = self.requester.get(endpoint, params=params)
-        except requests.exceptions.HTTPError:
+        except requests.exceptions.RequestException:
             raise OSLicenseNonExistent
         else:
             return response
