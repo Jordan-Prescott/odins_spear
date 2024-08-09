@@ -122,3 +122,10 @@ class OSFileNotFound(OSError):
 
     def __str__(self) -> str:
         return f"File can not be found, please check path and file name."   
+
+class OSLicenseNonExistent(OSError):
+    """ Raised when the Specified Entity doesn't exist due to licensing.  
+    """
+
+    def __str__(self) -> str:
+        return f"Specified Entity doesn't have the correct License." 
