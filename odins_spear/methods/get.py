@@ -1,5 +1,5 @@
 from ..utils.formatting import format_filter_value
-
+from ..exceptions import *
 
 class Get():
 
@@ -140,12 +140,12 @@ class Get():
             "userId": user_id
         }
         try:
-            self.requester.get(endpoint, params=params)
-        except Exception as error: # If user is not found
-            if "404" in str(error):
-                return dict([]) # Return empty dict
+            import requests.exceptions
+            response = self.requester.get(endpoint, params=params)
+        except requests.exceptions.HTTPError:
+            raise OSLicenseNonExistent
         else:
-            return
+            return response
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
@@ -183,14 +183,8 @@ class Get():
             "serviceUserId": service_user_id
         }
 
-        try:
-            self.requester.get(endpoint, params=params)
-        except Exception as error: # If service is not found
-            if "404" in str(error):
-                return dict([]) # Return empty dict
-        else:
-            return
-    
+        return self.requester.get(endpoint, params=params)
+
     
     def group_call_center_overflow(self, service_user_id):
         """Retrieves the forwarding number for a user when all call center agents are busy, along with any associated audio messages.
