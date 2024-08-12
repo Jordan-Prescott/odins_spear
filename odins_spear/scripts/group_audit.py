@@ -113,7 +113,7 @@ def main(api, service_provider_id: str, group_id: str):
     except:
         trunk_detail = []
 
-    return json.dumps({
+    group_audit = {
         "groupDetail": group_detail,
         "licenceBreakdown": {
             "userServices": assigned_user_services,
@@ -123,4 +123,6 @@ def main(api, service_provider_id: str, group_id: str):
         "groupDNs": all_dns,
         "groupTrunking": trunk_detail
 
-    })
+    }
+    
+    return group_audit
