@@ -913,7 +913,8 @@ class Put():
         
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
-        updates["serviceUserId"] = hunt_group_user_id          
+        updates["serviceUserId"] = hunt_group_user_id
+        updates["serviceInstanceProfile"] = {}          
         
         return self.requester.put(endpoint, data=updates)
             
