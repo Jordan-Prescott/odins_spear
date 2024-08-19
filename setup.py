@@ -1,12 +1,20 @@
 from setuptools import setup, find_packages
+from os import path
+
+working_directory = path.abspath(path.dirname(__file__))
+
+with open(path.join(working_directory, 'README.md')) as file:
+    long_description = file.read()
 
 setup(
     name='odin_api',
     version='0.0.1',
-    description='Encapsulates the Odin API easing the use as well as additional features such as find alias',
+    url='https://github.com/Jordan-Prescott/odins_spear',
     author='Jordan Prescott',
     author_email='jprescott23@gmail.com',
-    url='https://github.com/Jordan-Prescott/odins_spear',
+    description='Python library for Odin API to build and manage Broadworks installations.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     install_requires=[
         "certifi==2023.7.22"
@@ -16,9 +24,6 @@ setup(
         "cryptography==41.0.7"
         "graphviz==0.20.1"
         "idna==3.4"
-        "loguru==0.7.2"
-        "numpy==1.26.4"
-        "pandas==2.2.2"
         "pycparser==2.21"
         "PyJWT==2.8.0"
         "python-dateutil==2.9.0.post0"
