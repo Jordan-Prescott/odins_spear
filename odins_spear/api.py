@@ -49,6 +49,14 @@ class Api:
  
  
     def authenticate(self):
+        """Authenticates session with username and password supplied by user.
+
+        Raises:
+            OSApiAuthenticationFail: Raised if authenticaion fails.
+
+        Returns:
+            Bool: Returns True to indicate authentication was successful.
+        """
         
         try:
             response = self.post.session(self.username, self.password)
@@ -59,6 +67,14 @@ class Api:
     
     
     def refresh_authorisation(self):
+        """Re-authenticates the session with the API. Used if API key is to expire. 
+
+        Raises:
+            OSSessionRefreshFail: Raised if authentication fails.
+
+        Returns:
+            Bool: Returns True to indicate authentication was successful.
+        """
         
         try:
             response = self.put.session()
@@ -69,6 +85,15 @@ class Api:
   
     
     def get_auth_details(self):
+        """Gets current session details. 
+
+        Raises:
+            OSFailedToLocateSession: Raised when session details can't be found. \
+                Most likely because session has expired.
+
+        Returns:
+            Dict: Current session details. 
+        """
         
         try:
             return self.get.session()
@@ -77,12 +102,18 @@ class Api:
 
 
     def _update_requester(self, session_response):
+        """When authenticating or re-auth update requester with token so it can make \
+            api calls 
+
+        Args:
+            session_response (obj): Requests mod response.
+        """
         self.token = session_response["token"]
         self._requester.headers["Authorization"] = f"Bearer {self.token}"
         self.authorised = True
 
 
     def __str__(self) -> str:
-        return f"API - url: {self.base_url}, username: {self.username}, password: {self.password}." \
+        return f"API - url: {self.base_url}, username: {self.username}" \
             f"Authenticated: {self.authorised}"
     
