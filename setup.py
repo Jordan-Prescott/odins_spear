@@ -1,14 +1,12 @@
 from setuptools import setup, find_packages
 from os import path
 
-working_directory = path.abspath(path.dirname(__file__))
-
-with open(path.join(working_directory, 'README.md')) as file:
+with open('README.md', 'r', encoding="utf-8") as file:
     long_description = file.read()
 
 setup(
     name='odins_spear',
-    version='0.0.1',
+    version='1.0.0',
     url='https://github.com/Jordan-Prescott/odins_spear',
     author='Jordan Prescott',
     author_email='jprescott23@gmail.com',
@@ -23,23 +21,23 @@ setup(
     ],
     python_requires='>=3.10',
     install_requires=[
-        'certifi==2023.7.22'
-        'cffi==1.16.0'
-        'charset-normalizer==3.2.0'
-        'colorama==0.4.6'
-        'cryptography==41.0.7'
-        'graphviz==0.20.1'
-        'idna==3.4'
-        'pycparser==2.21'
-        'PyJWT==2.8.0'
-        'python-dateutil==2.9.0.post0'
-        'pytz==2024.1'
-        'ratelimit==2.2.1'
-        'requests==2.31.0'
-        'six==1.16.0'
-        'tqdm==4.66.1'
-        'tzdata==2024.1'
-        'urllib3==2.0.4'
+        'certifi==2023.7.22',
+        'cffi==1.16.0',
+        'charset-normalizer==3.2.0',
+        'colorama==0.4.6',
+        'cryptography==41.0.7',
+        'graphviz==0.20.1',
+        'idna==3.4',
+        'pycparser==2.21',
+        'PyJWT==2.8.0',
+        'python-dateutil==2.9.0.post0',
+        'pytz==2024.1',
+        'ratelimit==2.2.1',
+        'requests==2.31.0',
+        'six==1.16.0',
+        'tqdm==4.66.1',
+        'tzdata==2024.1',
+        'urllib3==2.0.4',
         'win32-setctime==1.1.0'
     ]
 )
