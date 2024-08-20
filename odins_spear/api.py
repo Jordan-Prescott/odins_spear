@@ -88,7 +88,7 @@ class Api:
         """Gets current session details. 
 
         Raises:
-            OSFailedToLocateSession: Raised when session details can't be found. \
+            OSFailedToLocateSession: Raised when session details can't be found.
                 Most likely because session has expired.
 
         Returns:
@@ -102,8 +102,8 @@ class Api:
 
 
     def _update_requester(self, session_response):
-        """When authenticating or re-auth update requester with token so it can make \
-            api calls 
+        """When authenticating or re-auth update requester with token so it can make
+        api calls 
 
         Args:
             session_response (obj): Requests mod response.
