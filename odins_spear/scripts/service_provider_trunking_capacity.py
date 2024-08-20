@@ -107,4 +107,4 @@ def main(api: object, service_provider_id: str):
     return_data["callCapacityDifference"] = return_data["maxActiveCalls"] - return_data["groupsCallCapacityTotal"]
     return_data["burstingCallCapacityDifference"] = return_data["burstingMaxActiveCalls"] - return_data["groupsBurstingCallCapacityTotal"]
         
-    return json.dumps(return_data)
+    return (return_data)

@@ -17,7 +17,7 @@ def main(api, service_provider_id: str, group_id: str, users: list, password_typ
         
         print("Setting new SIP passwords complete.")
         formatted_user_and_new_passwords = [{"userId": user[0], "newPassword": user[1]} for user in users_and_new_passwords]
-        return json.dumps(formatted_user_and_new_passwords)
+        return (formatted_user_and_new_passwords)
     
     # intigration password
     elif password_type.lower() == "web":
@@ -32,7 +32,7 @@ def main(api, service_provider_id: str, group_id: str, users: list, password_typ
         
         print("Setting new SIP passwords complete.")
         formatted_user_and_new_passwords = [{"userId": user[0], "newPassword": user[1]} for user in users_and_new_passwords]
-        return json.dumps(formatted_user_and_new_passwords)
+        return (formatted_user_and_new_passwords)
     
     # voicemail/ oortal
     elif password_type.lower() == "vm": # voicemail
@@ -47,7 +47,7 @@ def main(api, service_provider_id: str, group_id: str, users: list, password_typ
           
         print("Setting new voicemail passcodes complete.")    
         formatted_user_and_new_passcodes = [{"userId": user[0], "newPasscode": user[1]} for user in users_and_new_passcodes]
-        return json.dumps(formatted_user_and_new_passcodes)
+        return (formatted_user_and_new_passcodes)
     
     # raise error if user attempts to change another type of password.
     else:
