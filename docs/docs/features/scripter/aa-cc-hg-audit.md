@@ -29,7 +29,7 @@ api.get.user_services_assigned()
 ```python
 from odins_spear import api
 
-may_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
 print(
