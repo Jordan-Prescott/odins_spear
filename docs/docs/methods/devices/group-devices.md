@@ -47,7 +47,8 @@ updates = {
     "deviceName": "my-new-device-name",
     "deviceLevel": "Group",
     "accessDeviceCredentials": {
-        "userName": 9871515000
+        "userName": 9871515000,
+        "password": "na9@!67nak2"
     },
     "serviceProviderId": "ent.odin",
     "groupId": "grp.odin",
