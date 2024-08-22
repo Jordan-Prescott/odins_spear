@@ -1,7 +1,6 @@
 """ Library exceptions.
 """
 
-
 class OSError(Exception):
     """ Odin Api Exceptions
     """
@@ -33,6 +32,7 @@ class OSObjectParseError(OSError):
 
     def __str__(self) -> str:
         return f"Parsing Broadwork Entity failed."
+
     
 class OSUnsupportedFilter(OSError):
     """ Raised when user requests to filter on unsupported filter
@@ -41,6 +41,7 @@ class OSUnsupportedFilter(OSError):
     def __str__(self) -> str:
         return f"Unsupported filter. Supported: macAddress, lastName," \
             f"firstName, dn, emailAddress, userId, extension"
+
     
 class OSAliasNotFound(OSError):
     """ Raised when alias is not found in Broadowks Group. 
@@ -48,6 +49,7 @@ class OSAliasNotFound(OSError):
 
     def __str__(self) -> str:
         return f"Alias not found, it either does not exist or check alias."
+
     
 class OSSessionRefreshFail(OSError):
     """ Raised when refreshing session fails.
@@ -56,6 +58,7 @@ class OSSessionRefreshFail(OSError):
     def __str__(self) -> str:
         return f"Refreshing sesion failed. Check credentials are valid and " \
             f"token has not yet expired. If expired request another."
+
             
 class OSLogoutFailed(OSError):
     """ Raised when logout attempt failed.
@@ -63,6 +66,7 @@ class OSLogoutFailed(OSError):
 
     def __str__(self) -> str:
         return f"Failed to logout, session still valid. Please try again."
+
     
 class OSFailedToLocateSession(OSError):
     """ Raised when user attempts to get session details but session cant be found.
@@ -70,6 +74,7 @@ class OSFailedToLocateSession(OSError):
 
     def __str__(self) -> str:
         return f"Session details not found. Check token is valid and not exppired."
+
     
 class OSInvalidCode(OSError):
     """ Raised when code is less than 4 and higher than 6.
@@ -77,6 +82,7 @@ class OSInvalidCode(OSError):
 
     def __str__(self) -> str:
         return f"Code needs to be between 4 and 6 digits."
+
     
 class OSInvalidWeighting(OSError):
     """ Raised when invalid weighted call distribution set.
@@ -92,6 +98,7 @@ class OSInvalidData(OSError):
 
     def __str__(self) -> str:
         return f"Data invalid or incomplete, please check data passed to method is correct."
+
 
 class OSInvalidBroadworkService(OSError):
     """ Raised when service given by user is not a valid license of Broadworks.
@@ -116,9 +123,18 @@ class OSServiceNotAssigned(OSError):
     def __str__(self) -> str:
         return f"Service not assigend to target Broadworks entity. Please check services assigned."   
 
+
 class OSFileNotFound(OSError):
     """ Raised when a file can not be found.  
     """
 
     def __str__(self) -> str:
         return f"File can not be found, please check path and file name."   
+
+
+class OSLicenseNonExistent(OSError):
+    """ Raised when the Specified Entity doesn't exist due to licensing.  
+    """
+
+    def __str__(self) -> str:
+        return f"Specified Entity doesn't have the correct License." 

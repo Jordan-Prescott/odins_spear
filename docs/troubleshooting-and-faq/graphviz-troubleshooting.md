@@ -65,6 +65,4 @@ MacOS (Needs homebrew):
 brew install graphviz
 ```
 
-Otherwise there are RPM Packages available:
-
 [RPM resource graphviz (rpmfind.net)](https://rpmfind.net/linux/rpm2html/search.php?query=graphviz)

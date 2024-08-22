@@ -1,5 +1,5 @@
 from ..utils.formatting import format_filter_value
-
+from ..exceptions import *
 
 class Get():
 
@@ -156,8 +156,13 @@ class Get():
         params = {
             "userId": user_id
         }
-
-        return self.requester.get(endpoint, params=params)
+        try:
+            import requests.exceptions
+            response = self.requester.get(endpoint, params=params)
+        except requests.exceptions.RequestException:
+            raise OSLicenseNonExistent
+        else:
+            return response
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
@@ -196,7 +201,7 @@ class Get():
         }
 
         return self.requester.get(endpoint, params=params)
-    
+
     
     def group_call_center_overflow(self, service_user_id):
         """Retrieves the forwarding number for a user when all call center agents are busy, along with any associated audio messages.
@@ -1267,7 +1272,7 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
-    def group_services_assigned(self, group_id: str, service_provider_id: str, service_name: str, service_type: str):
+    def group_services_user_assigned(self, group_id: str, service_provider_id: str, service_name: str, service_type: str):
         """
         Get details of the user/service instances where a particular service is assigned.
 

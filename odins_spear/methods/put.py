@@ -26,11 +26,11 @@ class Put():
 #AUTHENTICATION
 
     def user_authentication_service(self, user_id: str, new_password: str):
-        """Set new SIP Authenticatino passowrd for a single user.
+        """Set new SIP Authentication password for a single user.
 
         Args:
-            user_id (str): Target user ID to reset the web authentication password.
-            new_password (str): New web authentication password to apply to new user.
+            user_id (str): Target user ID to reset the SIP authentication password.
+            new_password (str): New SIP authentication password to apply to new user.
 
         Returns:
             None: This method does not return any specific value.
@@ -382,7 +382,7 @@ class Put():
     
     
     def user_call_center(self, user_id: str, updates: dict):
-        """Update an agents status in a Call Center (CC).
+        """Update an agent's status in a Call Center (CC).
 
         Args:
             user_id (str): User ID of the target user.
@@ -725,7 +725,7 @@ class Put():
     
     def group_device_type_file(self, service_provider_id: str, group_id: str, 
                                device_type: str, updates: dict):
-        """Set config file for all devices of a spceific type at the group level.
+        """Set config file for all devices of a specific type at the group level.
 
         Args:
             service_provider_id (str): Service Provider or Enterprise ID where Group is located.
@@ -832,7 +832,7 @@ class Put():
 #DO NOT DISTURB
 
     def user_do_not_disturb(self, user_id: str, dnd_active: bool = False, ring_splash_active: bool = False ):
-        """Updates a users DND and Ring Splash status.
+        """Updates a user's DND and Ring Splash status.
 
         Args:
             user_id (str): Target user id of user you would like to update the state of. 
@@ -875,7 +875,7 @@ class Put():
 #HOTELING HOST
 #HUNT GROUPS
     
-    def group_hunt_groups_status(self, hunt_group_user_ids: list, status: bool =True):
+    def group_hunt_groups_status(self, service_user_ids: list, status: bool =True):
         """Updates a list of Hunt Groups (HG) status to either active or inactive.
 
         Args:
@@ -889,18 +889,18 @@ class Put():
         endpoint = f"/groups/hunt-groups/status"
         
         data = {     
-            "instances": [{'serviceUserId': hunt_group_user_id, 'isActive': status} 
-                          for hunt_group_user_id in hunt_group_user_ids]
+            "instances": [{'serviceUserId': service_user_id, 'isActive': status} 
+                          for service_user_id in service_user_ids]
         }
         
         return self.requester.put(endpoint, data=data)
         
     
-    def group_hunt_group(self, service_provider_id: str, group_id: str, hunt_group_user_id: str, updates: dict):
-        """Update a Hunt Groups (HG) settings.
+    def group_hunt_group(self, service_provider_id: str, group_id: str, service_user_id: str, updates: dict):
+        """Update a Hunt Group's (HG) settings.
 
         Args:
-            hunt_group_user_id (str): Service provider ID of where the group that hosts the HG is located.
+            service_provider_id (str): Service provider ID of where the group that hosts the HG is located.
             group_id (str): Group ID of where the HG is located.
             service_user_id (str): Target service user ID of the HG.
             updates (dict): Updates to be applied to HG.
@@ -913,19 +913,21 @@ class Put():
         
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
-        updates["serviceUserId"] = hunt_group_user_id          
+        updates["serviceUserId"] = service_user_id
+        if not updates.get("serviceInstanceProfile"):
+            updates["serviceInstanceProfile"] = {}          
         
         return self.requester.put(endpoint, data=updates)
             
         
-    def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, hunt_group_user_id: str, 
+    def group_hunt_group_weighted_call_distribution(self, service_provider_id: str, group_id, service_user_id: str, 
                                                     agents: list):
         """Update the Weighted Call Distribution (WCD) between users in a Hunt Group (HG).
 
         Args:
             service_provider_id (str): Service provider ID where the group is located. 
             group_id (_type_): Group ID where the HG is located.
-            hunt_group_user_id (str): Service user ID of the target HG.
+            service_user_id (str): Service user ID of the target HG.
             agents (list): Updates of WCD to be applied to HG.
 
         Raises:
@@ -940,7 +942,7 @@ class Put():
         data = {
             "serviceProviderId": service_provider_id,
             "groupId": group_id,
-            "serviceUserId": hunt_group_user_id,
+            "serviceUserId": service_user_id,
             "agents": agents
         }
         
@@ -1008,7 +1010,7 @@ class Put():
 #SERVICES
 
     def user_services(self, user_id: str, services: list =None, service_packs: list =None, assigned: bool =True):
-        """Update the services assigend to a user. NOT service/ feature packs.
+        """Update the services assigned to a user. NOT service/feature packs.
 
         Args:
             user_id (str): User ID of the target user.
@@ -1049,16 +1051,15 @@ class Put():
 #TRUNK GROUPS
 
     def group_trunk_groups_call_capacity(self, service_provider_id: str, group_id: str, max_active_calls: int=None,
-                                         max_available_active_calls: int=None, bursting_max_active_calls: int=None, 
-                                         number_of_bursting_btlus: int=None):
+                                         bursting_max_active_calls: int=None, number_of_bursting_btlus: int=None):
         """
         Updates the trunking call capacity in the specified group. 
+        NOTE: The max available active calls cannot be changed here. Please see service_providers_trunk_group_call_capacity to update this.
 
         Args:
             service_provider_id (str): Service provider ID where the target group is built
             group_id (str): Group ID whose trunk group call capacity needs updating
             max_active_calls (int, optional): The max active calls for the group. 
-            max_available_active_calls (int, optional): The max available active calls for the group. 
             bursting_max_active_calls (int, optional): The bursting max active calls for the group.
             number_of_bursting_btlus (int, optional): The number of Business Trunking License Units for bursting. 
 
@@ -1075,8 +1076,6 @@ class Put():
 
         if max_active_calls:
             updates["maxActiveCalls"] = max_active_calls
-        if max_available_active_calls:
-            updates["maxAvailableActiveCalls"] = max_available_active_calls
         if bursting_max_active_calls:
             updates["burstingMaxActiveCalls"] = bursting_max_active_calls
         if number_of_bursting_btlus:
@@ -1085,13 +1084,14 @@ class Put():
         return self.requester.put(endpoint, data=updates)
 
 
-    def group_trunk_group(self, service_provider_id: str, group_id: str, updates: dict):
+    def group_trunk_group(self, service_provider_id: str, group_id: str, trunk_group_name: str, updates: dict):
         """
         Updates trunk group (TG) information.
 
         Args: 
             service_provider_id (str): Service provider ID where the target group is built
             group_id (str): Group ID whose trunk group call capacity needs updating
+            trunk_group_name (str): The name of the trunk group that is being updated. 
             updates (dict): Updates to be applied to the TG. 
 
         Returns:
@@ -1102,6 +1102,7 @@ class Put():
 
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
+        updates["name"] = trunk_group_name
 
         return self.requester.put(endpoint, data=updates)
 
@@ -1134,7 +1135,18 @@ class Put():
 #USERS
 
     def users_bulk(self, users: list, updates: dict):
+        """
+        Updates specified list of User's options, such as extension, name and etc.
+
+        Note: Available options to change can be seen through: get.user_by_id()
+
+        Args: 
+            users (list): List of specified User IDs to update
+            updates (dict): The updates to be applied to the list of Users e.g {"extension":"9999"}
         
+        Returns:
+            Dict: Returns the changes made including the list of User IDs and updates.
+        """
         endpoint = "/users/bulk"
         
         target_users = [{"userId": user} for user in users]
@@ -1147,8 +1159,21 @@ class Put():
         return self.requester.put(endpoint, data=data)
 
 
-    def user(self, service_provider_id: str, group_id, user_id: str, updates: dict):
+    def user(self, service_provider_id: str, group_id: str, user_id: str, updates: dict):
+        """
+        Updates specified User's options, such as extension, name and etc.
+
+        Note: Available options to change can be seen through: get.user_by_id()
+
+        Args: 
+            service_provider_id (str): Target Service Provider where group is located
+            group_id (str): Target Group ID where user is located
+            user_id (str): Target User ID
+            updates (dict): The updates to be applied to the list of Users e.g {"extension":"9999"}
         
+        Returns:
+            Dict: Returns the changes made including User ID and updates.
+        """
         endpoint = "/users"
         
         updates["serviceProviderId"] = service_provider_id
@@ -1159,7 +1184,7 @@ class Put():
         
     
     def user_portal_passcode(self, user_id: str, new_passcode: str):
-        """_summary_
+        """Updates the specified User's portal passcode.
 
         Args:
             user_id (str): User ID of the target user you would like to change the portal passcode for. 

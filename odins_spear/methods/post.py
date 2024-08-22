@@ -382,25 +382,6 @@ class Post():
                           sip_authentication_username: str="", sip_authentication_password: str=""):
         """
         Builds a Trunk Group (TG) in the specified group. 
-        Default fields: 
-            "capacityExceededTrapInitialCalls":0,
-            "capacityExceededTrapOffsetCalls":0,
-            "clidSourceForScreenedCallsPolicy":"Profile Name Profile Number",
-            "continuousOptionsSendingIntervalSeconds":30,
-            "failureOptionsSendingIntervalSeconds":10,
-            "failureThresholdCounter":1,
-            "invitationTimeout":6,
-            "inviteFailureThresholdCounter":1,
-            "inviteFailureThresholdWindowSeconds":30,
-            "pilotUserCallOptimizationPolicy":"Optimize For User Services",
-            "pilotUserCallingLineAssertedIdentityPolicy":"Unscreened Originating Calls",
-            "pilotUserCallingLineIdentityForEmergencyCallsPolicy":"No Calls",
-            "pilotUserCallingLineIdentityForExternalCallsPolicy":"No Calls",
-            "pilotUserChargeNumberPolicy":"No Calls",
-            "requireAuthentication":"false",
-            "successThresholdCounter":1,
-            "useSystemUserLookupPolicy":"true",
-            "userLookupPolicy":"Basic"
 
         Args:
             service_provider_id (str): The service provider ID in which the target group is built.
@@ -425,10 +406,6 @@ class Post():
         payload["serviceProviderId"] = service_provider_id
         payload["groupId"] = group_id
 
-        if payload["requireAuthentication"] == "true":
-            payload["sipAuthenticationUserName"] = sip_authentication_username
-            payload["sipAuthenticationPassword"] = sip_authentication_password
-
         default_payload_values = {
             "capacityExceededTrapInitialCalls": 0, 
             "capacityExceededTrapOffsetCalls": 0,
@@ -452,6 +429,10 @@ class Post():
         for key, default_value in default_payload_values.items():
             payload.setdefault(key, default_value)
 
+        if payload["requireAuthentication"] == "true":
+            payload["sipAuthenticationUserName"] = sip_authentication_username
+            payload["sipAuthenticationPassword"] = sip_authentication_password
+
         return self.requester.post(endpoint, data=payload)
 
 #TWO STAGE DIALING
@@ -459,7 +440,8 @@ class Post():
         
     def user(self, service_provider_id: str, group_id: str, user_id: str, first_name: str, last_name: str, 
              extension: str, web_auth_password: str, payload: dict):
-        """_summary_
+        """
+            Creates a new user in the specified group with the configuration defined in the payload.
 
         Args:
             service_provider_id (str): Service provider ID where Group is loctaed.
@@ -467,7 +449,7 @@ class Post():
             user_id (str): Complete User ID including group domain of new user.
             first_name (str): First name of new user.
             last_name (str): Last name of new user.
-            extension (str): Extension numebr of new user.
+            extension (str): Extension number of new user.
             web_auth_password (str): Web authentication password. Note get.password_generate() can be used to get this.
             payload (dict): User configuration.
 
@@ -477,8 +459,8 @@ class Post():
         
         endpoint = "/users"
         
-        payload["callingLineIdFirstName"] = first_name if not payload["callingLineIdFirstName"] else payload["callingLineIdFirstName"]
-        payload["callingLineIdLastName"] = last_name if not payload["callingLineIdLastName"] else payload["callingLineIdLastName"]
+        payload["callingLineIdFirstName"] = first_name if not payload.get("callingLineIdFirstName") else payload["callingLineIdFirstName"]
+        payload["callingLineIdLastName"] = last_name if not payload.get("callingLineIdLastName") else payload["callingLineIdLastName"]
 
         payload["serviceProviderId"] = service_provider_id
         payload["groupId"] = group_id
