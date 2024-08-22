@@ -1,3 +1,8 @@
+---
+description: my_api.put.system_device_tag()
+---
+
+
 # 💾 PUT - System Device Tag
 
 Update a single tag assigned to a device at the System level.
@@ -23,7 +28,7 @@ my_api.authenticate()
 
 my_api.put.system_device_tag(
     "servivce_provider_id",
-    "group_id"
+    "group_id",
     "device_name",
     tag_name= "tagName",
     tag_value= "tagValue"

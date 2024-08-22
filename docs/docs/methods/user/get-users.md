@@ -8,12 +8,16 @@ Returns list of users depending on filter criteria you set. See supported filter
 
 ### Parameters&#x20;
 
-* servive\_provider\_id (str, optional): Service or Enterprise ID, top level object. Defaults to None.
+* service\_provider\_id (str, optional): Service or Enterprise ID, top level object. Defaults to None.
 * group\_id (str, optional): Group ID where user is hosted. Defaults to None.&#x20;
 * filter (str, optional): Filter criteria, supported filters below. Defaults to None.&#x20;
 * filter\_type (str, optional): Options: equal to, starts with, or contains. Defaults to None.&#x20;
 * filter\_value (str, optional): Value filtering on e.g. firstName. Defaults to None.&#x20;
 * limit (int, optional): Limits the amount of values API returns. Defaults to None.
+
+### Returns
+
+* Dict: Python dictionary of the users details
 
 ## Supported Filters
 
@@ -86,9 +90,7 @@ my_api.get.users(
 )
 </code></pre>
 
-### Returns
 
-* Dict: Python dictionary of the users details
 
 ### How To Use:
 

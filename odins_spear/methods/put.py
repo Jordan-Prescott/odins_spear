@@ -95,18 +95,18 @@ class Put():
         
     def auto_attendant(self, service_provider_id: str, group_id, 
                        auto_attendant_user_id: str, updates: dict):
-        """Updates a specific Auto Attendant.
+        """Updates a single target Auto Attendant.
         
         Note: Needs the service instance profile to use this method.
 
         Args:
-            service_provider_id (str): _description_
-            group_id (_type_): _description_
-            auto_attendant_user_id (str): _description_
-            updates (dict): _description_
+            service_provider_id (str): Service Provider ID where Group is hosted.
+            group_id (str): Group ID where target Auto Attendant is located.
+            auto_attendant_user_id (str): Target Auto Attendant User ID.
+            updates (dict): Updates to be applied to Auto Attendant.
 
         Returns:
-            Dict: AA updated.  
+            Dict: Updated version of the Auto Attendant with updates applied. 
         """
         
         endpoint = "/groups/auto-attendants"

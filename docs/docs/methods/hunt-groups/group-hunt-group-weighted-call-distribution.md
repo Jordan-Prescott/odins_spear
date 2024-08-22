@@ -1,5 +1,5 @@
 ---
-description: my_api.group_hunt_group_weighted_call_distribution()
+description: my_api.put.group_hunt_group_weighted_call_distribution()
 ---
 
 # 💯 PUT - Group Hunt Group Weighted Call Distribution

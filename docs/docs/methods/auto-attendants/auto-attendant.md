@@ -8,16 +8,16 @@ In this method, you can update your AAs&#x20;
 
 ### Parameters&#x20;
 
-* auto\_attendant\_user\_ids (list): List of service user IDs (AA IDs), the status given will be applied to these.
-* status (bool): Boolean value of True (Activate) or False (Deactivate) which will be applied to list of AAs.
+* service_provider_id (str): Service Provider ID where Group is hosted.
+* group_id (str): Group ID where target Auto Attendant is located.
+* auto_attendant_user_id (str): Target Auto Attendant User ID.
+* updates (dict): Updates to be applied to Auto Attendant.
 
 ### Return
 
-* JSON Data: This method returns json representation of AA updated.
+* Dict: Updated version of the Auto Attendant with updates applied. 
 
 ### How To Use:
-
-The below code will set the AA to deactivated.
 
 {% code overflow="wrap" %}
 ```python
@@ -26,13 +26,29 @@ from odins_spear import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-auto_attendants = [
-    "basic_aa@domain.com"
-]
+my_changes = {
+    "serviceInstanceProfile": {
+    "name": "Name of Auto Attendant",
+    "callingLineIdLastName": "Auto Attendant",
+    "callingLineIdFirstName": "Main",
+    "hiraganaLastName": "mock-aa-test-1",
+    "hiraganaFirstName": "Auto Attendant",
+    "language": "English",
+    "timeZone": "America/Denver",
+    "timeZoneDisplayName": "(GMT-06:00) (US) Mountain Time",
+    "aliases": []
+  },
+  "type": "Basic",
+  "enableVideo": False,
+  "extensionDialingScope": "Group",
+  "nameDialingScope": "Group",
+}
 
-my_api.put.auto_attendants_status(
-    auto_attendant_user_ids= auto_attendants,
-    status= False
+my_api.put.auto_attendant(
+    service_provider_id="serviceProviderID",
+    group_id="groupID"
+    auto_attendant_user_id="AAUserID",
+    updates=my_changes
 )
 ```
 {% endcode %}

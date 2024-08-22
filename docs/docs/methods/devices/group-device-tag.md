@@ -1,3 +1,7 @@
+---
+description: my_api.put.group_device_tag()
+---
+
 # 🎐 PUT - Group Device Tag
 
 Update a single tag assigned to a device at the group level.
@@ -24,7 +28,7 @@ my_api.authenticate()
 
 my_api.put.group_device_tag(
     "servivce_provider_id",
-    "group_id"
+    "group_id",
     "device_name",
     tag_name= "tagName",
     tag_value= "tagValue"

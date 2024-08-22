@@ -1,3 +1,7 @@
+---
+description: my_api.put.service_provider_device_file()
+---
+
 # 🗃️ PUT - Group Device File
 
 Update a config file for a single device at the Group level.

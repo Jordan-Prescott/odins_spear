@@ -41,7 +41,7 @@ api.post.group_dns()
 ```python
 from odins_spear import api
 
-may_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
 # Moving the range 234567891-3 from GroupID-A to GroupID-B

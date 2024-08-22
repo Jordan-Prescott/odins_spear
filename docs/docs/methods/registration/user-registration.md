@@ -1,5 +1,5 @@
 ---
-description: my_api.get.user_regsitration()
+description: my_api.get.user_registration()
 ---
 
 # 💚 GET - User Registration

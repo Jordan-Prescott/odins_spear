@@ -1,5 +1,5 @@
 ---
-description: my_api.get.service_provider_dns_search()
+description: my_api.get.service_provider_dn_search()
 ---
 
 # 5️⃣ GET - Service Provider DN Search
@@ -25,7 +25,7 @@ from odins_spear import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-my_api.get.service_provider_dns_search(
+my_api.get.service_provider_dn_search(
     "serviceProviderId",
     dn= "01942",
     filter_type= "contains",
@@ -34,9 +34,9 @@ my_api.get.service_provider_dns_search(
 ```
 {% endcode %}
 
-### Example Returned Data of SIP Passwords (Formatted)
+### Example Returned Data (Formatted)
 
-```
+```json
 [
   {
     "phoneNumbers": "+1-9589582000",
