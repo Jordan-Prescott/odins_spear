@@ -891,6 +891,27 @@ class Get():
         }
 
         return self.requester.get(endpoint, params=params)
+    
+    def group_hunt_groups_available_users(self, service_provider_id: str, group_id: str):
+
+        """Returns a list of all users within the service provider that are available to be assigned to a hunt group in the specified group. 
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: available users (dict)
+        """
+
+        endpoint = "/groups/hunt-groups/users"
+
+        params = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
 #IN CALL SERVICE ACTIVATION
