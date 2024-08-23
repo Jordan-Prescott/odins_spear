@@ -145,6 +145,28 @@ class Delete():
 #HOTELING GUEST
 #HOTELING HOST
 #HUNT GROUPS
+
+    def group_hunt_group(self, service_user_id: str):
+
+        """Deletes the specified hunt group.
+
+        Args:
+            service_user_id (str): The service user ID of the hunt group to be deleted.
+
+        Returns:
+            Dict: Profile of the deleted hunt group.
+
+        """
+
+        endpoint = "/groups/hunt-groups"
+
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.delete(endpoint, params=params)
+
+
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
 #INTEGRATED IMP

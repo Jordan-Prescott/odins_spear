@@ -315,6 +315,30 @@ class Post():
         payload["serviceInstanceProfile"]["extension"] = extension
 
         return self.requester.post(endpoint, data=payload)
+    
+
+    def group_hunt_groups_remove_user(self, service_provider_id: str, group_id: str, user_id: str):
+
+        """Removes the specified user from all hunt groups in which it currently exists. 
+
+        Args:
+            service_provider_id (str): The service provider ID in which the target user exists.
+            group_id (str): The group ID where the user exists.
+            user_id (str): The User ID of the user that is to be removed from the hunt group(s).
+
+        Returns:
+            List: Service user ID's (str) of the hunt groups from which the specified user has been removed. 
+        """
+
+        endpoint = "/groups/hunt-groups/removeUser"
+
+        data = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id,
+            "userId": user_id
+        }
+
+        return self.requester.post(endpoint, data=data)
 
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
