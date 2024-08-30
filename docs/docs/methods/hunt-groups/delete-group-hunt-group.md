@@ -1,20 +1,18 @@
 ---
-description: my_api.post.group_hunt_groups_remove_user()
+description: my_api.delete.group_hunt_group()
 ---
 
-#  👋 POST - Group Hunt Groups Remove User
+#  💔 DELETE - Group Hunt Group
 
-Removes the specified user from all hunt groups in which it currently exists. 
+Deletes the specified hunt group.
 
 ### Parameters&#x20;
 
-* service_provider_id (str): The service provider ID in which the target user exists.
-* group_id (str): The group ID where the user exists.
-* user_id (str): The User ID of the user that is to be removed from the hunt group(s).
-
+* service_user_id (str): The service user ID of the hunt group to be deleted.
+  
 ### Returns
 
-* List: Service user ID's (str) of the hunt groups from which the specified user has been removed. 
+* Dict: Profile of the deleted hunt group.
 
 ### How To Use:
 
@@ -25,15 +23,44 @@ from odins_spear import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-my_api.post.group_hunt_groups_remove_user(
-    service_provider_id = "Test Service Provider ID",
-    group_id = "Test Group ID",
-    service_user_id = "test_userd@domain.com"
+my_api.delete.group_hunt_group(
+    service_user_id = "test_hunt_groupd@domain.com"
 )
 ```
 {% endcode %}
 
 ### Example Returned Data (Formatted)
 ```json
-["test_hunt_group_1@domain.com", "test_hunt_group2@domain.com"]
+{
+    "serviceInstanceProfile": {
+        "name": "test_hunt_group",
+        "callingLineIdLastName": "Hunt Group",
+        "callingLineIdFirstName": "Test",
+        "hiraganaLastName": "Hunt Group",
+        "hiraganaFirstName": "Test",
+        "language": "English",
+        "timeZone": "Europe/London",
+        "timeZoneDisplayName": "(GMT+01:00) Greenwich Mean Time",
+        "aliases": []
+    },
+    "policy": "Regular",
+    "huntAfterNoAnswer": False,
+    "noAnswerNumberOfRings": 5,
+    "forwardAfterTimeout": False,
+    "forwardTimeoutSeconds": 10,
+    "allowCallWaitingForAgents": False,
+    "useSystemHuntGroupCLIDSetting": True,
+    "includeHuntGroupNameInCLID": True,
+    "enableNotReachableForwarding": False,
+    "makeBusyWhenNotReachable": False,
+    "allowMembersToControlGroupBusy": False,
+    "enableGroupBusy": False,
+    "applyGroupBusyWhenTerminatingToAgent": False,
+    "serviceUserId": "test_hunt_group@domain.com",
+    "resellerId": None,
+    "serviceProviderId": "ExampleServiceProvider",
+    "groupId": "ExampleGroup",
+    "isEnterprise": True,
+    "agents": []
+}
 ```
