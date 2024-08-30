@@ -28,7 +28,7 @@ my_api.authenticate()
 my_api.post.group_hunt_groups_remove_user(
     service_provider_id = "Test Service Provider ID",
     group_id = "Test Group ID",
-    service_user_id = "test_userd@domain.com"
+    user_id = "test_user@domain.com"
 )
 ```
 {% endcode %}
