@@ -32,10 +32,6 @@ class Requester():
 
 
     def _request(self, method, endpoint, data=None, params=None):
-        
-        
-
-
         if self.rate_limit:
             return self._rate_limited_request(method, endpoint, data, params)
         else:
