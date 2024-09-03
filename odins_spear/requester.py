@@ -34,6 +34,8 @@ class Requester():
     def _request(self, method, endpoint, data=None, params=None):
         
         
+
+
         if self.rate_limit:
             return self._rate_limited_request(method, endpoint, data, params)
         else:
@@ -45,7 +47,10 @@ class Requester():
             )
             self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
             response.raise_for_status()
+            if isinstance(response.json(), list):
+                return response.request.body
             return response.json()
+
         
 
     @sleep_and_retry
@@ -59,5 +64,7 @@ class Requester():
         )
         self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
         response.raise_for_status()
+        if isinstance(response.json(), list):
+            return response.request.body
         return response.json()
     
