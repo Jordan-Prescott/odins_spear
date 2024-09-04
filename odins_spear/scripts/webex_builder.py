@@ -1,5 +1,7 @@
 
-def main():
+
+def main(api, service_provider_id, group_id, user_id, device_type, 
+         email, primary_device, webex_feature_pack_name):
     
     # 1. update the email - KB
     
