@@ -56,4 +56,4 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     except Exception:
         USER_DATA["callCenters"] = None
     
-    return (USER_DATA)
+    return USER_DATA

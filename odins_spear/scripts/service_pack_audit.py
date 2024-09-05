@@ -29,7 +29,4 @@ def main(api, service_provider_id, group_id):
 
                 assigned_service_pack_services.append(sps)
                 
-    Service_Pack_Audit = ({
-        "servicePackServices": assigned_service_pack_services
-})
-    return Service_Pack_Audit
+    return assigned_service_pack_services
