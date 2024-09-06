@@ -1032,9 +1032,29 @@ class Put():
             data["userServices"] = [{'serviceName': service, 'assigned': assigned} for service in services]
         if service_packs:
             data["servicePackServices"] = [{'serviceName': service_pack, 'assigned': assigned} for service_pack in service_packs]
-        
+        print(data)
         return self.requester.put(endpoint, data=data)
     
+    def user_service_settings(self, user_id: str, settings: dict):
+        """Updates specific service settings for a given user.
+        This function allows you to modify one or more service settings associated with a particular user.
+
+        Args:
+            user_id (str): The ID of the target user
+            settings (dict): A dictionary containing the new settings to be applied. The structure of this dictionary should mirror the API's expected format for updating service settings.
+
+        Returns:
+            Dict: A dictionary representing the updated service settings for the specified user.
+        """
+
+        endpoint = f"/users/services/settings"
+
+        data = {
+            "userId": user_id,
+            **settings
+        }
+
+        return self.requester.put(endpoint, data=data)
 
 #SHARED CALL APPEARANCE
 #SILENT ALERTING
