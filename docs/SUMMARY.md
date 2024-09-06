@@ -148,6 +148,8 @@
       * [🧍 GET - User-Services](docs/methods/services/get-user-services.md)
       * [🧍 GET - Group Services Assigned](docs/methods/services/get-group-services-assigned.md)
       * [🧍 GET - Group Services](docs/methods/services/get-group-services.md)
+      * [⚙️ GET - User Service Settings](docs/methods/services/get-user-service-settings.md)
+      * [⚙️ PUT - User Service Settings](docs/methods/services/put-user-service-settings.md)
     * [🛑 Do Not Disturb](docs/methods/do-not-disturb/README.md)
       * [🛑 GET - User Do Not Disturb](docs/methods/do-not-disturb/get-user-do-not-disturb.md)
       * [🛑 PUT - User Do Not Disturb](docs/methods/do-not-disturb/put-user-do-not-disturb.md)
