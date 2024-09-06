@@ -1032,7 +1032,6 @@ class Put():
             data["userServices"] = [{'serviceName': service, 'assigned': assigned} for service in services]
         if service_packs:
             data["servicePackServices"] = [{'serviceName': service_pack, 'assigned': assigned} for service_pack in service_packs]
-        print(data)
         return self.requester.put(endpoint, data=data)
     
     def user_service_settings(self, user_id: str, settings: dict):
