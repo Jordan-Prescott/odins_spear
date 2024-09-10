@@ -11,6 +11,22 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 
 	# 3. assign feature pack - OC
 
+
+	api.put.user(
+    	service_provider_id,
+    	group_id, 
+    	user_id,
+    	{
+		"emailAddress": email,
+    	"alternateUserId": [
+        	{
+            	"alternateUserId": alternateid,
+            	"description": description
+        	}
+    	]
+        	}    
+	)
+
 	# 4. enable IMP in service settings (Micheal Clarke 04.09.24) - MC
 	enableIMP = {'Integrated IMP': {'isActive': True}}
 	api.put.user_service_settings(user_id=user_id, settings=enableIMP)
