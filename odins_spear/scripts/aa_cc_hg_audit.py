@@ -70,6 +70,6 @@ def main(api, service_provider_id: str, group_id: str):
             del aa_cc_hg["typeTag"]
             return_data["huntGroups"].append(aa_cc_hg)
         
-    return (return_data)
+    return return_data
         
     
