@@ -5,12 +5,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 
 	DEVICE_NAME = f"{user_id.split('@')[0]}_WBX"
 
-	# 1. update the email - KB
-
-	# 2. update alt user id - KB
-
-	# 3. assign feature pack - OC
-
+	# 1 update the email & 2. update alt user id - KB
 
 	api.put.user(
     	service_provider_id,
@@ -26,6 +21,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
     	]
         	}    
 	)
+	# 3. assign feature pack - OC
 
 	# 4. enable IMP in service settings (Micheal Clarke 04.09.24) - MC
 	enableIMP = {'Integrated IMP': {'isActive': True}}
