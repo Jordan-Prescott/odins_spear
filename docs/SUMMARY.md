@@ -153,6 +153,8 @@
     * [🛑 Do Not Disturb](docs/methods/do-not-disturb/README.md)
       * [🛑 GET - User Do Not Disturb](docs/methods/do-not-disturb/get-user-do-not-disturb.md)
       * [🛑 PUT - User Do Not Disturb](docs/methods/do-not-disturb/put-user-do-not-disturb.md)
+    * [🎭 Shared Call Appearance](docs/methods/shared-call-appearance/README.md)
+      * [🎭 POST - User Shared Call Appearance Endpoint](docs/methods/shared-call-appearance/post-user-shared-call-appearance-endpoint)
   * [🙌 Advanced Features](docs/features/README.md)
     * [🤖 Scripter](docs/features/scripter/README.md)
       * [🔎 Find Alias](docs/features/scripter/find-alias-script.md)
