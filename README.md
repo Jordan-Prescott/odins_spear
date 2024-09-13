@@ -1,5 +1,7 @@
 # ⚔️ Odin's Spear
 
+Officially adopted by [Fourteen IP Communications](https://fourteenip.com/) leading supplier of hosted telephony in the hospitality industry. 
+
 ![Odin's Spear Logo](./assets/images/logo.svg)
 [![Downloads](https://static.pepy.tech/badge/odins-spear)](https://pepy.tech/project/odins-spear)
 [![Downloads](https://static.pepy.tech/badge/odins-spear/month)](https://pepy.tech/project/odins-spear)
