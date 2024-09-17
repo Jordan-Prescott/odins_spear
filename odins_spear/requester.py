@@ -79,7 +79,7 @@ class Requester():
                 # for methods where call is a success but returns no useful data 
                 if response.text == '[]':
                     return response.status_code
-                return response.json()n
+                return response.json()
         
 
     @sleep_and_retry
