@@ -43,8 +43,9 @@ class Requester():
             )
             self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
             response.raise_for_status()
-            if isinstance(response.json(), list):
-                return response.request.body
+            
+            if response.text == '[]':
+                return response.status_code
             return response.json()
 
         
@@ -60,7 +61,8 @@ class Requester():
         )
         self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
         response.raise_for_status()
-        if isinstance(response.json(), list):
-            return response.request.body
+        
+        if response.text == '[]':
+            return response.status_code
         return response.json()
     
