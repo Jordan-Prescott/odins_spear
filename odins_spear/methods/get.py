@@ -156,13 +156,9 @@ class Get():
         params = {
             "userId": user_id
         }
-        try:
-            import requests.exceptions
-            response = self.requester.get(endpoint, params=params)
-        except requests.exceptions.RequestException:
-            raise OSLicenseNonExistent
-        else:
-            return response
+        
+        return self.requester.get(endpoint, params=params)
+        
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
