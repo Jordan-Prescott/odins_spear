@@ -65,7 +65,7 @@ class Requester():
                 data=json.dumps(data if data is not None else {}),
                 params=(params if params is not None else {})
             )
-            
+
             # if logger used log request
             if self.logger:
                 self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
@@ -76,7 +76,10 @@ class Requester():
             except requests.exceptions.RequestException:
                 raise OSApiResponseError(response)
             else:
-                return response.json()
+                # for methods where call is a success but returns no useful data 
+                if response.text == '[]':
+                    return response.status_code
+                return response.json()n
         
 
     @sleep_and_retry
@@ -102,7 +105,8 @@ class Requester():
         except requests.exceptions.RequestException:
             raise OSApiResponseError(response)
         else:
+            # for methods where call is a success but returns no useful data 
+            if response.text == '[]':
+                return response.status_code
             return response.json()
-        
-
     
