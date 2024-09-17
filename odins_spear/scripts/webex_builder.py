@@ -15,8 +15,8 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 		"emailAddress": email,
     	"alternateUserId": [
         	{
-            	"alternateUserId": alternateid,
-            	"description": description
+            	"alternateUserId": email,
+            	"description": "Webex"
         	}
     	]
         	}    
