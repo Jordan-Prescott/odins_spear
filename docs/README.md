@@ -1,21 +1,81 @@
-# 👋 Welcome!!
+# ⚔️ Odin's Spear
 
-Working on Broadwork's for 5 years was painful, with its stiff 90’s user interface and all its limitations so when I first saw Odin by [Rev.io](https://www.rev.io/blog/solutions/rev-io-odin-api). I nearly fell off my seat. Those beautiful people brought the solution into the 21st century with a modern user interface, automation, and most of all its API. This made my life so much easier, I was able to build 500 users in one go rather than one by one, I could give users access to manage their own systems, and I could duplicate groups with everything I needed when building new groups for customers. But I still couldn’t easily locate where the alias 0 was assigned and here is where the story of Odin’s Spear begins.
+<figure><img src=".gitbook/assets/logo.png" alt="Odin's Spear Logo"><figcaption></figcaption></figure>
 
-Odin’s web user interface is great but it’s not perfect and it's limited, however, its API is a gift sent from the developer gods over at Rev.io (thank you!). Using the documentation and a few lines of code you can achieve everything you can achieve in the web interface but you are no longer limited to how fast you can operate your keyboard with the power of programming languages like Python. I can create a loop to create 10, 100, 1000, or 10, 000 users, hunt groups, and call centers in seconds or minutes.&#x20;
+## Overview
 
-Managing them all becomes a breeze also, let's say a customer has a new user they want to add to all 50 of their hunt groups (if you’ve read this far I’m assuming you know what this is). If you’re using Broadworks then block the day out in your calendar, if you're using Odin’s web portal block the morning out, if you're using Python with the Odin API block 30 minutes out (that’s being generous).&#x20;
+Odin's Spear is a Python library designed to streamline and enhance your experience with Odin's API by [Rev.io](https://www.rev.io/blog/solutions/rev-io-odin-api). If you've worked with BroadWorks for years and struggled with its outdated interface and limitations, Odin's API feels like a breath of fresh air—offering a modern user interface, automation, and comprehensive API access.
 
-{% embed url="https://doc.odinapi.net/" %}
-Odin's API Documentation
-{% endembed %}
+With Odin's Spear, managing users, hunt groups, call centers, and other telecom operations becomes significantly easier. This library encapsulates Odin's API functionality, making it accessible, efficient, and user-friendly.
 
-Alas, using the API is not perfect, each time I would write a script to help me achieve these things I was hit with some recurring issues, I would have to find the API call I needed, format the data, design the request, handle any errors that could occur and the list goes on. Each time I was starting fresh and this was frustrating, if only there was a solution that handled my authentication, I could just select the method and pass it the data rather than designing the request, if an error occurs tell me what the issue is, resolve or even handle it for me…
+## Features
 
-## Introducing...
+- **Bulk User Management:** Create and manage thousands of users, hunt groups, and call centers in minutes.
+- **Error Handling:** Automatically manage authentication, request design, and error handling.
+- **Advanced Tools:** Features like call flow visualization, group audit reports, and bulk management of telecom entities.
+- **Alias Assignment Locator:** The first feature release addresses a long-standing issue by allowing you to easily locate where an alias is assigned within BroadWorks—saving you time and frustration.
 
-<figure><img src=".gitbook/assets/Frame 2.png" alt=""><figcaption></figcaption></figure>
+## Why Odin's Spear?
 
-**Odin’s Spear** is a Python library that aims to do exactly that. It will encapsulate the entire functionality of Odin’s API making the use easy, efficient, and accessible. The project is stakeholder lead and all features have come from engineers that have been using Broadworks and now Odin for decades. It will also introduce other features requested such as a graph showing a call flow to a number, a group audit report for all things billable, and bulk management of call centers, hunt groups, and auto attendants. However, it was clear what the first feature had to be. For years now locating where an alias has been assigned on the Broadworks system has brought hosted telephony engineers to their knees. No more. With Odin’s Spears’ very first release (beta) I have addressed this issue making locating an alias a breeze. In 3 lines of code and 1 minute of your time, you can now achieve this once painstaking task, and more features are coming soon!
+Working with BroadWorks for over five years was a challenge, with its 90s-style UI and rigid functionality. When Rev.io introduced Odin, with its modern interface and API, it revolutionized how telecom management could be done. However, even with these advancements, some tasks remained cumbersome, like locating alias assignments. 
 
-<figure><img src=".gitbook/assets/Frame 5.png" alt=""><figcaption></figcaption></figure>
+Odin's Spear is the solution. It simplifies your workflow by automating repetitive tasks, handling errors, and making API interactions as smooth as possible. Whether you're managing 10 users or 10,000, Odin's Spear has you covered.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.10+
+- An Odin account
+
+### Installation
+
+Install Odin's Spear using pip:
+
+```bash
+pip install odins-spear
+```
+
+### Basic Usage
+
+Here's a simple example to get you started:
+
+```python
+from odins_spear.api import API
+
+# Initialize the API with your credentials
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
+my_api.authenticate()
+
+# Locate an alias assignment
+alias_info = my_api.scripter.find_alias('ServiceProviderID', 'GroupID', alias=0)
+print(alias_info)
+```
+
+For more detailed usage and examples, check out our [Documentation](#-documentation).
+
+## 📖 Documentation
+
+We provide extensive documentation to help you get started quickly and take full advantage of Odin's Spear's capabilities:
+
+- [Odin's Spear Documentation](https://docs.jordan-prescott.com/odins_spear)
+
+Odins Official API docs
+- [Odin API Documentaion](https://doc.odinapi.net/)
+
+## Contributing
+
+We welcome contributions! If you'd like to contribute, please fork the project, make your changes then submit a pull request. 
+For issues to work on please see our [project](https://github.com/users/Jordan-Prescott/projects/2).
+
+## License
+
+This project is licensed under the MIT License—see the [LICENSE.md](LICENSE) file for details.
+
+## Support
+
+If you encounter any issues or have questions, feel free to open an issue on GitHub.
+
+## Acknowledgements
+
+Special thanks to the developers at Rev.io for creating the Odin API and to the engineers who provided invaluable feedback and feature suggestions.

@@ -1,5 +1,5 @@
 ---
-description: my_api.group_hunt_group()
+description: my_api.put.group_hunt_group()
 ---
 
 # 🍏 PUT - Group Hunt Group

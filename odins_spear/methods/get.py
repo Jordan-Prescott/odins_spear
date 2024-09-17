@@ -51,7 +51,16 @@ class Get():
 #AUTHENTICATION
 #AUTO ATTENDANTS
 
-    def auto_attendants(self, service_provider_id, group_id):
+    def auto_attendants(self, service_provider_id: str, group_id: str):
+        """Returns a complete list of all Auto Attendants in a single group.
+
+        Args:
+            service_provider_id (str): Service Provider where Group is hosted.
+            group_id (str): Target Group where Auto Attendants are hosted.
+
+        Returns:
+            List: List of Auto Attendants with basic info on them.
+        """
 
         endpoint = "/groups/auto-attendants"
 
@@ -62,7 +71,15 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
-    def auto_attendant(self, service_user_id):
+    def auto_attendant(self, service_user_id: str):
+        """Returns detailed information of a singel Auto Attendant.
+
+        Args:
+            service_user_id (str): User ID of target Auto Attendant.
+
+        Returns:
+            dict: Detailed information of target Auto Attendant.
+        """
 
         endpoint = "/groups/auto-attendants"
 
@@ -94,7 +111,7 @@ class Get():
             group_id (str): Target Group ID
 
         Returns:
-            Dict: List of Call Centers and their settings.
+            List: List of Call Centers and their settings.
         """
 
         endpoint = "/groups/call-centers"
@@ -106,13 +123,13 @@ class Get():
 
 
     def group_call_center(self, service_user_id: str):
-        """Retrieves a list of a Call Center's settings and profile.
+        """Retrieves deatiled information on a single Call Center.
 
         Args:
             service_user_id (str): Target Call Center's ID
 
         Returns:
-            Dict: List of the Call Center's settings and profile
+            Dict: Target Call Centers details.
         """
 
         endpoint = "/groups/call-centers"
@@ -131,7 +148,7 @@ class Get():
             user_id (str): Target User ID
 
         Returns:
-            Dict: List of the User's associated Call Centers.
+            Dict: Agents Call Centers setting and a list of the User's associated Call Centers.
         """
 
         endpoint = "/users/call-center"
@@ -139,13 +156,9 @@ class Get():
         params = {
             "userId": user_id
         }
-        try:
-            import requests.exceptions
-            response = self.requester.get(endpoint, params=params)
-        except requests.exceptions.RequestException:
-            raise OSLicenseNonExistent
-        else:
-            return response
+        
+        return self.requester.get(endpoint, params=params)
+        
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
@@ -193,7 +206,7 @@ class Get():
             service_user_id (str): Target Call Center ID
 
         Returns:
-            Dict: Number to be Forwarded to, alongside any Audio Messages.
+            Dict: Dict: Call Centers overflow configuration.
         """
         
         endpoint = "/groups/call-centers/overflow"
@@ -212,7 +225,7 @@ class Get():
             service_user_id (str): Target Call Center ID
 
         Returns:
-            Dict: Number to be Forwarded to, alongside any Audio Messages.
+            Dict: Call Centers stranded call configuration.
         """
         
         endpoint = "/groups/call-centers/stranded-calls"
@@ -617,6 +630,8 @@ class Get():
             params["dn"] = format_filter_value(filter_type, dn)
         if limit:
             params["limit"] = limit
+            
+        return self.requester.get(endpoint, params=params)
     
     
     def group_dn_details(self, service_provider_id:str, group_id:str):
@@ -655,7 +670,7 @@ class Get():
         endpoint = "/system/dns/search"
 
         params = {
-            "dn": "+{dn}"
+            "dn": f"+{dn}"
         }    
 
         return self.requester.get(endpoint, params=params)
@@ -853,7 +868,7 @@ class Get():
         return self.requester.get(endpoint, params=params)
 
     def group_hunt_group(self, service_user_id):
-        """Returns information about the specified Hunt Group.
+        """Returns detailed information about the specified Hunt Group.
 
         Args:
             service_user_id (str): UserID of the target Hunt Group.
@@ -888,6 +903,27 @@ class Get():
             "serviceProviderId": service_provider_id,
             "groupId": group_id,
             "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+    
+    def group_hunt_groups_available_users(self, service_provider_id: str, group_id: str):
+
+        """Returns a list of all users within the service provider that are available to be assigned to a hunt group in the specified group. 
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: available users (dict)
+        """
+
+        endpoint = "/groups/hunt-groups/users"
+
+        params = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id
         }
 
         return self.requester.get(endpoint, params=params)
@@ -1120,8 +1156,8 @@ class Get():
         """ Retrieves the Business Schedules for the specified group.
 
         Args:
-            service_provider_id (str): Target Service Provider ID
-            group_id (str): Target Group ID
+            service_provider_id (str): Target Service Provider ID where group is hosted.
+            group_id (str): Target Group ID with schedules.
 
         Returns:
             List: List of all the groups schedules, including Name, Type and Level.

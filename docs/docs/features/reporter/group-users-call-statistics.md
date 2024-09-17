@@ -47,8 +47,7 @@ api.get.user_services()
 ```python
 from odins_spear.api import Api
 
-my_api= Api("https://magic.14ip.net/api/v2", "Jordan.Prescott", "MAGIC-US", rate_limit=False)
-my_api.logger.set_up_sys_log_handler("123.456.789.112", 48816)
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
 # Whole day in date range

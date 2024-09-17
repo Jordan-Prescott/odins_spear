@@ -39,11 +39,11 @@ api.get.group_trunk_groups_call_capacity()
 ```python
 from odins_spear import api
 
-magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
-magic.authenticate()
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api.authenticate()
 
 
-print(magic.scripter.group_audit("ServiceProviderID", "GroupID"))
+print(my_api.scripter.group_audit("ServiceProviderID", "GroupID"))
 ```
 
 ### Example returned data (formatted):

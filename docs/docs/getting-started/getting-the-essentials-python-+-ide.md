@@ -1,8 +1,6 @@
 # 🐍 Getting the Essentials (Python + IDE)
 
-To _run_ Python code you first need to install Python on your machine, below is the link to the Python website where you can download this. I recommend if you are on Windows, install this through the Windows store and get the latest version.
-
-{% embed url="https://www.python.org/downloads/" %}
+To _run_ Python code you first need to install Python on your machine, I recommend if you are on Windows, install this through the Windows store and get the latest version. Find version 3.12 in the Windows Store and download this.
 
 To _write_ Python code you need an Integrated Development Environment (IDE) a fancy title for software (app) where you can write code.  Just like the Notepad app is used to write text. The one I recommend is Visual Studio Code (VSC) by Microsoft, you can download that below.&#x20;
 

@@ -1,3 +1,8 @@
+---
+description: my_api.put.group_hunt_groups_status()
+---
+
+
 # 🟢 PUT - Group Hunt Groups Status
 
 Updates a list of Hunt Groups (HG) status to either active or inactive.

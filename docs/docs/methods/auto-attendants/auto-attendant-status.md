@@ -1,8 +1,8 @@
 ---
-description: my_api.put.auto_attendant_status()
+description: my_api.put.auto_attendants_status()
 ---
 
-# 🟢 PUT - Auto Attendant Status
+# 🟢 PUT - Auto Attendants Status
 
 In this method, you can control the status of your auto attendants (AA) by activating and deactivating them. The method takes in two parameters, they are a list of the AA service user IDs and a status which is a boolean value of True (Active) or False (Deactivate).
 

@@ -31,10 +31,10 @@ api.get.user_report()
 ```python
 from odins_spear import api
 
-magic = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
-magic.authenticate()
+my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
+my_api.authenticate()
 
-magic.scripter.user_association(
+my_api.scripter.user_association(
     "ServiceProviderID", 
     "GroupID", 
     "UserID"
