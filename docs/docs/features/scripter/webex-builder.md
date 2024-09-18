@@ -53,7 +53,7 @@ my_api.scripter.webex_builder(
 ```
 {% endcode %}
 
-### Terminal Output
+### Retuned Data (Formatted)
 
 {% code overflow="wrap" fullWidth="false" %}
 ```
