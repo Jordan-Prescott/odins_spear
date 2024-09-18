@@ -36,6 +36,51 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 
 	# 5. build device - OC
 
+	device_password = api.get.password_generate(service_provider_id, group_id)["password"]
+
+	device_payload = {
+		"deviceLevel": "Group",
+		"useCustomUserNamePassword": "true",
+		"accessDeviceCredentials": {
+			"userName": device_name,
+			"password": device_password
+		},
+		"netAddress": "",
+		"port": "",
+		"outboundProxyServerNetAddress": "",
+		"stunServerNetAddress": "",
+		"macAddress": "",
+		"serialNumber": "",
+		"description": "",
+		"physicalLocation": "",
+		"transportProtocol": "UDP",
+		"profile": "Intelligent Proxy Addressing",
+		"staticRegistrationCapable": "false",
+		"configType": "2 File Configuration",
+		"protocolChoice": [
+			"SIP 2.0"
+		],
+		"isIpAddressOptional": "true",
+		"useDomain": "true",
+		"isMobilityManagerDevice": "false",
+		"deviceConfigurationOption": "Device Management",
+		"staticLineOrdering": "false",
+		"deviceTypeLevel": "System",
+		"tags": ["US-One"],
+		"relatedServices": ["Client License 18"],
+		"protocol": "SIP 2.0",
+		"userName": device_name
+	}
+
+	api.post.group_device(
+		service_provider_id = service_provider_id, 
+		group_id = group_id, 
+		device_name = device_name, 
+		device_type = device_type, 
+		payload = device_payload
+	)
+
+
 	# 6. add device to user based on primary flag - JP
 	if primary_device:
 		primary_device_configuration = {
@@ -60,7 +105,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 		)
   
 	# 7. get webex password - JP
-	password = api.get.passwords_generate(service_provider_id, group_id)["password"]
+	password = api.get.password_generate(service_provider_id, group_id)["password"]
 	api.put.user_web_authentication_password(user_id, password)
 
 	# 8. return formatted data
