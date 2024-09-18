@@ -29,8 +29,8 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 		)
 
 	# enable IMP in service settings
-	enableIMP = {'Integrated IMP': {'isActive': True}}
-	api.put.user_service_settings(user_id=user_id, settings=enableIMP)
+	enable_IMP = {'Integrated IMP': {'isActive': True}}
+	api.put.user_service_settings(user_id=user_id, settings=enable_IMP)
 
 	# build device
 	device_name = f"{user_id.split('@')[0]}_WBX"
