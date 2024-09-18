@@ -1185,10 +1185,10 @@ class Put():
         Note: Available options to change can be seen through: get.user_by_id()
 
         Args: 
-            service_provider_id (str): Target Service Provider where group is located
+            service_provider_id (str): 
+            updates (dict): The updates to be applied Target Service Provider where group is located
             group_id (str): Target Group ID where user is located
-            user_id (str): Target User ID
-            updates (dict): The updates to be applied to the list of Users e.g {"extension":"9999"}
+            user_id (str): Target User IDto the list of Users e.g {"extension":"9999"}
         
         Returns:
             Dict: Returns the changes made including User ID and updates.

@@ -13,6 +13,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
         	}
     	]
     } 
+ 
 	api.put.user(
     	service_provider_id,
     	group_id, 
@@ -27,11 +28,11 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 			service_packs=[webex_feature_pack_name]
 		)
 
-	# 4. enable IMP in service settings
+	# enable IMP in service settings
 	enableIMP = {'Integrated IMP': {'isActive': True}}
 	api.put.user_service_settings(user_id=user_id, settings=enableIMP)
 
-	# 5. build device
+	# build device
 	device_name = f"{user_id.split('@')[0]}_WBX"
 	device_password = api.get.password_generate(service_provider_id, group_id)["password"]
 
@@ -59,7 +60,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 			"accessDeviceEndpoint": {
 				"accessDevice": {
 				"deviceType": device_type,
-				"deviceName": f"{user_id.split('@')[0]}_WBX",
+				"deviceName": device_name,
 				"serviceProviderId": service_provider_id,
 				"groupId": group_id,
 				"deviceLevel": "Group",
