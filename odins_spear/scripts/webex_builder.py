@@ -3,7 +3,7 @@
 def main(api, service_provider_id, group_id, user_id, device_type, 
          email, primary_device, webex_feature_pack_name):
 
-	DEVICE_NAME = f"{user_id.split('@')[0]}_WBX"
+	device_name = f"{user_id.split('@')[0]}_WBX"
 
 	# 1 update the email & 2. update alt user id - KB
 
@@ -23,10 +23,12 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 	)
 	# 3. assign feature pack - OC
 
-	api.put.user_services(
-		user_id  = user_id, 
-		service_packs = [webex_feature_pack_name]
-	)
+	if webex_feature_pack_name:
+	
+		api.put.user_services(
+			user_id  = user_id, 
+			service_packs = [webex_feature_pack_name]
+		)
 
 	# 4. enable IMP in service settings (Micheal Clarke 04.09.24) - MC
 	enableIMP = {'Integrated IMP': {'isActive': True}}
@@ -54,7 +56,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 		api.post.user_shared_call_appearance_endpoint(
 			user_id,
 			user_id.replace("@", "_WBX@"),
-			DEVICE_NAME
+			device_name
 		)
   
 	# 7. get webex password - JP
