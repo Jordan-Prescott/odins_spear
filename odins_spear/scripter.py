@@ -186,3 +186,30 @@ class Scripter:
         """
         return scripts.service_provider_trunking_capacity.main(self.api, service_provider_id)
     
+    
+    def webex_builder(self, service_provider_id: str, group_id: str, user_id: str, 
+                      device_type: str, email:str, primary_device: bool =True, 
+                      webex_feature_pack_name: str =None, enable_integrated_imp: bool =True):
+        """Builds a Webex device and assigns to user either as the primary device or a 
+        Shared Call Appearance.
+
+        Args:
+            service_provider_id (str): Service Provider ID where group is hosted.
+            group_id (str): Group ID where target user is hosted. 
+            user_id (str): Target user to build and add webex device.
+            device_type (str): Name of the device profile to apply. 
+            email (str): Email of user. This will be used to sign into the webex client.
+            primary_device (bool, optional): Setting to False will assign as SCA, True is primary. Defaults to True. 
+            webex_feature_pack_name (str, optional): Feature pack to assign for Webex services. Defaults to None.
+            enable_integrated_imp (bool, optional): Enables Integrated IMP service for the user if True .Defaults to True.
+
+        Returns:
+            dict: Webex user/ device details. Includes webex client username and password, and if primary device 
+            device type set. 
+            
+        Raises:
+            OSLicenseNonExistent: Raised if user does not have correct license which allows for SCA devices.
+        """
+        
+        return scripts.webex_builder.main(self.api, service_provider_id, group_id, user_id, device_type, 
+                                          email, primary_device, webex_feature_pack_name)

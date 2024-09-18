@@ -1268,6 +1268,24 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
+    def user_service_settings(self, user_id: str):
+        """Retrieves all service settings for a specific user.
+
+        Args:
+            user_id (str): ID of the target user
+
+        Returns:
+            Dict: A dictionary containing all the service settings for the specified user.
+        """
+
+        endpoint = f"/users/services/settings"
+
+        params = {
+            "userId": user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
+    
     def group_services(self, group_id: str, service_provider_id: str):
         """
         Fetch all userServices, groupServices and servicePackServices assigned to a group.
