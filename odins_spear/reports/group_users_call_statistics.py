@@ -52,9 +52,9 @@ def main(api: object, service_provider_id: str, group_id: str,
             user_services = api.get.user_services(
                 user_id=user["userId"]
             )
-            
+
         except Exception:
-            # attempt 2
+            # attempt 2 in case of connection time out
             try:
                 user_statistics = api.get.users_stats(
                     user["userId"],
@@ -77,24 +77,26 @@ def main(api: object, service_provider_id: str, group_id: str,
         if not user_statistics:
             user_statistics = {
                     "userId": user["userId"],
-                    "total": 0,
-                    "totalAnsweredAndMissed": 0,
-                    "answeredTotal": 0,
-                    "missedTotal": 0,
-                    "busyTotal": 0,
-                    "redirectTotal": 0,
-                    "receivedTotal": 0,
-                    "receivedMissed": 0,
-                    "receivedAnswered": 0,
-                    "placedTotal": 0,
-                    "placedMissed": 0,
-                    "placedAnswered": 0
+                    "total": None,
+                    "totalAnsweredAndMissed": None,
+                    "answeredTotal": None,
+                    "missedTotal": None,
+                    "busyTotal": None,
+                    "redirectTotal": None,
+                    "receivedTotal": None,
+                    "receivedMissed": None,
+                    "receivedAnswered": None,
+                    "placedTotal": None,
+                    "placedMissed": None,
+                    "placedAnswered": None
                 }
             
         user_statistics["servicePackServices"] = [service["serviceName"] for service in user_services["servicePackServices"] if service["assigned"]]
         
         user_statistic_record = call_records_statistics.from_dict(user["firstName"], user["lastName"], user["extension"], user_statistics)
         group_users_statistics.append(user_statistic_record)
+
+        user_statistic_record.replace_none_with_0()
     
     # replace none with 0 if data returns None. Output is better if 0 allows user to make use of data better
     for record in tqdm(group_users_statistics, "Formatting individual stats for each user"):
