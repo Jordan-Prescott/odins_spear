@@ -156,13 +156,9 @@ class Get():
         params = {
             "userId": user_id
         }
-        try:
-            import requests.exceptions
-            response = self.requester.get(endpoint, params=params)
-        except requests.exceptions.RequestException:
-            raise OSLicenseNonExistent
-        else:
-            return response
+        
+        return self.requester.get(endpoint, params=params)
+        
     
     
     def group_call_center_bounced_calls(self, service_user_id: str):
@@ -910,6 +906,27 @@ class Get():
         }
 
         return self.requester.get(endpoint, params=params)
+    
+    def group_hunt_groups_available_users(self, service_provider_id: str, group_id: str):
+
+        """Returns a list of all users within the service provider that are available to be assigned to a hunt group in the specified group. 
+
+        Args:
+            service_provider_id (str): Target Service Provider ID
+            group_id (str): Target Group ID
+
+        Returns:
+            List: available users (dict)
+        """
+
+        endpoint = "/groups/hunt-groups/users"
+
+        params = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 
 #IN CALL SERVICE ACTIVATION
@@ -1251,6 +1268,24 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
+    def user_service_settings(self, user_id: str):
+        """Retrieves all service settings for a specific user.
+
+        Args:
+            user_id (str): ID of the target user
+
+        Returns:
+            Dict: A dictionary containing all the service settings for the specified user.
+        """
+
+        endpoint = f"/users/services/settings"
+
+        params = {
+            "userId": user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
+    
     def group_services(self, group_id: str, service_provider_id: str):
         """
         Fetch all userServices, groupServices and servicePackServices assigned to a group.

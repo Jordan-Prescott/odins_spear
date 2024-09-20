@@ -315,6 +315,30 @@ class Post():
         payload["serviceInstanceProfile"]["extension"] = extension
 
         return self.requester.post(endpoint, data=payload)
+    
+
+    def group_hunt_groups_remove_user(self, service_provider_id: str, group_id: str, user_id: str):
+
+        """Removes the specified user from all hunt groups in which it currently exists. 
+
+        Args:
+            service_provider_id (str): The service provider ID in which the target user exists.
+            group_id (str): The group ID where the user exists.
+            user_id (str): The User ID of the user that is to be removed from the hunt group(s).
+
+        Returns:
+            List: Service user ID's (str) of the hunt groups from which the specified user has been removed. 
+        """
+
+        endpoint = "/groups/hunt-groups/removeUser"
+
+        data = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id,
+            "userId": user_id
+        }
+
+        return self.requester.post(endpoint, data=data)
 
 #IN CALL SERVICE ACTIVATION
 #INSTANT GROUP CALL
@@ -365,6 +389,33 @@ class Post():
 #SERVICE PROVIDERS
 #SERVICES
 #SHARED CALL APPEARANCE
+
+    def user_shared_call_appearance_endpoint(self, user_id: str, line_port: str, device_name):
+        """Creates a new Shared Call Apprance (SCA) on a single user.
+
+        Args:
+            user_id (str): Target user id of user to create SCA on.
+            line_port (str): Line port to be assigned to the new SCA.
+            device_name (_type_): Device to add for SCA from available devices.
+
+        Returns:
+            dict: New SCA details applied to user. 
+        """
+        
+        endpoint = "/users/shared-call-appearance/endpoints"
+        
+        data = {
+            "userId":user_id,
+            "linePort":line_port,
+            "isActive":True,
+            "allowOrigination":True,
+            "allowTermination":True,
+            "deviceName":device_name,
+            "deviceLevel":"Group"
+        }
+        
+        return self.requester.post(endpoint, data=data)
+
 #SILENT ALERTING
 #SIMULTANEOUS RING PERSONAL
 #SMARTY ADDRESS

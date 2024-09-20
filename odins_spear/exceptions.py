@@ -130,11 +130,13 @@ class OSFileNotFound(OSError):
 
     def __str__(self) -> str:
         return f"File can not be found, please check path and file name."   
-
-
-class OSLicenseNonExistent(OSError):
-    """ Raised when the Specified Entity doesn't exist due to licensing.  
+    
+class OSApiResponseError(OSError):
+    """ Raised when Odin Api returns an error code.
     """
+    def __init__(self, response):
+        response = response.json()
+        self.response = f"{response['details']} {response['status']}: {response['error']}"
 
     def __str__(self) -> str:
-        return f"Specified Entity doesn't have the correct License." 
+        return self.response

@@ -166,6 +166,7 @@
       * [🔢 Remove Numbers](docs/features/scripter/remove-numbers.md)
       * [🔑 Bulk Password Reset](docs/features/scripter/bulk-password-reset.md)
       * [📜 Service Provider Trunking Capacity](docs/features/scripter/service-provider-trunking-capacity.md)
+      * [💻 Webex Builder](docs/features/scripter/webex-builder.md)
     * [📈 Reporter](docs/features/reporter/README.md)
       * [🤙 Call Flow](docs/features/reporter/call-flow/README.md)
         * [🔑 Node Key](docs/features/reporter/call-flow/node-key.md)

@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding="utf-8") as file:
 
 setup(
     name='odins_spear',
-    version='1.0.0',
+    version='1.1.0',
     url='https://github.com/Jordan-Prescott/odins_spear',
     author='Jordan Prescott',
     author_email='jprescott23@gmail.com',
@@ -19,7 +19,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.10',
+    python_requires='>=3.9',
     install_requires=[
         'certifi==2023.7.22',
         'cffi==1.16.0',
