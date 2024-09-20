@@ -30,13 +30,6 @@ class call_records_statistics:
     placedTotal: str
     placedMissed: str
     placedAnswered: str
-    
-    def replace_none_with_0(self):
-        for field in fields(self):
-            value = getattr(self, field.name)
-            # Replace None with 0
-            if value is None or value == 'None':
-                setattr(self, field.name, 0)
 
     @classmethod
     def from_dict(cls, first_name, last_name, extension, data):
