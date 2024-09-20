@@ -34,7 +34,7 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 				service_packs=[webex_feature_pack_name]
 			)
 		print(f"Added feature: {webex_feature_pack_name}")
-	except Exception:
+	except Exception as e:
 		print(f"\tERROR: Failed to add feature - {webex_feature_pack_name}. Detail: {e}")
 
 	# enable IMP in service settings
