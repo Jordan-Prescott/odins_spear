@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding="utf-8") as file:
 
 setup(
     name='odins_spear',
-    version='1.2.0',
+    version='1.2.1',
     url='https://github.com/Jordan-Prescott/odins_spear',
     author='Jordan Prescott',
     author_email='jprescott23@gmail.com',
