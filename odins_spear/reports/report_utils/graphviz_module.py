@@ -40,7 +40,7 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'call_centre': {
-            'shape': 'Mrecord',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
             'color': '#68272E',
@@ -49,7 +49,7 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'hunt_group': {
-            'shape': 'Mrecord',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
             'color': '#3D4066',
@@ -58,7 +58,7 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'user': {
-            'shape': 'Mrecord',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
             'color': '#B87700',
@@ -88,9 +88,10 @@ class GraphvizModule:
             if isinstance(n, bre.User):
                 self.dot.node(n.id, n.extension, GraphvizModule.NODE_STYLING["user"])
             elif isinstance(n, bre.CallCenter):
-                self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["call_centre"])
+                self.dot.node(n.service_user_id, "{ {test} | {test} }" , GraphvizModule.NODE_STYLING["call_centre"])
+                #f"{{<name> {n.name} | <policy>{n.policy}}}"
             elif isinstance(n, bre.HuntGroup):
-                self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["hunt_group"])
+                self.dot.node(n.service_user_id, f"{{<name> {n.name} | <policy>{n.policy}}}", GraphvizModule.NODE_STYLING["hunt_group"])
             elif isinstance(n, bre.AutoAttendant):
                 self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["auto_attendant"])
             
@@ -136,7 +137,10 @@ class GraphvizModule:
                         self._format_edge(n, key.phone_number, key.number)
                         
     
-    def _format_edge(self, node_a: str, node_b: str, label: str):
+    def _format_edge(self, node_a: str, node_b: str, label: str):     
+        if node_b is None:
+            return None
+           
         try:
             self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
         except AttributeError:
