@@ -88,8 +88,7 @@ class GraphvizModule:
             if isinstance(n, bre.User):
                 self.dot.node(n.id, n.extension, GraphvizModule.NODE_STYLING["user"])
             elif isinstance(n, bre.CallCenter):
-                self.dot.node(n.service_user_id, "{ {test} | {test} }" , GraphvizModule.NODE_STYLING["call_centre"])
-                #f"{{<name> {n.name} | <policy>{n.policy}}}"
+                self.dot.node(n.service_user_id, f"{{<name> {n.name} | <policy>{n.policy}}}" , GraphvizModule.NODE_STYLING["call_centre"])
             elif isinstance(n, bre.HuntGroup):
                 self.dot.node(n.service_user_id, f"{{<name> {n.name} | <policy>{n.policy}}}", GraphvizModule.NODE_STYLING["hunt_group"])
             elif isinstance(n, bre.AutoAttendant):
