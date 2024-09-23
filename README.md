@@ -45,10 +45,10 @@ pip install odins-spear
 Here's a simple example to get you started:
 
 ```python
-from odins_spear.api import API
+from odins_spear.api import Api
 
 # Initialize the API with your credentials
-my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
+my_api = Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
 my_api.authenticate()
 
 # Locate an alias assignment
