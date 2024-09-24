@@ -40,8 +40,8 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     
     broadwork_entities_user_ids = []
     
-    for aa in auto_attendants:
-        broadwork_entities_user_ids.append(["AA", aa["serviceUserId"]])
+    # for aa in auto_attendants:
+    #     broadwork_entities_user_ids.append(["AA", aa["serviceUserId"]])
         
     for hg in hunt_groups:
         broadwork_entities_user_ids.append(["HG", hg["serviceUserId"]])
@@ -108,15 +108,27 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     for broadwork_entity in tqdm(OBJECT_WITH_ALIAS, desc=f"Searching AA, HG, and CC for alias {alias}"):
 
         if locate_alias(alias, broadwork_entity['aliases']):
-            return f"""
-        Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"""
+            return {
+                "alias":alias,
+                "broadwork_entity": "AA, CC, HG",
+                "broadwork_entity":broadwork_entity
+            }
+        #     return f"""
+        # Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"""
         
     users = api.get.users(service_provider_id, group_id, extended=True)
     print("Fetched users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
-
+        
         if locate_alias(alias, user['aliases']):
-            return f"\n\n\tAlias ({alias}) found: User - {user['userId']}\n"
+            return {
+                "alias": alias,
+                "user_id": user['userId'],
+                "type":  "user"
+            }
     
-    return f"\n\n\tAlias ({alias}) not found."
+    from ..exceptions import OSAliasNotFound
+    return OSAliasNotFound
+    
+    # return f"\n\n\tAlias ({alias}) not found."
