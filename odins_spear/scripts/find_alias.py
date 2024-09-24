@@ -40,8 +40,8 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     
     broadwork_entities_user_ids = []
     
-    # for aa in auto_attendants:
-    #     broadwork_entities_user_ids.append(["AA", aa["serviceUserId"]])
+    for aa in auto_attendants:
+        broadwork_entities_user_ids.append(["AA", aa["serviceUserId"]])
         
     for hg in hunt_groups:
         broadwork_entities_user_ids.append(["HG", hg["serviceUserId"]])
