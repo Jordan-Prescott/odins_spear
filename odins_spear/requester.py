@@ -36,10 +36,10 @@ class Requester():
     
     def put(self, endpoint, data=None):
         return self._request(requests.put, endpoint, data)
-
+    
     
     def delete(self, endpoint, data=None, params=None):
-        return self._request(requests.delete, endpoint, data, params)
+        return self._request(requests.put, endpoint, data, params)
 
 
     def _request(self, method, endpoint, data=None, params=None):
@@ -76,9 +76,6 @@ class Requester():
             except requests.exceptions.RequestException:
                 raise OSApiResponseError(response)
             else:
-                # for methods where call is a success but returns no useful data 
-                if response.text == '[]':
-                    return response.status_code
                 return response.json()
         
 
@@ -105,8 +102,5 @@ class Requester():
         except requests.exceptions.RequestException:
             raise OSApiResponseError(response)
         else:
-            # for methods where call is a success but returns no useful data 
-            if response.text == '[]':
-                return response.status_code
             return response.json()
     
