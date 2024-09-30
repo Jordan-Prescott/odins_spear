@@ -55,9 +55,11 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     for broadwork_entity in tqdm(broadwork_entities_user_ids, desc="Fetching AA, HG, and CC details"):
         # add some buffer time for odins api 
         
-        formatted = {}
-        formatted["type"] = broadwork_entity[0] 
-        
+        formatted = {
+            "type":broadwork_entity[0],
+            "service_user_id":broadwork_entity[1]
+        }
+
         temp_object = ""
         
         try:
@@ -111,11 +113,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     for broadwork_entity in tqdm(OBJECT_WITH_ALIAS, desc=f"Searching AA, HG, and CC for alias {alias}"):
 
         if locate_alias(alias, broadwork_entity['aliases']):
-            return {
-                "alias":alias,
-                "service_user_id": broadwork_entity[1],
-                "type":broadwork_entity[0]
-            }
+            return broadwork_entity
         
     users = api.get.users(service_provider_id, group_id, extended=True)
     print("Fetched users.")
@@ -124,9 +122,9 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         
         if locate_alias(alias, user['aliases']):
             return {
-                "alias": alias,
+                "type":  "user",
                 "user_id": user['userId'],
-                "type":  "user"
+                "alias": alias
             }
     
     return OSAliasNotFound
