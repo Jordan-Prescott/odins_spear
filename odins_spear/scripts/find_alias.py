@@ -1,6 +1,9 @@
 import re
 from tqdm import tqdm
 
+from ..exceptions import OSAliasNotFound
+
+
 def locate_alias(alias, aliases: list):
     for a in aliases:
         if re.search(rf'\b{alias}\b', a):
@@ -108,15 +111,22 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     for broadwork_entity in tqdm(OBJECT_WITH_ALIAS, desc=f"Searching AA, HG, and CC for alias {alias}"):
 
         if locate_alias(alias, broadwork_entity['aliases']):
-            return f"""
-        Alias ({alias}) found: {broadwork_entity['type']} - {broadwork_entity['name']}"""
+            return {
+                "alias":alias,
+                "service_user_id": broadwork_entity[1],
+                "type":broadwork_entity[0]
+            }
         
     users = api.get.users(service_provider_id, group_id, extended=True)
     print("Fetched users.")
     
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
-
+        
         if locate_alias(alias, user['aliases']):
-            return f"\n\n\tAlias ({alias}) found: User - {user['userId']}\n"
+            return {
+                "alias": alias,
+                "user_id": user['userId'],
+                "type":  "user"
+            }
     
-    return f"\n\n\tAlias ({alias}) not found."
+    return OSAliasNotFound
