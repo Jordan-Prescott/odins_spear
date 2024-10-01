@@ -9,7 +9,7 @@ The search is conducted in two phases:
 1. Collecting details of AAs, HGs, and CCs and checking for the aliases.
 2. If not found, search through the users for the alias.
 
-If the alias is found, the method returns a string specifying the type of entity and its name or userID. If the alias is not found after checking all entities, an AOAliasNotFound exception is raised.
+If the alias is found, the method returns a dict specifying the type of entity and its name or userID. If the alias is not found after checking all entities, an AOAliasNotFound exception is raised.
 
 The script makes use of the following methods:
 
