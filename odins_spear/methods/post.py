@@ -31,6 +31,31 @@ class Post():
 
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS
+
+    def group_admin(self, service_provider_id: str, group_id: str, user_id: str, password: str, payload: dict = {}):
+        """Builds a group-level administrator.
+
+        Args:
+            service_provider_id (str): Service provider ID where the admin should be built.
+            group_id (str): Group ID where the admin should be built
+            user_id (str): User ID of the admin. 
+            password (str): Password for the administrator profile. Note get.password_generate() can be used to get this.
+            payload (dict, optional): Admin configuration data. 
+        
+        Returns:
+            Dict: Returns the device profile. 
+        """
+
+        endpoint = "/groups/admins"
+
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["userId"] = user_id
+        payload["password"] = password
+
+        return self.requester.post(endpoint, data=payload)
+
+
 #ADVICE OF CHARGE
 #ALTERNATE NUMBERS
 #ANSWER CONFIRMATION
