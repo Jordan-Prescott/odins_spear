@@ -85,12 +85,23 @@ class GraphvizModule:
         # build nodes
         self.dot.node("Start", "Start", GraphvizModule.NODE_STYLING["start"])
         for n in nodes:
+            
+            try: 
+                node_config = f"<extension> {n.extension} "
+            except AttributeError:
+                node_config = ""
+            
             if isinstance(n, bre.User):
-                self.dot.node(n.id, n.extension, GraphvizModule.NODE_STYLING["user"])
-            elif isinstance(n, bre.CallCenter):
-                self.dot.node(n.service_user_id, f"{{<name> {n.name} | <policy>{n.policy}}}" , GraphvizModule.NODE_STYLING["call_centre"])
-            elif isinstance(n, bre.HuntGroup):
-                self.dot.node(n.service_user_id, f"{{<name> {n.name} | <policy>{n.policy}}}", GraphvizModule.NODE_STYLING["hunt_group"])
+                self.dot.node(n.id, node_config, GraphvizModule.NODE_STYLING["user"])
+                
+            elif isinstance(n, bre.CallCenter) or isinstance(n, bre.HuntGroup):
+                node_config += f"| <name> {n.name} | <policy> {n.policy}"
+                for i, a in enumerate(n.agents):
+                    node_config += f"| <{a.user_id}> Agent {i+1}: {a.extension}"
+                self.dot.node(n.service_user_id, node_config , 
+                              GraphvizModule.NODE_STYLING["call_centre"] if isinstance(n, bre.CallCenter) 
+                              else GraphvizModule.NODE_STYLING["hunt_group"])
+            
             elif isinstance(n, bre.AutoAttendant):
                 self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["auto_attendant"])
             
