@@ -859,6 +859,41 @@ class Put():
 #DOMAINS
 #EMERGENCY NOTIFICATIONS
 #EMERGENCY ZONES
+
+    def group_emergency_zones(self, service_provider_id: str, group_id: str, is_active: bool=True, zone_rules: str=None, emergency_notification_email: str=None, ip_addresses: list=None):
+        """Updates the Emergency Zone configuration in the group. 
+       
+        Args:
+            service_provider_id (str): Service provider ID where the Emergency Zone to be updated exists.
+            group_id (str): Group ID where the Emergency Zone to be updated exists.
+            is_active (bool, optional): Whether the Emergency Zone service is active or not. Defaults to True
+            zone_rules (str, optional): The rules of the Emergency Zone. This will either be "Prohibit all registrations and call originations" or "Prohibit emergency call originations".
+            ip_addresses (list, optional): A list of IP address ranges (dicts) to be added to the Emergency Zone. If the IP address to be applied is not a range, the min and max values should be the same.
+            
+        Returns:
+            dict: Emergency Zone profile with updated IP addresses.
+        """
+
+        endpoint = "/groups/emergency-zones"
+
+        data = {
+            "groupId": group_id, 
+            "serviceProviderId": service_provider_id
+        }
+
+        if is_active:
+            data["isActive"] = is_active
+        if zone_rules:
+            data["emergencyZonesProhibition"] = zone_rules
+        if emergency_notification_email:
+            data["sendEmergencyCallNotifyEmail"] = True
+            data["emergencyCallNotifyEmailAddress"] = emergency_notification_email
+        if ip_addresses:
+            data["ipAddresses"] = ip_addresses
+        
+        return self.requester.put(endpoint, data)        
+
+
 #ENTERPRISE TRUNKS
 #EXECUTIVE
 #EXECUTIVE ASSISTANT
