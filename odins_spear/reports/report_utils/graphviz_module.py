@@ -103,7 +103,9 @@ class GraphvizModule:
                               else GraphvizModule.NODE_STYLING["hunt_group"])
             
             elif isinstance(n, bre.AutoAttendant):
-                
+                node_config += f"| <name> {n.name}"
+                for k in n.business_hours_menu.keys:
+                    node_config += f"| <key{k.number}> {k.number}"
                 self.dot.node(n.service_user_id, node_config, GraphvizModule.NODE_STYLING["auto_attendant"])
             
         # build edges
@@ -145,7 +147,7 @@ class GraphvizModule:
             elif isinstance(n, bre.AutoAttendant):
                 for key in n.business_hours_menu.keys:
                     if "Transfer" in key.action:
-                        self._format_edge(n, key.phone_number, key.number)
+                        self._format_edge(key, key.phone_number, key.number)
                         
     
     def _format_edge(self, node_a: str, node_b: str, label: str):     
