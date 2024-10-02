@@ -868,10 +868,11 @@ class Put():
             group_id (str): Group ID where the Emergency Zone to be updated exists.
             is_active (bool, optional): Whether the Emergency Zone service is active or not. Defaults to True
             zone_rules (str, optional): The rules of the Emergency Zone. This will either be "Prohibit all registrations and call originations" or "Prohibit emergency call originations".
+            emergency_notification_email (str, optional): The email address where emergency call notifications should be sent. 
             ip_addresses (list, optional): A list of IP address ranges (dicts) to be added to the Emergency Zone. If the IP address to be applied is not a range, the min and max values should be the same.
             
         Returns:
-            dict: Emergency Zone profile with updated IP addresses.
+            Dict: Updated Emergency Zone configuration.
         """
 
         endpoint = "/groups/emergency-zones"

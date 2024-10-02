@@ -290,7 +290,7 @@ class Post():
             ip_addresses (list): A list of IP address ranges (dicts) to be added to the Emergency Zone. If the IP address to be applied is not a range, the min and max values should be the same.
             
         Returns:
-            dict: Emergency Zone profile with updated IP addresses.
+            Dict: Emergency Zone profile with updated IP addresses.
         """
 
         endpoint = "/groups/emergency-zones"
