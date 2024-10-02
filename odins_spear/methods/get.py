@@ -165,6 +165,25 @@ class Get():
             return response
     
     
+    def group_call_center_agents(self, service_user_id: str):
+        """Returns list of agents assigned to the target call center.
+
+        Args:
+            service_user_id (str): Service user ID of target call center.
+
+        Returns:
+            Dict: List of agents assigned to call center
+        """
+        
+        endpoint = "/groups/call-centers/agents"
+        
+        params = {
+            "serviceUserId": service_user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
+    
+    
     def group_call_center_bounced_calls(self, service_user_id: str):
         """Retrieves the number of rings before a call is bounced from the specified call center.
 

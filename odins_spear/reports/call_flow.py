@@ -68,7 +68,11 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
 
     call_centers = api.get.group_call_centers(service_provider_id, group_id)    
     for cc in tqdm(call_centers, desc=f"Fetching all Call Centers."):
-        call_center = bre.CallCenter.from_dict(group= group, data= api.get.group_call_center(cc['serviceUserId']))
+        
+        call_center = api.get.group_call_center(cc['serviceUserId'])
+        call_center['agents'] = api.get.group_call_center_agents(cc['serviceUserId'])['agents']
+        
+        call_center = bre.CallCenter.from_dict(group= group, data= call_center)
         
         try:
             overflow_settings = api.get.group_call_center_overflow(call_center.service_user_id)

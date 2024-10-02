@@ -31,7 +31,7 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'auto_attendant': {
-            'shape': 'circle',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
             'color': '#5E1008',
@@ -97,13 +97,14 @@ class GraphvizModule:
             elif isinstance(n, bre.CallCenter) or isinstance(n, bre.HuntGroup):
                 node_config += f"| <name> {n.name} | <policy> {n.policy}"
                 for i, a in enumerate(n.agents):
-                    node_config += f"| <{a.user_id}> Agent {i+1}: {a.extension}"
-                self.dot.node(n.service_user_id, node_config , 
+                    node_config += f"| <{a.id}> Agent {i+1}: {a.extension}"
+                self.dot.node(n.service_user_id, node_config, 
                               GraphvizModule.NODE_STYLING["call_centre"] if isinstance(n, bre.CallCenter) 
                               else GraphvizModule.NODE_STYLING["hunt_group"])
             
             elif isinstance(n, bre.AutoAttendant):
-                self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["auto_attendant"])
+                
+                self.dot.node(n.service_user_id, node_config, GraphvizModule.NODE_STYLING["auto_attendant"])
             
         # build edges
         for n in nodes:
