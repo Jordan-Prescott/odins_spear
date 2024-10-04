@@ -34,8 +34,8 @@ class GraphvizModule:
             'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#5E1008',
-            'fillcolor': '#FF0000',
+            'color': '#1C3A3A',
+            'fillcolor': '#356969',
             'fontname': 'Arial',
             'fontcolor': 'white'
         },
@@ -43,8 +43,8 @@ class GraphvizModule:
             'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#68272E',
-            'fillcolor': '#FFC0CB',
+            'color': '#9773F1',
+            'fillcolor': '#B4A0E5',
             'fontname': 'Arial',
             'fontcolor': 'white'
         },
@@ -52,19 +52,19 @@ class GraphvizModule:
             'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#3D4066',
-            'fillcolor': '#9C1FE9',
+            'color': '#E892E2',
+            'fillcolor': '#E9BCE6',
             'fontname': 'Arial',
-            'fontcolor': 'white'
+            'fontcolor': 'black'
         },
         'user': {
             'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#B87700',
-            'fillcolor': '#FBA200',
+            'color': '#CAE188',
+            'fillcolor': '#E3FE97',
             'fontname': 'Arial',
-            'fontcolor': 'white'
+            'fontcolor': 'black'
         },
         
     }
@@ -87,7 +87,7 @@ class GraphvizModule:
         for n in nodes:
             
             try: 
-                node_config = f"<extension> {n.extension} "
+                node_config = f"<extension> Extension: {n.extension} "
             except AttributeError:
                 node_config = ""
             
@@ -95,7 +95,7 @@ class GraphvizModule:
                 self.dot.node(n.id, node_config, GraphvizModule.NODE_STYLING["user"])
                 
             elif isinstance(n, bre.CallCenter) or isinstance(n, bre.HuntGroup):
-                node_config += f"| <name> {n.name} | <policy> {n.policy}"
+                node_config += f"| <name> Name: {n.name} | <policy> Policy: {n.policy}"
                 for i, a in enumerate(n.agents):
                     node_config += f"| <{a.id}> Agent {i+1}: {a.extension}"
                 self.dot.node(n.service_user_id, node_config, 
@@ -103,9 +103,10 @@ class GraphvizModule:
                               else GraphvizModule.NODE_STYLING["hunt_group"])
             
             elif isinstance(n, bre.AutoAttendant):
-                node_config += f"| <name> {n.name}"
+                node_config += f"| <name> Name: {n.name}"
                 for k in n.business_hours_menu.keys:
-                    node_config += f"| <key{k.number}> {k.number}"
+                    node_config += f"| <key{k.number}> Option: {k.number}"
+                    k.id = f"{n.service_user_id}:<key{k.number}>"
                 self.dot.node(n.service_user_id, node_config, GraphvizModule.NODE_STYLING["auto_attendant"])
             
         # build edges
