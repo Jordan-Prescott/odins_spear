@@ -490,7 +490,7 @@ class Post():
 #USERS
         
     def user(self, service_provider_id: str, group_id: str, user_id: str, first_name: str, last_name: str, 
-             extension: str, web_auth_password: str, payload: dict):
+             extension: str, web_auth_password: str, payload: dict={}):
         """
             Creates a new user in the specified group with the configuration defined in the payload.
 
@@ -502,7 +502,7 @@ class Post():
             last_name (str): Last name of new user.
             extension (str): Extension number of new user.
             web_auth_password (str): Web authentication password. Note get.password_generate() can be used to get this.
-            payload (dict): User configuration.
+            payload (dict, optional): User configuration.
 
         Returns:
             Dict: New user entity.
