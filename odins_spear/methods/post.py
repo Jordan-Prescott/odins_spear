@@ -31,6 +31,31 @@ class Post():
 
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS
+
+    def group_admin(self, service_provider_id: str, group_id: str, user_id: str, password: str, payload: dict = {}):
+        """Builds a group-level administrator.
+
+        Args:
+            service_provider_id (str): Service provider ID where the admin should be built.
+            group_id (str): Group ID where the admin should be built
+            user_id (str): User ID of the admin. 
+            password (str): Password for the administrator profile. Note get.password_generate() can be used to get this.
+            payload (dict, optional): Admin configuration data. 
+        
+        Returns:
+            Dict: Returns the device profile. 
+        """
+
+        endpoint = "/groups/admins"
+
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["userId"] = user_id
+        payload["password"] = password
+
+        return self.requester.post(endpoint, data=payload)
+
+
 #ADVICE OF CHARGE
 #ALTERNATE NUMBERS
 #ANSWER CONFIRMATION
@@ -255,6 +280,30 @@ class Post():
 #DOMAINS
 #EMERGENCY NOTIFICATIONS
 #EMERGENCY ZONES
+
+    def group_emergency_zones(self, service_provider_id: str, group_id: str, ip_addresses: list):
+        """Updates the IP address(es) for the Emergency Zone configured in the group. 
+       
+        Args:
+            service_provider_id (str): Service provider ID where the Emergency Zone to be updated exists.
+            group_id (str): Group ID where the Emergency Zone to be updated exists.
+            ip_addresses (list): A list of IP address ranges (dicts) to be added to the Emergency Zone. If the IP address to be applied is not a range, the min and max values should be the same.
+            
+        Returns:
+            Dict: Emergency Zone profile with updated IP addresses.
+        """
+
+        endpoint = "/groups/emergency-zones"
+
+        data = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id, 
+            "ipAddresses": ip_addresses
+        }
+
+        return self.requester.post(endpoint, data=data)
+
+
 #ENTERPRISE TRUNKS
 #EXECUTIVE
 #EXECUTIVE ASSISTANT
