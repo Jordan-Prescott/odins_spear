@@ -31,7 +31,7 @@ my_api.post.group_admin(
 ```
 {% endcode %}
 
-### Example Returned Data of Device (Formatted)
+### Example Data Returned (Formatted)
 
 ```json
 {
