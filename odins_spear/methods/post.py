@@ -43,7 +43,7 @@ class Post():
             payload (dict, optional): Admin configuration data. 
         
         Returns:
-            Dict: Returns the device profile. 
+            Dict: Returns the admin profile. 
         """
 
         endpoint = "/groups/admins"
