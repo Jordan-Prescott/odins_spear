@@ -1,7 +1,7 @@
 
 
 def main(api, service_provider_id, group_id, user_id, device_type, 
-         email, primary_device, webex_feature_pack_name):
+         email, primary_device, webex_feature_pack_name, enable_integarated_imp):
 
 	print("Start.\n")
 	# Update the email & alt user id
@@ -38,12 +38,13 @@ def main(api, service_provider_id, group_id, user_id, device_type,
 		print(f"\tERROR: Failed to add feature - {webex_feature_pack_name}. Detail: {e}")
 
 	# enable IMP in service settings
-	enable_IMP = {'Integrated IMP': {'isActive': True}}
-	try:
-		api.put.user_service_settings(user_id=user_id, settings=enable_IMP)
-		print("Enabled integrated IMP.")
-	except Exception as e:
-		print(f"\tERROR: Failed to enable Integrated IMP. Detail: {e}")
+	if enable_integarated_imp:
+		enable_IMP = {'Integrated IMP': {'isActive': True}}
+		try:
+			api.put.user_service_settings(user_id=user_id, settings=enable_IMP)
+			print("Enabled integrated IMP.")
+		except Exception as e:
+			print(f"\tERROR: Failed to enable Integrated IMP. Detail: {e}")
   
 	# build device
 	device_name = f"{user_id.split('@')[0]}_WBX"

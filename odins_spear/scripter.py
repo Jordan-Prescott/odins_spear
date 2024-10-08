@@ -212,4 +212,4 @@ class Scripter:
         """
         
         return scripts.webex_builder.main(self.api, service_provider_id, group_id, user_id, device_type, 
-                                          email, primary_device, webex_feature_pack_name)
+                                          email, primary_device, webex_feature_pack_name, enable_integrated_imp)
