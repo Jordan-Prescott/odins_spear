@@ -154,17 +154,22 @@ class GraphvizModule:
     def _format_edge(self, node_a: str, node_b: str, label: str):     
         if node_b is None:
             return None
-           
-        try:
-            self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
-        except AttributeError:
-            try:
-                self.dot.edge(node_a.id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
-            except AttributeError:
-                try:
-                    self.dot.edge(node_a.service_user_id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
-                except AttributeError:
-                    self.dot.edge(node_a.service_user_id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
+        
+        node_a_id = node_a.id if hasattr(node_a, 'id') else node_a.service_user_id
+        node_b_id = node_b.id if hasattr(node_b, 'id') else node_b.service_user_id
+
+        self.dot.edge(node_a_id, node_b_id, label, GraphvizModule.EDGE_STYLYING)
+        
+        # try:
+        #     self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
+        # except AttributeError:
+        #     try:
+        #         self.dot.edge(node_a.id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
+        #     except AttributeError:
+        #         try:
+        #             self.dot.edge(node_a.service_user_id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
+        #         except AttributeError:
+        #             self.dot.edge(node_a.service_user_id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
 
             
     def _save_graph(self, filename: str):
