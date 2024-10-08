@@ -31,40 +31,40 @@ class GraphvizModule:
             'fontcolor': 'white'
         },
         'auto_attendant': {
-            'shape': 'circle',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#5E1008',
-            'fillcolor': '#FF0000',
+            'color': '#1C3A3A',
+            'fillcolor': '#356969',
             'fontname': 'Arial',
             'fontcolor': 'white'
         },
         'call_centre': {
-            'shape': 'Mrecord',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#68272E',
-            'fillcolor': '#FFC0CB',
+            'color': '#9773F1',
+            'fillcolor': '#B4A0E5',
             'fontname': 'Arial',
             'fontcolor': 'white'
         },
         'hunt_group': {
-            'shape': 'Mrecord',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#3D4066',
-            'fillcolor': '#9C1FE9',
+            'color': '#E892E2',
+            'fillcolor': '#E9BCE6',
             'fontname': 'Arial',
-            'fontcolor': 'white'
+            'fontcolor': 'black'
         },
         'user': {
-            'shape': 'Mrecord',
+            'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#B87700',
-            'fillcolor': '#FBA200',
+            'color': '#CAE188',
+            'fillcolor': '#E3FE97',
             'fontname': 'Arial',
-            'fontcolor': 'white'
+            'fontcolor': 'black'
         },
         
     }
@@ -85,14 +85,29 @@ class GraphvizModule:
         # build nodes
         self.dot.node("Start", "Start", GraphvizModule.NODE_STYLING["start"])
         for n in nodes:
+            
+            try: 
+                node_config = f"<extension> Extension: {n.extension} "
+            except AttributeError:
+                node_config = ""
+            
             if isinstance(n, bre.User):
-                self.dot.node(n.id, n.extension, GraphvizModule.NODE_STYLING["user"])
-            elif isinstance(n, bre.CallCenter):
-                self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["call_centre"])
-            elif isinstance(n, bre.HuntGroup):
-                self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["hunt_group"])
+                self.dot.node(n.id, node_config, GraphvizModule.NODE_STYLING["user"])
+                
+            elif isinstance(n, bre.CallCenter) or isinstance(n, bre.HuntGroup):
+                node_config += f"| <name> Name: {n.name} | <policy> Policy: {n.policy}"
+                for i, a in enumerate(n.agents):
+                    node_config += f"| <{a.id}> Agent {i+1}: {a.extension}"
+                self.dot.node(n.service_user_id, node_config, 
+                              GraphvizModule.NODE_STYLING["call_centre"] if isinstance(n, bre.CallCenter) 
+                              else GraphvizModule.NODE_STYLING["hunt_group"])
+            
             elif isinstance(n, bre.AutoAttendant):
-                self.dot.node(n.service_user_id, n.extension, GraphvizModule.NODE_STYLING["auto_attendant"])
+                node_config += f"| <name> Name: {n.name}"
+                for k in n.business_hours_menu.keys:
+                    node_config += f"| <key{k.number}> Option: {k.number}"
+                    k.id = f"{n.service_user_id}:<key{k.number}>"
+                self.dot.node(n.service_user_id, node_config, GraphvizModule.NODE_STYLING["auto_attendant"])
             
         # build edges
         for n in nodes:
@@ -133,20 +148,28 @@ class GraphvizModule:
             elif isinstance(n, bre.AutoAttendant):
                 for key in n.business_hours_menu.keys:
                     if "Transfer" in key.action:
-                        self._format_edge(n, key.phone_number, key.number)
+                        self._format_edge(key, key.phone_number, key.number)
                         
     
-    def _format_edge(self, node_a: str, node_b: str, label: str):
-        try:
-            self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
-        except AttributeError:
-            try:
-                self.dot.edge(node_a.id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
-            except AttributeError:
-                try:
-                    self.dot.edge(node_a.service_user_id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
-                except AttributeError:
-                    self.dot.edge(node_a.service_user_id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
+    def _format_edge(self, node_a: str, node_b: str, label: str):     
+        if node_b is None:
+            return None
+        
+        node_a_id = node_a.id if hasattr(node_a, 'id') else node_a.service_user_id
+        node_b_id = node_b.id if hasattr(node_b, 'id') else node_b.service_user_id
+
+        self.dot.edge(node_a_id, node_b_id, label, GraphvizModule.EDGE_STYLYING)
+        
+        # try:
+        #     self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
+        # except AttributeError:
+        #     try:
+        #         self.dot.edge(node_a.id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
+        #     except AttributeError:
+        #         try:
+        #             self.dot.edge(node_a.service_user_id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
+        #         except AttributeError:
+        #             self.dot.edge(node_a.service_user_id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
 
             
     def _save_graph(self, filename: str):
