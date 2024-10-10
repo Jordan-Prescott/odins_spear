@@ -231,7 +231,7 @@ class Delete():
 #TWO STAGE DIALING
 #USERS
 
-def user(self, user_id: str):
+    def user(self, user_id: str):
 
         """Deletes the specified User
 
