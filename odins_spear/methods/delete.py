@@ -230,6 +230,26 @@ class Delete():
 #TRUNK GROUPS
 #TWO STAGE DIALING
 #USERS
+
+def user(self, user_id: str):
+
+        """Deletes the specified User
+
+        Args:
+            user_id (str): The target user ID to be deleted.
+
+        Returns:
+            Dict: Profile of the deleted User.
+
+        """
+
+        endpoint = "/users"
+
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.delete(endpoint, params=params)
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON
 #VIRTUAL ON-NET ENTERPRISE EXTENSIONS
