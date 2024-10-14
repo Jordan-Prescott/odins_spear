@@ -46,16 +46,42 @@ my_api.scripter.user_association(
 
 {% code overflow="wrap" fullWidth="false" %}
 ```
-User Data:
-        User Id: userId@domain.com
-        First Name: John
-        Last Name: Smith
-        Extension: 101
-        Phone Number: 0123456789
-        Services: Custom Ringback User
-        Feature Packs: Feature Pack X, Feature Pack Y
-        Hunt Groups: Accounts, Sales, Reception
-        Call Centers: Technical Support, Service Support
-        Pick Up Group: Tech and Service
+Fetching Hunt Groups: 100%|█████████████████████████████████████████████████████████████████████████| 4/4 [00:00<?, ?it/s]
+Fetching Call Centers: 100%|████████████████████████████████████████████████████████████████████████| 3/3 [00:00<?, ?it/s] 
+{"userId": "TestUser2076@Domain.com", "firstName": "John", "lastName": "Smith", "extension": "2076", "phoneNumber": "012345678910", "aliases": ["12@Domain"], "services": [], "featurePacks": ["WBX-B", "Agent-AGPCCSA", "Call-R"], "huntGroups": ["KallumTEST@Domain.com", "FrontDoorOverflow3", "CallumTest", "Maintenance"], "callCenters": ["DemoCC", "CallCenterName", "TechSupport_CC"], "pickUpGroup": "tech and service"}
 ```
 {% endcode %}
+
+### Formatted Output
+
+```
+{
+   "userId":"TestUser2076@Domain.com",
+   "firstName":"John",
+   "lastName":"Smith",
+   "extension":"2076",
+   "phoneNumber":"012345678910",
+   "aliases":[
+      "12@Domain"
+   ],
+   "services":[
+      
+   ],
+   "featurePacks":[
+      "WBX-B",
+      "Agent-AGPCCSA",
+      "Call-R"
+   ],
+   "huntGroups":[
+      "KallumTEST@Domain.com",
+      "FrontDoorOverflow3",
+      "CallumTest",
+      "Maintenance"
+   ],
+   "callCenters":[
+      "DemoCC",
+      "CallCenterName",
+      "TechSupport_CC"
+   ],
+   "pickUpGroup":"tech and service"
+```

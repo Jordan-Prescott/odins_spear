@@ -31,7 +31,7 @@ api.get.users()
 
 ### Return
 
-* Returns type and name/ userId of entity where alias located.
+* Returns dict with type, userserviceid, name and alias.
 
 ### Raise
 
@@ -47,7 +47,7 @@ my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", pass
 my_api.authenticate()
 
 # find alias method
-print(magic.scripter.find_alias('Service Provider ID', 'Group ID', alias=11))
+print(my_api.scripter.find_alias('Service Provider ID', 'Group ID', alias=12))
 ```
 {% endcode %}
 
@@ -56,11 +56,23 @@ print(magic.scripter.find_alias('Service Provider ID', 'Group ID', alias=11))
 {% code overflow="wrap" fullWidth="false" %}
 ```
 Fetching AA, HG, and CC details: 100%|██████████████████████████████████████████████████████████████████████████
-Searching AA, HG, and CC for alias 11: 100%|████████████████████████████████████████████████████████████████████
+Searching AA, HG, and CC for alias 12: 100%|████████████████████████████████████████████████████████████████████
 2024-01-03 13:05:33,003 - INFO - Fetched users.
-Searching Users for alias: 11:  38%|███████████████████████████████████████████████▎                            
-
-        Alias (11) found: User - userid@domain.com
+Searching Users for alias: 12:  38%|███████████████████████████████████████████████▎                            
+{'type': 'HG', 'service_user_id': 'LiamDivert', 'name': 'Liam Divert', 'aliases': ['12@PROXYADDRESS']}
         
 ```
 {% endcode %}
+
+### Formatted Output
+
+```
+{
+   "type":"HG",
+   "service_user_id":"LiamDivert",
+   "name":"Liam Divert",
+   "aliases":[
+      "12@PROXYADDRESS"
+   ]
+}
+```

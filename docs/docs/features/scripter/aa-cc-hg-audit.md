@@ -39,61 +39,58 @@ print(
     )
 )
 ```
+### Terminal Output
+
+aa_cc_hg_audit start.
+Analysing Auto Attendants: 100%|█████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<?, ?it/s] 
+Analysing Call Centers: 100%|████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s] 
+Analysing Hunt Groups: 100%|█████████████████████████████████████████████████████████████████████████████████| 6/6 [00:00<?, ?it/s] 
+Fetching User Services: 100%|████████████████████████████████████████████████████████████████████████| 9/9 [00:10<00:00,  1.14s/it] 
+{"autoAttendants": [{"serviceUserId": "basic_aa@domain.com", "type": "Basic", "services": []}, {"serviceUserId": "test_aa@domain.com", "type": "Basic", "services": []}], "callCenters": [{"serviceUserId": "basic_cc@domain.com", "type": "Basic", "services": []}], "huntGroups": [{"serviceUserId": "EVA_External_HG@domain.com", "services": []}, {"serviceUserId": "EVA_Internal_HG@domain.com", "services": []}, {"serviceUserId": "EVA_External_HG_SB@domain.com", "services": []}, {"serviceUserId": "EVA_Internal_HG_SB@domain.com", "services": []}, {"serviceUserId": "testing@domain.com", "services": []}, {"serviceUserId": "odin.mock.hg.2@domain.com", "services": []}]}
+
 
 ### Example returned data (formatted):
 
 ```json
-{
-  "auto_attendants": [
-    {
-      "serviceUserId": "my_aa",
-      "services": [
-        {
-          "serviceName": "Alternate Numbers"
-        }
-      ]
-    }
-  ],
-  "call_centers": [
-    {
-      "serviceUserId": "my_cc",
-      "type": "Premium",
-      "services": []
-    },
-    {
-      "serviceUserId": "my_cc_2",
-      "type": "Premium",
-      "services": [
-        {
-          "serviceName": "Call Forwarding Busy",
-          "isActive": false
-        }
-      ]
-    }
-  ],
-  "hunt_groups": [
-    {
-      "serviceUserId": "my_hg_1",
-      "services": [
-        {
-          "serviceName": "Call Forwarding Selective",
-          "isActive": true
-        }
-      ]
-    },
-    {
-      "serviceUserId": "my_hg_2",
-      "services": [
-        {
-          "serviceName": "Call Forwarding Always",
-          "isActive": false
-        }
-      ]
-    },
-    {
-      "serviceUserId": "my_hg_3",
-      "services": []
-    }
-  ]
-}
+         ]
+      }
+   ],
+   "huntGroups":[
+      {
+         "serviceUserId":"EVA_External_HG@domain.com",
+         "services":[
+            
+         ]
+      },
+      {
+         "serviceUserId":"EVA_Internal_HG@domain.com",
+         "services":[
+            
+         ]
+      },
+      {
+         "serviceUserId":"EVA_External_HG_SB@domain.com",
+         "services":[
+            
+         ]
+      },
+      {
+         "serviceUserId":"EVA_Internal_HG_SB@domain.com",
+         "services":[
+            
+         ]
+      },
+      {
+         "serviceUserId":"testing@domain.com",
+         "services":[
+            
+         ]
+      },
+      {
+         "serviceUserId":"odin.mock.hg.2@domain.com",
+         "services":[
+            
+         ]
+      }
+   ]
 ```

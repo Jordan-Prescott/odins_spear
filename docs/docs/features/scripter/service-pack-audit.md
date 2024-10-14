@@ -18,7 +18,7 @@ The script makes use of the following methods:
 
 ### Return
 
-* JSON: A JSON formatted report of service packs assigned in the group.
+* JSON: A JSON dict formatted report of service packs assigned in the group.
 
 ### How To Use:
 
@@ -35,28 +35,32 @@ print(
     )
 )
 ```
+```json
+Terminal Output:
+
+Analysing Service Packs...: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 114/114 [00:00<?, ?it/s] 
+{"servicePackServices": [{"servicePackName": "Admin-A", "usage": 21, "description": null}, {"servicePackName": "Unity-R", "usage": 4, "description": null}, {"servicePackName": "WBX-B", "usage": 45, "description": "Webex for BroadWorks Basic"}
+
+```
 
 ### Example returned data (formatted):
 
 ```json
 
-{
-    "service_pack_services": [
-        {
-            "servicePackName": "Standard pack 1",
-            "usage": 20,
-            "description": "Standard pack 1"
-        },
-        {
-            "servicePackName": "Premium pack 1",
-            "usage": 1,
-            "description": "Premium pack 1"
-        },
-        {
-            "servicePackName": "Service pack 2",
-            "usage": 13,
-            "description": "Service pack 2"
-        }
-    ]
-}
+
+   "servicePackServices":[
+      {
+         "servicePackName":"Admin-A",
+         "usage":21,
+         "description":null
+      },
+      {
+         "servicePackName":"Unity-R",
+         "usage":4,
+         "description":null
+      },
+      {
+         "servicePackName":"WBX-B",
+         "usage":45,
+         "description":"Webex for BroadWorks Basic"
 ```
