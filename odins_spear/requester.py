@@ -39,7 +39,7 @@ class Requester():
     
     
     def delete(self, endpoint, data=None, params=None):
-        return self._request(requests.put, endpoint, data, params)
+        return self._request(requests.delete, endpoint, data, params)
 
 
     def _request(self, method, endpoint, data=None, params=None):
