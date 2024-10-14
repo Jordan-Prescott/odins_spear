@@ -239,7 +239,7 @@ class Delete():
             user_id (str): The target user ID to be deleted.
 
         Returns:
-            Dict: Profile of the deleted User.
+            Nothing
 
         """
 

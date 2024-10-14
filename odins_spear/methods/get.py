@@ -1076,6 +1076,23 @@ class Get():
 
         return self.requester.get(endpoint, params = params)
 
+    def user_portal_passcode(self, user_id: str):
+        """Pulls the target user's portal passcode
+
+        Args:
+            user_id (str): The target user's UserID
+
+        Returns:
+            dict: Portal Passcode
+        """
+
+        endpoint = "/users/portal-passcode"
+        
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params = params)
 #PASSWORD RULES
 #PERSONAL PHONE LIST
 #PHONE DIRECTORY
@@ -1509,6 +1526,46 @@ class Get():
         """
 
         endpoint = "/users"
+
+        params = {
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+    
+    def group_user_audit(self, service_provider_id: str, group_id: str, user_id: str):
+        """Returns extensive details of a single user including device type, calling plans, licenses and etc
+
+        Args:
+            service_provider_id (str): Target Service Provider the Group resides in.
+            group_id (str): Target GroupID the User Resides in.
+            user_id (str): Target user ID of the user you would like to review.
+
+        Returns:
+            Dict: Python dictionary of the users details 
+        """
+
+        endpoint = "/users/audit"
+
+        params = {
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id,
+            "userId": user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+    
+    def user_audit(self, user_id: str):
+        """Returns extensive details of a single user including device type, calling plans, licenses and etc
+
+        Args:
+            user_id (str): Target user ID of the user you would like to review.
+
+        Returns:
+            Dict: Python dictionary of the users details 
+        """
+
+        endpoint = "/users/audit"
 
         params = {
             "userId": user_id
