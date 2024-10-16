@@ -66,7 +66,7 @@ Searching Users for alias: 12:  38%|██████████████�
 
 ### Formatted Output
 
-```
+```json
 {
    "type":"HG",
    "service_user_id":"LiamDivert",

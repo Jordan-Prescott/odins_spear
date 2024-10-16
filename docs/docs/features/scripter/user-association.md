@@ -54,7 +54,7 @@ Fetching Call Centers: 100%|█████████████████�
 
 ### Formatted Output
 
-```
+```json
 {
    "userId":"TestUser2076@Domain.com",
    "firstName":"John",
@@ -84,4 +84,5 @@ Fetching Call Centers: 100%|█████████████████�
       "TechSupport_CC"
    ],
    "pickUpGroup":"tech and service"
+}
 ```
