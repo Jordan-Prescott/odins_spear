@@ -92,7 +92,7 @@ class GraphvizModule:
                 node_config = ""
             
             if isinstance(n, bre.User):
-                node_config += f'| <name> {n.first_name} {n.last_name}'
+                node_config += f'| <name> Name: {n.first_name} {n.last_name}'
                 self.dot.node(n.id, node_config, GraphvizModule.NODE_STYLING["user"])
                 
             elif isinstance(n, bre.CallCenter) or isinstance(n, bre.HuntGroup):
@@ -106,7 +106,7 @@ class GraphvizModule:
             elif isinstance(n, bre.AutoAttendant):
                 node_config += f"| <name> Name: {n.name}"
                 for k in n.business_hours_menu.keys:
-                    node_config += f"| <key{k.number}> {k.number}: {k.action}"
+                    node_config += f"| <key{k.number}> Option {k.number}: {k.action}"
                     k.id = f"{n.service_user_id}:<key{k.number}>"
                 self.dot.node(n.service_user_id, node_config, GraphvizModule.NODE_STYLING["auto_attendant"])
             
