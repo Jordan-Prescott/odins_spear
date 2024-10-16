@@ -45,7 +45,7 @@ print(my_api.scripter.aa_cc_hg_audit(
 {
    "autoAttendants":[
       {
-         "serviceUserId":"basic_aa@domain.ev.com",
+         "serviceUserId":"basic_aa@domain.com",
          "type":"Basic",
          "services":[
             
@@ -54,7 +54,7 @@ print(my_api.scripter.aa_cc_hg_audit(
    ],
    "callCenters":[
       {
-         "serviceUserId":"basic_cc@domain.ev.com",
+         "serviceUserId":"basic_cc@domain.com",
          "type":"Basic",
          "services":[
             
@@ -63,37 +63,37 @@ print(my_api.scripter.aa_cc_hg_audit(
    ],
    "huntGroups":[
       {
-         "serviceUserId":"EVA_External_HG@domain.ev.com",
+         "serviceUserId":"EVA_External_HG@domain.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"EVA_Internal_HG@domain.ev.com",
+         "serviceUserId":"EVA_Internal_HG@domain.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"EVA_External_HG_SB@domain.ev.com",
+         "serviceUserId":"EVA_External_HG_SB@domain.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"EVA_Internal_HG_SB@domain.ev.com",
+         "serviceUserId":"EVA_Internal_HG_SB@domain.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"testing@domain.ev.com",
+         "serviceUserId":"testing@domain.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"odin.mock.hg.2@domain.ev.com",
+         "serviceUserId":"odin.mock.hg.2@domain.com",
          "services":[
             
          ]
