@@ -32,56 +32,84 @@ from odins_spear import api
 my_api= api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN_INSTANCE_1")
 my_api.authenticate()
 
-print(
-    my_api.scripter.aa_cc_hg_audit(
-        "serviceProviderId",
-        "groupId"
-    )
+print(my_api.scripter.aa_cc_hg_audit(
+      "serviceProviderId",
+      "groupId"
+   )
 )
+```
+### Terminal Output
+
+```
+aa_cc_hg_audit start.
+Analysing Auto Attendants: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+Analysing Call Centers: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<?, ?it/s]
+Analysing Hunt Groups: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:00<?, ?it/s]
+Fetching User Services: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [00:10<00:00,  1.25s/it] 
+{"autoAttendants": [{"serviceUserId": "basic_aa@domain.ev.com", "type": "Basic", "services": []}], "callCenters": [{"serviceUserId": "basic_cc@domain.ev.com", "type": "Basic", "services": []}], "huntGroups": [{"serviceUserId": "EVA_External_HG@domain.ev.com", "services": []}, {"serviceUserId": "EVA_Internal_HG@domain.ev.com", 
+"services": []}, {"serviceUserId": "EVA_External_HG_SB@domain.ev.com", "services": []}, {"serviceUserId": "EVA_Internal_HG_SB@domain.ev.com", "services": []}, {"serviceUserId": "testing@domain.ev.com", "services": []}, {"serviceUserId": "odin.mock.hg.2@domain.ev.com", "services": []}]}
 ```
 
 ### Example returned data (formatted):
 
 ```json
+{
+   "autoAttendants":[
+      {
+         "serviceUserId":"basic_aa@domain.ev.com",
+         "type":"Basic",
+         "services":[
+            
+         ]
+      }
+   ],
+   "callCenters":[
+      {
+         "serviceUserId":"basic_cc@domain.ev.com",
+         "type":"Basic",
+         "services":[
+            
          ]
       }
    ],
    "huntGroups":[
       {
-         "serviceUserId":"EVA_External_HG@domain.com",
+         "serviceUserId":"EVA_External_HG@domain.ev.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"EVA_Internal_HG@domain.com",
+         "serviceUserId":"EVA_Internal_HG@domain.ev.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"EVA_External_HG_SB@domain.com",
+         "serviceUserId":"EVA_External_HG_SB@domain.ev.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"EVA_Internal_HG_SB@domain.com",
+         "serviceUserId":"EVA_Internal_HG_SB@domain.ev.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"testing@domain.com",
+         "serviceUserId":"testing@domain.ev.com",
          "services":[
             
          ]
       },
       {
-         "serviceUserId":"odin.mock.hg.2@domain.com",
+         "serviceUserId":"odin.mock.hg.2@domain.ev.com",
          "services":[
             
          ]
       }
    ]
+}
+
 ```
