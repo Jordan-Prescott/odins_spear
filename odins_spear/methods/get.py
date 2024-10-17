@@ -130,6 +130,27 @@ class Get():
         }
 
         return self.requester.get(endpoint, params=params)
+    
+
+    def auto_attendant_submenu_usage(self, service_user_id: str, submenu_id: str):
+        """Returns the type of the specified Auto Attendant (AA) submenu. NOTE: This method does not return any usage data. 
+
+        Args:
+            service_user_id (str): The servivce user ID of the AA being queried.
+            submenu_id (str): The submenu ID of the submenu being queried. 
+
+        Returns:
+            List: Returns a list containing a single dict of the submenu. 
+        """
+
+        endpoint = "/groups/auto-attendants/submenus/usage"
+
+        params = {
+            "serviceUserId": service_user_id, 
+            "submenuId": submenu_id
+        }
+
+        return self.requester.get(endpoint, params=params)
 
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
