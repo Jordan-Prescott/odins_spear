@@ -112,6 +112,25 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
+
+    def auto_attendant_submenus(self, service_user_id: str):
+        """Returns a list of the submenus of the specified Auto Attendant (AA). Works with Standard AAs only, basic AAs do not have submenus.
+
+        Args:
+            service_user_id (str): The service user ID of the AA
+
+        Returns:
+            List: Returns a list of the submenus associated with the AA.
+        """
+
+        endpoint = "/groups/auto-attendants/submenus"
+
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT
