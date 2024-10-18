@@ -65,6 +65,41 @@ class Post():
 #ATTENDANT CONSOLE
 #AUTHENTICATION
 #AUTO ATTENDANTS
+
+    def auto_attendant(self, service_provider_id: str, group_id: str, service_user_id: str, aa_name: str, aa_type: str ="Basic", payload: dict ={}):
+        """Builds an Auto Attendant (AA) from the given payload.
+
+        Args:
+            service_provider_id (str): Service Provider ID of the group where the AA should be built.
+            group_id (str): Group ID where the AA should be built.
+            service_user_id (str): Service User ID of the AA (including the domain). 
+            aa_name (str): Name of the AA
+            aa_type (str): Type of AA: "Basic" or "Standard". Will default to "Basic". NOTE: The "Auto Attendant - Standard" service must be enabled on the group in order for the aa_type to be set to "Standard".
+            payload (dict, optional): Additional AA configuration data.
+
+        Returns:
+            Dict: Returns the AA profile.
+        """
+
+        endpoint = "/groups/auto-attendants"
+
+        payload = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id,
+            "enableVideo": "false", 
+            "extensionDialingScope":"Group",
+            "nameDialingScope":"Group",
+            "nameDialingEntries":"LastName + FirstName",
+            "firstDigitTimeoutSeconds":1,
+            "type":aa_type,
+            "serviceUserId":service_user_id,
+            "serviceInstanceProfile":{
+                "name": aa_name
+                }
+            }
+
+        return self.requester.post(endpoint, data=payload)
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT
