@@ -36,7 +36,7 @@ print(
 )
 ```
 Terminal Output:
-
+```
 Analysing Service Packs...: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 114/114 [00:00<?, ?it/s] 
 {"servicePackServices": [{"servicePackName": "Admin-A", "usage": 21, "description": null}, {"servicePackName": "Unity-R", "usage": 4, "description": null}, {"servicePackName": "WBX-B", "usage": 45, "description": "Webex for BroadWorks Basic"}
 
