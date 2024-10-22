@@ -51,26 +51,13 @@ print(my_api.scripter.find_alias('Service Provider ID', 'Group ID', alias=12))
 ```
 {% endcode %}
 
-### Terminal Output
-
-{% code overflow="wrap" fullWidth="false" %}
-```
-Fetching AA, HG, and CC details: 100%|██████████████████████████████████████████████████████████████████████████
-Searching AA, HG, and CC for alias 12: 100%|████████████████████████████████████████████████████████████████████
-2024-01-03 13:05:33,003 - INFO - Fetched users.
-Searching Users for alias: 12:  38%|███████████████████████████████████████████████▎                            
-{'type': 'HG', 'service_user_id': 'LiamDivert', 'name': 'Liam Divert', 'aliases': ['12@PROXYADDRESS']}
-        
-```
-{% endcode %}
-
 ### Formatted Output
 
 ```json
 {
    "type":"HG",
-   "service_user_id":"LiamDivert",
-   "name":"Liam Divert",
+   "service_user_id":"TESTHG",
+   "name":"Test HG",
    "aliases":[
       "12@PROXYADDRESS"
    ]

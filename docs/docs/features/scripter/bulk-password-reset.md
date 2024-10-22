@@ -77,13 +77,6 @@ my_api.scripter.bulk_password_reset(
         password_type="WEB"   
     )
 ```
-### Terminal Output
-```
-Generating new SIP passwords.
-Setting new SIP passwords.
-Setting new SIP passwords complete.
-[{"userId": "User1@domain.com", "newPassword": "3h1U[-"}, {"userId": "User2@domain.com", "newPassword": "e^Bv4c"}, {"userId": "User3@domain.com", "newPassword": "4WK#:y"}]
-```
 
 ### Example Returned Data of SIP Passwords (Formatted)
 

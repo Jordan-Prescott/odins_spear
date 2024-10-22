@@ -58,8 +58,8 @@ my_api.scripter.webex_builder(
 {% code overflow="wrap" fullWidth="false" %}
 ```
     {
-    'username': 'Jordan.Prescott4401@jrdneva.ev.wbx.com', 
-    'password': '{YdQb8', 
+    'username': 'User.ID@Domain.wbx.com', 
+    'password': '{YdQba', 
     'primary_device': True, 
     'device_type': 'Business Communicator - PC'
     }

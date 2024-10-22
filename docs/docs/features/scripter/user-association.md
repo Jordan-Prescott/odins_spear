@@ -42,16 +42,6 @@ my_api.scripter.user_association(
 ```
 {% endcode %}
 
-### Terminal Output
-
-{% code overflow="wrap" fullWidth="false" %}
-```
-Fetching Hunt Groups: 100%|█████████████████████████████████████████████████████████████████████████| 4/4 [00:00<?, ?it/s]
-Fetching Call Centers: 100%|████████████████████████████████████████████████████████████████████████| 3/3 [00:00<?, ?it/s] 
-{"userId": "TestUser2076@Domain.com", "firstName": "John", "lastName": "Smith", "extension": "2076", "phoneNumber": "012345678910", "aliases": ["12@Domain"], "services": [], "featurePacks": ["WBX-B", "Agent-AGPCCSA", "Call-R"], "huntGroups": ["KallumTEST@Domain.com", "FrontDoorOverflow3", "CallumTest", "Maintenance"], "callCenters": ["DemoCC", "CallCenterName", "TechSupport_CC"], "pickUpGroup": "tech and service"}
-```
-{% endcode %}
-
 ### Formatted Output
 
 ```json
