@@ -23,7 +23,7 @@ api.get.user_report()
 
 ### Return
 
-* dict: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.&#x20;
+* dict: Returns a dictionary output containing all CC, HG, and Pick Up a user is assigned to.&#x20;
 
 ### How To Use:
 

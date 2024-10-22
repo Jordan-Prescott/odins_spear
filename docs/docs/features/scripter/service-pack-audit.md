@@ -18,7 +18,7 @@ The script makes use of the following methods:
 
 ### Return
 
-* JSON: A JSON dict formatted report of service packs assigned in the group.
+* dict: Returns dict containing service packs assigned in the group.
 
 ### How To Use:
 

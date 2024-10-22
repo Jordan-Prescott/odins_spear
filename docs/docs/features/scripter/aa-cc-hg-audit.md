@@ -22,7 +22,7 @@ api.get.user_services_assigned()
 
 ### Return
 
-* JSON: A JSON formatted report of service packs assigned in the group.
+* dict: A dictionary containting service packs assigned in the group.
 
 ### How To Use:
 

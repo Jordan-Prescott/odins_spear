@@ -36,7 +36,7 @@ api.put.user_web_authentication_password()
 
 ### Return
 
-* JSON: Returns JSON dict containing user ID and new password set.
+* Jdict: Returns dictionary containing user ID and new password set.
 
 ### How To Use:
 

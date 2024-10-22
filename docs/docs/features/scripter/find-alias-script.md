@@ -31,7 +31,7 @@ api.get.users()
 
 ### Return
 
-* Returns dict with type, userserviceid, name and alias.
+* dict: Returns dictionary with type, userserviceid, name and alias.
 
 ### Raise
 
