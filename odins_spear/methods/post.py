@@ -100,6 +100,55 @@ class Post():
 
         return self.requester.post(endpoint, data=payload)
 
+    
+    def auto_attendant_remove_user(self, service_provider_id: str, group_id: str, user_id: str):
+        """Returns a list of the available Auto Attendants (AAs) built in the same group as the specified user.
+
+        Args:
+            service_provider_id (str): Service Provider ID where the user is built. 
+            group_id (str): Group ID where the user is built. 
+            user_id (str): User ID of the user.
+
+        Returns:
+            List: List of the Service User IDs of the AAs in the group.
+        """
+
+        endpoint = "/groups/auto-attendants/removeUser"
+
+        payload = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id, 
+            "userId": user_id
+        }
+
+        return self.requester.post(endpoint, data=payload)
+    
+
+    def auto_attendant_submenu(self, service_user_id: str, submenu_id: str, announcement_selection: str="Default", extension_dialing: bool= True):
+        """Posts a new submenu to the specified Auto Attendant (AA).
+
+        Args:
+            service_user_id (str): Service User ID of the AA.
+            submenu_id (str): ID of the submenu to be created. 
+            announcement_selection (str, optional): "Default" or "Personal". Defaults to "Default".
+            extension_dialing (bool, optional): Whether Level Extension Dialing is enabled or not. Defaults to True.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+
+        endpoint = "/groups/auto-attendants/submenus"
+
+        payload = {
+            "serviceUserId": service_user_id, 
+            "submenuId": submenu_id, 
+            "announcementSelection": announcement_selection,
+            "enableExtensionDialing": extension_dialing
+        }
+
+        return self.requester.post(endpoint, data=payload)
+
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT
