@@ -14,6 +14,46 @@ class Delete():
 #ATTENDANT CONSOLE
 #AUTHENTICATION
 #AUTO ATTENDANTS
+
+    def auto_attendant(self, service_user_id: str):
+        """Removes an Auto Attendant (AA) from a group. 
+
+        Args:
+            service_user_id(str): The service user ID of the AA.
+
+        Returns:
+            Dict: Returns the profile of the deleted AA.
+        """
+
+        endpoint = "/groups/auto-attendants"
+
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.delete(endpoint, params=params)
+
+
+    def auto_attendant_submenu(self, service_user_id: str, submenu_id: str):
+        """Removes an Auto Attendant (AA) Submenu from the AA configuration. Submenus are only a feature of the 'Auto Attendant - Standard' service. These are not available on Basic AAs.
+
+        Args:
+            service_user_id(str): The service user ID of the AA.
+            submenu_id (str): The ID of the Submenu to be removed from the AA. 
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+
+        endpoint = "/groups/auto-attendants/submenus"
+
+        params = {
+            "serviceUserId": service_user_id, 
+            "submenuId": submenu_id
+        }
+
+        return self.requester.delete(endpoint, params=params)
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT

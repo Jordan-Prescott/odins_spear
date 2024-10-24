@@ -72,7 +72,7 @@ class Get():
         return self.requester.get(endpoint, params=params)
 
     def auto_attendant(self, service_user_id: str):
-        """Returns detailed information of a singel Auto Attendant.
+        """Returns detailed information of a single Auto Attendant.
 
         Args:
             service_user_id (str): User ID of target Auto Attendant.
@@ -85,6 +85,69 @@ class Get():
 
         params = {
             "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+    
+
+    def auto_attendant_user(self, service_provider_id: str, group_id: str, user_id: str):
+        """Returns detailed information about all Auto Attendants (AA) built in the same group as the specified user.
+
+        Args:
+            service_provider_id (str): Service Provider ID of the group where the user is built. 
+            group_id (str): Group ID of the group where the user is built.
+            user_id (str): User ID of the user being queried.
+
+        Returns:
+           List: Returns a list of the AAs built in the group. 
+        """
+
+        endpoint = "/groups/auto-attendants/user"
+
+        params = {
+            "userId": user_id, 
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+
+
+    def auto_attendant_submenus(self, service_user_id: str):
+        """Returns a list of the submenus of the specified Auto Attendant (AA). Works with Standard AAs only, basic AAs do not have submenus.
+
+        Args:
+            service_user_id (str): The service user ID of the AA
+
+        Returns:
+            List: Returns a list of the submenus associated with the AA.
+        """
+
+        endpoint = "/groups/auto-attendants/submenus"
+
+        params = {
+            "serviceUserId": service_user_id
+        }
+
+        return self.requester.get(endpoint, params=params)
+    
+
+    def auto_attendant_submenu_usage(self, service_user_id: str, submenu_id: str):
+        """Returns the type of the specified Auto Attendant (AA) submenu. NOTE: This method does not return any usage data. 
+
+        Args:
+            service_user_id (str): The service user ID of the AA being queried.
+            submenu_id (str): The submenu ID of the submenu being queried. 
+
+        Returns:
+            List: Returns a list containing a single dict of the submenu. 
+        """
+
+        endpoint = "/groups/auto-attendants/submenus/usage"
+
+        params = {
+            "serviceUserId": service_user_id, 
+            "submenuId": submenu_id
         }
 
         return self.requester.get(endpoint, params=params)
