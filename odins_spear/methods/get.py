@@ -136,7 +136,7 @@ class Get():
         """Returns the type of the specified Auto Attendant (AA) submenu. NOTE: This method does not return any usage data. 
 
         Args:
-            service_user_id (str): The servivce user ID of the AA being queried.
+            service_user_id (str): The service user ID of the AA being queried.
             submenu_id (str): The submenu ID of the submenu being queried. 
 
         Returns:
