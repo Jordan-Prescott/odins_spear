@@ -143,7 +143,7 @@ class Post():
             "serviceUserId": service_user_id, 
             "submenuId": submenu_id, 
             "announcementSelection": announcement_selection,
-            "enableExtensionDialing": extension_dialing
+            "enableLevelExtensionDialing": extension_dialing
         }
 
         return self.requester.post(endpoint, data=payload)
