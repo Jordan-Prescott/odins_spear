@@ -97,6 +97,7 @@
       * [🎚️ GET - Auto Attendant Subemnus](docs/methods/auto-attendants/get-auto-attendant-submenus.md)
       * [💁‍♀️ GET - Auto Attendant User](docs/methods/auto-attendants/get-auto-attendant-user.md)
       * [✍️ POST - Auto Attendant](docs/methods/auto-attendants/post-auto-attendant.md)
+      * [👋 POST - Auto Attendant Remove User](docs/methods/auto-attendants/post-auto-attendant-remove-user.md)
     * [📞 Call Centers](docs/methods/call-centers/README.md)
       * [🎧 GET - Group Call Centers](docs/methods/call-centers/get-group-call-centers.md)
       * [🎧 GET - Group Call Center](docs/methods//call-centers/get-group-call-center.md)
