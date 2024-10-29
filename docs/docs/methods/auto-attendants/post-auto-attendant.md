@@ -12,7 +12,7 @@ Builds an Auto Attendant (AA) from the given payload.
 * group_id (str): Group ID where the AA should be built.
 * service_user_id (str): Service User ID of the AA (including the domain). 
 * aa_name (str): Name of the AA
-* aa_type (str): Type of AA: "Basic" or "Standard". Will default to "Basic". NOTE: The "Auto Attendant - Standard" service must be enabled on the group in order for the aa_type to be set to "Standard".
+* aa_type (str, optional): Type of AA: "Basic" or "Standard". Will default to "Basic". NOTE: The "Auto Attendant - Standard" service must be enabled on the group in order for the aa_type to be set to "Standard".
 * payload (dict, optional): Additional AA configuration data.
 
 ### Returns
