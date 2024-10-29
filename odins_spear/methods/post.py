@@ -74,7 +74,7 @@ class Post():
             group_id (str): Group ID where the AA should be built.
             service_user_id (str): Service User ID of the AA (including the domain). 
             aa_name (str): Name of the AA
-            aa_type (str): Type of AA: "Basic" or "Standard". Will default to "Basic". NOTE: The "Auto Attendant - Standard" service must be enabled on the group in order for the aa_type to be set to "Standard".
+            aa_type (str, optional): Type of AA: "Basic" or "Standard". Will default to "Basic". NOTE: The "Auto Attendant - Standard" service must be enabled on the group in order for the aa_type to be set to "Standard".
             payload (dict, optional): Additional AA configuration data.
 
         Returns:
@@ -83,21 +83,23 @@ class Post():
 
         endpoint = "/groups/auto-attendants"
 
-        payload = {
-            "serviceProviderId": service_provider_id, 
-            "groupId": group_id,
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["serviceUserId"] = service_user_id
+        payload["serviceInstanceProfile"]["name"] = aa_name
+        payload["type"] = aa_type
+
+        default_payload_values = {
             "enableVideo": "false", 
             "extensionDialingScope":"Group",
             "nameDialingScope":"Group",
             "nameDialingEntries":"LastName + FirstName",
-            "firstDigitTimeoutSeconds":1,
-            "type":aa_type,
-            "serviceUserId":service_user_id,
-            "serviceInstanceProfile":{
-                "name": aa_name
-                }
+            "firstDigitTimeoutSeconds":1
             }
 
+        for key, default_value in default_payload_values.items():
+            payload.setdefault(key, default_value)
+        
         return self.requester.post(endpoint, data=payload)
 
     
