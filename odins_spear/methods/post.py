@@ -529,7 +529,7 @@ class Post():
         for key, default_value in default_payload_values.items():
             payload.setdefault(key, default_value)
 
-        if payload["requireAuthentication"] == "true":
+        if payload["requireAuthentication"]:
             payload["sipAuthenticationUserName"] = sip_authentication_username
             payload["sipAuthenticationPassword"] = sip_authentication_password
 
