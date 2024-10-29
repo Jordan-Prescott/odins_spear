@@ -65,6 +65,92 @@ class Post():
 #ATTENDANT CONSOLE
 #AUTHENTICATION
 #AUTO ATTENDANTS
+
+    def auto_attendant(self, service_provider_id: str, group_id: str, service_user_id: str, aa_name: str, aa_type: str ="Basic", payload: dict ={}):
+        """Builds an Auto Attendant (AA) from the given payload.
+
+        Args:
+            service_provider_id (str): Service Provider ID of the group where the AA should be built.
+            group_id (str): Group ID where the AA should be built.
+            service_user_id (str): Service User ID of the AA (including the domain). 
+            aa_name (str): Name of the AA
+            aa_type (str, optional): Type of AA: "Basic" or "Standard". Will default to "Basic". NOTE: The "Auto Attendant - Standard" service must be enabled on the group in order for the aa_type to be set to "Standard".
+            payload (dict, optional): Additional AA configuration data.
+
+        Returns:
+            Dict: Returns the AA profile.
+        """
+
+        endpoint = "/groups/auto-attendants"
+
+        payload["serviceProviderId"] = service_provider_id
+        payload["groupId"] = group_id
+        payload["serviceUserId"] = service_user_id
+        payload["serviceInstanceProfile"]["name"] = aa_name
+        payload["type"] = aa_type
+
+        default_payload_values = {
+            "enableVideo": "false", 
+            "extensionDialingScope":"Group",
+            "nameDialingScope":"Group",
+            "nameDialingEntries":"LastName + FirstName",
+            "firstDigitTimeoutSeconds":1
+            }
+
+        for key, default_value in default_payload_values.items():
+            payload.setdefault(key, default_value)
+        
+        return self.requester.post(endpoint, data=payload)
+
+    
+    def auto_attendant_remove_user(self, service_provider_id: str, group_id: str, user_id: str):
+        """Returns a list of the available Auto Attendants (AAs) built in the same group as the specified user.
+
+        Args:
+            service_provider_id (str): Service Provider ID where the user is built. 
+            group_id (str): Group ID where the user is built. 
+            user_id (str): User ID of the user.
+
+        Returns:
+            List: List of the Service User IDs of the AAs in the group.
+        """
+
+        endpoint = "/groups/auto-attendants/removeUser"
+
+        payload = {
+            "serviceProviderId": service_provider_id, 
+            "groupId": group_id, 
+            "userId": user_id
+        }
+
+        return self.requester.post(endpoint, data=payload)
+    
+
+    def auto_attendant_submenu(self, service_user_id: str, submenu_id: str, announcement_selection: str="Default", extension_dialing: bool= True):
+        """Posts a new submenu to the specified Auto Attendant (AA).
+
+        Args:
+            service_user_id (str): Service User ID of the AA.
+            submenu_id (str): ID of the submenu to be created. 
+            announcement_selection (str, optional): "Default" or "Personal". Defaults to "Default".
+            extension_dialing (bool, optional): Whether Level Extension Dialing is enabled or not. Defaults to True.
+
+        Returns:
+            None: This method does not return any specific value.
+        """
+
+        endpoint = "/groups/auto-attendants/submenus"
+
+        payload = {
+            "serviceUserId": service_user_id, 
+            "submenuId": submenu_id, 
+            "announcementSelection": announcement_selection,
+            "enableLevelExtensionDialing": extension_dialing
+        }
+
+        return self.requester.post(endpoint, data=payload)
+
+
 #AUTOMATIC CALLBACK
 #AUTOMATIC HOLD RETRIEVE
 #BARGE IN EXEMPT
