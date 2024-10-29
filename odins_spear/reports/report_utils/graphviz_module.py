@@ -55,7 +55,7 @@ class GraphvizModule:
             'color': '#4773EB',
             'fillcolor': '#5E85ED',
             'fontname': 'Arial',
-            'fontcolor': 'white'
+            'fontcolor': 'black'
         },
         'user': {
             'shape': 'record',

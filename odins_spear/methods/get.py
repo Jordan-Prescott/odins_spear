@@ -156,13 +156,28 @@ class Get():
         params = {
             "userId": user_id
         }
-        try:
-            import requests.exceptions
-            response = self.requester.get(endpoint, params=params)
-        except requests.exceptions.RequestException:
-            raise OSLicenseNonExistent
-        else:
-            return response
+        
+        return self.requester.get(endpoint, params=params)
+        
+    
+    
+    def group_call_center_agents(self, service_user_id: str):
+        """Returns list of agents assigned to the target call center.
+
+        Args:
+            service_user_id (str): Service user ID of target call center.
+
+        Returns:
+            Dict: List of agents assigned to call center
+        """
+        
+        endpoint = "/groups/call-centers/agents"
+        
+        params = {
+            "serviceUserId": service_user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
     
     
     def group_call_center_agents(self, service_user_id: str):
@@ -1291,6 +1306,24 @@ class Get():
 
         return self.requester.get(endpoint, params=params)
 
+    def user_service_settings(self, user_id: str):
+        """Retrieves all service settings for a specific user.
+
+        Args:
+            user_id (str): ID of the target user
+
+        Returns:
+            Dict: A dictionary containing all the service settings for the specified user.
+        """
+
+        endpoint = f"/users/services/settings"
+
+        params = {
+            "userId": user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
+    
     def group_services(self, group_id: str, service_provider_id: str):
         """
         Fetch all userServices, groupServices and servicePackServices assigned to a group.

@@ -1,5 +1,6 @@
 import requests
 import json
+from .exceptions import OSApiResponseError
 
 from ratelimit import limits, sleep_and_retry
 class Requester():
@@ -35,7 +36,7 @@ class Requester():
     
     def put(self, endpoint, data=None):
         return self._request(requests.put, endpoint, data)
-
+    
     
     def delete(self, endpoint, data=None, params=None):
         return self._request(requests.delete, endpoint, data, params)
@@ -64,14 +65,18 @@ class Requester():
                 data=json.dumps(data if data is not None else {}),
                 params=(params if params is not None else {})
             )
-            
+
             # if logger used log request
             if self.logger:
                 self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
                 
             # flags errors if any returned from the API
-            response.raise_for_status()
-            return response.json()
+            try:
+                response.raise_for_status()
+            except requests.exceptions.RequestException:
+                raise OSApiResponseError(response)
+            else:
+                return response.json()
         
 
     @sleep_and_retry
@@ -92,6 +97,10 @@ class Requester():
             self.logger._log_request(endpoint=endpoint, response_code=response.status_code)
         
         # flags errors if any returned from the API
-        response.raise_for_status()
-        return response.json()
+        try:
+            response.raise_for_status()
+        except requests.exceptions.RequestException:
+            raise OSApiResponseError(response)
+        else:
+            return response.json()
     

@@ -1,7 +1,11 @@
 # ⚔️ Odin's Spear
 
-![Odin's Spear Logo](./assets/images/logo.svg)
+Officially adopted by [Fourteen IP Communications](https://fourteenip.com/) leading supplier of hosted telephony in the hospitality industry. 
 
+![Odin's Spear Logo](./assets/images/logo.svg)
+[![Downloads](https://static.pepy.tech/badge/odins-spear)](https://pepy.tech/project/odins-spear)
+[![Downloads](https://static.pepy.tech/badge/odins-spear/month)](https://pepy.tech/project/odins-spear)
+[![Downloads](https://static.pepy.tech/badge/odins-spear/week)](https://pepy.tech/project/odins-spear)
 ## Overview
 
 Odin's Spear is a Python library designed to streamline and enhance your experience with Odin's API by [Rev.io](https://www.rev.io/blog/solutions/rev-io-odin-api). If you've worked with BroadWorks for years and struggled with its outdated interface and limitations, Odin's API feels like a breath of fresh air—offering a modern user interface, automation, and comprehensive API access.
@@ -41,10 +45,10 @@ pip install odins-spear
 Here's a simple example to get you started:
 
 ```python
-from odins_spear.api import API
+from odins_spear.api import Api
 
 # Initialize the API with your credentials
-my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
+my_api = Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
 my_api.authenticate()
 
 # Locate an alias assignment

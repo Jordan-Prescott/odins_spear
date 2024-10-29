@@ -29,6 +29,4 @@ def main(api, service_provider_id, group_id):
 
                 assigned_service_pack_services.append(sps)
                 
-    return json.dumps({
-        "servicePackServices": assigned_service_pack_services
-})
+    return {"servicePackServices": assigned_service_pack_services}
