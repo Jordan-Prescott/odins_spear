@@ -43,17 +43,17 @@ class GraphvizModule:
             'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#9773F1',
-            'fillcolor': '#B4A0E5',
+            'color': '#CCCCCC',
+            'fillcolor': '#D9D9D9',
             'fontname': 'Arial',
-            'fontcolor': 'white'
+            'fontcolor': 'black'
         },
         'hunt_group': {
             'shape': 'record',
             'style': 'filled',
             'margin': '0.2',
-            'color': '#E892E2',
-            'fillcolor': '#E9BCE6',
+            'color': '#4773EB',
+            'fillcolor': '#5E85ED',
             'fontname': 'Arial',
             'fontcolor': 'black'
         },
@@ -92,6 +92,7 @@ class GraphvizModule:
                 node_config = ""
             
             if isinstance(n, bre.User):
+                node_config += f'| <name> Name: {n.first_name} {n.last_name}'
                 self.dot.node(n.id, node_config, GraphvizModule.NODE_STYLING["user"])
                 
             elif isinstance(n, bre.CallCenter) or isinstance(n, bre.HuntGroup):
@@ -105,7 +106,7 @@ class GraphvizModule:
             elif isinstance(n, bre.AutoAttendant):
                 node_config += f"| <name> Name: {n.name}"
                 for k in n.business_hours_menu.keys:
-                    node_config += f"| <key{k.number}> Option: {k.number}"
+                    node_config += f"| <key{k.number}> Option {k.number}: {k.action}"
                     k.id = f"{n.service_user_id}:<key{k.number}>"
                 self.dot.node(n.service_user_id, node_config, GraphvizModule.NODE_STYLING["auto_attendant"])
             
@@ -159,17 +160,6 @@ class GraphvizModule:
         node_b_id = node_b.id if hasattr(node_b, 'id') else node_b.service_user_id
 
         self.dot.edge(node_a_id, node_b_id, label, GraphvizModule.EDGE_STYLYING)
-        
-        # try:
-        #     self.dot.edge(node_a.id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
-        # except AttributeError:
-        #     try:
-        #         self.dot.edge(node_a.id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
-        #     except AttributeError:
-        #         try:
-        #             self.dot.edge(node_a.service_user_id, node_b.service_user_id, label, GraphvizModule.EDGE_STYLYING)
-        #         except AttributeError:
-        #             self.dot.edge(node_a.service_user_id, node_b.id, label, GraphvizModule.EDGE_STYLYING)
 
             
     def _save_graph(self, filename: str):
