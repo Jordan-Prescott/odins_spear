@@ -2,7 +2,7 @@
 description: my_api.get.auto_attendant_submenus()
 ---
 
-#  🎚️ GET - Auto Attendant Subemnus
+#  🎚️ GET - Auto Attendant Submenus
 
 Returns a list of the submenus of the specified Auto Attendant (AA). Works with Standard AAs only, basic AAs do not have submenus.
 
