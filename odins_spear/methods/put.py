@@ -1208,6 +1208,26 @@ class Put():
         }
         
         return self.requester.put(endpoint, data=data)
+
+    def user_id(self, user_id: str, new_id: str):
+        """
+        Updates A Specified Users User Identifier
+
+        Args:
+            user_id (str): Users Original Identifier
+            new_id (str): New User Identifier
+
+        Returns:
+            None: No Specified Return Type
+        """
+        endpoint = "/users/user-id"
+        
+        data = {
+            "userId": user_id,
+            "newUserId": new_id
+        }
+        
+        return self.requester.put(endpoint, data=data)
    
     
 #USER CUSTOM RINGBACK
