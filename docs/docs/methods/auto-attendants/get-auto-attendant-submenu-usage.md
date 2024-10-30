@@ -2,7 +2,7 @@
 description: my_api.get.auto_attendant_submenu_usage()
 ---
 
-#  🖲️ GET - Auto Attendant Subemnu Usage
+#  🖲️ GET - Auto Attendant Submenu Usage
 
 Returns the type of the specified Auto Attendant (AA) submenu. NOTE: This method does not return any usage data. 
 
