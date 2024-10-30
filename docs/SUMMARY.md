@@ -102,7 +102,7 @@
       * [🎚️ GET - Auto Attendant Submenus](docs/methods/auto-attendants/get-auto-attendant-submenus.md)
       * [💁‍♀️ GET - Auto Attendant User](docs/methods/auto-attendants/get-auto-attendant-user.md)
       * [✍️ POST - Auto Attendant](docs/methods/auto-attendants/post-auto-attendant.md)
-      * [👋 POST - Auto Attendant Remove User](docs/methods/auto-attendants/post-auto-attendants/post-auto-attendant-remove-user.md)
+      * [👋 POST - Auto Attendant Remove User](docs/methods/auto-attendants/post-auto-attendant-remove-user.md)
       * [🦾 POST - Auto Attendant Submenu](docs/methods/auto-attendants/post-auto-attendant-submenu.md)
       * [🚮 DELETE - Auto Attendant](docs/methods/auto-attendants/delete-auto-attendant.md)
       * [🛑 DELETE - Auto Attendant Submenu](docs/methods/auto-attendants/delete-auto-attendant-submenu.md)
