@@ -1,7 +1,7 @@
 ---
 description: api.delete.user()
 ---
-# ❌ DEL - Delete User
+# ❌ DELETE - Delete User
 
 Removes the specified user from the platform entirely.
 
