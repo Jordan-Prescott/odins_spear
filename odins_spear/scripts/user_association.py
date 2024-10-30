@@ -45,7 +45,7 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     try:
         USER_DATA["pickUpGroup"] = pick_up_group[0]["name"]
     except IndexError:
-        USER_DATA["pickUpGroup"] = "None"
+        USER_DATA["pickUpGroup"] = None
     
     hunt_groups = api.get.group_hunt_group_user(service_provider_id, group_id, user_id)
     for hg in tqdm(hunt_groups, desc="Fetching Hunt Groups"):
