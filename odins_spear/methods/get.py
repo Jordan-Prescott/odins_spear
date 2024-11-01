@@ -1572,6 +1572,31 @@ class Get():
         }
 
         return self.requester.get(endpoint, params=params)
+    
+    def user_login_info(
+        self,
+        user_id: str,
+        new_user_id: str
+    ):
+        """
+        Gets The Specified Users Login Information
+
+        Args:
+            user_id (str): Users Original Identifier
+            new_id (str): New User Identifier
+
+        Returns:
+            Json: A Stub Of The Users Login Information
+        """
+        
+        endpoint = "/users/login?userId=" + user_id
+
+        data = {
+            "userId": user_id,
+            "newUserId": new_user_id
+        }
+
+        return self.requester.put(endpoint, data=data)
 
 # USER CUSTOM RINGBACK
 # VIDEO ADD ON
