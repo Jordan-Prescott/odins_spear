@@ -58,6 +58,7 @@
       * [🔐 GET - User Portal Passcode](docs/methods/user/get-user-portal-passcode.md)
       * [👯 GET - Users](docs/methods/user/get-users.md)
       * [📮 POST - User](docs/methods/user/post-user.md)
+      * [⭕ POST - User Reset](docs/methods/user/post-user-reset.md)
       * [👩‍💻 PUT - User](docs/methods/user/put-user.md)
       * [🆔 PUT - User ID](docs/methods/user/put-user-id.md)
       * [👩‍👩‍👧‍👧 PUT - Users Bulk](docs/methods/user/put-users-bulk.md)
