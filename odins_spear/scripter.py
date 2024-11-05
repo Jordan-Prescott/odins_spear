@@ -167,6 +167,9 @@ class Scripter:
         return scripts.remove_numbers.main(self.api, service_provider_id, group_id, start_of_range_number, 
                        end_of_range_number)
         
+    def locate_free_extension(self, service_provider_id: str, group_id: str, field: list):
+
+        return scripts.locate_free_extension(self.api, service_provider_id, group_id, field)
     
     def service_provider_trunking_capacity(self, service_provider_id: str):
         """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
