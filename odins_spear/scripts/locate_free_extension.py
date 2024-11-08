@@ -45,14 +45,11 @@ def main(
         group_id,
     )
 
-    extension: int
-
     for extension in range(extension_range[0], extension_range[1] + 1):
         if extension not in extensions:
             return {'extension': extension}
 
-    if not extension:
-        raise OSExtensionNotFound
+    raise OSExtensionNotFound
     
 
     
