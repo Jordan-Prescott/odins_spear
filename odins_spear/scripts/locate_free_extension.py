@@ -1,3 +1,4 @@
+from exceptions import OSExtensionNotFound
 
 def retrieve_extensions(
     api,
@@ -7,97 +8,49 @@ def retrieve_extensions(
     
     extensions = []
 
-    dataset = api.get.users(
-        service_provider_id,
-        group_id
-    )
-
-    for data in dataset:
-        if not data['extension']:
-            continue
-    ###
-
-        extensions.append(data['extension'])
-
-    dataset = api.get.group_hunt_groups(
-        service_provider_id,
-        group_id
-    )
-
-    for data in dataset:
-        if not data['extension']:
-            continue
-    ###
-
-        extensions.append(data['extension'])
-
-    dataset = api.get.group_call_centers(
-        service_provider_id,
-        group_id
-    )
-
-    for data in dataset:
-        if not data['extension']:
-            continue
-    ###
-
-        extensions.append(data['extension'])
-
-    dataset = api.get.auto_attendants(
-        service_provider_id,
-        group_id
+    dataset = (
+       api.get.users( service_provider_id, group_id )              +
+       api.get.group_hunt_groups( service_provider_id,group_id )   +
+       api.get.group_call_centers( service_provider_id, group_id ) +
+       api.get.auto_attendants( service_provider_id, group_id )
     )
 
     for data in dataset:
         if not data['extension']:
             continue
 
-        extensions.append(data['extension'])
-    ###
+        extensions.append(int(data['extension']))
 
-    if not extensions:
-        return
-    
-    return extensions
-###
+    return extensions if extensions else None
 
 def main(
     api,
-    service_provider_id,
-    group_id,
-    field: list
+    service_provider_id: str,
+    group_id: str,
+    extension_range: list
 ):
+    '''Retrieves The Lowest Free Extension Available In The Designated Group Passed.
     '''
-    Retrieves The Lowest Free Extension Available In The Designated Group Passed.
 
-    field is passed as such [100, 1000]
-    '''
-    ### Retrieve List Of Occupied Extensions Within The Group
+    if extension_range[0] > extension_range[1]:
+        initial_range = extension_range[1]
+
+        extension_range[1] = extension_range[0]
+        extension_range[0] = initial_range
+
+    # Retrieve List Of Occupied Extensions Within The Group
     extensions = retrieve_extensions(
         api,
         service_provider_id,
         group_id,
     )
 
-    ### Cull Out Of Range Extensions
-    for extension in extensions:
+    for extension in range(extension_range[0], extension_range[1] + 1):
+        if extension not in extensions:
+            return {'extension': extension}
 
-        if field[0] < extension and field[1] > extension:
-            continue
-
-        extensions.remove(extension)
-    ###
-
-    ### Locate Initial Free Extension
-    extension_set = set(extensions)
-
-    for extension in range(field[0] + 1, field[1]):
-        if extension not in extension_set:
-            return extension
-    ####
-
-    print("Unable To Locate A Free Extension Within The Range")
-    return    
+    if not extension:
+        raise OSExtensionNotFound
     
 
     
