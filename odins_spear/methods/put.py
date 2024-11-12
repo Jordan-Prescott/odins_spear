@@ -111,6 +111,8 @@ class Put():
         if 'serviceInstanceProfile' not in updates:     
             updates.setdefault('serviceInstanceProfile', {})
 
+        updates["serviceProviderId"] = service_provider_id
+        updates["groupId"] = group_id
         updates["serviceUserId"] = auto_attendant_user_id
     
         return self.requester.put(endpoint, data=updates)
