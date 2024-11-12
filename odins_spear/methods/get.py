@@ -683,6 +683,24 @@ class Get():
 #DIRECTED CALL PICKUP WITH BARGE IN
 #DIRECTROUTE
 #DN
+    def user_dns(self, user_id: str):
+        """_summary_
+
+        Args:
+            user_id (str): Target user to retrieve assigned numbers.
+            
+        Returns:
+            Dict: Numbers assigned to user.
+        """
+        
+        endpoint = "/users/dns"
+        
+        params = {
+            "userId": user_id
+        }
+        
+        return self.requester.get(endpoint, params=params)
+        
 
     def group_dns(self, service_provider_id:str, group_id:str):
         """Gets all numbers assigned to group.
