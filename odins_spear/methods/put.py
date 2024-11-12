@@ -91,13 +91,15 @@ class Put():
         
         return self.requester.put(endpoint, data=data)
 
-    def auto_attendant(self, auto_attendant_id: str, updates: dict):
+    def auto_attendant(self, service_provider_id: str, group_id, auto_attendant_user_id: str, updates: dict):
         """Updates a single target Auto Attendant.
         
         Note: Needs the service instance profile to use this method.
 
         Args:
-            auto_attendant_id (str): Target Auto Attendant User ID.
+            service_provider_id (str): Service Provider ID where Group is hosted.
+            group_id (str): Group ID where target Auto Attendant is located.
+            auto_attendant_user_id (str): Target Auto Attendant User ID.
             updates (dict): Updates to be applied to Auto Attendant.
 
         Returns:
@@ -106,7 +108,10 @@ class Put():
         
         endpoint = "/groups/auto-attendants"
         
-        updates["serviceUserId"] = auto_attendant_id
+        if 'serviceInstanceProfile' not in updates:     
+            updates.setdefault('serviceInstanceProfile', {})
+
+        updates["serviceUserId"] = auto_attendant_user_id
     
         return self.requester.put(endpoint, data=updates)
 
