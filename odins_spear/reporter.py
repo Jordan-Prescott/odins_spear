@@ -54,6 +54,6 @@ class Reporter:
         Args:
             service_provider_id (str):  Service Provider/ Enterprise where group is hosted.
             group_id (str): Target Group you would like to check the registration of.
-            remove_null_entries (bool): If a duser does not have a device endpoint assigned, setting this to true will remove them from the final Workbook.
+            remove_null_entries (bool): If a user does not have a device endpoint assigned, setting this to true will remove them from the final Workbook.
         """
         return reports.user_registration_report.main(self.api, service_provider_id, group_id, remove_null_entires)
