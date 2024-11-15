@@ -48,4 +48,5 @@ class Reporter:
         return reports.group_users_call_statistics.main(self.api, service_provider_id, group_id, 
                                                         start_date, end_date, start_time, end_time, time_zone)
       
-    
+    def user_registration_report(self, service_provider_id: str, group_id: str, remove_null_entires: bool = False):
+        return reports.user_registration_report.main(self.api, service_provider_id, group_id, remove_null_entires)

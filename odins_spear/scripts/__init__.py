@@ -24,4 +24,5 @@ from .service_pack_audit import main
 from .service_provider_trunking_capacity import main
 from .user_activity import main
 from .user_association import main
+from .user_registration import main
 from .webex_builder import main
