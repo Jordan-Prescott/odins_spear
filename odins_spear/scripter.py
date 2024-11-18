@@ -167,17 +167,21 @@ class Scripter:
         return scripts.remove_numbers.main(self.api, service_provider_id, group_id, start_of_range_number, 
                        end_of_range_number)
         
-    def locate_free_extension(self, service_provider_id: str, group_id: str, extension_range: list):
+    def locate_free_extension( self, service_provider_id: str, group_id: str, range_start: int, range_end: int ):
         """Locates the lowest value free extension given the provided range of extension numbers.
 
-        Note: The extension range is passed as a list like such [100, 1000]
+        Raises: OSExtensionNotFound: Raises when a free extension is not located within the passed range.
 
         Args:
             service_provider_id (str): Service Provider/ Enterprise ID where Group is located which hosts needed free extensions
             group_id (str): Group ID where target extensions are located.
-            extension_range (list): List value representing the search range for free extensions
+            range_start (int): integral value specifying the starting range for free extensions
+            range_end (int): integral value specifying the ending range for free extensions
+
+        Returns:
+            JSON: JSON data of the free extension {extension: "1000"}
         """
-        return scripts.locate_free_extension.main(self.api, service_provider_id, group_id, extension_range)
+        return scripts.locate_free_extension.main( self.api, service_provider_id, group_id, range_start, range_end )
     
     def service_provider_trunking_capacity(self, service_provider_id: str):
         """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
