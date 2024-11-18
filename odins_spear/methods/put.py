@@ -16,6 +16,30 @@ class Put():
         
 #ACCOUNT AUTHORIZATION CODES
 #ADMINISTRATORS
+
+    def group_admin_policies_bulk(self, user_ids: list, policy_config: dict):
+        """_summary_
+
+        Args:
+            user_ids (list): _description_
+
+        Raises:
+            OSInvalidWeighting: _description_
+            OSInvalidCode: _description_
+
+        Returns:
+            _type_: _description_
+        """
+        endpoint = '/groups/admins/policies/bulk'
+        
+        data = {
+            'users': [{'userId':user} for user in user_ids],
+            'data': policy_config
+        }
+        
+        self.requester.put(endpoint, data=data)
+        
+        
 #ADVICE OF CHARGE
 #ALTERNATE NUMBERS
 #ANSWER CONFIRMATION
