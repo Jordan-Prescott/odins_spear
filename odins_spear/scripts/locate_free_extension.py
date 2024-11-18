@@ -1,4 +1,4 @@
-from exceptions import OSExtensionNotFound
+from exceptions import OSExtensionNotFound, OSRangeFault
 
 def retrieve_extensions( api, service_provider_id: str, group_id: str ) -> list:
     
@@ -24,10 +24,7 @@ def main( api, service_provider_id: str, group_id: str, range_start: int, range_
     '''
 
     if range_start > range_end:
-        initial_range = range_end
-
-        range_end = range_start
-        range_start = initial_range
+        raise OSRangeFault
 
     # Retrieve List Of Occupied Extensions Within The Group
     extensions = retrieve_extensions(

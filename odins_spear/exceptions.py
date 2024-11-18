@@ -121,6 +121,14 @@ class OSExtensionNotFound(OSError):
 
     def __str__(self) -> str:
         return f"Cannot locate extension. Please alter search criteria"
+    
+class OSRangeFault(OSError):
+    """ Raised when a numeric range is invalid to the context provided, 
+        E.G: uninitialised range values, disordered range values.
+    """
+
+    def __str__(self):
+        return f"Range fault raised. Please verify integrity of passed range values"
 
 class OSServiceNotAssigned(OSError):
     """ Raised a service needed is not assigned to a Broadworks entity.  
