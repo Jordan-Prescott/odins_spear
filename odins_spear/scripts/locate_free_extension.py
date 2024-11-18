@@ -5,17 +5,17 @@ def retrieve_extensions( api, service_provider_id: str, group_id: str ) -> list:
     extensions = []
 
     dataset = (
-       api.get.users( service_provider_id, group_id )              +
-       api.get.group_hunt_groups( service_provider_id, group_id )  +
+       api.get.users( service_provider_id, group_id              ) +
+       api.get.group_hunt_groups( service_provider_id, group_id  ) +
        api.get.group_call_centers( service_provider_id, group_id ) +
-       api.get.auto_attendants( service_provider_id, group_id )
+       api.get.auto_attendants( service_provider_id, group_id    )
     )
 
     for data in dataset:
         if not data['extension']:
             continue
 
-        extensions.append(int(data['extension']))
+        extensions.append( int(data['extension']) )
 
     return extensions if extensions else None
 
@@ -38,7 +38,3 @@ def main( api, service_provider_id: str, group_id: str, range_start: int, range_
             return {'extension': extension}
 
     raise OSExtensionNotFound
-    
-
-    
-
