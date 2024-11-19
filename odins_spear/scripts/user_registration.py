@@ -1,7 +1,17 @@
-def main(api, service_provider_id: str, group_id: str):
+from exceptions import OSObjectParseError
 
+def main( api, service_provider_id: str, group_id: str ):
+
+    # Dictionary Descripting Total Users Devices
     registrations_out = {}
-    users = api.get.users(service_provider_id, group_id)
+
+    users = api.get.users(
+        service_provider_id,
+        group_id
+    )
+
+    if not users:
+        raise OSObjectParseError
 
     for user in users:
 
@@ -11,7 +21,7 @@ def main(api, service_provider_id: str, group_id: str):
 
         registrations_out[user["userId"]] = {}
 
-        DeviceID = 1
+        device_identifier = 1
 
         for registration_entry in registration_info["registrations"]:
 
@@ -20,11 +30,12 @@ def main(api, service_provider_id: str, group_id: str):
             if registration_entry["linePort"]:
                 is_registered = "True"
 
-            registrations_out[user["userId"]][f"DeviceID: {DeviceID}"] = {
-                "LinePort": registration_entry["linePort"],
-                "Device": registration_entry["deviceName"],
-                "Registered": is_registered
+            registrations_out[user["userId"]][f"deviceId: {device_identifier}"] = {
+                "linePort":     registration_entry["linePort"],
+                "deviceName":   registration_entry["deviceName"],
+                "isRegistered": is_registered
             }
 
-            DeviceID += 1
+            device_identifier += 1
+
     return registrations_out
