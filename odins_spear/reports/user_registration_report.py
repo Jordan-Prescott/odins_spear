@@ -4,17 +4,18 @@ def export_to_xlsx(data: dict, remove_null_entries: bool, group_id: str):
     rows = []
 
     for user_id, devices in data.items():
-        if not devices and remove_null_entries:
+        if not devices and not remove_null_entries:
+            rows.append({
+                "UserID": user_id,
+                "Lineport": "N/A",
+                "Device Name": "N/A",
+                "Registered": "N/A"
+            })
             continue
 
-        device_items = devices.items() if devices else [{
-                        "UserID": user_id,
-                        "Lineport": "N/A",
-                        "Device Name": "N/A",
-                        "Registered": "N/A"
-                    }]
+        device_items = devices.items() if devices else []
 
-        for _, device_details in device_items():
+        for _, device_details in device_items:
             rows.append({
                 "UserID": user_id,
                 "Lineport": device_details.get("linePort", "N/A"),

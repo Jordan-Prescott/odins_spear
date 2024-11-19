@@ -1,4 +1,4 @@
-from exceptions import OSObjectParseError
+from ..exceptions import OSObjectParseError
 
 def main( api, service_provider_id: str, group_id: str ):
 
