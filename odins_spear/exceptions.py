@@ -113,8 +113,22 @@ class OSInvalidPasswordType(OSError):
     """
 
     def __str__(self) -> str:
-        return f"Invalid or unsupported password, please review supported passwords."   
+        return f"Invalid or unsupported password, please review supported passwords."  
+
+class OSExtensionNotFound(OSError):
+    """ Raised when a searched extension is not found
+    """ 
+
+    def __str__(self) -> str:
+        return f"Cannot locate extension. Please alter search criteria"
     
+class OSRangeFault(OSError):
+    """ Raised when a numeric range is invalid to the context provided, 
+        E.G: uninitialised range values, disordered range values.
+    """
+
+    def __str__(self):
+        return f"Range fault raised. Please verify integrity of passed range values"
 
 class OSServiceNotAssigned(OSError):
     """ Raised a service needed is not assigned to a Broadworks entity.  
@@ -122,7 +136,6 @@ class OSServiceNotAssigned(OSError):
 
     def __str__(self) -> str:
         return f"Service not assigend to target Broadworks entity. Please check services assigned."   
-
 
 class OSFileNotFound(OSError):
     """ Raised when a file can not be found.  

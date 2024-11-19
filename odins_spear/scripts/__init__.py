@@ -25,3 +25,4 @@ from .service_provider_trunking_capacity import main
 from .user_activity import main
 from .user_association import main
 from .webex_builder import main
+from .locate_free_extension import main
