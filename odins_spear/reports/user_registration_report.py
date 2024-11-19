@@ -3,23 +3,25 @@ import pandas as pd
 def export_to_xlsx(data: dict, remove_null_entries: bool, group_id: str):
     rows = []
 
-    for userId, deviceId in data.items():
-        if deviceId:
-            for deviceId, deviceDetails in deviceId.items():
-                rows.append({
-                    "UserID": userId,
-                    "Lineport": deviceDetails.get("LinePort", ""),
-                    "Device Name": deviceDetails.get("Device", ""),
-                    "Registered": deviceDetails.get("Registered", "")
-                })
-        else:
-            if remove_null_entries == False:
-                rows.append({
-                        "UserID": userId,
+    for user_id, devices in data.items():
+        if not devices and remove_null_entries:
+            continue
+
+        device_items = devices.items() if devices else [{
+                        "UserID": user_id,
                         "Lineport": "N/A",
                         "Device Name": "N/A",
                         "Registered": "N/A"
-                    })
+                    }]
+
+        for _, device_details in device_items():
+            rows.append({
+                "UserID": user_id,
+                "Lineport": device_details.get("linePort", "N/A"),
+                "Device Name": device_details.get("deviceName", "N/A"),
+                "Registered": device_details.get("isRegistered", "N/A")
+            })
+
 
     dataframe = pd.DataFrame(rows)
     dataframe.to_excel(f"./os_reports/Registration_report_for_{group_id}.xlsx", index=False)
