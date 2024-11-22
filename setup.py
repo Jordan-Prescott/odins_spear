@@ -1,12 +1,11 @@
 from setuptools import setup, find_packages
-from os import path
 
 with open('README.md', 'r', encoding="utf-8") as file:
     long_description = file.read()
 
 setup(
     name='odins_spear',
-    version='1.1.0',
+    version='1.4.5',
     url='https://github.com/Jordan-Prescott/odins_spear',
     author='Jordan Prescott',
     author_email='jprescott23@gmail.com',
@@ -19,7 +18,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.8',
     install_requires=[
         'certifi==2023.7.22',
         'cffi==1.16.0',

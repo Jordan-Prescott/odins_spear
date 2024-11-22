@@ -67,7 +67,7 @@ def _traverse_connecting_entities(entity: object, data_store: object, visited= N
                         _traverse_connecting_entities(entity.bounced_calls_transfer_to_phone_number, data_store, visited)
             
             if entity.overflow_calls_action:
-                if data_store.number_mapping.get(str(entity.overflow_calls_transfer_to_phone_number)) == None and len(str(entity.call_forwarding_overflow_calls_transfer_to_phone_numberalways)) >= 3 and str(entity.overflow_calls_transfer_to_phone_number)[2].isdigit():
+                if data_store.number_mapping.get(str(entity.overflow_calls_transfer_to_phone_number)) == None and len(str(entity.overflow_calls_transfer_to_phone_number)) >= 3 and str(entity.overflow_calls_transfer_to_phone_number)[2].isdigit():
                     entity.overflow_calls_transfer_to_phone_number = external_number(str(entity.overflow_calls_transfer_to_phone_number))
                 else:
                     entity.overflow_calls_transfer_to_phone_number = data_store.number_mapping.get(str(entity.overflow_calls_transfer_to_phone_number))

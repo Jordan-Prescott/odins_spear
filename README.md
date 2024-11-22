@@ -2,7 +2,7 @@
 
 Officially adopted by [Fourteen IP Communications](https://fourteenip.com/) leading supplier of hosted telephony in the hospitality industry. 
 
-![Odin's Spear Logo](./assets/images/logo.svg)
+![Odin's Spear Logo](https://github.com/Jordan-Prescott/odins_spear/blob/main/assets/images/logo.svg)
 [![Downloads](https://static.pepy.tech/badge/odins-spear)](https://pepy.tech/project/odins-spear)
 [![Downloads](https://static.pepy.tech/badge/odins-spear/month)](https://pepy.tech/project/odins-spear)
 [![Downloads](https://static.pepy.tech/badge/odins-spear/week)](https://pepy.tech/project/odins-spear)
@@ -45,10 +45,10 @@ pip install odins-spear
 Here's a simple example to get you started:
 
 ```python
-from odins_spear.api import API
+from odins_spear.api import Api
 
 # Initialize the API with your credentials
-my_api = api.Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
+my_api = Api(base_url="https://base_url/api/vx", username="john.smith", password="ODIN-INSTANCE-1")
 my_api.authenticate()
 
 # Locate an alias assignment
@@ -80,3 +80,5 @@ If you encounter any issues or have questions, feel free to open an issue on Git
 ## Acknowledgements
 
 Special thanks to the developers at Rev.io for creating the Odin API and to the engineers who provided invaluable feedback and feature suggestions.
+
+![Odin's Spear Logo](https://github.com/Jordan-Prescott/odins_spear/blob/main/assets/images/slogan.svg)
