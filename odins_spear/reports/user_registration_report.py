@@ -3,6 +3,8 @@ import pandas as pd
 
 def export_to_xlsx(data: dict, group_id: str):
     rows = []
+    print("Start.\n")
+    print("Generating report.\n")
 
     for user_id, user_data in data.items():
         registration = user_data.get("registration", {})
@@ -20,6 +22,7 @@ def export_to_xlsx(data: dict, group_id: str):
         f"./os_reports/Registration_report_for_{group_id}.xlsx",
         index=False,
     )
+    print("End.\n")
 
 
 def main(api, service_provider_id: str, group_id: str):
