@@ -247,6 +247,48 @@ class Post():
         payload["deviceType"] = device_type
 
         return self.requester.post(endpoint, data=payload)
+    
+    def group_device_rebuild(self, service_provider_id: str, group_id: str, device_name: str, ):
+        """Rebuilds the configuration files for the specified device.
+
+            Args:
+                service_provider_id (str): Service provider ID where the device should be rebuilt.
+                group_id (str): Group ID where the device should be rebuilt
+                device_name (str); Name of the target device to be rebuilt
+
+            Returns:
+                Nothing
+        """
+        endpoint = "/groups/devices/rebuild"
+
+        data = {
+            "deviceName": device_name,
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.post(endpoint, data=data)
+    
+    def group_device_reset(self, service_provider_id: str, group_id: str, device_name: str, ):
+        """Sends a reboot request to the specified device.
+
+            Args:
+                service_provider_id (str): Service provider ID where the device should be reset.
+                group_id (str): Group ID where the device should be reset
+                device_name (str); Name of the target device to be reset
+
+            Returns:
+                Nothing
+        """
+        endpoint = "/groups/devices/reset"
+
+        data = {
+            "deviceName": device_name,
+            "serviceProviderId": service_provider_id,
+            "groupId": group_id
+        }
+
+        return self.requester.post(endpoint, data=data)
 
 #DIAL PLAN POLICY
 #DIRECTED CALL PICKUP WITH BARGE IN
@@ -678,6 +720,47 @@ class Post():
         payload["password"] = web_auth_password   
         
         return self.requester.post(endpoint, data=payload)
+
+		     
+    def user_reset(
+    self,
+    user_id: str,
+    remove_from_group_services: bool,
+    remove_call_records: bool,
+    remove_alternate_user_ids: bool,
+    remove_webex_person: bool,
+    cycle_service_packs: bool,
+    reset_password_passcode: bool,
+    ): 
+        """
+        Updates A Specified Users User Identifier
+
+        Args:
+            user_id (str): Users Original Identifier
+            remove_from_group_services (bool): Remove From Group Services
+            remove_call_records (bool): Remove Call Record Instances
+            remove_alternate_user_ids (bool): Remove Alternate User Identifiers
+            remove_webex_person (bool): Remove Webex Entry
+            cycle_service_packs (bool): Shift Service Packs
+            reset_password_passcode (bool): Reset Password Forcing A New Login And Password
+
+        Returns:
+            None: No Specified Return Type
+        """
+    
+        endpoint = "/users/reset"
+
+        data = {
+            "userId": user_id,
+            "removeFromGroupServices": remove_from_group_services,
+            "removeCallRecords": remove_call_records,
+            "removeAlternateUserIds": remove_alternate_user_ids,
+            "removeWebexPerson": remove_webex_person,
+            "cycleServicePacks": cycle_service_packs,
+            "resetPasswordPasscode": reset_password_passcode
+        }
+
+        return self.requester.post(endpoint, data=data)
     
 #USER CUSTOM RINGBACK
 #VIDEO ADD ON
