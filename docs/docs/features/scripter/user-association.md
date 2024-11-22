@@ -23,7 +23,7 @@ api.get.user_report()
 
 ### Return
 
-* str: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.&#x20;
+* dict: Returns a dictionary output containing all CC, HG, and Pick Up a user is assigned to.&#x20;
 
 ### How To Use:
 
@@ -42,20 +42,37 @@ my_api.scripter.user_association(
 ```
 {% endcode %}
 
-### Terminal Output
+### Formatted Output
 
-{% code overflow="wrap" fullWidth="false" %}
+```json
+{
+   "userId":"TestUser2076@Domain.com",
+   "firstName":"John",
+   "lastName":"Smith",
+   "extension":"2076",
+   "phoneNumber":"012345678910",
+   "aliases":[
+      "12@Domain"
+   ],
+   "services":[
+      
+   ],
+   "featurePacks":[
+      "WBX-B",
+      "Agent-AGPCCSA",
+      "Call-R"
+   ],
+   "huntGroups":[
+      "KallumTEST@Domain.com",
+      "FrontDoorOverflow3",
+      "CallumTest",
+      "Maintenance"
+   ],
+   "callCenters":[
+      "DemoCC",
+      "CallCenterName",
+      "TechSupport_CC"
+   ],
+   "pickUpGroup":"tech and service"
+}
 ```
-User Data:
-        User Id: userId@domain.com
-        First Name: John
-        Last Name: Smith
-        Extension: 101
-        Phone Number: 0123456789
-        Services: Custom Ringback User
-        Feature Packs: Feature Pack X, Feature Pack Y
-        Hunt Groups: Accounts, Sales, Reception
-        Call Centers: Technical Support, Service Support
-        Pick Up Group: Tech and Service
-```
-{% endcode %}

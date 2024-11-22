@@ -32,7 +32,7 @@ api.get.group_trunk_groups_call_capacity()
 
 ### Return
 
-* JSON: json structure containing all the information
+* dict: Returns dictionary containing all group information. Including Users, Group DNs, Group Services, User Services, User Service Packs, Trunking Capacity.
 
 ### How To Use:
 
