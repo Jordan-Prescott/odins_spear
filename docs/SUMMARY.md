@@ -198,6 +198,7 @@
       * [☁️ Sending Logs To A Syslog Server](docs/features/logger/sending-logs-to-a-syslog-server.md)
     * [🛑 Rate Limiting API Calls](docs/features/rate-limiting-api-calls.md)
 * [Powered By Odin's Spear](powered-by-odins-spear.md)
+  * [Bulk Build Group Admins](powered-by-odins-spear/bulk-build-group-admins.md)
 * [👨‍💻 Development](development.md)
 * [🆘 Troubleshooting & FAQ](troubleshooting-and-faq/README.md)
   * [🐛 Common Issues](troubleshooting-and-faq/common-issues.md)
