@@ -8,7 +8,7 @@ There is now no need to spend hours interrogating how calls to 0 flows through y
 You will need to download Graphviz in order to use this feature. Follow the instruction here [graphviz.md](graphviz.md "mention")
 {% endhint %}
 
-<figure><img src="../../../../.gitbook/assets/image (29).png" alt=""><figcaption><p>Simple call flow example of calls to the main number attached to an Auto Attendant</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/call_flow.jpg" alt=""><figcaption><p>Simple call flow example of calls to the main number attached to an Auto Attendant</p></figcaption></figure>
 
 ### Making Sense of The Graph
 

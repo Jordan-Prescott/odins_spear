@@ -36,7 +36,7 @@ api.put.user_web_authentication_password()
 
 ### Return
 
-* JSON: Returns JSON containing user ID and new password set.
+* Jdict: Returns dictionary containing user ID and new password set.
 
 ### How To Use:
 
@@ -82,17 +82,17 @@ my_api.scripter.bulk_password_reset(
 
 ```json
 [
-    {
-        "userId": "testuser1@domain.com",
-        "newPassword": "8H]}3y"
-    },
-    {
-        "userId": "testuser2@domain.com",
-        "newPassword": "@734mC"
-    },
-    {
-        "userId": "testuser3@domain.com",
-        "newPassword": "b6V_@%"
-    }
+   {
+      "userId":"User1@domain.com",
+      "newPassword":"3h1U[-"
+   },
+   {
+      "userId":"User2@domain.com",
+      "newPassword":"e^Bv4c"
+   },
+   {
+      "userId":"User3@domain.com",
+      "newPassword":"4WK#:y"
+   }
 ]
 ```

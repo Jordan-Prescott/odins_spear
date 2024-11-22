@@ -54,7 +54,28 @@ class Post():
         payload["password"] = password
 
         return self.requester.post(endpoint, data=payload)
+    
+    
+    def group_admin_policies_bulk(self, user_ids: list, policy_config: dict):
+        """Applies policy settings to multiple group administrators.
 
+        Note: See docs for formatting of parameters.
+
+        Args:
+            user_ids (list): User IDs of admins to apply policy to.
+            policy_config (dict): Policy settings to apply to target users.
+
+        Returns:
+            Dict: Returns admins and policy applied. 
+        """
+        endpoint = '/groups/admins/policies/bulk'
+        
+        data = {
+            'users': [{'userId':user} for user in user_ids],
+            'data': policy_config
+        }
+        
+        self.requester.post(endpoint, data=data)
 
 #ADVICE OF CHARGE
 #ALTERNATE NUMBERS
