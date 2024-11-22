@@ -2,7 +2,7 @@
 description: api.scripter.user_registration()
 ---
 
-# 🔗 User Association
+# 📝 User Registration
 
 This script is to pull User Id's, Registered Device Names, and Registration status from every user within a group. This is helpful to diagnose issues, and identify devices that have gone offline.
 
