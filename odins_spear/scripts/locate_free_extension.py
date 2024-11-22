@@ -1,4 +1,4 @@
-from exceptions import OSExtensionNotFound, OSRangeFault
+from ..exceptions import OSExtensionNotFound, OSRangeFault
 
 def retrieve_extensions( api, service_provider_id: str, group_id: str ) -> list:
     
