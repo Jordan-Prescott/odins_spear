@@ -16,8 +16,13 @@ def main(api, service_provider_id: str, group_id: str):
 
             device_name = registration["deviceName"]
 
+            line_port = registration["linePort"]
+
             registrations_out[user_id]["registration"][device_name] = {
-                "registered": True
-            }  # All devices listed under the "registrations" attribute must be registered, so always True.
+                "deviceName": device_name,
+                "linePort": line_port,
+                "registered": True,
+            }
+    # All devices listed under the "registrations" attribute must be registered, so always True.
 
     return registrations_out
