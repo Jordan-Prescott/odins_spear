@@ -1,0 +1,13 @@
+{
+	"recommendations": [
+		"charliermarsh.ruff",
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"ms-python.debugpy",
+		"donjayamanne.python-environment-manager",
+		"tamasfe.even-better-toml",
+		"graykode.ai-docstring",
+		"bierner.markdown-mermaid",
+		"Postman.postman-for-vscode"
+	]
+}
