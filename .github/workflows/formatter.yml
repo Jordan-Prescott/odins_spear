@@ -7,6 +7,9 @@ on:
     pull_request:
         branches:
             - main
+        types:
+            - opened
+            - synchronize
 
 jobs:
     run-linters:
