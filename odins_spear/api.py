@@ -1,17 +1,17 @@
 import requests
 
 from .requester import Requester
-from .methods import *
 from .logger import Logger
 from .scripter import Scripter
 from .reporter import Reporter
+
 from .exceptions import (
     OSApiAuthenticationFail,
     OSSessionRefreshFail,
     OSFailedToLocateSession,
 )
 
-from .endpoints import *
+from .endpoints import *  # noqa: F403
 
 
 class API:
@@ -48,7 +48,7 @@ class API:
         self.call_records = CallRecords(self._requester)
         self.administrators = Administrators(self._requester)
 
-    def authenticate(self):
+    def authenticate(self) -> bool:
         """Authenticates session with username and password supplied by user.
 
         Raises:
@@ -69,7 +69,7 @@ class API:
         except requests.exceptions.HTTPError:
             raise OSApiAuthenticationFail()
 
-    def refresh_authorisation(self):
+    def refresh_authorisation(self) -> bool:
         """Re-authenticates the session with the API. Used if API key is to expire.
 
         Raises:
@@ -106,12 +106,12 @@ class API:
         except requests.exceptions.HTTPError:
             raise OSFailedToLocateSession()
 
-    def _update_requester(self, session_response):
+    def _update_requester(self, session_response: requests.models.Response):
         """When authenticating or re-auth update requester with token so it can make
         api calls
 
         Args:
-            session_response (obj): Requests mod response.
+            session_response (request): Requests mod response.
         """
 
         self.token = session_response["token"]
