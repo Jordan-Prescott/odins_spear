@@ -1,3 +1,6 @@
+import copy
+
+
 class BaseConfig:
     def __init__(self, default_config: dict):
         """Base class for all config classes. This class is used to store the default
@@ -45,6 +48,17 @@ class BaseConfig:
 
         # Return a deep copy to ensure the original data remains unmodified
         return copy.deepcopy(data)
+
+    def update_config(self, new_config: dict):
+        """
+        Updates the entire configuration with a custom one.
+
+        Args:
+            new_config (dict): A dictionary containing the new configuration.
+        """
+        if not isinstance(new_config, dict):
+            raise TypeError("The new configuration must be a dictionary.")
+        self.data = copy.deepcopy(new_config)
 
     def reset_config(self):
         """Resets the configuration to the default configuration."""
