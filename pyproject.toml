@@ -23,7 +23,7 @@ classifiers=[
     "Programming Language :: Python :: 3.12",
     # Operating Systems
     "Operating System :: OS Independent",
-    # Topics (adjust based on your project’s purpose)
+    
     "Topic :: Software Development :: Libraries",
     "Topic :: Utilities",
 ]
