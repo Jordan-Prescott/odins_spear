@@ -1,12 +1,11 @@
-""" Library exceptions.
-"""
+"""Library exceptions."""
+
 
 class OSError(Exception):
-    """ Odin Api Exceptions
-    """
+    """Odin Api Exceptions"""
 
     def __str__(self) -> str:
-        return f"I dont think you can be trusted in a combat situation"
+        return "I dont think you can be trusted in a combat situation"
 
 
 class OSApiAuthenticationFail(OSError):
@@ -15,141 +14,139 @@ class OSApiAuthenticationFail(OSError):
     """
 
     def __str__(self) -> str:
-        return f"Failed to authenticate. Check username, password, and url." 
+        return "Failed to authenticate. Check username, password, and url."
 
 
 class OSRequestTypeError(OSError):
-    """ Raised when unsupport request type is given. 
-    """
+    """Raised when unsupport request type is given."""
 
     def __str__(self) -> str:
-        return f"Non-supported request type, supported: GET, POST, PUT, DELETE."
-    
+        return "Non-supported request type, supported: GET, POST, PUT, DELETE."
+
 
 class OSObjectParseError(OSError):
-    """ Raised when parsing Broadworks Entity fails. 
-    """
+    """Raised when parsing Broadworks Entity fails."""
 
     def __str__(self) -> str:
-        return f"Parsing Broadwork Entity failed."
+        return "Parsing Broadwork Entity failed."
 
-    
+
 class OSUnsupportedFilter(OSError):
-    """ Raised when user requests to filter on unsupported filter
-    """
+    """Raised when user requests to filter on unsupported filter"""
 
     def __str__(self) -> str:
-        return f"Unsupported filter. Supported: macAddress, lastName," \
-            f"firstName, dn, emailAddress, userId, extension"
+        return (
+            "Unsupported filter. Supported: macAddress, lastName,"
+            "firstName, dn, emailAddress, userId, extension"
+        )
 
-    
+
 class OSAliasNotFound(OSError):
-    """ Raised when alias is not found in Broadowks Group. 
-    """
+    """Raised when alias is not found in Broadowks Group."""
 
     def __str__(self) -> str:
-        return f"Alias not found, it either does not exist or check alias."
+        return "Alias not found, it either does not exist or check alias."
 
-    
+
 class OSSessionRefreshFail(OSError):
-    """ Raised when refreshing session fails.
-    """
+    """Raised when refreshing session fails."""
 
     def __str__(self) -> str:
-        return f"Refreshing sesion failed. Check credentials are valid and " \
-            f"token has not yet expired. If expired request another."
+        return (
+            "Refreshing sesion failed. Check credentials are valid and "
+            "token has not yet expired. If expired request another."
+        )
 
-            
+
 class OSLogoutFailed(OSError):
-    """ Raised when logout attempt failed.
-    """
+    """Raised when logout attempt failed."""
 
     def __str__(self) -> str:
-        return f"Failed to logout, session still valid. Please try again."
+        return "Failed to logout, session still valid. Please try again."
 
-    
+
 class OSFailedToLocateSession(OSError):
-    """ Raised when user attempts to get session details but session cant be found.
-    """
+    """Raised when user attempts to get session details but session cant be found."""
 
     def __str__(self) -> str:
-        return f"Session details not found. Check token is valid and not exppired."
+        return "Session details not found. Check token is valid and not exppired."
 
-    
+
 class OSInvalidCode(OSError):
-    """ Raised when code is less than 4 and higher than 6.
-    """
+    """Raised when code is less than 4 and higher than 6."""
 
     def __str__(self) -> str:
-        return f"Code needs to be between 4 and 6 digits."
+        return "Code needs to be between 4 and 6 digits."
 
-    
+
 class OSInvalidWeighting(OSError):
-    """ Raised when invalid weighted call distribution set.
-    """
+    """Raised when invalid weighted call distribution set."""
 
     def __str__(self) -> str:
-        return f"Weighted call distribution is not equal to 100. This weight must add up to 100."
-    
+        return "Weighted call distribution is not equal to 100. This weight must add up to 100."
+
 
 class OSInvalidData(OSError):
-    """ Raised when data used in request is invalid or incomplete.
-    """
+    """Raised when data used in request is invalid or incomplete."""
 
     def __str__(self) -> str:
-        return f"Data invalid or incomplete, please check data passed to method is correct."
+        return (
+            "Data invalid or incomplete, please check data passed to method is correct."
+        )
 
 
 class OSInvalidBroadworkService(OSError):
-    """ Raised when service given by user is not a valid license of Broadworks.
-    """
+    """Raised when service given by user is not a valid license of Broadworks."""
 
     def __str__(self) -> str:
-        return f"Service invalid, please check the services you have given are valid Broadwork services."
-    
- 
+        return "Service invalid, please check the services you have given are valid Broadwork services."
+
+
 class OSInvalidPasswordType(OSError):
-    """ Raised when password requested is invalid or not supported.  
-    """
+    """Raised when password requested is invalid or not supported."""
 
     def __str__(self) -> str:
-        return f"Invalid or unsupported password, please review supported passwords."  
+        return "Invalid or unsupported password, please review supported passwords."
+
 
 class OSExtensionNotFound(OSError):
-    """ Raised when a searched extension is not found
-    """ 
+    """Raised when a searched extension is not found"""
 
     def __str__(self) -> str:
-        return f"Cannot locate extension. Please alter search criteria"
-    
+        return "Cannot locate extension. Please alter search criteria"
+
+
 class OSRangeFault(OSError):
-    """ Raised when a numeric range is invalid to the context provided, 
-        E.G: uninitialised range values, disordered range values.
+    """Raised when a numeric range is invalid to the context provided,
+    E.G: uninitialised range values, disordered range values.
     """
 
     def __str__(self):
-        return f"Range fault raised. Please verify integrity of passed range values"
+        return "Range fault raised. Please verify integrity of passed range values"
+
 
 class OSServiceNotAssigned(OSError):
-    """ Raised a service needed is not assigned to a Broadworks entity.  
-    """
+    """Raised a service needed is not assigned to a Broadworks entity."""
 
     def __str__(self) -> str:
-        return f"Service not assigend to target Broadworks entity. Please check services assigned."   
+        return "Service not assigend to target Broadworks entity. Please check services assigned."
+
 
 class OSFileNotFound(OSError):
-    """ Raised when a file can not be found.  
-    """
+    """Raised when a file can not be found."""
 
     def __str__(self) -> str:
-        return f"File can not be found, please check path and file name."   
-    
+        return "File can not be found, please check path and file name."
+
+
 class OSApiResponseError(OSError):
-    """ Raised when Odin Api returns an error code.
-    """
+    """Raised when Odin Api returns an error code."""
+
     def __init__(self, response):
         response = response.json()
-        self.response = f"{response['details']} {response['status']}: {response['error']}"
+        self.response = (
+            f"{response['details']} {response['status']}: {response['error']}"
+        )
 
     def __str__(self) -> str:
         return self.response

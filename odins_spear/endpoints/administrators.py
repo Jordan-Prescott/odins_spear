@@ -1,9 +1,9 @@
-from ..requester import Requester
+from .base_endpoint import BaseEndpoint
 
 
-class Administrators:
-    def __init__(self, requester: Requester):
-        self._requester = requester
+class Administrators(BaseEndpoint):
+    def __init__(self):
+        super().__init__()
 
     def post_group_admin(
         self,

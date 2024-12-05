@@ -1,5 +1,3 @@
-import requests
-
 from .requester import Requester
 from .logger import Logger
 from .scripter import Scripter
@@ -12,6 +10,8 @@ from .exceptions import (
 )
 
 from .endpoints import *  # noqa: F403
+
+import requests
 
 
 class API:
@@ -33,7 +33,7 @@ class API:
 
         self.base_url = base_url
         self.username = username
-        self.password = password
+        self._password = password
         self.rate_limit = rate_limit
 
         self.authorised = False
@@ -45,8 +45,8 @@ class API:
         self.scripter = Scripter(api=self)
         self.reporter = Reporter(api=self)
 
-        self.call_records = CallRecords(self._requester)
-        self.administrators = Administrators(self._requester)
+        self.call_records = CallRecords()
+        self.administrators = Administrators()
 
     def authenticate(self) -> bool:
         """Authenticates session with username and password supplied by user.
@@ -60,7 +60,7 @@ class API:
 
         endpoint = "/auth/token"
 
-        payload = {"username": self.username, "password": self.password}
+        payload = {"username": self.username, "password": self._password}
 
         try:
             response = self._requester.post(endpoint, data=payload)
@@ -105,6 +105,35 @@ class API:
             return self._requester.get(endpoint)
         except requests.exceptions.HTTPError:
             raise OSFailedToLocateSession()
+
+    def update_api(
+        self,
+        base_url: str = None,
+        username: str = None,
+        password: str = None,
+        rate_limit: bool = None,
+    ):
+        """Updates the API with new details.
+
+        Args:
+            base_url (str, optional): Base url of your odin instance api. Defaults to None.
+            username (str, optional): Username used when logging into odin account. Defaults to None.
+            password (str, optional): Password used when logging into odin account stored as virtual environment. Defaults to None.
+            rate_limit (bool, optional): Enables (True) or Disables (False) rate limiting to 5 calls per second. Defaults to None.
+        """
+
+        if base_url:
+            self.base_url = base_url
+            self._requester.base_url = base_url
+        if username:
+            self.username = username
+            self.logger = Logger.get_instance(self.username)
+            self._requester.logger = self.logger
+        if password:
+            self._password = password
+        if rate_limit:
+            self.rate_limit = rate_limit
+            self._requester.rate_limit = rate_limit
 
     def _update_requester(self, session_response: requests.models.Response):
         """When authenticating or re-auth update requester with token so it can make

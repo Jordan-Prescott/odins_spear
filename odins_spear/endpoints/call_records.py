@@ -1,9 +1,9 @@
-from ..requester import Requester
+from .base_endpoint import BaseEndpoint
 
 
-class CallRecords:
-    def __init__(self, requester: Requester):
-        self._requester = requester
+class CallRecords(BaseEndpoint):
+    def __init__(self):
+        super().__init__()
 
     def get_users_stats(
         self,
