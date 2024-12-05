@@ -34,11 +34,21 @@ class OSObjectParseError(OSError):
 class OSUnsupportedFilter(OSError):
     """Raised when user requests to filter on unsupported filter"""
 
+    def __init__(self, filter_attempt):
+        self.filter_attempt = filter_attempt
+
     def __str__(self) -> str:
-        return (
-            "Unsupported filter. Supported: macAddress, lastName,"
-            "firstName, dn, emailAddress, userId, extension"
-        )
+        return f"Filter '{self.filter_attempt}' is unsupported. Supported: macAddress, lastName, firstName, dn, emailAddress, userId, extension"
+
+
+class OSUnsupportedFilterType(OSError):
+    """Raised when user requests to filter on unsupported filter"""
+
+    def __init__(self, type_attempt):
+        self.type_attempt = type_attempt
+
+    def __str__(self) -> str:
+        return f"Filter type '{self.type_attempt}' is unsupported. Supported: contains, startsWith, endsWith, equals"
 
 
 class OSAliasNotFound(OSError):

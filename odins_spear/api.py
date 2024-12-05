@@ -45,8 +45,9 @@ class API:
         self.scripter = Scripter(api=self)
         self.reporter = Reporter(api=self)
 
-        self.call_records = CallRecords()
         self.administrators = Administrators()
+        self.call_records = CallRecords()
+        self.users = Users()
 
     def authenticate(self) -> bool:
         """Authenticates session with username and password supplied by user.

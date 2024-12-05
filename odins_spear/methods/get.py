@@ -1,9 +1,8 @@
-from ..utils.formatting import format_filter_value
+from ..utils.formatters import format_filter_value
 from ..exceptions import *
 
 
 class Get:
-
     filters = [
         "macAddress",
         "lastName",
@@ -20,7 +19,6 @@ class Get:
     # SESSION
 
     def session(self):
-
         endpoint = "/auth/session"
 
         return self.requester.get(endpoint)
