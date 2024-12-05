@@ -1,6 +1,5 @@
 from .base_endpoint import BaseEndpoint
 from ..utils.formatters import format_filter_value
-from ..utils.checkers import check_type_filter
 
 
 class Users(BaseEndpoint):
@@ -65,8 +64,6 @@ class Users(BaseEndpoint):
             if group_id:
                 params["groupId"] = group_id
         if filter:
-            # check and raise error if filter is not supported
-            check_type_filter(filter, filter_type)
             params[filter] = format_filter_value(filter_type, filter_value)
         if limit:
             params["limit"] = limit

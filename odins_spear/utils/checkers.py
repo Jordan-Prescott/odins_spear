@@ -1,45 +1,34 @@
-from typing import List
-
 from ..exceptions import OSUnsupportedFilter, OSUnsupportedFilterType
-from .constants import supported_filters
+from .constants import supported_filters, supported_filter_types
 
 
-def check_filters(filters: List[str]) -> bool:
-    """
-    Check if filters are supported. If supported return True.
+def check_type_filter(filter_by: str, filter_type: str) -> None:
+    """Checks if the filter and filter type is supported by the API.
 
-    Suppoerted filters:
+    Args:
+        filter_by (str): The data you would like to filter by e.g. firstName
+        filter_type (str): The type of filter you would like to apply e.g. equal to
+
+    Raises:
+        OSUnsupportedFilter: Raised when the filter is not supported by the API
+        OSUnsupportedFilterType: Raised when the filter type is not supported by the API
+
+    Supported filters:
     - macAddress
     - lastName
     - firstName
     - dn
     - emailAddress
     - userId
-    - extension
-    """
-    for filter_ in filters:
-        if filter_ not in supported_filters:
-            raise OSUnsupportedFilter(filter_)
-
-
-def check_filter_type(filter_types: List[str]) -> bool:
-    """
-    Check if filter types are supported. If supported return True.
+    -extension
 
     Supported filter types:
+    - equal to
+    - starts with
     - contains
-    - startsWith
-    - endsWith
-    - equals
     """
-    for filter_ in filter_types:
-        if filter_ not in supported_filters:
-            raise OSUnsupportedFilterType(filter_)
 
-
-def check_type_filter(filter_: str, filter_type: str) -> None:
-    """
-    Checks if filter and filter type are supported.
-    """
-    check_filters([filter_])
-    check_filter_type([filter_type])
+    if filter_by not in supported_filters:
+        raise OSUnsupportedFilter(filter_by)
+    if filter_type not in supported_filter_types:
+        raise OSUnsupportedFilterType(filter_type)

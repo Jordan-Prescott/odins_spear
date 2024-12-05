@@ -1,7 +1,7 @@
-from ..exceptions import OSUnsupportedFilter
+from .checkers import check_type_filter
 
 
-def format_filter_value(type, value):
+def format_filter_value(filter_type, filter_value):
     """Takes in a filter type and the value to filter for. Depenining on the type
     the value is formatted with the correct wild card e.g. 'contains' will add a
     wildcard to the start and end of value *value*
@@ -16,14 +16,16 @@ def format_filter_value(type, value):
     Returns:
         str: Formatted filter with the value and correct filter wildcards.
     """
-    if type.lower() == "equal to":
-        return f"{value}"
-    elif type.lower() == "starts with":
-        return f"{value}*"
-    elif type.lower() == "contains":
-        return f"*{value}*"
-    else:
-        raise OSUnsupportedFilter
+
+    check_type_filter(filter_type, filter_value)
+
+    filter_type = filter_type.lower()
+    if filter_type == "equal to":
+        return f"{filter_value}"
+    elif filter_type == "starts with":
+        return f"{filter_value}*"
+    elif filter_type == "contains":
+        return f"*{filter_value}*"
 
 
 def format_int_list_of_numbers(counrty_code: int, numbers: list):
