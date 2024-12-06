@@ -8,6 +8,13 @@
 			"source.fixAll": "explicit"
 		}
 	},
+	// Markdown settings
+	"[markdown]": {
+		"editor.formatOnType": false,
+		"editor.defaultFormatter": null,
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": null
+	},
 	"python.analysis.autoSearchPaths": true,
 	"python.analysis.diagnosticSeverityOverrides": {
 		"reportMissingImports": "none"
