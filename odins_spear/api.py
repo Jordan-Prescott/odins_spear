@@ -46,6 +46,7 @@ class API:
         self.reporter = Reporter(api=self)
 
         self.administrators = Administrators()
+        self.call_forwarding_always = CallForwardingAlways()
         self.call_records = CallRecords()
         self.users = Users()
 
