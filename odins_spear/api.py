@@ -46,6 +46,7 @@ class API:
         self.reporter = Reporter(api=self)
 
         self.administrators = Administrators()
+        self.auto_attendant = AutoAttendant()
         self.call_records = CallRecords()
         self.users = Users()
 
