@@ -5,6 +5,7 @@ class CallRecords(BaseEndpoint):
     def __init__(self):
         super().__init__()
 
+    # GET
     def get_users_stats(
         self,
         user_id: str,
@@ -45,3 +46,7 @@ class CallRecords(BaseEndpoint):
         }
 
         return self._requester.get(endpoint, params=params)
+
+    # POST
+    # PUT
+    # DELETE
