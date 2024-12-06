@@ -1,4 +1,4 @@
-from ..utils.formatting import format_filter_value
+from ..utils.formatters import format_filter_value
 from ..exceptions import *
 
 

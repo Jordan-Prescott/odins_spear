@@ -1,10 +1,11 @@
 # endpoints/__init__.py
 
-from .call_records import CallRecords
 from .administrators import Administrators
-
+from .call_records import CallRecords
+from .users import Users
 
 __all__ = [
-    "CallRecords",
     "Administrators",
+    "CallRecords",
+    "Users",
 ]

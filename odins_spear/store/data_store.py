@@ -2,7 +2,7 @@ from typing import List
 import json
 
 from .. import api
-from ..utils import parsing
+from ..utils import parsers
 from . import broadwork_entities as bre
 
 
@@ -123,7 +123,7 @@ class DataStore:
         }
 
         for key, object_list in object_lists.items():
-            export_data[key] = parsing.export_objects(object_list)
+            export_data[key] = parsers.export_objects(object_list)
 
         return json.dumps(export_data, indent=2)
 

@@ -5,6 +5,9 @@ class Administrators(BaseEndpoint):
     def __init__(self):
         super().__init__()
 
+    # GET
+
+    # POST
     def post_group_admin(
         self,
         service_provider_id: str,
@@ -52,3 +55,7 @@ class Administrators(BaseEndpoint):
         data = {"users": [{"userId": user} for user in user_ids], "data": policy_config}
 
         self._requester.post(endpoint, data=data)
+
+    # PUT
+    # DELETE
+    
