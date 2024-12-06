@@ -1,9 +1,8 @@
-import json
 from tqdm import tqdm
 
 
 def main(api, service_provider_id: str, group_id: str):
-    """ Audits a group for chargeable services this will return all feature packs 
+    """Audits a group for chargeable services this will return all feature packs
     assigned and count for all broadwork entities such as users, call centers, hunt groups etc.
     Additionaly this will return all DID/DDI's and their active status.
 
@@ -34,7 +33,8 @@ def main(api, service_provider_id: str, group_id: str):
             del us["alias"]
 
             users = api.get.group_services_user_assigned(
-                group_id, service_provider_id, us["serviceName"], "serviceName")
+                group_id, service_provider_id, us["serviceName"], "serviceName"
+            )
             userIDs = [u["userId"] for u in users["users"]]
             us["users"] = userIDs
 
@@ -52,7 +52,9 @@ def main(api, service_provider_id: str, group_id: str):
             del gs["alias"]
             assigned_group_services.append(gs)
 
-    for sps in tqdm(service_report["servicePackServices"], desc="Analysing Service Packs..."):
+    for sps in tqdm(
+        service_report["servicePackServices"], desc="Analysing Service Packs..."
+    ):
         if sps["usage"] > 0:
             del sps["authorized"]
             del sps["assigned"]
@@ -63,7 +65,8 @@ def main(api, service_provider_id: str, group_id: str):
             del sps["alias"]
 
             users = api.get.group_services_user_assigned(
-                group_id, service_provider_id, sps["servicePackName"], "servicePackName")
+                group_id, service_provider_id, sps["servicePackName"], "servicePackName"
+            )
             userIDs = [u["userId"] for u in users["users"]]
             sps["users"] = userIDs
 
@@ -72,14 +75,8 @@ def main(api, service_provider_id: str, group_id: str):
     # Group DNs
     dn_report = api.get.group_dns(service_provider_id, group_id)
     all_dns = {
-        "assigned": {
-            "activated":[],
-            "deactivated": []
-        },
-        "unassigned": {
-            "activated": [],
-            "deactivated": []
-        }
+        "assigned": {"activated": [], "deactivated": []},
+        "unassigned": {"activated": [], "deactivated": []},
     }
 
     for dn in tqdm(dn_report["dns"], desc="Analysing Group DNs..."):
@@ -96,18 +93,29 @@ def main(api, service_provider_id: str, group_id: str):
     total_assigned_deactivated = len(all_dns["assigned"]["deactivated"])
     total_unassigned_activated = len(all_dns["unassigned"]["activated"])
     total_unassigned_deactivated = len(all_dns["unassigned"]["deactivated"])
-    total_dns = total_assigned_activated + total_assigned_deactivated + total_unassigned_activated + total_unassigned_deactivated
+    total_dns = (
+        total_assigned_activated
+        + total_assigned_deactivated
+        + total_unassigned_activated
+        + total_unassigned_deactivated
+    )
 
     all_dns["totalDNs"] = total_dns
-    all_dns["assigned"]["totalAssignedDNs"] = total_assigned_activated + total_assigned_deactivated
-    all_dns["unassigned"]["totalUassignedDNs"] = total_unassigned_activated + total_unassigned_deactivated
+    all_dns["assigned"]["totalAssignedDNs"] = (
+        total_assigned_activated + total_assigned_deactivated
+    )
+    all_dns["unassigned"]["totalUassignedDNs"] = (
+        total_unassigned_activated + total_unassigned_deactivated
+    )
 
     # Group Detail
-    group_detail = api.get.group(service_provider_id,group_id)
+    group_detail = api.get.group(service_provider_id, group_id)
 
-    #Trunking detail
+    # Trunking detail
     try:
-        trunk_detail = api.get.group_trunk_groups_call_capacity(service_provider_id,group_id)
+        trunk_detail = api.get.group_trunk_groups_call_capacity(
+            service_provider_id, group_id
+        )
         del trunk_detail["serviceProviderId"]
         del trunk_detail["groupId"]
     except:
@@ -118,11 +126,10 @@ def main(api, service_provider_id: str, group_id: str):
         "licenceBreakdown": {
             "userServices": assigned_user_services,
             "groupServices": assigned_group_services,
-            "servicePackServices": assigned_service_pack_services
+            "servicePackServices": assigned_service_pack_services,
         },
         "groupDNs": all_dns,
-        "groupTrunking": trunk_detail
-
+        "groupTrunking": trunk_detail,
     }
-    
+
     return group_audit

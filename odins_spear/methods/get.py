@@ -3,7 +3,6 @@ from ..exceptions import *
 
 
 class Get:
-
     filters = [
         "macAddress",
         "lastName",
@@ -20,7 +19,6 @@ class Get:
     # SESSION
 
     def session(self):
-
         endpoint = "/auth/session"
 
         return self.requester.get(endpoint)
@@ -1251,7 +1249,7 @@ class Get:
             Dict: A dictionary containing all the service settings for the specified user.
         """
 
-        endpoint = f"/users/services/settings"
+        endpoint = "/users/services/settings"
 
         params = {"userId": user_id}
 

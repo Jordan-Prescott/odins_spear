@@ -23,7 +23,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
     data_store.store_objects(service_provider, group)
     
     auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    for aa in tqdm(auto_attendants, desc=f"Fetching all Auto Attendants."):
+    for aa in tqdm(auto_attendants, desc="Fetching all Auto Attendants."):
         auto_attendant = bre.AutoAttendant.from_dict(group=group, data=api.get.auto_attendant(aa['serviceUserId']))
         data_store.auto_attendants.append(auto_attendant)
     
@@ -51,7 +51,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         and item["data"]["isActive"]
     ]
 
-    for u in tqdm(users, desc=f"Parsing all Users."):
+    for u in tqdm(users, desc="Parsing all Users."):
         user = bre.User.from_dict(group=group, data=u)
         
         if user.id in call_forward_always_users:
@@ -67,7 +67,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
 
 
     call_centers = api.get.group_call_centers(service_provider_id, group_id)    
-    for cc in tqdm(call_centers, desc=f"Fetching all Call Centers."):
+    for cc in tqdm(call_centers, desc="Fetching all Call Centers."):
         
         call_center = api.get.group_call_center(cc['serviceUserId'])
         call_center['agents'] = api.get.group_call_center_agents(cc['serviceUserId'])['agents']
@@ -114,7 +114,7 @@ def main(api, service_provider_id: str, group_id: str, number: str, number_type:
         data_store.call_centers.append(call_center)
     
     hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    for hg in tqdm(hunt_groups, desc=f"Fetching all Hunt Groups."):
+    for hg in tqdm(hunt_groups, desc="Fetching all Hunt Groups."):
         hunt_group = bre.HuntGroup.from_dict(group=group, data= api.get.group_hunt_group(hg['serviceUserId']))
         data_store.hunt_groups.append(hunt_group)
       

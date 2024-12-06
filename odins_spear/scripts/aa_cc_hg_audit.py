@@ -1,4 +1,3 @@
-import json
 from tqdm import tqdm
 
 def remove_excess_details(aa_cc_hg: dict):

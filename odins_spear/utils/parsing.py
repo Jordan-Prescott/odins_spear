@@ -1,5 +1,6 @@
 import json
 
+
 def json_to_dictionary(json_data: str):
     """Loads JSON into a Python Dict.
 
@@ -14,8 +15,8 @@ def json_to_dictionary(json_data: str):
     except json.JSONDecodeError as e:
         print(f"JSON decoding error: {e}")
         return None
-    
-    
+
+
 def dictionary_to_json(python_dict: dict):
     """Takes in a Python dictionary and converts to JSON.
 
