@@ -2,10 +2,12 @@
 
 from .administrators import Administrators
 from .call_records import CallRecords
+from .dns import DNs
 from .users import Users
 
 __all__ = [
     "Administrators",
     "CallRecords",
+    "DNs",
     "Users",
 ]

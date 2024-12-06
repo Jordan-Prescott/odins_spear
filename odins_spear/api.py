@@ -47,6 +47,7 @@ class API:
 
         self.administrators = Administrators()
         self.call_records = CallRecords()
+        self.dns = DNs()
         self.users = Users()
 
     def authenticate(self) -> bool:
