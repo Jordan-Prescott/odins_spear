@@ -1,7 +1,7 @@
 from .base_endpoint import BaseEndpoint
 
 
-class AutoAttendant(BaseEndpoint):
+class AutoAttendants(BaseEndpoint):
     def __init__(self):
         super().__init__()
 
