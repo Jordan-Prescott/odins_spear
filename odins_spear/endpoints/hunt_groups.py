@@ -5,13 +5,6 @@ class HuntGroups(BaseEndpoint):
     def __init__(self):
         super().__init__()
 
-    # TODO: copy and paste the methods from get, post, put, delete.py her in the correct section below.
-    # TODO: renam methods including the method call. Example: def group_admin -> def post_group_admin
-    # TODO: adjust the _requester method call in each methods return. Change from self._requester{method} to self._requester{method}
-
-    # NOTE: as an example to follow look at endpoitns/administrators.py
-    # NOTE: delete these comments after.
-
     # GET
 
     def get_group_hunt_groups(self, service_provider_id, group_id):
