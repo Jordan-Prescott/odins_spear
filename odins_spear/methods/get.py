@@ -3,7 +3,6 @@ from ..exceptions import *
 
 
 class Get:
-
     filters = [
         "macAddress",
         "lastName",
@@ -20,7 +19,6 @@ class Get:
     # SESSION
 
     def session(self):
-
         endpoint = "/auth/session"
 
         return self.requester.get(endpoint)
@@ -1442,7 +1440,7 @@ class Get:
             user_id (str): Target user ID of the user you would like to review.
 
         Returns:
-            Dict: Python dictionary of the users details
+            Dict: Users details
         """
 
         endpoint = "/users/audit"
@@ -1460,12 +1458,12 @@ class Get:
             new_id (str): New User Identifier
 
         Returns:
-            Json: A Stub Of The Users Login Information
+            Dict: Details of target user login information.
         """
 
         endpoint = "/users/login"
 
-        data = {"userId": user_id}
+        data = {"userId": user_id, "newUserId": new_user_id}
 
         return self.requester.put(endpoint, data=data)
 

@@ -503,7 +503,7 @@ class Put:
             Dict: Python dictionary of the new state after updates have been applied.
         """
 
-        endpoint = f"/groups/devices"
+        endpoint = "/groups/devices"
 
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
@@ -844,7 +844,7 @@ class Put:
             "userId": user_id,
         }
 
-        endpoint = f"/users/do-not-disturb"
+        endpoint = "/users/do-not-disturb"
 
         return self.requester.put(endpoint, data)
 
@@ -878,7 +878,7 @@ class Put:
             None: This method does not return any specific value.
         """
 
-        endpoint = f"/groups/hunt-groups/status"
+        endpoint = "/groups/hunt-groups/status"
 
         data = {
             "instances": [
@@ -908,7 +908,7 @@ class Put:
             None: This method does not return any specific value.
         """
 
-        endpoint = f"/groups/hunt-groups"
+        endpoint = "/groups/hunt-groups"
 
         updates["serviceProviderId"] = service_provider_id
         updates["groupId"] = group_id
@@ -936,7 +936,7 @@ class Put:
             None: This method does not return any specific value.
         """
 
-        endpoint = f"/groups/hunt-groups/weighted-call-distribution"
+        endpoint = "/groups/hunt-groups/weighted-call-distribution"
 
         data = {
             "serviceProviderId": service_provider_id,
@@ -1023,7 +1023,7 @@ class Put:
             Dict: User services assigned to the user.
         """
 
-        endpoint = f"/users/services"
+        endpoint = "/users/services"
 
         data = {"userId": user_id}
 

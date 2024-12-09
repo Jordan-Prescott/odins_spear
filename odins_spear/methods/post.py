@@ -1,12 +1,10 @@
 class Post:
-
     def __init__(self, requester):
         self.requester = requester
 
     # SESSION
 
     def session(self, username, password):
-
         endpoint = "/auth/token"
 
         data = {"username": username, "password": password}
@@ -14,7 +12,6 @@ class Post:
         return self.requester.post(endpoint, data=data)
 
     def session_switch(self, username: str):
-
         endpoint = "/auth/switch-user"
 
         data = {"username": username}
@@ -362,9 +359,9 @@ class Post:
 
         payload["serviceInstanceProfile"]["callingLineIdFirstName"] = clid_first_name
         payload["serviceInstanceProfile"]["callingLineIdLastName"] = clid_last_name
-        payload["serviceInstanceProfile"][
-            "name"
-        ] = f"{clid_first_name} {clid_last_name}"
+        payload["serviceInstanceProfile"]["name"] = (
+            f"{clid_first_name} {clid_last_name}"
+        )
         payload["serviceInstanceProfile"]["extension"] = extension
 
         return self.requester.post(endpoint, data=payload)
