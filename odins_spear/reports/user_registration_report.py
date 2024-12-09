@@ -12,7 +12,7 @@ def export_to_xlsx(data: dict, group_id: str):
         if not registration:
             rows.append([user_id, None, None, False])
         else:
-            for device_name, registration_info in registration.items():
+            for device_name, registration_info in enumerate(registration):
                 rows.append(
                     [
                         user_id,

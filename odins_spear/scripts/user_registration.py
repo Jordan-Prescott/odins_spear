@@ -10,7 +10,7 @@ def main(api, service_provider_id: str, group_id: str):
     for user in users:
 
         user_id = user["profile"]["userId"]
-        registrations_out[user_id] = {"registration": {}}  # Initialise the dictionary
+        registrations_out[user_id] = {"registration": []}  # Initialise the dictionary
 
         for registration in user["data"]["registrations"]:
 
@@ -18,11 +18,11 @@ def main(api, service_provider_id: str, group_id: str):
 
             line_port = registration["linePort"]
 
-            registrations_out[user_id]["registration"][device_name] = {
+            registrations_out[user_id]["registration"].append({
                 "deviceName": device_name,
                 "linePort": line_port,
                 "registered": True,
-            }
+            })
     # All devices listed under the "registrations" attribute must be registered, so always True.
 
     return registrations_out
