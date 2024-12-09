@@ -49,6 +49,7 @@ class API:
         self.alternate_numbers = AlternateNumbers()
         self.auto_attendant = AutoAttendants()
         self.call_records = CallRecords()
+        self.hunt_groups = HuntGroups()
         self.users = Users()
 
     def authenticate(self) -> bool:
