@@ -2,19 +2,26 @@
 
 
 class OSError(Exception):
-    """Odin Api Exceptions"""
+    """Odin's Spears Exceptions"""
 
     def __str__(self) -> str:
         return "I dont think you can be trusted in a combat situation"
 
 
-class OSApiAuthenticationFail(OSError):
-    """
-    Raised when api fails to authenticate
-    """
+# API
+
+
+class OSApiResponseError(OSError):
+    """Raised when Odin Api returns an error code."""
+
+    def __init__(self, response):
+        response = response.json()
+        self.response = (
+            f"{response['details']} {response['status']}: {response['error']}"
+        )
 
     def __str__(self) -> str:
-        return "Failed to authenticate. Check username, password, and url."
+        return self.response
 
 
 class OSRequestTypeError(OSError):
@@ -24,38 +31,14 @@ class OSRequestTypeError(OSError):
         return "Non-supported request type, supported: GET, POST, PUT, DELETE."
 
 
-class OSObjectParseError(OSError):
-    """Raised when parsing Broadworks Entity fails."""
+# AUTHENTICATION
+
+
+class OSApiAuthenticationFail(OSError):
+    """Raised when api fails to authenticate"""
 
     def __str__(self) -> str:
-        return "Parsing Broadwork Entity failed."
-
-
-class OSUnsupportedFilter(OSError):
-    """Raised when user requests to filter on unsupported filter"""
-
-    def __init__(self, filter_attempt):
-        self.filter_attempt = filter_attempt
-
-    def __str__(self) -> str:
-        return f"Filter '{self.filter_attempt}' is unsupported. Supported: macAddress, lastName, firstName, dn, emailAddress, userId, extension"
-
-
-class OSUnsupportedFilterType(OSError):
-    """Raised when user requests to filter on unsupported filter"""
-
-    def __init__(self, type_attempt):
-        self.type_attempt = type_attempt
-
-    def __str__(self) -> str:
-        return f"Filter type '{self.type_attempt}' is unsupported. Supported: contains, startsWith, endsWith, equals"
-
-
-class OSAliasNotFound(OSError):
-    """Raised when alias is not found in Broadowks Group."""
-
-    def __str__(self) -> str:
-        return "Alias not found, it either does not exist or check alias."
+        return "Failed to authenticate. Check username, password, and url."
 
 
 class OSSessionRefreshFail(OSError):
@@ -80,6 +63,52 @@ class OSFailedToLocateSession(OSError):
 
     def __str__(self) -> str:
         return "Session details not found. Check token is valid and not exppired."
+
+
+# NOT-FOUND
+
+
+class OSExtensionNotFound(OSError):
+    """Raised when a searched extension is not found"""
+
+    def __str__(self) -> str:
+        return "Cannot locate extension. Please alter search criteria"
+
+
+# FILTER
+
+
+class OSUnsupportedFilter(OSError):
+    """Raised when user requests to filter on unsupported filter"""
+
+    def __init__(self, filter_attempt):
+        self.filter_attempt = filter_attempt
+
+    def __str__(self) -> str:
+        return f"Filter '{self.filter_attempt}' is unsupported. Supported: macAddress, lastName, firstName, dn, emailAddress, userId, extension"
+
+
+class OSUnsupportedFilterType(OSError):
+    """Raised when user requests to filter on unsupported filter"""
+
+    def __init__(self, type_attempt):
+        self.type_attempt = type_attempt
+
+    def __str__(self) -> str:
+        return f"Filter type '{self.type_attempt}' is unsupported. Supported: contains, startsWith, endsWith, equals"
+
+
+# FILES
+
+
+class OSFileNotFound(OSError):
+    """Raised when a file can not be found."""
+
+    def __str__(self) -> str:
+        return "File can not be found, please check path and file name."
+
+
+# FORMATTING
 
 
 class OSInvalidCode(OSError):
@@ -119,11 +148,17 @@ class OSInvalidPasswordType(OSError):
         return "Invalid or unsupported password, please review supported passwords."
 
 
-class OSExtensionNotFound(OSError):
-    """Raised when a searched extension is not found"""
+# FEATURE
+
+
+class OSAliasNotFound(OSError):
+    """Raised when alias is not found in Broadowks Group."""
 
     def __str__(self) -> str:
-        return "Cannot locate extension. Please alter search criteria"
+        return "Alias not found, it either does not exist or check alias."
+
+
+# RANGE
 
 
 class OSRangeFault(OSError):
@@ -135,28 +170,11 @@ class OSRangeFault(OSError):
         return "Range fault raised. Please verify integrity of passed range values"
 
 
-class OSServiceNotAssigned(OSError):
-    """Raised a service needed is not assigned to a Broadworks entity."""
+# PARSING
+
+
+class OSObjectParseError(OSError):
+    """Raised when parsing Broadworks Entity fails."""
 
     def __str__(self) -> str:
-        return "Service not assigend to target Broadworks entity. Please check services assigned."
-
-
-class OSFileNotFound(OSError):
-    """Raised when a file can not be found."""
-
-    def __str__(self) -> str:
-        return "File can not be found, please check path and file name."
-
-
-class OSApiResponseError(OSError):
-    """Raised when Odin Api returns an error code."""
-
-    def __init__(self, response):
-        response = response.json()
-        self.response = (
-            f"{response['details']} {response['status']}: {response['error']}"
-        )
-
-    def __str__(self) -> str:
-        return self.response
+        return "Parsing Broadwork Entity failed."
