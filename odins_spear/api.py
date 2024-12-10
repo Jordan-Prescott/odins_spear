@@ -58,6 +58,7 @@ class API:
         self.call_forwarding_busy = CallForwardingBusy()
         self.call_records = CallRecords()
         self.dns = DNs()
+        self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
         self.users = Users()
 

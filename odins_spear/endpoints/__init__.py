@@ -11,6 +11,7 @@ from .call_forwarding_no_answer import CallForwardingNoAnswer
 from .call_forwarding_busy import CallForwardingBusy
 from .call_records import CallRecords
 from .dns import DNs
+from .do_not_disturb import DoNotDisturb
 from .hunt_groups import HuntGroups
 from .users import Users
 
@@ -28,6 +29,7 @@ __all__ = [
     "CallForwardingBusy",
     "CallRecords",
     "DNs",
+    "DoNotDisturb",
     "HuntGroups",
     "Users",
 ]
