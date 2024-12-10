@@ -15,6 +15,7 @@ from .dns import DNs
 from .emergency_zones import EmergencyZones
 from .do_not_disturb import DoNotDisturb
 from .hunt_groups import HuntGroups
+from .services import Services
 from .schedules import Schedules
 from .reports import Reports
 from .registration import Registration
@@ -39,6 +40,7 @@ __all__ = [
     "EmergencyZones",
     "DoNotDisturb",
     "HuntGroups",
+    "Services",
     "Reports",
     "Registration",
     "PasswordGenerate",
