@@ -53,6 +53,7 @@ class API:
         self.call_records = CallRecords()
         self.dns = DNs()
         self.hunt_groups = HuntGroups()
+        self.schedules = Schedules()
         self.users = Users()
 
     def authenticate(self) -> bool:

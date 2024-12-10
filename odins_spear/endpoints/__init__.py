@@ -6,6 +6,7 @@ from .call_forwarding_always import CallForwardingAlways
 from .call_records import CallRecords
 from .dns import DNs
 from .hunt_groups import HuntGroups
+from .schedules import Schedules
 from .users import Users
 
 __all__ = [
