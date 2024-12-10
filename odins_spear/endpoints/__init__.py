@@ -4,6 +4,10 @@ from .auto_attendant import AutoAttendants
 from .call_centers import CallCenters
 from .call_forwarding_always import CallForwardingAlways
 from .call_pickup import CallPickup
+from .call_fowarding_selective import CallForwardingSelective
+from .call_forwarding_not_reachable import CallForwardingNotReachable
+from .call_forwarding_no_answer import CallForwardingNoAnswer
+from .call_forwarding_busy import CallForwardingBusy
 from .call_records import CallRecords
 from .dns import DNs
 from .hunt_groups import HuntGroups
@@ -16,6 +20,10 @@ __all__ = [
     "CallCenters",
     "CallForwardingAlways",
     "CallPickup",
+    "CallForwardingSelective",
+    "CallForwardingNotReachable",
+    "CallForwardingNoAnswer",
+    "CallForwardingBusy",
     "CallRecords",
     "DNs",
     "HuntGroups",
