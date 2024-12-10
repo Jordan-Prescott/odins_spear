@@ -62,6 +62,7 @@ class API:
         self.emergency_zones = EmergencyZones()
         self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
+        self.regsitration = Registration()
         self.password_generate = PasswordGenerate()
         self.users = Users()
 
