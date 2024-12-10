@@ -53,6 +53,7 @@ class API:
         self.call_records = CallRecords()
         self.dns = DNs()
         self.hunt_groups = HuntGroups()
+        self.trunk_groups = TrunkGroups()
         self.users = Users()
 
     def authenticate(self) -> bool:
