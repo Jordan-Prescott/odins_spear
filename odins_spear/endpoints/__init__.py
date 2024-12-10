@@ -20,6 +20,7 @@ from .schedules import Schedules
 from .reports import Reports
 from .registration import Registration
 from .password_generate import PasswordGenerate
+from .trunk_groups import TrunkGroups
 from .users import Users
 
 __all__ = [
@@ -40,6 +41,7 @@ __all__ = [
     "EmergencyZones",
     "DoNotDisturb",
     "HuntGroups",
+    "TrunkGroups",
     "Services",
     "Reports",
     "Registration",
