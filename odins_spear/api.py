@@ -51,6 +51,7 @@ class API:
         self.call_centers = CallCenters()
         self.call_forwarding_always = CallForwardingAlways()
         self.call_records = CallRecords()
+        self.devices = Devices()
         self.dns = DNs()
         self.hunt_groups = HuntGroups()
         self.users = Users()
