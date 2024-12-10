@@ -148,7 +148,7 @@ class OSInvalidPasswordType(OSError):
         return "Invalid or unsupported password, please review supported passwords."
 
 
-# FEATURE
+#  OS FEATURES
 
 
 class OSAliasNotFound(OSError):
@@ -156,6 +156,13 @@ class OSAliasNotFound(OSError):
 
     def __str__(self) -> str:
         return "Alias not found, it either does not exist or check alias."
+
+
+class OSServiceNotAssigned(OSError):
+    """Raised a service needed is not assigned to a Broadworks entity."""
+
+    def __str__(self) -> str:
+        return "Service not assigend to target Broadworks entity. Please check services assigned."
 
 
 # RANGE
