@@ -17,5 +17,6 @@ __all__ = [
     "CallRecords",
     "DNs",
     "HuntGroups",
+    "SharedCallAppearance"
     "Users",
 ]
