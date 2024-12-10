@@ -1,5 +1,11 @@
 from . import scripts
 
+#TODO: singleton pattern
+#TODO: Add logging
+#TODO: Typing
+#TODO: Add **kwargs to all scripts
+#TODO: Add _call_scrpt method to call scripts
+#TODO: organise into alphabetical order
 
 class Scripter:
     """This object acts as the gateway to all pre-written scripts in /scripts/.
@@ -282,3 +288,5 @@ class Scripter:
             dict: User's ID, Device Name, and Registration status.
         """
         return scripts.user_registration.main(self.api, service_provider_id, group_id)
+    
+    def 
