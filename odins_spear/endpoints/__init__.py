@@ -5,6 +5,7 @@ from .call_centers import CallCenters
 from .call_forwarding_always import CallForwardingAlways
 from .call_records import CallRecords
 from .dns import DNs
+from .groups import Groups
 from .hunt_groups import HuntGroups
 from .users import Users
 
@@ -16,6 +17,7 @@ __all__ = [
     "CallForwardingAlways",
     "CallRecords",
     "DNs",
+    "Groups",
     "HuntGroups",
     "Users",
 ]
