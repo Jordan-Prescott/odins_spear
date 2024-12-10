@@ -1,3 +1,5 @@
+from typing import Dict
+
 from . import scripts
 
 # TODO: singleton pattern
@@ -24,7 +26,7 @@ class Scripter:
     def __init__(self, api) -> None:
         self.api = api
 
-    def aa_cc_hg_audit(self, service_provider_id: str, group_id: str):
+    def aa_cc_hg_audit(self, service_provider_id: str, group_id: str) -> Dict[str, any]:
         """
             This script returns the services assigned to Auto Attendants,
             Call Centres, and Hunt Groups. Only services are applied to these
@@ -42,7 +44,7 @@ class Scripter:
 
     def bulk_password_reset(
         self, service_provider_id: str, group_id: str, users: list, password_type: str
-    ):
+    ) -> Dict[str, any]:
         """Resets a list of users SIP passwords or Voicemail passcodes. Specify in password_type with the options of
         'SIP' or 'Voicemail' and the script will perform the necessary actions.
 
@@ -62,7 +64,9 @@ class Scripter:
             self.api, service_provider_id, group_id, users, password_type
         )
 
-    def find_alias(self, service_provider_id: str, group_id: str, alias: str):
+    def find_alias(
+        self, service_provider_id: str, group_id: str, alias: str
+    ) -> Dict[str, any]:
         """Locates alias if assigned to broadworks entity.
 
         Args:
@@ -79,7 +83,7 @@ class Scripter:
         """
         return scripts.find_alias.main(self.api, service_provider_id, group_id, alias)
 
-    def group_audit(self, service_provider_id: str, group_id: str):
+    def group_audit(self, service_provider_id: str, group_id: str) -> Dict[str, any]:
         """
         Produces a report of key information within the group.
         Reports on DN usage, Service and Service pack usage, Trunking call capacity and group info.
@@ -95,7 +99,7 @@ class Scripter:
 
     def locate_free_extension(
         self, service_provider_id: str, group_id: str, range_start: int, range_end: int
-    ):
+    ) -> Dict[str, any]:
         """Locates the lowest value free extension given the provided range of extension numbers.
 
         Raises: OSExtensionNotFound: Raises when a free extension is not located within the passed range.
@@ -155,7 +159,7 @@ class Scripter:
         group_id: str,
         start_of_range_number: str,
         end_of_range_number: str = None,
-    ):
+    ) -> bool:
         """Removes a singular or range of numbers from the entire Broadworks instance.
 
         Note: Numbers need to be strings and follow this format: +{country code}-{number}.
@@ -175,7 +179,7 @@ class Scripter:
             end_of_range_number,
         )
 
-    def service_pack_audit(self, servive_provider_id, group_id):
+    def service_pack_audit(self, servive_provider_id, group_id) -> Dict[str, any]:
         """
         A stripped down version of group audit focussing only on the service packs assigned within
         the group. This only shows the service packs assigned and total count of unlike group audit
@@ -190,7 +194,9 @@ class Scripter:
         """
         return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
 
-    def service_provider_trunking_capacity(self, service_provider_id: str):
+    def service_provider_trunking_capacity(
+        self, service_provider_id: str
+    ) -> Dict[str, any]:
         """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
         This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
         At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at 
@@ -210,7 +216,9 @@ class Scripter:
             self.api, service_provider_id
         )
 
-    def user_association(self, service_provider_id: str, group_id: str, user_id: str):
+    def user_association(
+        self, service_provider_id: str, group_id: str, user_id: str
+    ) -> Dict[str, any]:
         """
         Identify a user's associations with Call Centers (CC), Hunt Groups (HG),
         and Pick Up Groups.
@@ -227,7 +235,9 @@ class Scripter:
             self.api, service_provider_id, group_id, user_id
         )
 
-    def user_registration(self, service_provider_id: str, group_id: str):
+    def user_registration(
+        self, service_provider_id: str, group_id: str
+    ) -> Dict[str, any]:
         """Generates a dictionary detailing each Users ID, device name and registration status within a group.
 
         Args:
@@ -249,7 +259,7 @@ class Scripter:
         primary_device: bool = True,
         webex_feature_pack_name: str = None,
         enable_integrated_imp: bool = True,
-    ):
+    ) -> Dict[str, any]:
         """Builds a Webex device and assigns to user either as the primary device or a
         Shared Call Appearance.
 
