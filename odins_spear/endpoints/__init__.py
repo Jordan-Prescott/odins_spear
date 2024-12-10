@@ -3,6 +3,7 @@ from .alternate_numbers import AlternateNumbers
 from .auto_attendant import AutoAttendants
 from .call_centers import CallCenters
 from .call_forwarding_always import CallForwardingAlways
+from .call_pickup import CallPickup
 from .call_fowarding_selective import CallForwardingSelective
 from .call_forwarding_not_reachable import CallForwardingNotReachable
 from .call_forwarding_no_answer import CallForwardingNoAnswer
@@ -18,6 +19,7 @@ __all__ = [
     "AutoAttendants",
     "CallCenters",
     "CallForwardingAlways",
+    "CallPickup",
     "CallForwardingSelective",
     "CallForwardingNotReachable",
     "CallForwardingNoAnswer",

@@ -50,6 +50,7 @@ class API:
         self.auto_attendant = AutoAttendants()
         self.call_centers = CallCenters()
         self.call_forwarding_always = CallForwardingAlways()
+        self.call_pickup = CallPickup()
         self.call_forwarding_selective = CallForwardingSelective()
         self.call_forwarding_not_reachable = CallForwardingNotReachable()
         self.call_forwarding_no_answer = CallForwardingNoAnswer()
