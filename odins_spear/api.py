@@ -57,6 +57,7 @@ class API:
         self.call_forwarding_no_answer = CallForwardingNoAnswer()
         self.call_forwarding_busy = CallForwardingBusy()
         self.call_records = CallRecords()
+        self.devices = Devices()
         self.dns = DNs()
         self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
