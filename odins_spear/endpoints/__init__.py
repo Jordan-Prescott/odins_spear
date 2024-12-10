@@ -15,6 +15,7 @@ from .dns import DNs
 from .emergency_zones import EmergencyZones
 from .do_not_disturb import DoNotDisturb
 from .hunt_groups import HuntGroups
+from .password_generate import PasswordGenerate
 from .users import Users
 
 __all__ = [
@@ -35,5 +36,6 @@ __all__ = [
     "EmergencyZones",
     "DoNotDisturb",
     "HuntGroups",
+    "PasswordGenerate",
     "Users",
 ]
