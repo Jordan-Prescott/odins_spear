@@ -59,6 +59,7 @@ class API:
         self.call_records = CallRecords()
         self.devices = Devices()
         self.dns = DNs()
+        self.emergency_zones = EmergencyZones()
         self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
         self.users = Users()
