@@ -1,11 +1,12 @@
 from . import scripts
 
-#TODO: singleton pattern
-#TODO: Add logging
-#TODO: Typing
-#TODO: Add **kwargs to all scripts
-#TODO: Add _call_scrpt method to call scripts
-#TODO: organise into alphabetical order
+# TODO: singleton pattern
+# TODO: Add logging
+# TODO: Typing
+# TODO: Add **kwargs to all scripts
+# TODO: Add _call_scrpt method to call scripts
+# TODO: organise into alphabetical order
+
 
 class Scripter:
     """This object acts as the gateway to all pre-written scripts in /scripts/.
@@ -38,10 +39,6 @@ class Scripter:
             JSON: A JSON formatted report of service packs assigned to AA, CC, and HG.
         """
         return scripts.aa_cc_hg_audit.main(self.api, service_provider_id, group_id)
-
-    # TODO: How will users be passed in
-    def bulk_enable_voicemail(self, users):
-        return scripts.bulk_enable_voicemail.main(self.api, users)
 
     def bulk_password_reset(
         self, service_provider_id: str, group_id: str, users: list, password_type: str
@@ -96,39 +93,24 @@ class Scripter:
         """
         return scripts.group_audit.main(self.api, service_provider_id, group_id)
 
-    def service_pack_audit(self, servive_provider_id, group_id):
-        """
-        A stripped down version of group audit focussing only on the service packs assigned within
-        the group. This only shows the service packs assigned and total count of unlike group audit
-        which details the users this is assigned to.
+    def locate_free_extension(
+        self, service_provider_id: str, group_id: str, range_start: int, range_end: int
+    ):
+        """Locates the lowest value free extension given the provided range of extension numbers.
+
+        Raises: OSExtensionNotFound: Raises when a free extension is not located within the passed range.
 
         Args:
-            service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
-            group_id (str): Group ID to generate the report for.
+            service_provider_id (str): Service Provider/ Enterprise ID where Group is located which hosts needed free extensions
+            group_id (str): Group ID where target extensions are located.
+            range_start (int): integral value specifying the starting range for free extensions
+            range_end (int): integral value specifying the ending range for free extensions
 
         Returns:
-            str: A JSON formatted report of service packs assigned in the group.
+            JSON: JSON data of the free extension {extension: "1000"}
         """
-        return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
-
-    def user_activity(self, user):
-        return scripts.user_activity.main(self.api, user)
-
-    def user_association(self, service_provider_id: str, group_id: str, user_id: str):
-        """
-        Identify a user's associations with Call Centers (CC), Hunt Groups (HG),
-        and Pick Up Groups.
-
-        Args:
-            service_provider_id (str): Service Provider where the group is hosted.
-            group_id (str): Group where the User is located.
-            user_id (str): Target user ID.
-
-        Returns:
-            str: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
-        """
-        return scripts.user_association.main(
-            self.api, service_provider_id, group_id, user_id
+        return scripts.locate_free_extension.main(
+            self.api, service_provider_id, group_id, range_start, range_end
         )
 
     def move_numbers(
@@ -193,25 +175,20 @@ class Scripter:
             end_of_range_number,
         )
 
-    def locate_free_extension(
-        self, service_provider_id: str, group_id: str, range_start: int, range_end: int
-    ):
-        """Locates the lowest value free extension given the provided range of extension numbers.
-
-        Raises: OSExtensionNotFound: Raises when a free extension is not located within the passed range.
+    def service_pack_audit(self, servive_provider_id, group_id):
+        """
+        A stripped down version of group audit focussing only on the service packs assigned within
+        the group. This only shows the service packs assigned and total count of unlike group audit
+        which details the users this is assigned to.
 
         Args:
-            service_provider_id (str): Service Provider/ Enterprise ID where Group is located which hosts needed free extensions
-            group_id (str): Group ID where target extensions are located.
-            range_start (int): integral value specifying the starting range for free extensions
-            range_end (int): integral value specifying the ending range for free extensions
+            service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
+            group_id (str): Group ID to generate the report for.
 
         Returns:
-            JSON: JSON data of the free extension {extension: "1000"}
+            str: A JSON formatted report of service packs assigned in the group.
         """
-        return scripts.locate_free_extension.main(
-            self.api, service_provider_id, group_id, range_start, range_end
-        )
+        return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
 
     def service_provider_trunking_capacity(self, service_provider_id: str):
         """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
@@ -232,6 +209,35 @@ class Scripter:
         return scripts.service_provider_trunking_capacity.main(
             self.api, service_provider_id
         )
+
+    def user_association(self, service_provider_id: str, group_id: str, user_id: str):
+        """
+        Identify a user's associations with Call Centers (CC), Hunt Groups (HG),
+        and Pick Up Groups.
+
+        Args:
+            service_provider_id (str): Service Provider where the group is hosted.
+            group_id (str): Group where the User is located.
+            user_id (str): Target user ID.
+
+        Returns:
+            str: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
+        """
+        return scripts.user_association.main(
+            self.api, service_provider_id, group_id, user_id
+        )
+
+    def user_registration(self, service_provider_id: str, group_id: str):
+        """Generates a dictionary detailing each Users ID, device name and registration status within a group.
+
+        Args:
+            service_provider_id (str):  Service Provider/ Enterprise where group is hosted.
+            group_id (str): Target Group you would like to know user statistics for.
+
+        Returns:
+            dict: User's ID, Device Name, and Registration status.
+        """
+        return scripts.user_registration.main(self.api, service_provider_id, group_id)
 
     def webex_builder(
         self,
@@ -276,17 +282,3 @@ class Scripter:
             webex_feature_pack_name,
             enable_integrated_imp,
         )
-
-    def user_registration(self, service_provider_id: str, group_id: str):
-        """Generates a dictionary detailing each Users ID, device name and registration status within a group.
-
-        Args:
-            service_provider_id (str):  Service Provider/ Enterprise where group is hosted.
-            group_id (str): Target Group you would like to know user statistics for.
-
-        Returns:
-            dict: User's ID, Device Name, and Registration status.
-        """
-        return scripts.user_registration.main(self.api, service_provider_id, group_id)
-    
-    def 
