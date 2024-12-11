@@ -17,9 +17,9 @@ def format_filter_value(filter_type, filter_value):
         str: Formatted filter with the value and correct filter wildcards.
     """
 
+    filter_type = filter_type.lower()
     check_type_filter(filter_type, filter_value)
 
-    filter_type = filter_type.lower()
     if filter_type == "equal to":
         return f"{filter_value}"
     elif filter_type == "starts with":
