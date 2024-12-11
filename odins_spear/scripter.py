@@ -2,8 +2,7 @@ from typing import Dict, Any, Optional
 
 from . import scripts
 
-# TODO: singleton pattern
-# TODO: Add logging
+from .api import API
 
 
 class Scripter:
@@ -19,8 +18,32 @@ class Scripter:
     :param api: api object in package odin_api, this is used in the scripts to achieve objective.
     """
 
-    def __init__(self, api) -> None:
-        self.api = api
+    __instance = None
+
+    @staticmethod
+    def get_instance(api: API = None) -> "Scripter":
+        """
+        Singleton implementation for Scripter object.
+
+        Args:
+            api (API): API object to be used in the scripts.
+
+        Returns:
+            Scripter: Scripter object.
+        """
+        if Scripter.__instance is None:
+            Scripter(api)
+        return Scripter.__instance
+
+    def __init__(
+        self,
+        api: API,
+    ) -> None:
+        if Scripter.__instance is not None:
+            raise Exception("Singleton cannot be instantiated more than once!")
+        else:
+            self.api = api
+            Scripter.__instance = self
 
     def _run_script(self, script_name: str, *args, **kwargs) -> Dict[str, Any]:
         """
