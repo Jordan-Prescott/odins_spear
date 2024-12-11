@@ -42,11 +42,12 @@ __all__ = [
     "EmergencyZones",
     "DoNotDisturb",
     "HuntGroups",
-    "SharedCallAppearance"
-    "TrunkGroups",
     "Services",
+    "SharedCallAppearance",
+    "Schedules",
     "Reports",
     "Registration",
     "PasswordGenerate",
+    "TrunkGroups",
     "Users",
 ]
