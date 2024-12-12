@@ -17,7 +17,8 @@ class Services(BaseEndpoint):
 
         params = {"userId": user_id}
 
-        return self.requester.get(endpoint, params=params)
+        return self._requester.get(endpoint, params=params)
+
 
     def get_user_services(self, user_id: str):
         """Fetch all services assigned to a broadwrok entity, this can be
@@ -34,7 +35,8 @@ class Services(BaseEndpoint):
 
         params = {"userId": user_id}
 
-        return self.requester.get(endpoint, params=params)
+        return self._requester.get(endpoint, params=params)
+
 
     def get_user_service_settings(self, user_id: str):
         """Retrieves all service settings for a specific user.
@@ -50,7 +52,8 @@ class Services(BaseEndpoint):
 
         params = {"userId": user_id}
 
-        return self.requester.get(endpoint, params=params)
+        return self._requester.get(endpoint, params=params)
+      
 
     def get_group_services(self, group_id: str, service_provider_id: str):
         """
@@ -68,7 +71,8 @@ class Services(BaseEndpoint):
 
         params = {"groupId": group_id, "serviceProviderId": service_provider_id}
 
-        return self.requester.get(endpoint, params=params)
+        return self._requester.get(endpoint, params=params)
+
 
     def get_group_services_user_assigned(
         self,
@@ -99,7 +103,8 @@ class Services(BaseEndpoint):
             "serviceName": service_name,
         }
 
-        return self.requester.get(endpoint, params=params)
+        return self._requester.get(endpoint, params=params)
+
 
     # POST
 
@@ -137,7 +142,8 @@ class Services(BaseEndpoint):
                 {"serviceName": service_pack, "assigned": assigned}
                 for service_pack in service_packs
             ]
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
+
 
     def put_user_service_settings(self, user_id: str, settings: dict):
         """Updates specific service settings for a given user.
@@ -155,7 +161,7 @@ class Services(BaseEndpoint):
 
         data = {"userId": user_id, **settings}
 
-        return self.requester.put(endpoint, data=data)
+        return self._requester.put(endpoint, data=data)
 
 
 # DELETE
