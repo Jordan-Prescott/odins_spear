@@ -23,6 +23,6 @@ def main(api, service_provider_id: str, group_id: str):
                 "linePort": line_port,
                 "registered": True,
             })
-    # All devices listed under the "registrations" attribute must be registered, so always True.
-
+            
+       
     return registrations_out

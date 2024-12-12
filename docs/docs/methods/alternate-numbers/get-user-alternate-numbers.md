@@ -29,7 +29,7 @@ my_api.get.user_alternate_numbers(
 ```
 {% endcode %}
 
-### Example Returned Data of SIP Passwords (Formatted)
+### Example Data Returned (Formatted)
 
 ```json
 {

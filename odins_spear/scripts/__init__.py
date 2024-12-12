@@ -26,3 +26,4 @@ from .user_activity import main
 from .user_association import main
 from .user_registration import main
 from .webex_builder import main
+from .locate_free_extension import main

@@ -6,7 +6,7 @@ description: >-
 
 # 🔑 Abbreviation Key
 
-<figure><img src="../../../../.gitbook/assets/image (25).png" alt=""><figcaption><p>Example of Call Flow showing abbreviations.</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/call_flow.jpg" alt=""><figcaption><p>Example of Call Flow showing abbreviations.</p></figcaption></figure>
 
 | Abbreviation | Meaning                           |
 | ------------ | --------------------------------- |
