@@ -17,13 +17,13 @@ def main(api, service_provider_id: str, group_id: str):
     return_data = {"autoAttendants": [], "callCenters": [], "huntGroups": []}
 
     for entity_type, api_method in [
-        ("autoAttendants", api.get_auto_attendants),
-        ("callCenters", api.get_group_call_centers),
-        ("huntGroups", api.get_group_hunt_groups),
+        ("autoAttendants", api.auto_attendant.get_auto_attendants),
+        ("callCenters", api.call_centers.get_group_call_centers),
+        ("huntGroups", api.hunt_groups.get_group_hunt_groups),
     ]:
         entities = api_method(service_provider_id, group_id)
         for entity in tqdm(entities, desc=f"Analysing {entity_type.capitalize()}"):
-            services = api.get_user_services_assigned(entity["serviceUserId"])
+            services = api.services.get_user_services(entity["serviceUserId"])
             return_data[entity_type].append(
                 {
                     "serviceUserId": entity["serviceUserId"],
