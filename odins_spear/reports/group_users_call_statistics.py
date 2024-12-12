@@ -136,3 +136,4 @@ def main(
         "./odins_spear/assets/images/", "./os_reports/", "made_with_os.png"
     )
     print("\nEnd.")
+    return True

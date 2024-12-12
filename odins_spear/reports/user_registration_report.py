@@ -38,3 +38,4 @@ def main(api, service_provider_id: str, group_id: str):
     data = api.scripter.user_registration(service_provider_id, group_id)
 
     export_to_xlsx(data, group_id)
+    return True
