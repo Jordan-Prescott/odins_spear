@@ -158,6 +158,13 @@ class OSAliasNotFound(OSError):
         return "Alias not found, it either does not exist or check alias."
 
 
+class OSServiceNotAssigned(OSError):
+    """Raised a service needed is not assigned to a Broadworks entity."""
+
+    def __str__(self) -> str:
+        return "Service not assigend to target Broadworks entity. Please check services assigned."
+
+
 # RANGE
 
 

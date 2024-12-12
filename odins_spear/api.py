@@ -63,10 +63,12 @@ class API:
         self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
         self.services = Services()
+        self.shared_call_appearance = SharedCallAppearance()
         self.schedules = Schedules()
         self.reports = Reports()
         self.regsitration = Registration()
         self.password_generate = PasswordGenerate()
+        self.trunk_groups = TrunkGroups()
         self.users = Users()
 
     def authenticate(self) -> bool:
