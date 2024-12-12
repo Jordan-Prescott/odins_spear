@@ -1,27 +1,26 @@
-from .aa_cc_hg_audit import main
-from .bulk_password_reset import main
-from .find_alias import main
-from .group_audit import main
-from .locate_free_extension import main
-from .move_numbers import main
-from .remove_numbers import main
-from .service_pack_audit import main
-from .service_provider_trunking_capacity import main
-from .user_association import main
-from .user_registration import main
-from .webex_builder import main
+import os
+import importlib
+import inspect
 
-__all__ = [
-    "aa_cc_hg_audit",
-    "bulk_password_reset",
-    "find_alias",
-    "group_audit",
-    "move_numbers",
-    "locate_free_extension",
-    "remove_numbers",
-    "service_pack_audit",
-    "service_provider_trunking_capacity",
-    "user_association",
-    "user_registration",
-    "webex_builder",
-]
+# Get the directory path of this __init__.py file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Iterate over files in the directory
+for filename in os.listdir(current_dir):
+    # Skip __init__.py, __pycache__, and non-Python files
+    if (
+        filename == "__init__.py"
+        or filename.startswith("__")
+        or not filename.endswith(".py")
+    ):
+        continue
+
+    module_name = filename[:-3]  # remove the .py extension
+
+    # Dynamically import the module
+    module = importlib.import_module(f".{module_name}", package=__name__)
+
+    # Check if there is a function named 'main' in the module
+    if hasattr(module, "main") and inspect.isfunction(module.main):
+        # Add it to the current package's namespace with the module_name as the attribute name
+        globals()[module_name] = module.main
