@@ -23,11 +23,11 @@ def main(api, service_provider_id: str, group_id: str):
     ]:
         entities = api_method(service_provider_id, group_id)
         for entity in tqdm(entities, desc=f"Analysing {entity_type.capitalize()}"):
-            services = api.services.get_user_services(entity["serviceUserId"])
+            services = api.services.get_user_services_assigned(entity["serviceUserId"])
             return_data[entity_type].append(
                 {
                     "serviceUserId": entity["serviceUserId"],
-                    "type": entity["type"],
+                    "type": entity.get("type", "None"),
                     "services": services.get("userServices", []),
                 }
             )
