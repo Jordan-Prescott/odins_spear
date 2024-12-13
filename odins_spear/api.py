@@ -46,6 +46,7 @@ class API:
         self.reporter = Reporter(api=self)
         self.administrators = Administrators()
         self.alternate_numbers = AlternateNumbers()
+        self.authentication = Authentication()
         self.auto_attendant = AutoAttendants()
         self.call_centers = CallCenters()
         self.call_forwarding_always = CallForwardingAlways()
