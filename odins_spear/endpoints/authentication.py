@@ -13,7 +13,7 @@ class Authentication(BaseEndpoint):
 # PUT
 
 
-def user_authentication_service(self, user_id: str, new_password: str):
+def put_user_authentication_service(self, user_id: str, new_password: str):
     """Set new SIP Authentication password for a single user.
 
     Args:
@@ -31,7 +31,7 @@ def user_authentication_service(self, user_id: str, new_password: str):
     return self._requester.put(endpoint, data=data)
 
 
-def user_web_authentication_password(self, user_id: str, new_password: str):
+def put_user_web_authentication_password(self, user_id: str, new_password: str):
     """Set new Web Authentication password for a single user.
 
     Args:
