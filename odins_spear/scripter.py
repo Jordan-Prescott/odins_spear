@@ -1,4 +1,8 @@
+from typing import Dict, Any, Optional
+
 from . import scripts
+
+from .api import API
 
 
 class Scripter:
@@ -14,10 +18,57 @@ class Scripter:
     :param api: api object in package odin_api, this is used in the scripts to achieve objective.
     """
 
-    def __init__(self, api) -> None:
-        self.api = api
+    __instance = None
 
-    def aa_cc_hg_audit(self, service_provider_id: str, group_id: str):
+    @staticmethod
+    def get_instance(api: API = None) -> "Scripter":
+        """
+        Singleton implementation for Scripter object.
+
+        Args:
+            api (API): API object to be used in the scripts.
+
+        Returns:
+            Scripter: Scripter object.
+        """
+        if Scripter.__instance is None:
+            Scripter(api)
+        return Scripter.__instance
+
+    def __init__(
+        self,
+        api: API,
+    ) -> None:
+        if Scripter.__instance is not None:
+            raise Exception("Singleton cannot be instantiated more than once!")
+        else:
+            self.api = api
+            Scripter.__instance = self
+
+    def _run_script(self, script_name: str, *args, **kwargs) -> Dict[str, Any]:
+        """
+        Dynamically runs the specified script.
+
+        Args:
+            script_name (str): Name of the script to run.
+            *args: Positional arguments for the script.
+            **kwargs: Keyword arguments for the script.
+
+        Returns:
+            Dict[str, Any]: Output of the script.
+
+        Raises:
+            AttributeError: If the script is not found in the `scripts` module.
+        """
+        try:
+            script_function = getattr(scripts, script_name)
+        except AttributeError:
+            raise AttributeError(
+                f"Script '{script_name}' not found in 'scripts' module."
+            )
+        return script_function(self.api, *args, **kwargs)
+
+    def aa_cc_hg_audit(self, service_provider_id: str, group_id: str) -> Dict[str, Any]:
         """
             This script returns the services assigned to Auto Attendants,
             Call Centres, and Hunt Groups. Only services are applied to these
@@ -29,17 +80,13 @@ class Scripter:
             group_id: Group ID to generate the report for.
 
         Returns:
-            JSON: A JSON formatted report of service packs assigned to AA, CC, and HG.
+            Dict: Formatted report of service packs assigned to AA, CC, and HG.
         """
-        return scripts.aa_cc_hg_audit.main(self.api, service_provider_id, group_id)
-
-    # TODO: How will users be passed in
-    def bulk_enable_voicemail(self, users):
-        return scripts.bulk_enable_voicemail.main(self.api, users)
+        return self._run_script("aa_cc_hg_audit", service_provider_id, group_id)
 
     def bulk_password_reset(
         self, service_provider_id: str, group_id: str, users: list, password_type: str
-    ):
+    ) -> Dict[str, any]:
         """Resets a list of users SIP passwords or Voicemail passcodes. Specify in password_type with the options of
         'SIP' or 'Voicemail' and the script will perform the necessary actions.
 
@@ -55,11 +102,13 @@ class Scripter:
         Returns:
             Dict: Users and their new passwords.
         """
-        return scripts.bulk_password_reset.main(
-            self.api, service_provider_id, group_id, users, password_type
+        return self._run_script(
+            "bulk_password_reset", service_provider_id, group_id, users, password_type
         )
 
-    def find_alias(self, service_provider_id: str, group_id: str, alias: str):
+    def find_alias(
+        self, service_provider_id: str, group_id: str, alias: str
+    ) -> Dict[str, any]:
         """Locates alias if assigned to broadworks entity.
 
         Args:
@@ -71,12 +120,12 @@ class Scripter:
              AOALiasNotFound: If alias not found AOAliasNotFound error raised
 
         Returns:
-            str: Returns type and name/ userId of entity where alias located.
+            Dict: Returns type and name/ userId of entity where alias located.
 
         """
-        return scripts.find_alias.main(self.api, service_provider_id, group_id, alias)
+        return self._run_script("find_alias", service_provider_id, group_id, alias)
 
-    def group_audit(self, service_provider_id: str, group_id: str):
+    def group_audit(self, service_provider_id: str, group_id: str) -> Dict[str, any]:
         """
         Produces a report of key information within the group.
         Reports on DN usage, Service and Service pack usage, Trunking call capacity and group info.
@@ -86,43 +135,32 @@ class Scripter:
             group_id (str): Group ID to generate the report for.
 
         Returns:
-            str: A JSON formatted report of the group.
+            Dict: Formatted report of the group.
         """
-        return scripts.group_audit.main(self.api, service_provider_id, group_id)
+        return self._run_script("group_audit", service_provider_id, group_id)
 
-    def service_pack_audit(self, servive_provider_id, group_id):
-        """
-        A stripped down version of group audit focussing only on the service packs assigned within
-        the group. This only shows the service packs assigned and total count of unlike group audit
-        which details the users this is assigned to.
+    def locate_free_extension(
+        self, service_provider_id: str, group_id: str, range_start: int, range_end: int
+    ) -> Dict[str, any]:
+        """Locates the lowest value free extension given the provided range of extension numbers.
+
+        Raises: OSExtensionNotFound: Raises when a free extension is not located within the passed range.
 
         Args:
-            service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
-            group_id (str): Group ID to generate the report for.
+            service_provider_id (str): Service Provider/ Enterprise ID where Group is located which hosts needed free extensions
+            group_id (str): Group ID where target extensions are located.
+            range_start (int): integral value specifying the starting range for free extensions
+            range_end (int): integral value specifying the ending range for free extensions
 
         Returns:
-            str: A JSON formatted report of service packs assigned in the group.
+            Dict: Data of the free extension {extension: "1000"}
         """
-        return scripts.service_pack_audit.main(self.api, servive_provider_id, group_id)
-
-    def user_activity(self, user):
-        return scripts.user_activity.main(self.api, user)
-
-    def user_association(self, service_provider_id: str, group_id: str, user_id: str):
-        """
-        Identify a user's associations with Call Centers (CC), Hunt Groups (HG),
-        and Pick Up Groups.
-
-        Args:
-            service_provider_id (str): Service Provider where the group is hosted.
-            group_id (str): Group where the User is located.
-            user_id (str): Target user ID.
-
-        Returns:
-            str: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
-        """
-        return scripts.user_association.main(
-            self.api, service_provider_id, group_id, user_id
+        return self._run_script(
+            "locate_free_extension",
+            service_provider_id,
+            group_id,
+            range_start,
+            range_end,
         )
 
     def move_numbers(
@@ -132,7 +170,7 @@ class Scripter:
         target_service_provider_id: str,
         target_group_id: str,
         start_of_range_number: str,
-        end_of_range_number: str = None,
+        end_of_range_number: Optional[str] = None,
     ) -> bool:
         """Moves a list of numbers from existing group to another group on the same broadworks instance.
         This can move numbers between Service Provider/ Enterprise and groups in the same Service Provider/ Enterprise.
@@ -151,8 +189,8 @@ class Scripter:
         Returns:
             Bool: Returns a True once complete.
         """
-        return scripts.move_numbers.main(
-            self.api,
+        return self._run_script(
+            "move_numbers",
             current_service_provider_id,
             current_group_id,
             target_service_provider_id,
@@ -166,8 +204,8 @@ class Scripter:
         service_provider_id: str,
         group_id: str,
         start_of_range_number: str,
-        end_of_range_number: str = None,
-    ):
+        end_of_range_number: Optional[str] = None,
+    ) -> bool:
         """Removes a singular or range of numbers from the entire Broadworks instance.
 
         Note: Numbers need to be strings and follow this format: +{country code}-{number}.
@@ -178,36 +216,36 @@ class Scripter:
             start_of_number_range (str): Starting number in range of numbers you would like to remove.
             end_of_number_range (str): Ending nummber in range of numbers you would like to remove. If you need to remove
             only one number do not enter a value for this paramter. Defaults to None.
+
+        Returns:
+            Bool: Returns a True once complete.
         """
-        return scripts.remove_numbers.main(
-            self.api,
+        return self._run_script(
+            "remove_numbers",
             service_provider_id,
             group_id,
             start_of_range_number,
             end_of_range_number,
         )
 
-    def locate_free_extension(
-        self, service_provider_id: str, group_id: str, range_start: int, range_end: int
-    ):
-        """Locates the lowest value free extension given the provided range of extension numbers.
-
-        Raises: OSExtensionNotFound: Raises when a free extension is not located within the passed range.
+    def service_pack_audit(self, service_provider_id, group_id) -> Dict[str, any]:
+        """
+        A stripped down version of group audit focussing only on the service packs assigned within
+        the group. This only shows the service packs assigned and total count of unlike group audit
+        which details the users this is assigned to.
 
         Args:
-            service_provider_id (str): Service Provider/ Enterprise ID where Group is located which hosts needed free extensions
-            group_id (str): Group ID where target extensions are located.
-            range_start (int): integral value specifying the starting range for free extensions
-            range_end (int): integral value specifying the ending range for free extensions
+            service_provider_id (str): Service Provider ID or Enterprise ID containing the Group ID.
+            group_id (str): Group ID to generate the report for.
 
         Returns:
-            JSON: JSON data of the free extension {extension: "1000"}
+            Dict: Formatted report of service packs assigned in the group.
         """
-        return scripts.locate_free_extension.main(
-            self.api, service_provider_id, group_id, range_start, range_end
-        )
+        return self._run_script("service_pack_audit", service_provider_id, group_id)
 
-    def service_provider_trunking_capacity(self, service_provider_id: str):
+    def service_provider_trunking_capacity(
+        self, service_provider_id: str
+    ) -> Dict[str, any]:
         """Returns a JSON breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
         This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
         At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at 
@@ -221,11 +259,42 @@ class Scripter:
                 Trunk Call Capacity breakdown.
 
         Returns:
-            JSON: JSON data of Trunking Call Capacity details of SP/ ENT, Groups, and Trunk Groups.
+            Dict: Data of Trunking Call Capacity details of SP/ ENT, Groups, and Trunk Groups.
         """
-        return scripts.service_provider_trunking_capacity.main(
-            self.api, service_provider_id
+        return self._run_script(
+            "service_provider_trunking_capacity", service_provider_id
         )
+
+    def user_association(
+        self, service_provider_id: str, group_id: str, user_id: str
+    ) -> Dict[str, any]:
+        """
+        Identify a user's associations with Call Centers (CC), Hunt Groups (HG),
+        and Pick Up Groups.
+
+        Args:
+            service_provider_id (str): Service Provider where the group is hosted.
+            group_id (str): Group where the User is located.
+            user_id (str): Target user ID.
+
+        Returns:
+            Dict: Formatted output of the user showing all CC, HG, and Pick Up user is assigned to.
+        """
+        self._run_script("user_association", service_provider_id, group_id, user_id)
+
+    def user_registration(
+        self, service_provider_id: str, group_id: str
+    ) -> Dict[str, any]:
+        """Generates a dictionary detailing each Users ID, device name and registration status within a group.
+
+        Args:
+            service_provider_id (str):  Service Provider/ Enterprise where group is hosted.
+            group_id (str): Target Group you would like to know user statistics for.
+
+        Returns:
+            Dict: User's ID, Device Name, and Registration status.
+        """
+        return self._run_script("user_registration", service_provider_id, group_id)
 
     def webex_builder(
         self,
@@ -235,9 +304,9 @@ class Scripter:
         device_type: str,
         email: str,
         primary_device: bool = True,
-        webex_feature_pack_name: str = None,
+        webex_feature_pack_name: Optional[str] = None,
         enable_integrated_imp: bool = True,
-    ):
+    ) -> Dict[str, any]:
         """Builds a Webex device and assigns to user either as the primary device or a
         Shared Call Appearance.
 
@@ -252,15 +321,15 @@ class Scripter:
             enable_integrated_imp (bool, optional): Enables Integrated IMP service for the user if True .Defaults to True.
 
         Returns:
-            dict: Webex user/ device details. Includes webex client username and password, and if primary device
+            Dict: Webex user/ device details. Includes webex client username and password, and if primary device
             device type set.
 
         Raises:
             OSLicenseNonExistent: Raised if user does not have correct license which allows for SCA devices.
         """
 
-        return scripts.webex_builder.main(
-            self.api,
+        return self._run_script(
+            "webex_builder",
             service_provider_id,
             group_id,
             user_id,
@@ -270,15 +339,3 @@ class Scripter:
             webex_feature_pack_name,
             enable_integrated_imp,
         )
-
-    def user_registration(self, service_provider_id: str, group_id: str):
-        """Generates a dictionary detailing each Users ID, device name and registration status within a group.
-
-        Args:
-            service_provider_id (str):  Service Provider/ Enterprise where group is hosted.
-            group_id (str): Target Group you would like to know user statistics for.
-
-        Returns:
-            dict: User's ID, Device Name, and Registration status.
-        """
-        return scripts.user_registration.main(self.api, service_provider_id, group_id)
