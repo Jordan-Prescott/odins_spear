@@ -63,6 +63,7 @@ class API:
         self.emergency_zones = EmergencyZones()
         self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
+        self.service_providers = ServiceProviders()
         self.services = Services()
         self.shared_call_appearance = SharedCallAppearance()
         self.schedules = Schedules()

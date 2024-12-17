@@ -17,6 +17,7 @@ from .groups import Groups
 from .emergency_zones import EmergencyZones
 from .do_not_disturb import DoNotDisturb
 from .hunt_groups import HuntGroups
+from .service_providers import ServiceProviders
 from .services import Services
 from .shared_call_appearance import SharedCallAppearance
 from .schedules import Schedules
@@ -46,6 +47,7 @@ __all__ = [
     "EmergencyZones",
     "DoNotDisturb",
     "HuntGroups",
+    "ServiceProviders",
     "Services",
     "SharedCallAppearance",
     "Schedules",
