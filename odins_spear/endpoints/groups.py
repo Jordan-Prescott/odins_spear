@@ -7,7 +7,7 @@ class Groups(BaseEndpoint):
 
     # GET
 
-    def get_groups(self, service_provider_id: str):
+    def get_groups(self, service_provider_id: str) -> list:
         """Returns the specificied Service Provider's Groups.
 
         Args:
@@ -23,7 +23,7 @@ class Groups(BaseEndpoint):
 
         return self._requester.get(endpoint, params=params)
 
-    def get_group(self, service_provider_id, group_id):
+    def get_group(self, service_provider_id: str, group_id: str) -> dict:
         """Returns the specificied Group's settings and information.
 
         Args:
