@@ -13,7 +13,7 @@ def main(api, service_provider_id: str, group_id: str):
     """
 
     # all Services
-    service_report = api.get.group_services(group_id, service_provider_id)
+    service_report = api.services.get_group_services(group_id, service_provider_id)
 
     assigned_user_services = []
     assigned_group_services = []
@@ -32,7 +32,7 @@ def main(api, service_provider_id: str, group_id: str):
             del us["tags"]
             del us["alias"]
 
-            users = api.get.group_services_user_assigned(
+            users = api.services.get_group_services_user_assigned(
                 group_id, service_provider_id, us["serviceName"], "serviceName"
             )
             userIDs = [u["userId"] for u in users["users"]]
@@ -64,7 +64,7 @@ def main(api, service_provider_id: str, group_id: str):
             del sps["quantity"]
             del sps["alias"]
 
-            users = api.get.group_services_user_assigned(
+            users = api.services.get_group_services_user_assigned(
                 group_id, service_provider_id, sps["servicePackName"], "servicePackName"
             )
             userIDs = [u["userId"] for u in users["users"]]
@@ -73,7 +73,7 @@ def main(api, service_provider_id: str, group_id: str):
             assigned_service_pack_services.append(sps)
 
     # Group DNs
-    dn_report = api.get.group_dns(service_provider_id, group_id)
+    dn_report = api.dns.get_group_dns(service_provider_id, group_id)
     all_dns = {
         "assigned": {"activated": [], "deactivated": []},
         "unassigned": {"activated": [], "deactivated": []},
@@ -109,11 +109,11 @@ def main(api, service_provider_id: str, group_id: str):
     )
 
     # Group Detail
-    group_detail = api.get.group(service_provider_id, group_id)
+    group_detail = api.groups.get_group(service_provider_id, group_id)
 
     # Trunking detail
     try:
-        trunk_detail = api.get.group_trunk_groups_call_capacity(
+        trunk_detail = api.trunk_groups.get_group_trunk_groups_call_capacity(
             service_provider_id, group_id
         )
         del trunk_detail["serviceProviderId"]
