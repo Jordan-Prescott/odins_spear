@@ -15,9 +15,13 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
     MAX_RETRIES = 2
     OBJECT_WITH_ALIAS = []
 
-    auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    call_centers = api.get.group_call_centers(service_provider_id, group_id)
+    auto_attendants = api.auto_attendants.get_auto_attendants(
+        service_provider_id, group_id
+    )
+    hunt_groups = api.hunt_groups.get_group_hunt_groups(service_provider_id, group_id)
+    call_centers = api.call_centers.get_group_call_centers(
+        service_provider_id, group_id
+    )
 
     broadwork_entities_user_ids = []
 
@@ -44,11 +48,15 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
 
         try:
             if broadwork_entity[0] == "AA":
-                temp_object = api.get.auto_attendant(broadwork_entity[1])
+                temp_object = api.auto_attendants.get_auto_attendant(
+                    broadwork_entity[1]
+                )
             elif broadwork_entity[0] == "HG":
-                temp_object = api.get.group_hunt_group(broadwork_entity[1])
+                temp_object = api.hunt_groups.get_group_hunt_group(broadwork_entity[1])
             else:
-                temp_object = api.get.group_call_center(broadwork_entity[1])
+                temp_object = api.call_centers.get_group_call_center(
+                    broadwork_entity[1]
+                )
 
             formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
             formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
@@ -74,11 +82,11 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
 
         try:
             if entity_type == "AA":
-                temp_object = api.get.auto_attendant(service_user_id)
+                temp_object = api.auto_attendants.get_auto_attendant(service_user_id)
             elif entity_type == "HG":
-                temp_object = api.get.group_hunt_group(service_user_id)
+                temp_object = api.hunt_groups.get_group_hunt_group(service_user_id)
             else:
-                temp_object = api.get.group_call_center(service_user_id)
+                temp_object = api.call_centers.get_group_call_center(service_user_id)
 
             formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
             formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
@@ -101,7 +109,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         if locate_alias(alias, broadwork_entity["aliases"]):
             return broadwork_entity
 
-    users = api.get.users(service_provider_id, group_id, extended=True)
+    users = api.users.get_users(service_provider_id, group_id, extended=True)
     print("Fetched users.")
 
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
