@@ -44,9 +44,9 @@ class API:
 
         self.scripter = Scripter(api=self)
         self.reporter = Reporter(api=self)
-
         self.administrators = Administrators()
         self.alternate_numbers = AlternateNumbers()
+        self.authentication = Authentication()
         self.auto_attendant = AutoAttendants()
         self.call_centers = CallCenters()
         self.call_forwarding_always = CallForwardingAlways()
@@ -59,14 +59,18 @@ class API:
         self.call_records = CallRecords()
         self.devices = Devices()
         self.dns = DNs()
+        self.groups = Groups()
         self.emergency_zones = EmergencyZones()
         self.do_not_disturb = DoNotDisturb()
         self.hunt_groups = HuntGroups()
         self.service_providers = ServiceProviders()
+        self.services = Services()
+        self.shared_call_appearance = SharedCallAppearance()
         self.schedules = Schedules()
         self.reports = Reports()
         self.regsitration = Registration()
         self.password_generate = PasswordGenerate()
+        self.trunk_groups = TrunkGroups()
         self.users = Users()
 
     def authenticate(self) -> bool:

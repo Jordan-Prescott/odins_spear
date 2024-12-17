@@ -188,7 +188,7 @@ class Users(BaseEndpoint):
 
         return self._requester.put(endpoint, data=updates)
 
-    def user_portal_passcode(self, user_id: str, new_passcode: str):
+    def put_user_portal_passcode(self, user_id: str, new_passcode: str):
         """Updates the specified User's portal passcode.
 
         Args:
