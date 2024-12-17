@@ -13,6 +13,7 @@ from .call_forwarding_busy import CallForwardingBusy
 from .call_records import CallRecords
 from .devices import Devices
 from .dns import DNs
+from .groups import Groups
 from .emergency_zones import EmergencyZones
 from .do_not_disturb import DoNotDisturb
 from .hunt_groups import HuntGroups
@@ -41,6 +42,7 @@ __all__ = [
     "CallRecords",
     "Devices",
     "DNs",
+    "Groups",
     "EmergencyZones",
     "DoNotDisturb",
     "HuntGroups",
