@@ -7,7 +7,7 @@ class ServiceProviders(BaseEndpoint):
 
     # GET
 
-    def get_service_providers(self, reseller_id=None):
+    def get_service_providers(self, reseller_id: str = None):
         """
         Fetches list of service providers.
 
