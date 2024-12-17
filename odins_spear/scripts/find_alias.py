@@ -11,35 +11,17 @@ def locate_alias(alias, aliases: list):
 
 
 def main(api, service_provider_id: str, group_id: str, alias: str):
-    """Locates alias if assigned to broadworks entity.
-
-    The script searches through various entity types including Auto Attendants (AA),
-    Hunt Groups (HG), and Call Centers (CC), as well as individual Users. It employs
-    a retry mechanism for instances where initial attempts to fetch entity details fail.
-
-    The search is conducted in two phases:
-    1. Collecting details of AAs, HGs, and CCs and checking for the alias.
-    2. If not found, searching through the users for the alias.
-
-    If the alias is found, the method returns a string specifying the type of entity and
-    its name or userID. If the alias is not found after checking all entities, an
-    AOAliasNotFound exception is raised.
-
-    :param service_provider_id: Service Prodiver where group is hosted.
-    :param group_id: Group where alias is located.
-    :param alias: Alias number to identify e.g. 0
-
-    :return str: Returns type and name/ userId of entity where alias located.
-    :raise AOALiasNotFound: If alias not found AOAliasNotFound error raised
-    """
-
     RETRY_QUEUE = []
     MAX_RETRIES = 2
     OBJECT_WITH_ALIAS = []
 
-    auto_attendants = api.get.auto_attendants(service_provider_id, group_id)
-    hunt_groups = api.get.group_hunt_groups(service_provider_id, group_id)
-    call_centers = api.get.group_call_centers(service_provider_id, group_id)
+    auto_attendants = api.auto_attendants.get_auto_attendants(
+        service_provider_id, group_id
+    )
+    hunt_groups = api.hunt_groups.get_group_hunt_groups(service_provider_id, group_id)
+    call_centers = api.call_centers.get_group_call_centers(
+        service_provider_id, group_id
+    )
 
     broadwork_entities_user_ids = []
 
@@ -66,11 +48,15 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
 
         try:
             if broadwork_entity[0] == "AA":
-                temp_object = api.get.auto_attendant(broadwork_entity[1])
+                temp_object = api.auto_attendants.get_auto_attendant(
+                    broadwork_entity[1]
+                )
             elif broadwork_entity[0] == "HG":
-                temp_object = api.get.group_hunt_group(broadwork_entity[1])
+                temp_object = api.hunt_groups.get_group_hunt_group(broadwork_entity[1])
             else:
-                temp_object = api.get.group_call_center(broadwork_entity[1])
+                temp_object = api.call_centers.get_group_call_center(
+                    broadwork_entity[1]
+                )
 
             formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
             formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
@@ -96,11 +82,11 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
 
         try:
             if entity_type == "AA":
-                temp_object = api.get.auto_attendant(service_user_id)
+                temp_object = api.auto_attendants.get_auto_attendant(service_user_id)
             elif entity_type == "HG":
-                temp_object = api.get.group_hunt_group(service_user_id)
+                temp_object = api.hunt_groups.get_group_hunt_group(service_user_id)
             else:
-                temp_object = api.get.group_call_center(service_user_id)
+                temp_object = api.call_centers.get_group_call_center(service_user_id)
 
             formatted["name"] = temp_object["serviceInstanceProfile"]["name"]
             formatted["aliases"] = temp_object["serviceInstanceProfile"]["aliases"]
@@ -123,7 +109,7 @@ def main(api, service_provider_id: str, group_id: str, alias: str):
         if locate_alias(alias, broadwork_entity["aliases"]):
             return broadwork_entity
 
-    users = api.get.users(service_provider_id, group_id, extended=True)
+    users = api.users.get_users(service_provider_id, group_id, extended=True)
     print("Fetched users.")
 
     for user in tqdm(users, desc=f"Searching Users for alias: {alias}"):
