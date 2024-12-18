@@ -3,21 +3,11 @@ from tqdm import tqdm
 from ..exceptions import OSServiceNotAssigned
 
 
-def main(api: object, service_provider_id: str):
-    """Returns a breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT). 
-    This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups. 
-    At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at 
+def main(api: object, service_provider_id: str) -> dict:
+    """Returns a breakdown of the Trunking Call Capacity of a Service Provider/ Enterprise (SP/ENT).
+    This will show the totals at each level from SP/ ENT to Group to Trunk Groups located in Groups.
+    At each level Max Active Calls and Bursting Max Active calls are detailed and then differences at
     calculated.
-
-    Raises: 
-        OSServiceNotAssigned: Raises when the SP/ Ent does not have the service 'Trunk Group' assigned. 
-
-    Args:
-        service_provider_id (str): Target Service Provider ID/ Enterprise ID that you would like the \
-            Trunk Call Capacity breakdown.
-
-    Returns:
-        JSON: JSON data of Trunking Call Capacity details of SP/ ENT, Groups, and Trunk Groups.
     """
 
     return_data = {}
@@ -26,8 +16,10 @@ def main(api: object, service_provider_id: str):
 
     # OSServiceNotAssigned is returned if the Trunk Group service is not assigend to SP/ ENT
     try:
-        service_provider_capacity = api.get.service_provider_trunk_group_call_capacity(
-            service_provider_id
+        service_provider_capacity = (
+            api.trunk_groups.get_service_provider_trunk_group_call_capacity(
+                service_provider_id
+            )
         )
     except Exception:
         raise OSServiceNotAssigned
@@ -42,7 +34,7 @@ def main(api: object, service_provider_id: str):
     return_data["groups"] = []
 
     print(f"Fetching complete list of groups in {service_provider_id}.")
-    groups_in_service_provider = api.get.groups(service_provider_id)
+    groups_in_service_provider = api.groups.get_groups(service_provider_id)
 
     # getting groups and group call capacities
     for group in tqdm(
@@ -53,7 +45,7 @@ def main(api: object, service_provider_id: str):
         formatted_group["groupName"] = group["groupName"]
 
         try:
-            group_capacity = api.get.group_trunk_groups_call_capacity(
+            group_capacity = api.trunk_groups.get_group_trunk_groups_call_capacity(
                 service_provider_id, group["groupId"]
             )
             formatted_group["maxActiveCalls"] = group_capacity["maxActiveCalls"]
@@ -93,11 +85,11 @@ def main(api: object, service_provider_id: str):
         group["trunkGroupsBurstingCallCapacityTotal"] = 0
 
         try:
-            group_trunk_groups = api.get.group_trunk_groups(
+            group_trunk_groups = api.trunk_groups.get_group_trunk_groups(
                 service_provider_id, group["groupId"]
             )
             for trunk_group in group_trunk_groups:
-                trunk_group_detailed = api.get.group_trunk_group(
+                trunk_group_detailed = api.trunk_groups.get_group_trunk_group(
                     service_provider_id, group["groupId"], trunk_group["name"]
                 )
 
