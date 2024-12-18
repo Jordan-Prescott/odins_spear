@@ -47,7 +47,7 @@ class API:
 
         self.administrators = Administrators()
         self.alternate_numbers = AlternateNumbers()
-        self.auto_attendant = AutoAttendants()
+        self.auto_attendants = AutoAttendants()
         self.call_centers = CallCenters()
         self.call_forwarding_always = CallForwardingAlways()
         self.call_processing_policies = CallProcessingPolicies()
@@ -172,6 +172,6 @@ class API:
 
     def __str__(self) -> str:
         return (
-            f"API - url: {self.base_url}, username: {self.username}"
+            f"API - url: {self.base_url}, username: {self.username} "
             f"Authenticated: {self.authorised}"
         )
