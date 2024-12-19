@@ -29,7 +29,7 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     }
 
     try:
-        user = api.get.user_report(user_id)
+        user = api.reports.get_user_report(user_id)
     except Exception:
         return f"User {user_id} not found."
 
@@ -41,7 +41,7 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     USER_DATA["featurePacks"] = user["servicePacks"]
     USER_DATA["aliases"] = user["aliases"]
 
-    pick_up_group = api.get.call_pickup_group_user(
+    pick_up_group = api.call_pickup.get_call_pickup_group_user(
         service_provider_id, group_id, user_id
     )
     try:
@@ -49,13 +49,15 @@ def main(api, service_provider_id: str, group_id: str, user_id: str):
     except IndexError:
         USER_DATA["pickUpGroup"] = None
 
-    hunt_groups = api.get.group_hunt_group_user(service_provider_id, group_id, user_id)
+    hunt_groups = api.hunt_groups.get_group_hunt_group_user(
+        service_provider_id, group_id, user_id
+    )
     for hg in tqdm(hunt_groups, desc="Fetching Hunt Groups"):
         USER_DATA["huntGroups"].append(hg["serviceUserId"])
 
     # if the user does not have a license for CC this call errors
     try:
-        call_centers = api.get.user_call_center(user_id)
+        call_centers = api.call_centers.get_user_call_center(user_id)
         for cc in tqdm(call_centers["callCenters"], desc="Fetching Call Centers"):
             USER_DATA["callCenters"].append(cc["serviceUserId"])
     except Exception:
