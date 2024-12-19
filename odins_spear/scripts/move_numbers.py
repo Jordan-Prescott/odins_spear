@@ -11,7 +11,7 @@ def main(
 
     print(f"Removing numbers from {current_group_id}.")
     # delete number from group
-    api.delete.group_dns(
+    api.dns.delete_group_dns(
         current_service_provider_id,
         current_group_id,
         start_of_range_number=start_of_range_number,
@@ -22,7 +22,7 @@ def main(
     if not current_service_provider_id == target_service_provider_id:
         print(f"Removing numbers from {current_service_provider_id}.")
         # remove from sp/ent
-        api.delete.service_provider_dns(
+        api.dns.delete_service_provider_dns(
             current_service_provider_id,
             start_of_range_number=start_of_range_number,
             end_of_range_number=end_of_range_number,
@@ -32,7 +32,7 @@ def main(
             f"Adding number to SP/ Ent: {target_service_provider_id} Group: {target_group_id}."
         )
         # assign to new group
-        api.post.group_dns_assign_bulk(
+        api.dns.post_group_dns_assign_bulk(
             target_service_provider_id,
             target_group_id,
             start_of_range_number=start_of_range_number,
@@ -43,7 +43,7 @@ def main(
 
         print(f"Adding number to {target_group_id}.")
         # assign to new group
-        api.post.group_dns(
+        api.dns.post_group_dns(
             target_service_provider_id,
             target_group_id,
             start_of_range_number=start_of_range_number,
