@@ -5,10 +5,10 @@ def retrieve_extensions(api, service_provider_id: str, group_id: str) -> list:
     extensions = []
 
     dataset = (
-        api.get.users(service_provider_id, group_id)
-        + api.get.group_hunt_groups(service_provider_id, group_id)
-        + api.get.group_call_centers(service_provider_id, group_id)
-        + api.get.auto_attendants(service_provider_id, group_id)
+        api.users.get_users(service_provider_id, group_id)
+        + api.hunt_groups.get_group_hunt_groups(service_provider_id, group_id)
+        + api.call_centers.get_group_call_centers(service_provider_id, group_id)
+        + api.auto_ettendants.get_auto_attendants(service_provider_id, group_id)
     )
 
     for data in dataset:
@@ -25,6 +25,7 @@ def main(
 ):
     """Retrieves The Lowest Free Extension Available In The Designated Group Passed."""
 
+    # Raise Exception If Range Start Is Greater Than Range End
     if range_start > range_end:
         raise OSRangeFault
 
