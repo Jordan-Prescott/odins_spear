@@ -53,7 +53,7 @@ class Services(BaseEndpoint):
         params = {"userId": user_id}
 
         return self._requester.get(endpoint, params=params)
-      
+
 
     def get_group_services(self, group_id: str, service_provider_id: str):
         """
