@@ -148,7 +148,7 @@ class OSInvalidPasswordType(OSError):
         return "Invalid or unsupported password, please review supported passwords."
 
 
-# FEATURE
+#  OS FEATURES
 
 
 class OSAliasNotFound(OSError):

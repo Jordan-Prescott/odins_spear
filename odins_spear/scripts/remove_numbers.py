@@ -9,7 +9,7 @@ def main(
 
     print(f"Removing numbers from {current_group_id}.")
     # delete number from group
-    api.delete.group_dns(
+    api.dns.delete_group_dns(
         current_service_provider_id,
         current_group_id,
         start_of_range_number=start_of_range_number,
@@ -18,7 +18,7 @@ def main(
 
     print(f"Removing numbers from {current_service_provider_id}.")
     # remove from sp/ent
-    api.delete.service_provider_dns(
+    api.dns.delete_service_provider_dns(
         current_service_provider_id,
         start_of_range_number=start_of_range_number,
         end_of_range_number=end_of_range_number,

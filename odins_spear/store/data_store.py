@@ -1,7 +1,7 @@
 from typing import List
 import json
 
-from .. import api
+from ..api import API
 from ..utils import parsers
 from . import broadwork_entities as bre
 
@@ -14,7 +14,7 @@ class DataStore:
     """
 
     def __init__(self):
-        self.apis: List[api.Api] = []
+        self.apis: List[API] = []
         self.service_providers_enterprises: List[bre.ServiceProvider] = []
         self.groups: List[bre.Group] = []
         self.trunk_groups: List[bre.TrunkGroup] = []
@@ -68,14 +68,6 @@ class DataStore:
                     number = re.search(r"\d+", a).group()
                     self.number_mapping[number] = e
 
-    def get_group_state(api, group: bre.Group) -> None:
-        """takes in group id and loads group state into broadworks entities.
-
-        :param api: API object used to send requests to create group state in store.
-        :param group: Group object of Broadworks group user would like to load state.
-        """
-        pass
-
     def store_objects(self, *entities) -> None:
         """Takes in objects within the odin_api and custom and stores in lists
         depending on type.
@@ -84,7 +76,7 @@ class DataStore:
         """
 
         for e in entities:
-            if isinstance(e, api.Api):
+            if isinstance(e, API):
                 self.apis.append(e)
             elif isinstance(e, bre.ServiceProvider):
                 self.service_providers_enterprises.append(e)
