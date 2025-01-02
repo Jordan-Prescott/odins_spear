@@ -2,7 +2,9 @@ def main(api, service_provider_id: str, group_id: str):
     # Dictionary Descripting Total Users Devices
     registrations_out = {}
 
-    group_registration = api.get.bulk_user_registration(service_provider_id, group_id)
+    group_registration = api.regsitration.get_bulk_user_registration(
+        service_provider_id, group_id
+    )
 
     users = group_registration.get("users", [])
 
